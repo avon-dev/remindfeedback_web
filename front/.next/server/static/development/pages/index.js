@@ -93,223 +93,9 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ "./components/AppSidebar.js":
-/*!**********************************!*\
-  !*** ./components/AppSidebar.js ***!
-  \**********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "D:\\remindFB\\front\\components\\AppSidebar.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-const {
-  SubMenu
-} = antd__WEBPACK_IMPORTED_MODULE_1__["Menu"];
-
-const AppSidebar = () => {
-  return __jsx("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 8
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"], {
-    style: {
-      width: 256
-    },
-    defaultSelectedKeys: ['1'],
-    defaultOpenKeys: ['sub1'],
-    mode: "inline",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 9
-    },
-    __self: undefined
-  }, __jsx(SubMenu, {
-    key: "sub1",
-    title: __jsx("span", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 18
-      },
-      __self: undefined
-    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
-      type: "mail",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 19
-      },
-      __self: undefined
-    }), __jsx("span", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 20
-      },
-      __self: undefined
-    }, "Navigation One")),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 15
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].ItemGroup, {
-    key: "g1",
-    title: "Item 1",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 24
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
-    key: "1",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 25
-    },
-    __self: undefined
-  }, "Option 1"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
-    key: "2",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 26
-    },
-    __self: undefined
-  }, "Option 2"))), __jsx(SubMenu, {
-    key: "sub2",
-    title: __jsx("span", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 32
-      },
-      __self: undefined
-    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
-      type: "appstore",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 33
-      },
-      __self: undefined
-    }), __jsx("span", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 34
-      },
-      __self: undefined
-    }, "Navigation Two")),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 29
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
-    key: "5",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 38
-    },
-    __self: undefined
-  }, "Option 5"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
-    key: "6",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 39
-    },
-    __self: undefined
-  }, "Option 6"), __jsx(SubMenu, {
-    key: "sub3",
-    title: "Submenu",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 40
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
-    key: "7",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 41
-    },
-    __self: undefined
-  }, "Option 7"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
-    key: "8",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 42
-    },
-    __self: undefined
-  }, "Option 8"))), __jsx(SubMenu, {
-    key: "sub4",
-    title: __jsx("span", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 48
-      },
-      __self: undefined
-    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
-      type: "setting",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 49
-      },
-      __self: undefined
-    }), __jsx("span", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 50
-      },
-      __self: undefined
-    }, "Navigation Three")),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 45
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
-    key: "9",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 54
-    },
-    __self: undefined
-  }, "Option 9"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
-    key: "10",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 55
-    },
-    __self: undefined
-  }, "Option 10"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
-    key: "11",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 56
-    },
-    __self: undefined
-  }, "Option 11"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
-    key: "12",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 57
-    },
-    __self: undefined
-  }, "Option 12"))));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (AppSidebar);
-
-/***/ }),
-
-/***/ "./components/AppTopbar.js":
+/***/ "./components/AppHeader.js":
 /*!*********************************!*\
-  !*** ./components/AppTopbar.js ***!
+  !*** ./components/AppHeader.js ***!
   \*********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -318,159 +104,38 @@ const AppSidebar = () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "D:\\remindFB\\front\\components\\AppTopbar.js";
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/head */ "next/head");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "D:\\remindFB\\front\\components\\AppHeader.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
-const {
-  Title,
-  Paragraph,
-  Text
-} = antd__WEBPACK_IMPORTED_MODULE_1__["Typography"];
-const {
-  Search
-} = antd__WEBPACK_IMPORTED_MODULE_1__["Input"];
 
-const AppTopbar = () => {
-  return __jsx("div", {
+const Header = () => {
+  return __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 10
+      lineNumber: 5
     },
     __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"], {
-    mode: "horizontal",
+  }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 11
+      lineNumber: 6
     },
     __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+  }, "RemindFeedBack"), __jsx("link", {
+    rel: "stylesheet",
+    href: "https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.css",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 12
+      lineNumber: 7
     },
     __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-    span: 3,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 13
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
-    key: "mail",
-    style: {
-      textAlign: 'center'
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 14
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
-    type: "home",
-    style: {
-      fontSize: '30px'
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 15
-    },
-    __self: undefined
-  }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-    span: 4,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 18
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
-    key: "search",
-    style: {
-      textAlign: 'center'
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 19
-    },
-    __self: undefined
-  }, __jsx(Search, {
-    placeholder: "input search text",
-    enterButton: "Search",
-    size: "",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 20
-    },
-    __self: undefined
-  }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-    span: 12,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 27
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
-    key: "subject",
-    style: {
-      textAlign: 'center'
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 28
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 29
-    },
-    __self: undefined
-  }, __jsx(Title, {
-    type: "secondary",
-    level: 2,
-    style: {
-      color: 'blue'
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 30
-    },
-    __self: undefined
-  }, "RemindFeedBack")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-    span: 3,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 34
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
-    key: "bell",
-    style: {
-      textAlign: 'center'
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 35
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
-    type: "bell",
-    style: {
-      fontSize: '30px'
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 36
-    },
-    __self: undefined
-  }))))));
+  }));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (AppTopbar);
+/* harmony default export */ __webpack_exports__["default"] = (Header);
 
 /***/ }),
 
@@ -485,57 +150,45 @@ const AppTopbar = () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/head */ "next/head");
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_AppSidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/AppSidebar */ "./components/AppSidebar.js");
-/* harmony import */ var _components_AppTopbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/AppTopbar */ "./components/AppTopbar.js");
+/* harmony import */ var _components_AppHeader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/AppHeader */ "./components/AppHeader.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_2__);
 var _jsxFileName = "D:\\remindFB\\front\\pages\\index.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
-
+const {
+  Footer,
+  Content
+} = antd__WEBPACK_IMPORTED_MODULE_2__["Layout"];
 
 const Home = () => {
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 9
-    },
-    __self: undefined
-  }, __jsx("title", {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_components_AppHeader__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 10
     },
     __self: undefined
-  }, "RemindFeedBack"), __jsx("link", {
-    rel: "stylesheet",
-    href: "https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.css",
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Layout"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 11
     },
     __self: undefined
-  })), __jsx(_components_AppTopbar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, __jsx(Content, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 12
+    },
+    __self: undefined
+  }, "Content"), __jsx(Footer, {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 13
     },
     __self: undefined
-  }), __jsx(_components_AppSidebar__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 16
-    },
-    __self: undefined
-  }, __jsx("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 17
-    },
-    __self: undefined
-  }, "Main")));
+  }, "Footer")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Home);
