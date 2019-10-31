@@ -4,7 +4,7 @@ import { Menu, Icon,Button, Row } from 'antd';
 const { SubMenu } = Menu;
 
 const newFeedBack ={
-  fontSize:25,
+  fontSize:20,
   fontWeight:'bold',
 }
 
@@ -25,7 +25,7 @@ const AppSidebar = () => {
       </div>
       <div style={Sidebar}>
         <Menu
-            style={{ width: 256 }}
+            style={{ width: 230 }}
             defaultSelectedKeys={['1']}
             defaultOpenKeys={['sub1']}
             mode="inline"
