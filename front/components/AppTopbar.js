@@ -1,8 +1,7 @@
 import React from 'react';
-import { Menu, Icon, Input, Typography, Row, Col, Avatar, Layout } from 'antd';
+import { Menu, Icon, Input, Typography, Row, Col, Avatar } from 'antd';
 
 const { Title, Paragraph, Text } = Typography;
-
 
 const { Search } = Input;
 
@@ -25,7 +24,7 @@ const AppTopbar = () => {
     return(
         <div>
           <Menu mode="horizontal"  style={{backgroundColor:'#0B4E92'}} >
-            <Row>
+            <Row type="flex">
             <Col span={2}>
                 <Menu.Item key="home" style={MenuItem}>
                     <Icon type="home" style={commonStyle}/>

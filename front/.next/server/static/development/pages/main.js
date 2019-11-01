@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -327,7 +327,7 @@ const AppTopbar = () => {
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26
+      lineNumber: 25
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"], {
@@ -337,20 +337,21 @@ const AppTopbar = () => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27
+      lineNumber: 26
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+    type: "flex",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28
+      lineNumber: 27
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
     span: 2,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29
+      lineNumber: 28
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
@@ -358,7 +359,7 @@ const AppTopbar = () => {
     style: MenuItem,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30
+      lineNumber: 29
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
@@ -366,14 +367,14 @@ const AppTopbar = () => {
     style: commonStyle,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 30
     },
     __self: undefined
   }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
     span: 4,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 33
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
@@ -381,7 +382,7 @@ const AppTopbar = () => {
     style: MenuItem,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 34
     },
     __self: undefined
   }, __jsx(Search, {
@@ -391,14 +392,14 @@ const AppTopbar = () => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 35
     },
     __self: undefined
   }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
     span: 12,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 41
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
@@ -406,34 +407,34 @@ const AppTopbar = () => {
     style: MenuItem,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 42
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44
+      lineNumber: 43
     },
     __self: undefined
   }, __jsx(Title, {
     style: commonStyle,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 44
     },
     __self: undefined
   }, "RemindFeedBack")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
     span: 3,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 48
     },
     __self: undefined
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
     span: 1,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 49
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
@@ -441,7 +442,7 @@ const AppTopbar = () => {
     style: MenuItem,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 50
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
@@ -449,14 +450,14 @@ const AppTopbar = () => {
     style: commonStyle,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 51
     },
     __self: undefined
   }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
     span: 1,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 54
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
@@ -464,7 +465,7 @@ const AppTopbar = () => {
     style: MenuItem,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 55
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Avatar"], {
@@ -472,14 +473,14 @@ const AppTopbar = () => {
     style: commonStyle,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 56
     },
     __self: undefined
   }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
     span: 1,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60
+      lineNumber: 59
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
@@ -487,7 +488,7 @@ const AppTopbar = () => {
     style: MenuItem,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 60
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
@@ -495,13 +496,316 @@ const AppTopbar = () => {
     style: commonStyle,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 61
     },
     __self: undefined
   }))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (AppTopbar);
+
+/***/ }),
+
+/***/ "./container/main.js":
+/*!***************************!*\
+  !*** ./container/main.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _css_Main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../css/Main */ "./css/Main.js");
+var _jsxFileName = "D:\\remindFB\\front\\container\\main.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+const {
+  Meta
+} = antd__WEBPACK_IMPORTED_MODULE_1__["Card"];
+
+const main = () => {
+  const text = ['하하하', '호호호', '후후후', '키키키'];
+  const mainItem = text.map(data => __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
+    style: {
+      marginTop: 15
+    },
+    actions: [__jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+      type: "setting",
+      key: "setting",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 13
+      },
+      __self: undefined
+    }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+      type: "edit",
+      key: "edit",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 14
+      },
+      __self: undefined
+    }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+      type: "ellipsis",
+      key: "ellipsis",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 15
+      },
+      __self: undefined
+    })],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 10
+    },
+    __self: undefined
+  }, __jsx(Meta, {
+    avatar: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Avatar"], {
+      icon: "user",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 20
+      },
+      __self: undefined
+    }),
+    title: "\uC81C\uBAA9",
+    description: data,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 18
+    },
+    __self: undefined
+  })));
+
+  const handleMenuClick = e => {
+    antd__WEBPACK_IMPORTED_MODULE_1__["message"].info(e.target.name);
+  };
+
+  const menu = __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"], {
+    onClick: handleMenuClick,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 32
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
+    key: "1",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 33
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+    type: "user",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 34
+    },
+    __self: undefined
+  }), __jsx("strong", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 35
+    },
+    __self: undefined
+  }, "AVON")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
+    key: "2",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 37
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+    type: "user",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 38
+    },
+    __self: undefined
+  }), __jsx("strong", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: undefined
+  }, "\uC6B4\uB3D9")));
+
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 46
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 6,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 47
+    },
+    __self: undefined
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 12,
+    style: _css_Main__WEBPACK_IMPORTED_MODULE_2__["contentsBoder"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 49
+    },
+    __self: undefined
+  }, __jsx("div", {
+    style: {
+      marginTop: 15,
+      textAlign: 'center'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 50
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Dropdown"], {
+    overlay: menu,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 51
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    style: _css_Main__WEBPACK_IMPORTED_MODULE_2__["subjectBtn"],
+    size: "large",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 52
+    },
+    __self: undefined
+  }, " ", __jsx("strong", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 55
+    },
+    __self: undefined
+  }, "\uC8FC\uC81C\uC120\uD0DD"), " ", __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+    type: "down",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 55
+    },
+    __self: undefined
+  })))), __jsx("div", {
+    style: {
+      marginTop: 15,
+      textAlign: 'right'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 59
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Breadcrumb"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 60
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Breadcrumb"].Item, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 61
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+    type: "home",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 62
+    },
+    __self: undefined
+  }), __jsx("span", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 63
+    },
+    __self: undefined
+  }, "\uBD84\uB9581")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Breadcrumb"].Item, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 65
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+    type: "home",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 66
+    },
+    __self: undefined
+  }), __jsx("span", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 67
+    },
+    __self: undefined
+  }, "\uBD84\uB9582")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Breadcrumb"].Item, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 69
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+    type: "home",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 70
+    },
+    __self: undefined
+  }), __jsx("span", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 71
+    },
+    __self: undefined
+  }, "\uBD84\uB9583")))), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 75
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    type: "primary",
+    icon: "loading",
+    shape: "round",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 76
+    },
+    __self: undefined
+  }, __jsx("strong", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 80
+    },
+    __self: undefined
+  }, " \uC9C4\uD589\uC911"))), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 82
+    },
+    __self: undefined
+  }, mainItem)), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 6,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 87
+    },
+    __self: undefined
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (main);
 
 /***/ }),
 
@@ -541,6 +845,35 @@ const layoutCenter = {
 
 /***/ }),
 
+/***/ "./css/Main.js":
+/*!*********************!*\
+  !*** ./css/Main.js ***!
+  \*********************/
+/*! exports provided: contentsBoder, subjectBtn */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "contentsBoder", function() { return contentsBoder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "subjectBtn", function() { return subjectBtn; });
+const contentsBoder = {
+  border: '1px solid',
+  paddingRight: 50,
+  paddingLeft: 50,
+  paddingBottom: 50,
+  boxShadow: '10px 10px 5px grey',
+  marginTop: 30
+};
+const subjectBtn = {
+  boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)',
+  width: '35em',
+  backgroundColor: "#DDEEFF",
+  color: '#000000'
+};
+
+
+/***/ }),
+
 /***/ "./pages/main.js":
 /*!***********************!*\
   !*** ./pages/main.js ***!
@@ -554,13 +887,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_AppSidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/AppSidebar */ "./components/AppSidebar.js");
 /* harmony import */ var _components_AppTopbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/AppTopbar */ "./components/AppTopbar.js");
-/* harmony import */ var _components_AppHeader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/AppHeader */ "./components/AppHeader.js");
-/* harmony import */ var _components_AppFooter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/AppFooter */ "./components/AppFooter.js");
-/* harmony import */ var _css_Common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../css/Common */ "./css/Common.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! antd */ "antd");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _container_main__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../container/main */ "./container/main.js");
+/* harmony import */ var _components_AppHeader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/AppHeader */ "./components/AppHeader.js");
+/* harmony import */ var _components_AppFooter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/AppFooter */ "./components/AppFooter.js");
+/* harmony import */ var _css_Common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../css/Common */ "./css/Common.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_7__);
 var _jsxFileName = "D:\\remindFB\\front\\pages\\main.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 
@@ -571,160 +906,82 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 const {
   Footer,
   Content,
-  Header,
   Sider
-} = antd__WEBPACK_IMPORTED_MODULE_6__["Layout"];
-const {
-  Meta
-} = antd__WEBPACK_IMPORTED_MODULE_6__["Card"];
+} = antd__WEBPACK_IMPORTED_MODULE_7__["Layout"];
 
-const Home = () => {
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_components_AppHeader__WEBPACK_IMPORTED_MODULE_3__["default"], {
+const Main = () => {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_components_AppHeader__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
+    },
+    __self: undefined
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_7__["Layout"], {
+    style: _css_Common__WEBPACK_IMPORTED_MODULE_6__["layout"],
     __source: {
       fileName: _jsxFileName,
       lineNumber: 15
     },
     __self: undefined
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Layout"], {
-    style: _css_Common__WEBPACK_IMPORTED_MODULE_5__["layout"],
+  }, __jsx(_components_AppTopbar__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 16
     },
     __self: undefined
-  }, __jsx(_components_AppTopbar__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_7__["Layout"], {
+    style: _css_Common__WEBPACK_IMPORTED_MODULE_6__["backgroundWhite"],
     __source: {
       fileName: _jsxFileName,
       lineNumber: 17
     },
     __self: undefined
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Layout"], {
-    style: _css_Common__WEBPACK_IMPORTED_MODULE_5__["backgroundWhite"],
+  }, __jsx(Sider, {
+    style: _css_Common__WEBPACK_IMPORTED_MODULE_6__["backgroundWhite"],
     __source: {
       fileName: _jsxFileName,
       lineNumber: 18
     },
     __self: undefined
-  }, __jsx(Sider, {
-    style: _css_Common__WEBPACK_IMPORTED_MODULE_5__["backgroundWhite"],
+  }, __jsx(_components_AppSidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 19
     },
     __self: undefined
-  }, __jsx(_components_AppSidebar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  })), __jsx(Content, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20
+      lineNumber: 21
     },
     __self: undefined
-  })), __jsx(Content, {
+  }, __jsx(_container_main__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 22
     },
     __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Row"], {
+  }))), __jsx(Footer, {
+    style: _css_Common__WEBPACK_IMPORTED_MODULE_6__["backgroundLightBlue"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23
+      lineNumber: 25
     },
     __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Col"], {
-    span: 6,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 24
-    },
-    __self: undefined
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Col"], {
-    span: 12,
-    style: {
-      textAlign: "center"
-    },
+  }, __jsx(_components_AppFooter__WEBPACK_IMPORTED_MODULE_5__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 26
     },
     __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Card"], {
-    style: {
-      marginTop: 15
-    },
-    actions: [__jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Icon"], {
-      type: "setting",
-      key: "setting",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 30
-      },
-      __self: undefined
-    }), __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Icon"], {
-      type: "edit",
-      key: "edit",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 31
-      },
-      __self: undefined
-    }), __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Icon"], {
-      type: "ellipsis",
-      key: "ellipsis",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 32
-      },
-      __self: undefined
-    })],
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 27
-    },
-    __self: undefined
-  }, __jsx(Meta, {
-    avatar: __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Avatar"], {
-      src: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 37
-      },
-      __self: undefined
-    }),
-    title: "Card title",
-    description: "This is the description",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 35
-    },
-    __self: undefined
-  }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Col"], {
-    span: 6,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 44
-    },
-    __self: undefined
-  })))), __jsx(Footer, {
-    style: _css_Common__WEBPACK_IMPORTED_MODULE_5__["backgroundLightBlue"],
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 49
-    },
-    __self: undefined
-  }, __jsx(_components_AppFooter__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 50
-    },
-    __self: undefined
   }))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Home);
+/* harmony default export */ __webpack_exports__["default"] = (Main);
 
 /***/ }),
 
-/***/ 3:
+/***/ 5:
 /*!*****************************!*\
   !*** multi ./pages/main.js ***!
   \*****************************/

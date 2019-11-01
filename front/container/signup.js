@@ -1,7 +1,7 @@
 import React from 'react';
 import {Row, Col, Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
 import { layoutCenter } from '../css/Common';
-import { signUpBtn } from '../css/Signup';
+import { signUpBtn, shadowBorder } from '../css/Signup';
 import Link from 'next/link';
 
 
@@ -50,7 +50,7 @@ const signup = () => {
         <>
             <Row style={layoutCenter}>
                 <Col span={8}></Col>
-                <Col span={8}>
+                <Col span={8} style={shadowBorder}>
                     <div style={{textAlign:'center'}}>
                         <Title>회원가입</Title>
                     </div>

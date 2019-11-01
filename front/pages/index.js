@@ -1,6 +1,6 @@
 import React from 'react';
 import AppHeader from '../components/AppHeader';
-import { layoutCenter, backgroundWhite } from '../css/Common';
+import { layoutCenter, backgroundWhite, shadowBorder } from '../css/Common';
 import {Row,Col,Layout, Button , Progress} from 'antd';
 
 const { Footer, Content } = Layout;
@@ -13,7 +13,7 @@ const Home = () => {
                 <Content >
                     <Row style={layoutCenter}>
                         <Col span={8}></Col>
-                        <Col span={8}>
+                        <Col span={8} style={shadowBorder}>
                             <div style={{textAlign:'center'}}>
                                 <Button>테스트</Button>
                             </div>

@@ -17,10 +17,11 @@ const signup = () => {
                 <Content style={backgroundWhite}>
                     <AppSignUp/>
                 </Content>
-                <Footer style={backgroundLightBlue}>
-                    <AppFooter/>
-                </Footer>
-            </Layout>  
+            </Layout>
+            <Footer style={backgroundLightBlue}>
+                <AppFooter/> 
+            </Footer>
+             
         </>
     )
 };

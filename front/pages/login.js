@@ -14,10 +14,10 @@ const login = () => {
                 <Content style={backgroundWhite}>
                     <AppLogin/>
                 </Content>
-                <Footer style={backgroundLightBlue}>
-                    <AppFooter/>
-                </Footer>
             </Layout>
+            <Footer style={backgroundLightBlue}>
+                <AppFooter/> 
+            </Footer>
         </>
     )
 }

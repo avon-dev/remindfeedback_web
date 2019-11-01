@@ -1,7 +1,7 @@
 import React from 'react';
 import {Row, Col, Form, Icon, Input, Button, Checkbox } from 'antd';
 import { layoutCenter } from '../css/Common';
-import { loginBtn, loginApple, loginFacebook, loginGoogle, loginKakao } from '../css/login';
+import { loginBtn, loginApple, loginFacebook, loginGoogle, loginKakao, shadowBorder } from '../css/login';
 import Link from 'next/link';
 
 const login = () => {
@@ -15,7 +15,7 @@ const login = () => {
         <>
             <Row style={layoutCenter}>
                 <Col span={9}></Col>
-                <Col span={6}>
+                <Col span={6} style={shadowBorder}>
                     <Form onSubmit={_onsubmit} className='login-form'>
                         <label htmlFor="user-email"><strong>이메일</strong></label>
                        <Form.Item>
