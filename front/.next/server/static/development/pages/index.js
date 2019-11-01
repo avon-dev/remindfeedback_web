@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -139,6 +139,42 @@ const Header = () => {
 
 /***/ }),
 
+/***/ "./css/Common.js":
+/*!***********************!*\
+  !*** ./css/Common.js ***!
+  \***********************/
+/*! exports provided: layout, backgroundWhite, layoutCenter, backgroundLightBlue */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "layout", function() { return layout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "backgroundWhite", function() { return backgroundWhite; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "layoutCenter", function() { return layoutCenter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "backgroundLightBlue", function() { return backgroundLightBlue; });
+const layout = {
+  background: 'white',
+  height: '100vh',
+  width: 'auto'
+};
+const backgroundWhite = {
+  background: 'white'
+};
+const backgroundLightBlue = {
+  background: '#0B4E92'
+};
+const layoutCenter = {
+  height: '100vh',
+  width: 'auto',
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center'
+};
+
+
+/***/ }),
+
 /***/ "./pages/index.js":
 /*!************************!*\
   !*** ./pages/index.js ***!
@@ -151,67 +187,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_AppHeader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/AppHeader */ "./components/AppHeader.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd */ "antd");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _css_Common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../css/Common */ "./css/Common.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_3__);
 var _jsxFileName = "D:\\remindFB\\front\\pages\\index.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 
 const {
   Footer,
   Content
-} = antd__WEBPACK_IMPORTED_MODULE_2__["Layout"];
-const Logo = {
-  height: '100vh',
-  width: 'auto',
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'center',
-  alignItems: 'center'
-};
+} = antd__WEBPACK_IMPORTED_MODULE_3__["Layout"];
 
 const Home = () => {
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_components_AppHeader__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 11
     },
     __self: undefined
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Layout"], {
-    style: {
-      background: 'white'
-    },
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Layout"], {
+    style: _css_Common__WEBPACK_IMPORTED_MODULE_2__["backgroundWhite"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20
+      lineNumber: 12
     },
     __self: undefined
   }, __jsx(Content, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 21
+      lineNumber: 13
     },
     __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Row"], {
-    style: Logo,
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+    style: _css_Common__WEBPACK_IMPORTED_MODULE_2__["layoutCenter"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 22
+      lineNumber: 14
     },
     __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     span: 8,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23
+      lineNumber: 15
     },
     __self: undefined
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     span: 8,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 24
+      lineNumber: 16
     },
     __self: undefined
   }, __jsx("div", {
@@ -220,13 +248,13 @@ const Home = () => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25
+      lineNumber: 17
     },
     __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Button"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26
+      lineNumber: 18
     },
     __self: undefined
   }, "\uD14C\uC2A4\uD2B8")), __jsx("div", {
@@ -235,23 +263,23 @@ const Home = () => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28
+      lineNumber: 20
     },
     __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Progress"], {
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Progress"], {
     percent: 50,
     size: "small",
     status: "active",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29
+      lineNumber: 21
     },
     __self: undefined
-  }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+  }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     span: 8,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 24
     },
     __self: undefined
   })))));
@@ -261,7 +289,7 @@ const Home = () => {
 
 /***/ }),
 
-/***/ 3:
+/***/ 6:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

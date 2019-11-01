@@ -1,25 +1,17 @@
 import React from 'react';
 import AppHeader from '../components/AppHeader';
+import { layoutCenter, backgroundWhite } from '../css/Common';
 import {Row,Col,Layout, Button , Progress} from 'antd';
 
 const { Footer, Content } = Layout;
 
-const Logo = {
-    height:'100vh', 
-    width:'auto',
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'center',
-    alignItems:'center',
-
-}
 const Home = () => {
     return(
         <>
             <AppHeader/>
-            <Layout style={{background:'white'}} >
+            <Layout style={backgroundWhite} >
                 <Content >
-                    <Row style={Logo}>
+                    <Row style={layoutCenter}>
                         <Col span={8}></Col>
                         <Col span={8}>
                             <div style={{textAlign:'center'}}>

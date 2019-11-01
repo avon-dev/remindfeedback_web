@@ -2,7 +2,7 @@ import React from 'react';
 const AppFooter = () => {
     return(
         <>
-            <title>풋터입니다.</title>
+            <div>풋터입니다.</div>
         </>
     );
 }

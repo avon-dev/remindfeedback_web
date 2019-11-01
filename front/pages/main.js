@@ -1,9 +1,9 @@
 import React from 'react';
-import Head from 'next/head';
 import AppSidebar from '../components/AppSidebar';
 import AppTopbar from '../components/AppTopbar';
 import AppHeader from '../components/AppHeader';
 import AppFooter from '../components/AppFooter';
+import { layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
 import { Layout, Row, Col, Card, Avatar, Icon} from 'antd';
 const { Footer, Content, Header, Sider } = Layout;
 
@@ -13,17 +13,11 @@ const Home = () => {
     return(
         <>
             <AppHeader/>
-            <Layout style={{background:'white', height:'100vh', width:'auto'}} >
-                <Header style={{backgroundColor:'#0B4E92'}}>
-                    <AppTopbar>
-                    
-                    </AppTopbar>
-                </Header>
-                <Layout style={{background:'white'}}>
-                    <Sider style={{background:'white'}}>
-                        <AppSidebar>
-                            
-                        </AppSidebar>
+            <Layout style={layout} >
+                <AppTopbar/>
+                <Layout style={backgroundWhite}>
+                    <Sider style={backgroundWhite}>
+                        <AppSidebar/>
                     </Sider>
                     <Content>
                         <Row>
@@ -52,10 +46,8 @@ const Home = () => {
                         </Row>
                     </Content>
                 </Layout>
-                <Footer >
-                    <AppFooter>
-
-                    </AppFooter>
+                <Footer style={backgroundLightBlue}>
+                    <AppFooter/>
                 </Footer>
             </Layout>
         </>
