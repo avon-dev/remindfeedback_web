@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -181,8 +181,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _container_addFeedback__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../container/addFeedback */ "./container/addFeedback.js");
 var _jsxFileName = "D:\\remindFB\\front\\components\\AppSidebar.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 const {
@@ -198,27 +200,45 @@ const Sidebar = {
 };
 
 const AppSidebar = () => {
+  const {
+    0: visible,
+    1: setVisible
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])();
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleCancel = e => {
+    setVisible(false);
+  };
+
+  const handleOk = e => {
+    setVisible(false);
+  };
+
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("div", {
     style: Sidebar,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 34
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    onClick: showModal,
     type: "primary",
     size: "large",
     style: newFeedBack,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20
+      lineNumber: 35
     },
     __self: undefined
   }, " + \uC0C8\uB85C\uC6B4 \uD53C\uB4DC\uBC31 \uC791\uC131")), __jsx("div", {
     style: Sidebar,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26
+      lineNumber: 42
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"], {
@@ -230,7 +250,7 @@ const AppSidebar = () => {
     mode: "inline",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27
+      lineNumber: 43
     },
     __self: undefined
   }, __jsx(SubMenu, {
@@ -238,14 +258,14 @@ const AppSidebar = () => {
     title: __jsx("span", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 36
+        lineNumber: 52
       },
       __self: undefined
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
       type: "ordered-list",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 37
+        lineNumber: 53
       },
       __self: undefined
     }), __jsx("span", {
@@ -255,30 +275,45 @@ const AppSidebar = () => {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 38
+        lineNumber: 54
       },
       __self: undefined
     }, "\uC8FC\uC81C \uC124\uC815")),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 49
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
     key: "1",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 58
     },
     __self: undefined
   }, "AVON"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
     key: "2",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 59
     },
     __self: undefined
-  }, "\uC6B4\uB3D9")))));
+  }, "\uC6B4\uB3D9")))), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 63
+    },
+    __self: undefined
+  }, __jsx(_container_addFeedback__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    handleCancel: handleCancel,
+    handleOk: handleOk,
+    visible: visible,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 64
+    },
+    __self: undefined
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (AppSidebar);
@@ -506,6 +541,348 @@ const AppTopbar = () => {
 
 /***/ }),
 
+/***/ "./container/addFeedback.js":
+/*!**********************************!*\
+  !*** ./container/addFeedback.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _css_Common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../css/Common */ "./css/Common.js");
+/* harmony import */ var _css_Main__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../css/Main */ "./css/Main.js");
+
+var _jsxFileName = "D:\\remindFB\\front\\container\\addFeedback.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+
+
+const {
+  Search
+} = antd__WEBPACK_IMPORTED_MODULE_2__["Input"];
+const {
+  Content
+} = antd__WEBPACK_IMPORTED_MODULE_2__["Layout"];
+const {
+  Title
+} = antd__WEBPACK_IMPORTED_MODULE_2__["Typography"];
+
+const addFeedback = ({
+  visible,
+  handleCancel,
+  handleOk
+}) => {
+  const menuClick = e => {
+    message.info(e.target.name);
+  };
+
+  const item = __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 18
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"], {
+    onClick: menuClick,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 19
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"].Item, {
+    key: "1",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 20
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Icon"], {
+    type: "user",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 21
+    },
+    __self: undefined
+  }), __jsx("strong", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 22
+    },
+    __self: undefined
+  }, "AVON")), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"].Item, {
+    key: "2",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Icon"], {
+    type: "user",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 25
+    },
+    __self: undefined
+  }), __jsx("strong", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 26
+    },
+    __self: undefined
+  }, "\uC6B4\uB3D9"))));
+
+  const _onSubmit = e => {};
+
+  const _dateOnChange = () => {};
+
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Modal"], {
+    title: __jsx("div", {
+      style: {
+        textAlign: "center"
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 44
+      },
+      __self: undefined
+    }, __jsx(Title, {
+      level: 3,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 44
+      },
+      __self: undefined
+    }, "\uC0C8\uB85C\uC6B4 \uD53C\uB4DC\uBC31")),
+    visible: visible,
+    onOk: handleOk,
+    footer: [__jsx("div", {
+      style: {
+        textAlign: 'center'
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 49
+      },
+      __self: undefined
+    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+      key: "back",
+      onClick: handleCancel,
+      style: {
+        display: 'none'
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 50
+      },
+      __self: undefined
+    }, __jsx("strong", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 51
+      },
+      __self: undefined
+    }, "\uCDE8\uC18C")), ",", __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+      key: "submit",
+      type: "primary",
+      onClick: handleOk,
+      size: "large",
+      style: {
+        width: '100%'
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 53
+      },
+      __self: undefined
+    }, __jsx("strong", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 54
+      },
+      __self: undefined
+    }, "\uD53C\uB4DC\uBC31 \uC0DD\uC131")))],
+    onCancel: handleCancel,
+    centered: true,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 42
+    },
+    __self: undefined
+  }, __jsx(Content, {
+    style: _css_Common__WEBPACK_IMPORTED_MODULE_3__["backgroundWhite"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 61
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Form"], Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, _css_Main__WEBPACK_IMPORTED_MODULE_4__["formItemLayout"], {
+    onSubmit: _onSubmit,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 62
+    },
+    __self: undefined
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Form"].Item, {
+    label: __jsx("strong", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 63
+      },
+      __self: undefined
+    }, "\uD53C\uB4DC\uBC31 \uC8FC\uC81C\uC120\uD0DD"),
+    style: _css_Main__WEBPACK_IMPORTED_MODULE_4__["formBoder"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 63
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Dropdown"], {
+    overlay: item,
+    trigger: ['click'],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 64
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+    span: 24,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 65
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    style: {
+      width: '100%'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 66
+    },
+    __self: undefined
+  }, " ", __jsx("strong", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 68
+    },
+    __self: undefined
+  }, "\uD53C\uB4DC\uBC31 \uC8FC\uC81C\uC120\uD0DD"), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Icon"], {
+    type: "down",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 69
+    },
+    __self: undefined
+  }))))), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Form"].Item, {
+    label: __jsx("strong", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 74
+      },
+      __self: undefined
+    }, "\uD53C\uB4DC\uBC31 \uC81C\uBAA9"),
+    style: _css_Main__WEBPACK_IMPORTED_MODULE_4__["formBoder"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 74
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+    prefix: __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Icon"], {
+      type: "home",
+      style: {
+        color: 'rgba(0,0,0,.25)'
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 76
+      },
+      __self: undefined
+    }),
+    placeholder: "\uD53C\uB4DC\uBC31 \uC81C\uBAA9",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 75
+    },
+    __self: undefined
+  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Form"].Item, {
+    label: __jsx("strong", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 80
+      },
+      __self: undefined
+    }, "\uD53C\uB4DC\uBC31 \uB0A0\uC9DC"),
+    style: _css_Main__WEBPACK_IMPORTED_MODULE_4__["formBoder"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 80
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+    span: 24,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 81
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["DatePicker"], {
+    style: {
+      width: '100%'
+    },
+    onChange: _dateOnChange,
+    placeholder: "\uB0A0\uC9DC \uC120\uD0DD",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 82
+    },
+    __self: undefined
+  }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Form"].Item, {
+    label: __jsx("strong", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 89
+      },
+      __self: undefined
+    }, "\uD53C\uB4DC\uBC31 \uC870\uC5B8\uC790"),
+    style: _css_Main__WEBPACK_IMPORTED_MODULE_4__["formBoder"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 89
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+    span: 24,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 90
+    },
+    __self: undefined
+  }, __jsx(Search, {
+    style: {
+      width: '100%'
+    },
+    placeholder: "\uC870\uC5B8\uC790 \uC774\uB984\uC744 \uC785\uB825\uD558\uC138\uC694",
+    enterButton: "\uAC80\uC0C9",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 91
+    },
+    __self: undefined
+  })))))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (addFeedback);
+
+/***/ }),
+
 /***/ "./container/main.js":
 /*!***************************!*\
   !*** ./container/main.js ***!
@@ -533,7 +910,8 @@ const main = () => {
   const text = ['하하하', '호호호', '후후후', '키키키'];
   const mainItem = text.map(data => __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
     style: {
-      marginTop: 15
+      marginTop: 15,
+      background: '#FFFF00'
     },
     actions: [__jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
       type: "setting",
@@ -657,7 +1035,8 @@ const main = () => {
       lineNumber: 49
     },
     __self: undefined
-  }, __jsx("div", {
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 24,
     style: {
       marginTop: 15,
       textAlign: 'center'
@@ -695,9 +1074,10 @@ const main = () => {
       lineNumber: 55
     },
     __self: undefined
-  })))), __jsx("div", {
+  })))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 24,
     style: {
-      marginTop: 15,
+      marginTop: 20,
       textAlign: 'right'
     },
     __source: {
@@ -849,13 +1229,15 @@ const layoutCenter = {
 /*!*********************!*\
   !*** ./css/Main.js ***!
   \*********************/
-/*! exports provided: contentsBoder, subjectBtn */
+/*! exports provided: contentsBoder, subjectBtn, formBoder, formItemLayout */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "contentsBoder", function() { return contentsBoder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "subjectBtn", function() { return subjectBtn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formBoder", function() { return formBoder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formItemLayout", function() { return formItemLayout; });
 const contentsBoder = {
   border: '1px solid',
   paddingRight: 50,
@@ -866,11 +1248,72 @@ const contentsBoder = {
 };
 const subjectBtn = {
   boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)',
-  width: '35em',
+  width: '100%',
   backgroundColor: "#DDEEFF",
   color: '#000000'
 };
+const formBoder = {
+  border: '1px solid ',
+  padding: 10,
+  boxShadow: '10px 10px 5px #0B4E92'
+};
+const formItemLayout = {
+  labelCol: {
+    xs: {
+      span: 6
+    }
+  },
+  wrapperCol: {
+    sm: {
+      span: 18
+    }
+  }
+};
 
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/object/assign */ "core-js/library/fn/object/assign");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _extends; });
+/* harmony import */ var _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
+/* harmony import */ var _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__);
+
+function _extends() {
+  _extends = _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default.a || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
 
 /***/ }),
 
@@ -981,7 +1424,7 @@ const Main = () => {
 
 /***/ }),
 
-/***/ 5:
+/***/ 6:
 /*!*****************************!*\
   !*** multi ./pages/main.js ***!
   \*****************************/
@@ -1001,6 +1444,17 @@ module.exports = __webpack_require__(/*! D:\remindFB\front\pages\main.js */"./pa
 /***/ (function(module, exports) {
 
 module.exports = require("antd");
+
+/***/ }),
+
+/***/ "core-js/library/fn/object/assign":
+/*!***************************************************!*\
+  !*** external "core-js/library/fn/object/assign" ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/object/assign");
 
 /***/ }),
 

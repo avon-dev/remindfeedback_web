@@ -26,7 +26,7 @@ const Main = () => {
                     <AppFooter/>
                 </Footer>
             </Layout>
-           
+            
         </>
     );
 };

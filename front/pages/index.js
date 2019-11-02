@@ -1,6 +1,7 @@
 import React from 'react';
 import AppHeader from '../components/AppHeader';
-import { layoutCenter, backgroundWhite, shadowBorder } from '../css/Common';
+import { layoutCenter, backgroundWhite } from '../css/Common';
+import { shadowBorder } from '../css/Index';
 import {Row,Col,Layout, Button , Progress} from 'antd';
 
 const { Footer, Content } = Layout;

@@ -1,5 +1,6 @@
-import React from 'react';
-import { Menu, Icon,Button, Row } from 'antd';
+import React, { useState } from 'react';
+import { Menu, Icon,Button, Row, Modal } from 'antd';
+import AddFeedback from '../container/addFeedback';
 
 const { SubMenu } = Menu;
 
@@ -14,10 +15,25 @@ const Sidebar = {
 }
 
 const AppSidebar = () => {
+  const [visible, setVisible] = useState();
+
+  const showModal = () => {
+    setVisible(true);
+  }
+
+  const handleCancel = e => {
+    setVisible(false);
+  };
+
+  const handleOk  = e => {
+    setVisible(false);
+  };
+
     return(
       <>
       <div style={Sidebar}>
         <Button
+          onClick={showModal}
           type="primary"
           size='large'
           style={newFeedBack}
@@ -43,7 +59,14 @@ const AppSidebar = () => {
           <Menu.Item key="2">운동</Menu.Item>
         </SubMenu>
       </Menu>
-      </div> 
+      </div>
+      <div>
+        <AddFeedback
+          handleCancel={handleCancel}
+          handleOk={handleOk}
+          visible={visible}
+        /> 
+      </div>
       </> 
     );
 };

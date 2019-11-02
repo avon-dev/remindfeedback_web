@@ -8,7 +8,7 @@ const main = () => {
     const text = ['하하하','호호호','후후후','키키키'];
 
     const mainItem = text.map((data)=> <Card
-                        style={{ marginTop: 15 }}
+                        style={{ marginTop: 15, background:'#FFFF00' }}
                         actions={[
                         <Icon type="setting" key="setting" />,
                         <Icon type="edit" key="edit" />,
@@ -17,7 +17,7 @@ const main = () => {
                     >
                         <Meta
                             avatar={
-                            <Avatar icon="user"/>
+                            <Avatar icon="user" />
                             }
                             title="제목"
                             description={data}
@@ -26,20 +26,20 @@ const main = () => {
 
     const handleMenuClick = (e) => {
         message.info(e.target.name);
-    }                
-    
+    }       
+
     const menu = (
         <Menu onClick={handleMenuClick}>
-          <Menu.Item key="1">
+        <Menu.Item key="1">
             <Icon type="user" />
             <strong>AVON</strong>
-          </Menu.Item>
-          <Menu.Item key="2">
+        </Menu.Item>
+        <Menu.Item key="2">
             <Icon type="user" />
             <strong>운동</strong>
-          </Menu.Item>
+        </Menu.Item>
         </Menu>
-      );
+    );   
 
     return(
         <>
@@ -47,16 +47,16 @@ const main = () => {
                 <Col span={6}>
                 </Col>
                 <Col span={12} style={contentsBoder}>
-                    <div style={{marginTop:15, textAlign:'center'}}>
+                    <Col span={24} style={{marginTop:15, textAlign:'center'}}>
                         <Dropdown overlay={menu}>
                             <Button 
                                 style={subjectBtn}
                                 size='large'
                             > <strong>주제선택</strong> <Icon type="down" />
                             </Button>
-                        </Dropdown>  
-                    </div>
-                    <div style={{marginTop:15, textAlign:'right'}}>
+                        </Dropdown>
+                    </Col>
+                    <Col span={24} style={{marginTop:20, textAlign:'right'}}> 
                         <Breadcrumb>
                             <Breadcrumb.Item>
                                 <Icon type="home" />
@@ -71,7 +71,7 @@ const main = () => {
                                 <span>분류3</span>
                             </Breadcrumb.Item>
                         </Breadcrumb>
-                    </div>
+                    </Col> 
                     <div>
                         <Button
                             type="primary"
