@@ -1,69 +1,132 @@
-import React from 'react';
-import { Menu, Icon, Input, Typography, Row, Col, Avatar } from 'antd';
-
+import React,{useState} from 'react';
+import Link from 'next/link';
+import { Menu, Icon, Input, Typography, Dropdown, Col, Row, Button, Avatar} from 'antd';
+import AppTutorial from '../components/TutorialMain';
 const { Title, Paragraph, Text } = Typography;
 
 const { Search } = Input;
 
-const MenuItem = {
+const icon = {
+    float:'right',
     textAlign:'center',
-    top:0,
-    left:0,
-    right:0,
-    bottom:0,
-}
+};
 
 const commonStyle = {
     color: '#ffffff',
     fontSize:25,
-    textAlign:'center',
-}
+};
 
 const AppTopbar = () => {
 
-    return(
+    const [visible, setVisible] = useState();
+
+    const showModal = () => {
+        setVisible(true);
+    }
+
+    const handleCancel = e => {
+        setVisible(false);
+    };
+
+    const handleOk  = e => {
+        setVisible(false);
+    };
+
+     
+    const items = (
         <div>
-          <Menu mode="horizontal"  style={{backgroundColor:'#0B4E92'}} >
-            <Row type="flex">
-            <Col span={2}>
-                <Menu.Item key="home" style={MenuItem}>
-                    <Icon type="home" style={commonStyle}/>
+            <Menu style={{border:"gray solid 1px"}}>
+                <Menu.Item key="1">
+                    <Icon type="user" />
+                    <strong>마이페이지</strong>
                 </Menu.Item>
-            </Col>
-            <Col span={4}>
-                <Menu.Item key="search" style={MenuItem} >
-                    <Search
-                        placeholder="input search text"
-                        style={{ width: 200 }}
-                    /> 
+                <Menu.Item key="2">
+                    <Icon type="setting" />
+                    <strong>환경설정</strong>
                 </Menu.Item>
-            </Col>
-            <Col span={12}>
-                <Menu.Item key="subject" style={MenuItem}>
-                    <Typography>
-                        <Title style={commonStyle}>RemindFeedBack</Title>
-                    </Typography>
+                <Menu.Item key="3" onClick={showModal}>
+                    <Icon type="book" />
+                    <strong>튜토리얼</strong>
                 </Menu.Item>
-            </Col>
-            <Col span={3}></Col>
-            <Col span={1}>
-                <Menu.Item key="bell" style={MenuItem} >
-                    <Icon type="bell" style={commonStyle}/>
+                <Menu.Item key="4">
+                    <Icon type="logout" />
+                    <strong>로그아웃</strong>
+                    <Link href="/logout" ><a>></a></Link>
                 </Menu.Item>
-            </Col>
-            <Col span={1}>
-                <Menu.Item key="user" style={MenuItem}>
-                    <Avatar icon="user" style={commonStyle}/>
-                </Menu.Item>
-            </Col>
-            <Col span={1}>
-                <Menu.Item key="setting" style={MenuItem} >
-                    <Icon type="setting" style={commonStyle}/>
-                </Menu.Item>
-            </Col>
-            </Row>
-          </Menu>  
+            </Menu>
         </div>
+    );
+
+    return(
+        <>
+          <Menu mode="horizontal" key="topbar" style={{backgroundColor:'#0B4E92'}}>
+            <Menu.Item key="home">
+                <Button
+                    shape="circle"
+                    ghost={true}
+                    style={{ border:'none' }}
+                >
+                <Icon type="home" style={{fontSize:'23px'}} />
+                </Button>
+            </Menu.Item>
+            <Menu.Item key="search" style >
+                <Search
+                    placeholder="input search text"
+                    style={{ width: 250 }}
+                /> 
+            </Menu.Item>
+            <Menu.Item key="subject">
+                <Row type='flex'>
+                    <Col span={2}>
+                        <Typography>
+                            <Title style={commonStyle}>RemindFeedBack</Title>
+                        </Typography>
+                    </Col>
+                </Row>  
+            </Menu.Item> 
+            <Menu.Item key="icon" style={icon}>
+                <Row type='flex' gutter={30}>
+                    <Col span={8}>
+                        <Button
+                            shape="circle"
+                            ghost={true}
+                            style={{ border:'none' }}
+                        >
+                        <Icon type="bell" style={{fontSize:'23px'}} />
+                        </Button> 
+                    </Col>
+                    <Col span={8}>
+                        <Dropdown overlay={items} trigger={['click']}>
+                            <div>
+                                <Button
+                                    shape="circle"
+                                    style={{background:'gray', border:'none' }}
+                                >
+                                <Avatar>U</Avatar>
+                                </Button>
+                            </div>
+                        </Dropdown>
+                    </Col>
+                    <Col span={8}>
+                        <Button
+                            shape="circle"
+                            ghost={true}
+                            style={{ border:'none' }}
+                        >
+                        <Icon type="setting" style={{fontSize:'23px'}} />
+                        </Button> 
+                    </Col>
+                </Row>
+            </Menu.Item>
+          </Menu>
+          <div>
+              <AppTutorial
+                handleCancel={handleCancel}
+                handleOk={handleOk}
+                visible={visible}
+              />
+          </div>  
+        </>
     );
 };
 

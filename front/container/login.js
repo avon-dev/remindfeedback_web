@@ -36,32 +36,34 @@ const login = () => {
                             <Checkbox><strong>Remember me</strong></Checkbox>
                        </Form.Item>
                        <Form.Item style={{textAlign:'center'}}>
-                            <Button type="primary" size="large" className="login-form-button" style={loginBtn}>
-                                <Link href="/main" ><a><strong>로그인</strong></a></Link>
-                            </Button>
+                           <Col span={24}>
+                                <Button type="primary" size="large" className="login-form-button" style={loginBtn}>
+                                    <Link href="/main" ><a><strong>로그인</strong></a></Link>
+                                </Button>
+                           </Col>
                        </Form.Item>
                        <hr/>
                        <Form.Item style={{textAlign:'center'}}>
-                           <div style={{marginBottom:'5px'}}>
+                            <Col span={24}>
                                 <Button type="danger" size="large" htmlType="submit" className="login-form-button" style={loginApple} icon="apple">
                                        <strong>Log in with Apple</strong> 
                                 </Button>
-                           </div>
-                           <div style={{marginBottom:'5px'}}>
+                           </Col>
+                           <Col span={24}>
                                 <Button type="primary" size="large" htmlType="submit" className="login-form-button" style={loginGoogle} icon="google">
                                     <strong>Log in with Google</strong> 
                                 </Button>
-                            </div>
-                            <div style={{marginBottom:'5px'}}>
+                            </Col>
+                            <Col span={24}>
                                 <Button type="primary" size="large" htmlType="submit" className="login-form-button" style={loginKakao}>
                                     <strong>Log in with kakao</strong> 
                                 </Button>
-                            </div>
-                            <div style={{marginBottom:'5px'}}>
+                            </Col>
+                            <Col span={24}>
                                 <Button type="primary" size="large" htmlType="submit" className="login-form-button" style={loginFacebook} icon="facebook">
                                     <strong>Log in with Facebook</strong> 
                                 </Button>
-                            </div>
+                            </Col>
                        </Form.Item>
                     </Form>
                     <div style={{textAlign:'center'}}>

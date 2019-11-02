@@ -59,18 +59,18 @@ const signup = () => {
                     </div>
                     <Form onSubmit={_onsubmit} className='signUp-form'>
                         {signUpForm}
-                        <div style={{marginTop:15}}>
+                        <Col span={24} style={{marginTop:15}}>
                             <Checkbox style={{fontWeight:'bold'}}>서비스 이용약관, 개인정보 수집 및 이용, 중요한 약관에 모두 동의합니다.</Checkbox>
-                        </div>
-                        <div style={{marginTop:15, textAlign:'center'}}>
+                        </Col>
+                        <Col span={24} style={{marginTop:15}}>
                             <Button size="large" htmlType="submit" className="signup-form-button" style={signUpBtn}>
                                 회원가입
                             </Button>
-                        </div>
+                        </Col>
                     </Form>
-                    <div style={{marginTop:15, textAlign:'center'}}>
+                    <Col span={24} style={{marginTop:15, textAlign:'center'}}>
                         <span>계정을 이미 가지고 있으신가요? </span><Link href="/login" ><a><strong>로그인</strong></a></Link>
-                    </div>  
+                    </Col>  
                 </Col>
                 <Col span={8}></Col>
             </Row>

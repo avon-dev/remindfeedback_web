@@ -9,14 +9,9 @@ const {Title} = Typography;
 const addFeedback = ({visible,handleCancel,handleOk}) => {
         
     
-
-    const menuClick = (e) => {
-        message.info(e.target.name);
-    }  
-
     const item = (
         <div>
-            <Menu onClick={menuClick}>
+            <Menu>
                 <Menu.Item key="1">
                     <Icon type="user" />
                     <strong>AVON</strong>
@@ -40,6 +35,7 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
     return(
         <>  
            <Modal
+                key='addFeedback'
                 title={
                     <div style={{textAlign:"center"}}><Title level={3}>새로운 피드백</Title></div>
                 }
@@ -64,9 +60,10 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
                             <Dropdown overlay={item} trigger={['click']}>
                                 <Col span={24}>
                                     <Button 
-                                        style={{width:'100%'}}
-                                    > <strong>피드백 주제선택</strong> 
-                                    <Icon type="down" />
+                                        style={{width:'100%', textAlign:'left', color: 'rgba(0,0,0,.25)' }}
+                                   
+                                    >피드백 주제선택
+                                    <Icon type='down' style={{ color: 'rgba(0,0,0,.25)', textAlign:'right' }} />
                                     </Button>
                                 </Col>
                             </Dropdown>
