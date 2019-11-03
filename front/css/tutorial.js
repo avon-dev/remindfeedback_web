@@ -8,7 +8,18 @@ const layoutCenter = {
     justifyContent:'center',
     alignItems:'center',
 };
+
+const layoutCenter2 = {
+    background:'#FFFFFF',
+    height:'50vh', 
+    width:'auto',
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'center',
+};
 export {
     layoutCenter,
+    layoutCenter2,
     shadowBorder, 
 };

@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -711,6 +711,273 @@ const AppTopbar = () => {
 
 /***/ }),
 
+/***/ "./components/TutorialFirst.js":
+/*!*************************************!*\
+  !*** ./components/TutorialFirst.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _css_tutorial__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../css/tutorial */ "./css/tutorial.js");
+/* harmony import */ var _css_Common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../css/Common */ "./css/Common.js");
+/* harmony import */ var _img_logo1_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../img/logo1.png */ "./img/logo1.png");
+/* harmony import */ var _img_logo1_png__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_img_logo1_png__WEBPACK_IMPORTED_MODULE_4__);
+var _jsxFileName = "D:\\remindFB\\front\\components\\TutorialFirst.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+const {
+  Text
+} = antd__WEBPACK_IMPORTED_MODULE_1__["Typography"];
+
+const TutorialFirst = () => {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+    style: _css_tutorial__WEBPACK_IMPORTED_MODULE_2__["layoutCenter"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 13
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 8,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
+    },
+    __self: undefined
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 8,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 15
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 24,
+    style: {
+      textAlign: 'center',
+      marginBottom: 5
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 16
+    },
+    __self: undefined
+  }, __jsx("img", {
+    src: _img_logo1_png__WEBPACK_IMPORTED_MODULE_4___default.a,
+    width: "50%",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 17
+    },
+    __self: undefined
+  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 24,
+    style: {
+      textAlign: 'center'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 19
+    },
+    __self: undefined
+  }, __jsx(Text, {
+    style: {
+      fontSize: 20,
+      color: '#ffffff'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 20
+    },
+    __self: undefined
+  }, __jsx("strong", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 20
+    },
+    __self: undefined
+  }, "RemindFeedback")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 8,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 23
+    },
+    __self: undefined
+  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+    style: _css_Common__WEBPACK_IMPORTED_MODULE_3__["backgroundWhite"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 25
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 24,
+    style: {
+      textAlign: 'center',
+      padding: 20
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 26
+    },
+    __self: undefined
+  }, __jsx(Text, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 27
+    },
+    __self: undefined
+  }, __jsx("strong", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 27
+    },
+    __self: undefined
+  }, "Remind Feedback\uC5D0 \uC624\uC2E0 \uC5EC\uB7EC\uBD84\uB4E4 ", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 27
+    },
+    __self: undefined
+  }), " \uD658\uC601\uD569\uB2C8\uB2E4.")))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TutorialFirst);
+
+/***/ }),
+
+/***/ "./components/TutorialForth.js":
+/*!*************************************!*\
+  !*** ./components/TutorialForth.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _css_tutorial__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../css/tutorial */ "./css/tutorial.js");
+/* harmony import */ var _css_Common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../css/Common */ "./css/Common.js");
+/* harmony import */ var _img_logo1_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../img/logo1.png */ "./img/logo1.png");
+/* harmony import */ var _img_logo1_png__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_img_logo1_png__WEBPACK_IMPORTED_MODULE_4__);
+var _jsxFileName = "D:\\remindFB\\front\\components\\TutorialForth.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+const {
+  Text
+} = antd__WEBPACK_IMPORTED_MODULE_1__["Typography"];
+
+const TutorialForth = () => {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+    style: _css_tutorial__WEBPACK_IMPORTED_MODULE_2__["layoutCenter2"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 13
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 8,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
+    },
+    __self: undefined
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 8,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 15
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 24,
+    style: {
+      textAlign: 'center',
+      marginBottom: 5
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 16
+    },
+    __self: undefined
+  }, __jsx("img", {
+    src: _img_logo1_png__WEBPACK_IMPORTED_MODULE_4___default.a,
+    width: "50%",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 17
+    },
+    __self: undefined
+  }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 8,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 20
+    },
+    __self: undefined
+  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+    style: _css_Common__WEBPACK_IMPORTED_MODULE_3__["backgroundLightBlue"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 22
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 24,
+    style: {
+      textAlign: 'center',
+      padding: 20
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 23
+    },
+    __self: undefined
+  }, __jsx(Text, {
+    style: {
+      color: "#FFFFFF"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: undefined
+  }, __jsx("strong", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: undefined
+  }, "\uB098\uB9CC\uC758 \uC870\uC5B8\uC790\uB97C \uB4F1\uB85D\uD558\uC5EC ", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: undefined
+  }), " \uB2E4\uC591\uD55C \uC758\uACAC\uB4E4\uC744 \uACF5\uC720\uD574 \uBCF4\uC138\uC694")))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TutorialForth);
+
+/***/ }),
+
 /***/ "./components/TutorialMain.js":
 /*!************************************!*\
   !*** ./components/TutorialMain.js ***!
@@ -724,167 +991,420 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _css_tutorial__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../css/tutorial */ "./css/tutorial.js");
-/* harmony import */ var _css_Common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../css/Common */ "./css/Common.js");
+/* harmony import */ var _components_TutorialFirst__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/TutorialFirst */ "./components/TutorialFirst.js");
+/* harmony import */ var _components_TutorialSecond__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/TutorialSecond */ "./components/TutorialSecond.js");
+/* harmony import */ var _components_TutorialThird__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/TutorialThird */ "./components/TutorialThird.js");
+/* harmony import */ var _components_TutorialForth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/TutorialForth */ "./components/TutorialForth.js");
 var _jsxFileName = "D:\\remindFB\\front\\components\\TutorialMain.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
 
+
+
 const {
-  Title,
-  Text
-} = antd__WEBPACK_IMPORTED_MODULE_1__["Typography"];
+  Step
+} = antd__WEBPACK_IMPORTED_MODULE_1__["Steps"];
+const {
+  Panel
+} = antd__WEBPACK_IMPORTED_MODULE_1__["Collapse"];
 const {
   Content
 } = antd__WEBPACK_IMPORTED_MODULE_1__["Layout"];
+const steps = [{
+  title: __jsx("div", {
+    style: {
+      fontSize: 13
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
+    },
+    __self: undefined
+  }, __jsx("strong", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
+    },
+    __self: undefined
+  }, "Welcome")),
+  content: __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_components_TutorialFirst__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 15
+    },
+    __self: undefined
+  }))
+}, {
+  title: __jsx("div", {
+    style: {
+      fontSize: 13
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 18
+    },
+    __self: undefined
+  }, __jsx("strong", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 18
+    },
+    __self: undefined
+  }, "\uC8FC\uC81C\uC120\uC815")),
+  content: __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_components_TutorialSecond__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 19
+    },
+    __self: undefined
+  }))
+}, {
+  title: __jsx("div", {
+    style: {
+      fontSize: 13
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 22
+    },
+    __self: undefined
+  }, __jsx("strong", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 22
+    },
+    __self: undefined
+  }, "\uD53C\uB4DC\uBC31\uAE30\uB2A5")),
+  content: __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_components_TutorialThird__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 23
+    },
+    __self: undefined
+  }))
+}, {
+  title: __jsx("div", {
+    style: {
+      fontSize: 13
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 26
+    },
+    __self: undefined
+  }, __jsx("strong", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 26
+    },
+    __self: undefined
+  }, "\uC870\uC5B8\uC790\uAE30\uB2A5")),
+  content: __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_components_TutorialForth__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 27
+    },
+    __self: undefined
+  }))
+}];
 
 const TutorialMain = ({
   visible,
   handleCancel,
   handleOk
 }) => {
+  const {
+    0: current,
+    1: setCurrent
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0);
+
+  const next = () => {
+    const currents = current + 1;
+    setCurrent(currents);
+  };
+
+  const prev = () => {
+    const currents = current - 1;
+    setCurrent(currents);
+  };
+
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Modal"], {
     key: "tutorial",
-    title: __jsx("div", {
-      style: {
-        textAlign: "center"
-      },
+    title: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Steps"], {
+      current: current,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 14
+        lineNumber: 50
       },
       __self: undefined
-    }, __jsx(Title, {
-      level: 3,
+    }, steps.map(item => __jsx(Step, {
+      key: item.title,
+      title: item.title,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 14
+        lineNumber: 52
       },
       __self: undefined
-    }, "\uD29C\uD1A0\uB9AC\uC5BC")),
+    }))),
     bodyStyle: {
       padding: 0
     },
     visible: visible,
     onOk: handleOk,
-    footer: [__jsx("div", {
+    footer: [__jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("div", {
       style: {
-        textAlign: 'center'
+        textAlign: 'center',
+        marginBottom: 5
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 20
+        lineNumber: 61
       },
       __self: undefined
-    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    }, current > 0 && __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       key: "back",
-      onClick: handleCancel,
+      onClick: prev,
       style: {
-        display: 'none'
+        width: '100%'
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 21
+        lineNumber: 63
       },
       __self: undefined
     }, __jsx("strong", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 22
+        lineNumber: 64
       },
       __self: undefined
-    }, "\uCDE8\uC18C")), ",", __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-      key: "submit",
-      type: "primary",
-      onClick: handleOk,
+    }, "\uC774\uC804"))), __jsx("div", {
+      style: {
+        textAlign: 'center',
+        marginBottom: 5
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 68
+      },
+      __self: undefined
+    }, current === 1 && __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Collapse"], {
+      bordered: true,
       size: "large",
       style: {
         width: '100%'
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 24
+        lineNumber: 70
+      },
+      __self: undefined
+    }, __jsx(Panel, {
+      showArrow: false,
+      header: __jsx("strong", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 71
+        },
+        __self: undefined
+      }, "\uC8FC\uC81C \uC120\uC815\uD558\uAE30"),
+      key: "1",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 71
+      },
+      __self: undefined
+    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+      placeholder: "\uCCAB\uBC88\uC9F8 \uC8FC\uC81C\uB97C \uC791\uC131\uD574\uC8FC\uC138\uC694",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 72
+      },
+      __self: undefined
+    }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Popconfirm"], {
+      title: "\uC774\uB300\uB85C \uAD1C\uCC2E\uC2B5\uB2C8\uAE4C?",
+      okText: "\uB124",
+      cancelText: "\uC544\uB2C8\uC624",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 75
+      },
+      __self: undefined
+    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      type: "danger",
+      key: "confirm",
+      style: {
+        width: '100%',
+        marginTop: 5
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 76
       },
       __self: undefined
     }, __jsx("strong", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 25
+        lineNumber: 77
       },
       __self: undefined
-    }, "\uB2E4\uC74C")))],
+    }, "\uD655\uC778")))))), __jsx("div", {
+      style: {
+        textAlign: 'center'
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 84
+      },
+      __self: undefined
+    }, current < steps.length - 1 && __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      type: "primary",
+      onClick: next,
+      size: "large",
+      style: {
+        width: '100%'
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 86
+      },
+      __self: undefined
+    }, __jsx("strong", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 87
+      },
+      __self: undefined
+    }, "\uB2E4\uC74C"))), __jsx("div", {
+      style: {
+        textAlign: 'center'
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 91
+      },
+      __self: undefined
+    }, current === steps.length - 1 && __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      type: "primary",
+      onClick: handleCancel,
+      size: "large",
+      style: {
+        width: '100%'
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 93
+      },
+      __self: undefined
+    }, __jsx("strong", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 94
+      },
+      __self: undefined
+    }, "\uC2DC\uC791\uD558\uAE30"))))],
     onCancel: handleCancel,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 11
+      lineNumber: 47
     },
     __self: undefined
   }, __jsx(Content, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 102
     },
     __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
-    style: _css_tutorial__WEBPACK_IMPORTED_MODULE_2__["layoutCenter"],
+  }, steps[current].content)));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TutorialMain);
+
+/***/ }),
+
+/***/ "./components/TutorialSecond.js":
+/*!**************************************!*\
+  !*** ./components/TutorialSecond.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _css_tutorial__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../css/tutorial */ "./css/tutorial.js");
+/* harmony import */ var _css_Common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../css/Common */ "./css/Common.js");
+/* harmony import */ var _img_logo1_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../img/logo1.png */ "./img/logo1.png");
+/* harmony import */ var _img_logo1_png__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_img_logo1_png__WEBPACK_IMPORTED_MODULE_4__);
+var _jsxFileName = "D:\\remindFB\\front\\components\\TutorialSecond.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+const {
+  Text
+} = antd__WEBPACK_IMPORTED_MODULE_1__["Typography"];
+
+const TutorialSecond = () => {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+    style: _css_tutorial__WEBPACK_IMPORTED_MODULE_2__["layoutCenter2"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 13
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
     span: 8,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 14
     },
     __self: undefined
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
     span: 8,
-    style: _css_tutorial__WEBPACK_IMPORTED_MODULE_2__["shadowBorder"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 15
     },
     __self: undefined
-  }, __jsx("div", {
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 24,
     style: {
-      textAlign: 'center'
+      textAlign: 'center',
+      marginBottom: 5
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 16
     },
     __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+  }, __jsx("img", {
+    src: _img_logo1_png__WEBPACK_IMPORTED_MODULE_4___default.a,
+    width: "50%",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 17
     },
     __self: undefined
-  }, "\uD14C\uC2A4\uD2B8")), __jsx("div", {
-    style: {
-      marginTop: '5em'
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 38
-    },
-    __self: undefined
-  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+  }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
     span: 8,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 20
     },
     __self: undefined
   })), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
-    style: _css_Common__WEBPACK_IMPORTED_MODULE_3__["backgroundWhite"],
+    style: _css_Common__WEBPACK_IMPORTED_MODULE_3__["backgroundLightBlue"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44
+      lineNumber: 22
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -895,31 +1415,156 @@ const TutorialMain = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 23
     },
     __self: undefined
   }, __jsx(Text, {
+    style: {
+      color: "#FFFFFF"
+    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46
+      lineNumber: 24
     },
     __self: undefined
   }, __jsx("strong", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46
+      lineNumber: 24
     },
     __self: undefined
-  }, "Remind Feedback\uC5D0 \uC624\uC2E0 \uC5EC\uB7EC\uBD84\uB4E4 ", __jsx("br", {
+  }, "\uD53C\uB4DC\uBC31\uC5D0 \uC54C\uB9DE\uC740 \uC8FC\uC81C\uB97C \uC120\uC815\uD558\uC5EC, ", __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46
+      lineNumber: 24
     },
     __self: undefined
-  }), " \uD658\uC601\uD569\uB2C8\uB2E4.")))))));
+  }), " \uC27D\uACE0 \uD3B8\uD558\uAC8C \uD53C\uB4DC\uBC31\uC744 \uAD00\uB9AC\uD558\uC138\uC694")))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (TutorialMain);
+/* harmony default export */ __webpack_exports__["default"] = (TutorialSecond);
+
+/***/ }),
+
+/***/ "./components/TutorialThird.js":
+/*!*************************************!*\
+  !*** ./components/TutorialThird.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _css_tutorial__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../css/tutorial */ "./css/tutorial.js");
+/* harmony import */ var _css_Common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../css/Common */ "./css/Common.js");
+/* harmony import */ var _img_logo1_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../img/logo1.png */ "./img/logo1.png");
+/* harmony import */ var _img_logo1_png__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_img_logo1_png__WEBPACK_IMPORTED_MODULE_4__);
+var _jsxFileName = "D:\\remindFB\\front\\components\\TutorialThird.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+const {
+  Text
+} = antd__WEBPACK_IMPORTED_MODULE_1__["Typography"];
+
+const TutorialThird = () => {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+    style: _css_tutorial__WEBPACK_IMPORTED_MODULE_2__["layoutCenter2"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 13
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 8,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
+    },
+    __self: undefined
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 8,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 15
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 24,
+    style: {
+      textAlign: 'center',
+      marginBottom: 5
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 16
+    },
+    __self: undefined
+  }, __jsx("img", {
+    src: _img_logo1_png__WEBPACK_IMPORTED_MODULE_4___default.a,
+    width: "50%",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 17
+    },
+    __self: undefined
+  }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 8,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 20
+    },
+    __self: undefined
+  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+    style: _css_Common__WEBPACK_IMPORTED_MODULE_3__["backgroundLightBlue"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 22
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 24,
+    style: {
+      textAlign: 'center',
+      padding: 20
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 23
+    },
+    __self: undefined
+  }, __jsx(Text, {
+    style: {
+      color: "#FFFFFF"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: undefined
+  }, __jsx("strong", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: undefined
+  }, "\uC81C\uBAA9,\uB0A0\uC9DC,\uC870\uC5B8\uC790,\uC8FC\uC81C\uB97C \uC120\uD0DD\uD558\uC5EC ", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: undefined
+  }), " \uB098\uB9CC\uC758 \uD53C\uB4DC\uBC31\uC744 \uB9CC\uB4E4\uC5B4\uBCF4\uC138\uC694")))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TutorialThird);
 
 /***/ }),
 
@@ -1655,12 +2300,13 @@ const formItemLayout = {
 /*!*************************!*\
   !*** ./css/tutorial.js ***!
   \*************************/
-/*! exports provided: layoutCenter, shadowBorder */
+/*! exports provided: layoutCenter, layoutCenter2, shadowBorder */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "layoutCenter", function() { return layoutCenter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "layoutCenter2", function() { return layoutCenter2; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "shadowBorder", function() { return shadowBorder; });
 const shadowBorder = {
   border: '1px solid',
@@ -1679,7 +2325,27 @@ const layoutCenter = {
   justifyContent: 'center',
   alignItems: 'center'
 };
+const layoutCenter2 = {
+  background: '#FFFFFF',
+  height: '50vh',
+  width: 'auto',
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center'
+};
 
+
+/***/ }),
+
+/***/ "./img/logo1.png":
+/*!***********************!*\
+  !*** ./img/logo1.png ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/_next/static/images/logo1-15a8d656ec1b39a7a087c2e1d229d56d.png";
 
 /***/ }),
 
@@ -3511,7 +4177,7 @@ const Main = () => {
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!*****************************!*\
   !*** multi ./pages/main.js ***!
   \*****************************/
