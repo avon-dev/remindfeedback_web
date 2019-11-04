@@ -58,17 +58,14 @@ const main = () => {
                     </Col>
                     <Col span={24} style={{marginTop:20, textAlign:'right'}}> 
                         <Breadcrumb>
-                            <Breadcrumb.Item>
-                                <Icon type="home" />
-                                <span>분류1</span>
+                            <Breadcrumb.Item href="#">
+                                <Icon type="home" /><span>분류1</span>
+                            </Breadcrumb.Item >
+                            <Breadcrumb.Item href="#">
+                                <Icon type="home" /><span>분류2</span>
                             </Breadcrumb.Item>
-                            <Breadcrumb.Item>
-                                <Icon type="home" />
-                                <span>분류2</span>
-                            </Breadcrumb.Item>
-                            <Breadcrumb.Item>
-                                <Icon type="home" />
-                                <span>분류3</span>
+                            <Breadcrumb.Item href="#">
+                                <Icon type="home" /><span>분류3</span>
                             </Breadcrumb.Item>
                         </Breadcrumb>
                     </Col> 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Layout, Form, Input, Dropdown, Menu, Icon, Button, Col, Typography, DatePicker  } from 'antd';
+import { Modal, Layout, Form, Input, Dropdown, Menu, Icon, Button, Col, Typography, DatePicker, Calendar } from 'antd';
 import { backgroundWhite, backgroundLightBlue} from '../css/Common';
 import { subjectBtn, formBoder, formItemLayout } from '../css/Main';
 const { Search } = Input;
@@ -75,12 +75,15 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
                             />
                         </Form.Item>
                         <Form.Item label={<strong>피드백 날짜</strong>} style={formBoder}>
-                            <Col span={24}>
-                                <DatePicker
+                            <Col span={24}  style={{ width: 300 , border: '1px solid #d9d9d9', borderRadius: 4 }}>
+                                {/* <DatePicker
                                     style={{width:'100%'}}
                                     onChange={_dateOnChange}
                                     placeholder="날짜 선택" 
-                                />
+                                /> */}
+                                {/* <div> */}
+                                    <Calendar fullscreen={false} />
+                                {/* </div> */}
                             </Col>   
                         </Form.Item>
                         <Form.Item label={<strong>피드백 조언자</strong>} style={formBoder}>

@@ -1,8 +1,11 @@
 import React from 'react';
-import {Row, Col, Form, Icon, Input, Button, Checkbox } from 'antd';
+import {Row, Col, Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
 import { layoutCenter } from '../css/Common';
 import { loginBtn, loginApple, loginFacebook, loginGoogle, loginKakao, shadowBorder } from '../css/login';
 import Link from 'next/link';
+import logoImg from '../img/logo1.png';
+
+const {Text} = Typography;
 
 const login = () => {
 
@@ -16,6 +19,12 @@ const login = () => {
             <Row style={layoutCenter}>
                 <Col span={9}></Col>
                 <Col span={6} style={shadowBorder}>
+                    <Col span={24} style={{textAlign:'center', marginBottom:5}}>
+                                <img src={logoImg} width='25%'/>
+                    </Col>
+                    <Col span={24} style={{textAlign:'center', marginBottom:5}}>
+                        <Text style={{fontSize:20, color:'#000000'}}><strong>RemindFeedback</strong></Text> 
+                    </Col>
                     <Form onSubmit={_onsubmit} className='login-form'>
                         <label htmlFor="user-email"><strong>이메일</strong></label>
                        <Form.Item>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, Icon,Button, Row, Modal } from 'antd';
 import AddFeedback from '../container/addFeedback';
-
+import Link from 'next/link';
 const { SubMenu } = Menu;
 
 const newFeedBack ={
@@ -43,15 +43,20 @@ const AppSidebar = () => {
         <Menu
             style={{ width: 230 }}
             defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
+            defaultOpenKeys={['sub2']}
             mode="inline"
         >
+        <Menu.Item key="sub1" style={{color:"#000000"}}>
+          <Icon type="ordered-list"/><strong>주제 관리</strong>
+          <Link href="/subject">
+          <a></a></Link> 
+        </Menu.Item>
         <SubMenu
-          key="sub1"
+          key="sub2"
           title={
             <span>
               <Icon type="ordered-list" />
-              <span style={{color:'black', fontWeight:'bold'}}>주제 설정</span>
+              <span style={{color:'black', fontWeight:'bold'}}>주제</span>
             </span>
           }
         >

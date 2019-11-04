@@ -61,13 +61,11 @@ const AppTopbar = () => {
         <>
           <Menu mode="horizontal" key="topbar" style={{backgroundColor:'#0B4E92'}}>
             <Menu.Item key="home">
-                <Button
-                    shape="circle"
-                    ghost={true}
-                    style={{ border:'none' }}
-                >
-                <Icon type="home" style={{fontSize:'23px'}} />
-                </Button>
+                <Link href="/main">
+                    <a>
+                        <Icon type="home" style={{fontSize:'23px', color:'#FFFFFF'}} />
+                    </a>
+                </Link>    
             </Menu.Item>
             <Menu.Item key="search" style >
                 <Search
