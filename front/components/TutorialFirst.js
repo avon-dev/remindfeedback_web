@@ -7,7 +7,6 @@ import logoImg from '../img/logo1.png';
 const {Text} = Typography;
 
 const TutorialFirst = () => {
-    
     return(
         <>
             <Row style={layoutCenter}>

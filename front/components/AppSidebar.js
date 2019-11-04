@@ -51,7 +51,12 @@ const AppSidebar = () => {
           <Link href="/subject">
           <a></a></Link> 
         </Menu.Item>
-        <SubMenu
+        <Menu.Item key="sub1" style={{color:"#000000"}}>
+          <Icon type="team"/><strong>친구 관리</strong>
+          <Link href="/friends">
+          <a></a></Link> 
+        </Menu.Item>
+        {/* <SubMenu
           key="sub2"
           title={
             <span>
@@ -62,7 +67,7 @@ const AppSidebar = () => {
         >
           <Menu.Item key="1">AVON</Menu.Item>
           <Menu.Item key="2">운동</Menu.Item>
-        </SubMenu>
+        </SubMenu> */}
       </Menu>
       </div>
       <div>

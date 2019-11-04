@@ -1,14 +1,14 @@
 import React from 'react';
 import AppSidebar from '../components/AppSidebar';
 import AppTopbar from '../components/AppTopbar';
-import AppSubject from '../container/Subjects';
+import AppFriends from '../container/friends';
 import AppHeader from '../components/AppHeader';
 import AppFooter from '../components/AppFooter';
 import { layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
 import { Layout } from 'antd';
 const { Footer, Content, Sider } = Layout;
 
-const subject = () => {
+const friends = () => {
     return(
         <>
             <AppHeader/>
@@ -19,7 +19,7 @@ const subject = () => {
                         <AppSidebar/>
                     </Sider>
                     <Content>
-                        <AppSubject/>
+                        <AppFriends/>
                     </Content>
                 </Layout>
                 <Footer style={backgroundLightBlue}>
@@ -31,4 +31,4 @@ const subject = () => {
     );
 };
 
-export default subject;
+export default friends;
