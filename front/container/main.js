@@ -1,13 +1,16 @@
-import React from 'react';
+import React,{useState} from 'react';
+import Link from 'next/link';
 import { Row, Col, Card, Avatar, Icon, message, Menu, Dropdown, Button, Breadcrumb} from 'antd';
 import { contentsBoder, subjectBtn } from '../css/Main';
 const {Meta} = Card;
 
 const main = () => {
 
-    const text = ['하하하','호호호','후후후','키키키'];
+    const [feedbackName, setFeedbackName] = useState('');
 
-    const mainItem = text.map((data)=> <Card
+    const text = ['하하하','호호호','후후후','키키키'];
+    
+    const mainItem = text.map((data)=> <Link href={`/feedbackdetail?${data}`} ><a><Card
                         style={{ marginTop: 15, background:'#FFFF00' }}
                         actions={[
                         <Icon type="setting" key="setting" />,
@@ -22,7 +25,7 @@ const main = () => {
                             title="제목"
                             description={data}
                         />
-                    </Card>)
+                    </Card></a></Link>)
 
     const handleMenuClick = (e) => {
         message.info(e.target.name);
