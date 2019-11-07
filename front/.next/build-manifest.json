@@ -16,7 +16,7 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/updatepassword": [
+    "/main": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]
