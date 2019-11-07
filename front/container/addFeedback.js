@@ -42,7 +42,7 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
                 visible={visible}
                 onOk={handleOk}
                 footer={[
-                    <div style={{textAlign:'center'}}>
+                    <div key="add" style={{textAlign:'center'}}>
                         <Button key="back" onClick={handleCancel} style={{display:'none'}}>
                             <strong>취소</strong>
                         </Button>,
@@ -56,37 +56,34 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
                 >
                 <Content style={backgroundWhite}>
                     <Form  {...formItemLayout} onSubmit={_onSubmit}>
-                        <Form.Item label={<strong>피드백 주제선택</strong>} style={formBoder}>
+                        <Form.Item label={<strong>피드백 주제선택</strong>} >
                             <Dropdown overlay={item} trigger={['click']}>
                                 <Col span={24}>
                                     <Button 
                                         style={{width:'100%', textAlign:'left', color: 'rgba(0,0,0,.25)' }}
-                                   
+                                        
                                     >피드백 주제선택
-                                    <Icon type='down' style={{ color: 'rgba(0,0,0,.25)', textAlign:'right' }} />
+                                    <Icon  type='down' style={{ color: 'rgba(0,0,0,.25)', textAlign:'right' }} />
                                     </Button>
                                 </Col>
                             </Dropdown>
                         </Form.Item>
-                        <Form.Item label={<strong>피드백 제목</strong>} style={formBoder}>
+                        <Form.Item label={<strong>피드백 제목</strong>} >
                             <Input
-                                prefix={<Icon type='home' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                suffix={<Icon type='form' style={{ color: 'rgba(0,0,0,.25)' }} />}
                                 placeholder="피드백 제목"
                             />
                         </Form.Item>
-                        <Form.Item label={<strong>피드백 날짜</strong>} style={formBoder}>
-                            <Col span={24}  style={{ width: 300 , border: '1px solid #d9d9d9', borderRadius: 4 }}>
-                                {/* <DatePicker
+                        <Form.Item label={<strong>피드백 날짜</strong>} >
+                            <Col span={24}  style={{ width: '100%' ,  borderRadius: 4 }}>
+                                <DatePicker
                                     style={{width:'100%'}}
                                     onChange={_dateOnChange}
                                     placeholder="날짜 선택" 
-                                /> */}
-                                {/* <div> */}
-                                    <Calendar fullscreen={false} />
-                                {/* </div> */}
+                                />
                             </Col>   
                         </Form.Item>
-                        <Form.Item label={<strong>피드백 조언자</strong>} style={formBoder}>
+                        <Form.Item label={<strong>피드백 조언자</strong>} >
                             <Col span={24}>
                                 <Search
                                     style={{width:'100%'}}

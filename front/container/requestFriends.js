@@ -84,7 +84,7 @@ const requestFriends = ({requestVisible,requestHandleOk,requestHandleCancel}) =>
                 bodyStyle={{padding:0, borderTop:'#000000 solid 1px',borderBottom:'#000000 solid 1px',}}
                 centered={true}
                 footer={[
-                    <div style={{textAlign:'center'}}>
+                    <div key="add" style={{textAlign:'center'}}>
                         <Button key="back" onClick={requestHandleCancel} style={{display:'none'}}>
                             <strong>취소</strong>
                         </Button>,

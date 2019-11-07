@@ -1,7 +1,9 @@
 import React,{useState} from 'react';
 import Link from 'next/link';
-import { Menu, Icon, Input, Typography, Dropdown, Col, Row, Button, Avatar} from 'antd';
+import { Menu, Icon, Input, Typography, Dropdown, Col, Row, Button, Avatar, Popconfirm} from 'antd';
 import AppTutorial from '../components/TutorialMain';
+import AppAlert from '../container/alert';
+
 const { Title, Paragraph, Text } = Typography;
 
 const { Search } = Input;
@@ -18,7 +20,8 @@ const commonStyle = {
 
 const AppTopbar = () => {
 
-    const [visible, setVisible] = useState();
+    const [visible, setVisible] = useState(false);
+    const [alertVisible, setAlertVisible] = useState(false);
 
     const showModal = () => {
         setVisible(true);
@@ -37,18 +40,20 @@ const AppTopbar = () => {
         <div>
             <Menu style={{border:"gray solid 1px"}}>
                 <Menu.Item key="1">
-                    <Icon type="user" />
+                    <Icon type="user"/>
                     <strong>마이페이지</strong>
+                    <Link href="/mypage" ><a>></a></Link>
                 </Menu.Item>
-                <Menu.Item key="2">
+                {/* <Menu.Item key="2">
                     <Icon type="setting" />
                     <strong>환경설정</strong>
-                </Menu.Item>
-                <Menu.Item key="3" onClick={showModal}>
+                    <Link href="/setting" ><a>></a></Link>
+                </Menu.Item> */}
+                <Menu.Item key="2" onClick={showModal}>
                     <Icon type="book" />
                     <strong>튜토리얼</strong>
                 </Menu.Item>
-                <Menu.Item key="4">
+                <Menu.Item key="3">
                     <Icon type="logout" />
                     <strong>로그아웃</strong>
                     <Link href="/logout" ><a>></a></Link>
@@ -56,6 +61,21 @@ const AppTopbar = () => {
             </Menu>
         </div>
     );
+
+    const handleAlert = () => {
+        console.log('handleAlert');
+        setAlertVisible(true);
+    }
+
+    const alerthHandleCancel = () => {
+        console.log('alerthHandleCancel');
+        setAlertVisible(false);
+    }
+
+    const alerthHandleOk = () => {
+        console.log('alerthHandleOk');
+        setAlertVisible(false);
+    }
 
     return(
         <>
@@ -86,12 +106,18 @@ const AppTopbar = () => {
                 <Row type='flex' gutter={30}>
                     <Col span={8}>
                         <Button
+                            onClick={handleAlert}
                             shape="circle"
                             ghost={true}
                             style={{ border:'none' }}
                         >
                         <Icon type="bell" style={{fontSize:'23px'}} />
-                        </Button> 
+                        </Button>
+                        <AppAlert
+                            alerthHandleCancel={alerthHandleCancel}
+                            alerthHandleOk={alerthHandleOk}
+                            alertVisible={alertVisible}
+                         /> 
                     </Col>
                     <Col span={8}>
                         <Dropdown overlay={items} trigger={['click']}>
@@ -123,7 +149,10 @@ const AppTopbar = () => {
                 handleOk={handleOk}
                 visible={visible}
               />
-          </div>  
+          </div>
+          <div>
+              
+          </div>    
         </>
     );
 };

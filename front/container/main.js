@@ -6,11 +6,12 @@ const {Meta} = Card;
 
 const main = () => {
 
-    const [feedbackName, setFeedbackName] = useState('');
+    const [inProgress, setInProgress] = useState(false);
 
     const text = ['하하하','호호호','후후후','키키키'];
     
-    const mainItem = text.map((data)=> <Link href={`/feedbackdetail?${data}`} ><a><Card
+    const mainItem = text.map((data)=> <Link key={data} href={`/feedbackdetail?${data}`} ><a><Card
+                        key={data}
                         style={{ marginTop: 15, background:'#FFFF00' }}
                         actions={[
                         <Icon type="setting" key="setting" />,
@@ -44,11 +45,14 @@ const main = () => {
         </Menu>
     );   
 
+    const handleFilter = () => {
+        setInProgress(!inProgress);
+    }
+
     return(
         <>
             <Row>
-                <Col span={6}>
-                </Col>
+                <Col span={6}/>
                 <Col span={12} style={contentsBoder}>
                     <Col span={24} style={{marginTop:15, textAlign:'center'}}>
                         <Dropdown overlay={menu}>
@@ -71,21 +75,32 @@ const main = () => {
                                 <Icon type="home" /><span>분류3</span>
                             </Breadcrumb.Item>
                         </Breadcrumb>
-                    </Col> 
+                    </Col>
+                    {inProgress?
                     <div>
                         <Button
+                            onClick={handleFilter}
                             type="primary"
                             icon="loading"
                             shape="round"
                         ><strong> 진행중</strong></Button>
                     </div>
+                    :
+                    <div>
+                        <Button
+                            onClick={handleFilter}
+                            type="primary"
+                            icon="check"
+                            shape="round"
+                        ><strong> 진행완료 </strong></Button>
+                    </div>
+                    } 
                     <div>
                         {mainItem}  
                     </div>
                     
                 </Col>
-                <Col span={6}>
-                </Col>
+                <Col span={6}/>
             </Row>
         </>
     )

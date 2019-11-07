@@ -1,8 +1,9 @@
 import React from 'react';
-import { Col, Button, Breadcrumb, Icon, Card, Popover } from 'antd';
+import { Col, Button, Breadcrumb, Icon, Card, Popover, Pagination, Tooltip  } from 'antd';
 import moment from 'moment';
 
 const {Group} = Button;
+const CreatedAt = moment().format('YYYY-MM-DD HH:mm:ss');
 
 const feedBackDetailList = () => {
 
@@ -31,18 +32,19 @@ const feedBackDetailList = () => {
 
     const ItemCard = subTitle.map(data=>
         <Card 
+            key={data}
             title="Test" 
-            extra={<a href="#">More</a>} 
+            extra={<Tooltip title="더 자세한 사항을 보려면 More 버튼을 클릭해주세요!"><a href="#">More</a></Tooltip>} 
             style={{ width: '100%' }}
         >
             <p style={{color:'#000000'}}><strong>{data}</strong></p>
-            <p style={{fontSize:10}}>{moment().format('YYYY-MM-DD HH:mm:ss')}</p>
+            <p style={{fontSize:10}}>{CreatedAt}</p>
         </Card>)
 
     return(
         <>  
-            <Col span={12}>
-                <Col span={2}></Col>
+            <Col span={12} >
+                <Col offset={1}/>
                 <Col span={22} style={{textAlign:'right', marginBottom:10}}>
                     <Popover
                         content={<Group>
@@ -52,9 +54,10 @@ const feedBackDetailList = () => {
                             <Button type="primary" onClick={popUpRecord} icon="audio">녹음</Button>
                         </Group>}
                          trigger="click"
-                    ><Button type="primary" onClick={popUpWrite}><strong>추가하기</strong></Button></Popover>
+                    ><Tooltip title="버튼을 클릭하여 피드백을 추가해주세요!"><Button type="primary" onClick={popUpWrite}><strong>추가하기</strong></Button></Tooltip></Popover>
                 </Col>
-                <Col span={2}></Col>
+                <Col offset={1}/>
+                <Col offset={1}/>
                 <Col span={22} style={{textAlign:'right', marginBottom:10}}>
                     <Breadcrumb>
                         <Breadcrumb.Item href="#">
@@ -74,19 +77,27 @@ const feedBackDetailList = () => {
                         </Breadcrumb.Item>
                     </Breadcrumb>
                 </Col>
-                <Col span={2}></Col>
+                <Col offset={1}/>
+                <Col offset={1}/>
                 <Col span={22} style={{marginBottom:10}}>
                     <div>
                         <span style={{fontSize:20, color:'#000000', marginRight:5}}><strong>조언자:</strong></span><span>아무개</span>
                     </div>
                     <div>
-                        <span style={{fontSize:15, color:'#000000', marginRight:5}}><strong>생성일:</strong></span><span>{moment().format('YYYY-MM-DD HH:mm:ss')}</span>
+                        <span style={{fontSize:15, color:'#000000', marginRight:5}}><strong>생성일:</strong></span><span>{CreatedAt}</span>
                     </div>
                 </Col>
-                <Col span={2}></Col>
+                <Col offset={1}/>
+                <Col offset={1}/>
                 <Col span={22}>
                     {ItemCard}
-                </Col>     
+                </Col>
+                <Col offset={1}/>
+                <Col offset={1}/>
+                <Col span={22} style={{marginTop:20, marginBottom:20, textAlign:'center'}}>
+                    <Pagination efaultCurrent={1} total={50}/>
+                </Col>
+                <Col offset={1}/>     
             </Col>
         </>
     )

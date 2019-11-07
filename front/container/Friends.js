@@ -92,7 +92,7 @@ const Friends = () => {
 
     const Item = title.map((item)=> {
       return(
-        <Card extra={<Popover
+        <Card key={item.name} extra={<Popover
                           key={item.name}
                           title={item.name}
                           placement="rightBottom"

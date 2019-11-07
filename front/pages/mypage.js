@@ -1,14 +1,14 @@
 import React from 'react';
-import AppSidebar from '../components/AppSidebar';
+import AppMypageSidebar from '../components/AppMypageSidebar';
 import AppTopbar from '../components/AppTopbar';
-import AppSubject from '../container/subjects';
 import AppHeader from '../components/AppHeader';
 import AppFooter from '../components/AppFooter';
+import AppMypage from '../container/mypage';
 import { layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
 import { Layout } from 'antd';
 const { Footer, Content, Sider } = Layout;
 
-const subject = () => {
+const mypage = () => {
     return(
         <>
             <AppHeader/>
@@ -16,10 +16,10 @@ const subject = () => {
                 <AppTopbar/>
                 <Layout style={backgroundWhite}>
                     <Sider style={backgroundWhite}>
-                        <AppSidebar/>
+                        <AppMypageSidebar/>
                     </Sider>
                     <Content>
-                        <AppSubject/>
+                        <AppMypage />
                     </Content>
                 </Layout>
                 <Footer style={backgroundLightBlue}>
@@ -31,4 +31,4 @@ const subject = () => {
     );
 };
 
-export default subject;
+export default mypage;

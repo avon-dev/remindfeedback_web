@@ -3,7 +3,7 @@ const layout = {
 };
 
 const backgroundWhite ={
-    background:'white'
+    background:'white',
 };
 
 const backgroundLightBlue ={

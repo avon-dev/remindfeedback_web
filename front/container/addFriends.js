@@ -77,7 +77,7 @@ const addFriends = ({addVisible,addHandleOk,addHandleCancel}) => {
                 onCancel={addHandleCancel}
                 centered={true}
                 footer={[
-                    <div style={{textAlign:'center'}}>
+                    <div key="add" style={{textAlign:'center'}}>
                         <Button key="back" onClick={addHandleCancel} style={{display:'none'}}>
                             <strong>취소</strong>
                         </Button>,
