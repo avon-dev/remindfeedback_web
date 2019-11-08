@@ -19,7 +19,7 @@ const feedBackDetailRecord = ({recordVisible,recordHandleCancel,recordHandleOk})
     return(
         <>
             <Modal
-                key='feedBackDetailWrite'
+                key='feedBackDetailRecord'
                 title={
                     <div style={{textAlign:"center"}}><Title level={3}>녹음</Title></div>
                 }

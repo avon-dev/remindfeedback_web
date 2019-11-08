@@ -25,14 +25,8 @@ const getBase64 = (file) => {
 
 const feedBackDetailPhoto = ({photoVisible,photoHandleCancel,photoHandleOk}) => {
 
-    const [fileList, setFileList] =  useState([]);
     const [previewVisible, setpreviewVisible] = useState(false);
     const [previewImage, setpreviewImage] = useState('');
-
-    const handleChange  = ({fileList}) => {
-        console.log(fileList);
-        setFileList(fileList);
-    };
 
     const handlePreview = async(file) => {
         console.log('handlePreview', file);
@@ -44,42 +38,36 @@ const feedBackDetailPhoto = ({photoVisible,photoHandleCancel,photoHandleOk}) => 
           
     };
 
-   
-
     const uploadButton = (
-        <div>
-          <Icon type="plus" />
-          <div className="ant-upload-text">Upload</div>
-        </div>
+        <Button >
+            <Icon type="upload" /> Upload
+        </Button>
     );
 
     const handleCancel = () => {
         setpreviewVisible(false);
     }
 
+    const handlePreviewFile = file => getBase64(file);
+
     const up = <Upload
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"            
-                    listType="picture-card" 
-                    fileList={fileList}
+                    action='//jsonplaceholder.typicode.com/posts/'           
+                    listType="picture" 
                     onPreview={handlePreview}
-                    onChange={handleChange}
+                    previewFile={handlePreviewFile}
                     
                 >
-                {fileList.length >= 8 ? null : uploadButton}   
+                {uploadButton}   
                 </Upload>
 
     const _onsubmit = () => {
-
+        console.log('feedBackDetailPhoto_onsubmit');
     };
-    
-    // useEffect(()=>{
-    //     up
-    // },[fileList]);
-    
+       
     return(
         <>
             <Modal
-                key='feedBackDetailWrite'
+                key='feedBackDetailPhoto'
                 title={
                     <div style={{textAlign:"center"}}><Title level={3}>사진</Title></div>
                 }
@@ -99,10 +87,18 @@ const feedBackDetailPhoto = ({photoVisible,photoHandleCancel,photoHandleOk}) => 
                 centered={true}
             >
                 <Content style={backgroundWhite}>
-                    <Form onSubmit={_onsubmit}>
+                    <Form {...formItemLayout} onSubmit={_onsubmit}>
                        <Row>
                             <Col span={24}>
-                                <Form.Item label={<strong>사진 업로드</strong>} colon={false}>
+                                <Form.Item label={<strong>제목</strong>} >
+                                    <Input
+                                        placeholder="제목을 입력해주세요"
+                                        prefix={<Icon type="edit" />}
+                                    />
+                                </Form.Item>
+                            </Col>
+                            <Col span={24}>
+                                <Form.Item label={<strong>사진 업로드</strong>} >
                                     {up}
                                 </Form.Item>
                             </Col>

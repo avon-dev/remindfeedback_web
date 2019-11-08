@@ -1,6 +1,7 @@
-import React,{useState} from 'react';
+import React,{useState,useRef} from 'react';
 import Link from 'next/link';
-import { Modal, Layout, Form, Input, Icon, Button, Col, Typography, Row } from 'antd';
+import ReactPlayer from 'react-player';
+import { Modal, Layout, Form, Input, Icon, Button, Col, Typography, Row, } from 'antd';
 import { backgroundWhite, backgroundLightBlue} from '../css/Common';
 import {formItemLayout} from '../css/Subject';
 
@@ -8,18 +9,32 @@ import {formItemLayout} from '../css/Subject';
 const {Content} = Layout;
 const {Title} = Typography;
 
+
 const feedBackDetailVideo = ({videoVisible,videoHandleCancel,videoHandleOk}) => {
 
-    const [color,setColor] =  useState();
+    const [videoFile, setVideoFile] = useState();
+    const [isready, setIsReady] = useState(false);
+    const [isplay, setIsPlay] = useState(false);
+
+    const handlePreviewFile = async(e) => {
+        const file = e.target.files[0];
+        console.log(file);
+        await setVideoFile(URL.createObjectURL(file));
+        await setIsReady(true);
+    };
+    
+    const videoPlay = () => {
+        setIsPlay(!isplay);
+    }
 
     const _onsubmit = () => {
 
     };
-
+    
     return(
         <>
             <Modal
-                key='feedBackDetailWrite'
+                key='feedBackDetailVideo'
                 title={
                     <div style={{textAlign:"center"}}><Title level={3}>동영상</Title></div>
                 }
@@ -39,16 +54,45 @@ const feedBackDetailVideo = ({videoVisible,videoHandleCancel,videoHandleOk}) => 
                 centered={true}
             >
                 <Content style={backgroundWhite}>
-                    <Form {...formItemLayout} onSubmit={_onsubmit}>
+                    <Form  onSubmit={_onsubmit}>
                        <Row>
-                            <Col span={24}>
-                                <Form.Item label={<strong>비밀번호 입력</strong>}>
+                            <Col span={24} >
+                                <Form.Item label={<strong>제목</strong>} colon={false}>
                                     <Input
-                                        prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                        placeholder="비밀번호를 입력해주세요"
+                                        placeholder="제목을 입력해주세요"
+                                        suffix={<Icon type="edit" />}
                                     />
                                 </Form.Item>
                             </Col>
+                            <Col span={24}>
+                                <Form.Item label={<strong>동영상 업로드</strong>} colon={false}>
+                                    <Input
+                                        suffix={<Icon type="video-camera"/>}
+                                        type="file"
+                                        name="videoFile"
+                                        onChange={handlePreviewFile}
+                                        accept="video/mp4, video/x-m4v, video/*"
+                                    />
+                                </Form.Item>
+                            </Col>
+                            {isready&&
+                            <Col span={24}>
+                                <Form.Item >
+                                    <Col span={24}>
+                                        <ReactPlayer
+                                            playing={isplay}
+                                            url={videoFile}
+                                            width="100%"
+                                            style={{textAlign:'center'}}
+                                            playsinline={true}
+                                        />
+                                    </Col>
+                                    <Col span={24} style={{textAlign:'center'}}>
+                                        <Button type="primary" onClick={videoPlay}>플레이</Button>
+                                    </Col>    
+                                </Form.Item>
+                            </Col>
+                            }
                        </Row> 
                     </Form>
                 </Content>
