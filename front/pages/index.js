@@ -1,16 +1,14 @@
 import React from 'react';
-import AppHeader from '../components/AppHeader';
 import { layoutCenter, backgroundWhite } from '../css/Common';
 import { shadowBorder } from '../css/Index';
 import {Row,Col,Layout, Typography , Progress} from 'antd';
 import logoImg from '../img/logo1.png';
-const { Footer, Content } = Layout;
+const { Content } = Layout;
 const {Text} = Typography;
 
 const Home = () => {
     return(
         <>
-            <AppHeader/>
             <Layout style={backgroundWhite} >
                 <Content >
                     <Row style={layoutCenter}>

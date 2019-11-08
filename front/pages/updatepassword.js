@@ -1,7 +1,6 @@
 import React from 'react';
 import AppMypageSidebar from '../components/AppMypageSidebar';
 import AppTopbar from '../components/AppTopbar';
-import AppHeader from '../components/AppHeader';
 import AppFooter from '../components/AppFooter';
 import AppUpdatePassword from '../container/updatePassword';
 import { layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
@@ -11,7 +10,6 @@ const { Footer, Content, Sider } = Layout;
 const updatepassword = () => {
     return(
         <>
-            <AppHeader/>
             <Layout style={layout} >
                 <AppTopbar/>
                 <Layout style={backgroundWhite}>

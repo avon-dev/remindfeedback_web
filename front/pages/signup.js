@@ -1,6 +1,5 @@
 import React from 'react';
 import {Layout} from 'antd';
-import AppHeader from '../components/AppHeader';
 import AppFooter from '../components/AppFooter';
 import AppSignUp from '../container/signup';
 import { layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
@@ -12,7 +11,6 @@ const signup = () => {
 
     return(
         <>
-           <AppHeader/>
             <Layout style={layout}>
                 <Content style={backgroundWhite}>
                     <AppSignUp/>

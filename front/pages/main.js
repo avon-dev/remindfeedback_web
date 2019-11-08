@@ -2,7 +2,6 @@ import React from 'react';
 import AppSidebar from '../components/AppSidebar';
 import AppTopbar from '../components/AppTopbar';
 import AppMain from '../container/main';
-import AppHeader from '../components/AppHeader';
 import AppFooter from '../components/AppFooter';
 import { layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
 import { Layout } from 'antd';
@@ -11,7 +10,6 @@ const { Footer, Content, Sider } = Layout;
 const Main = () => {
     return(
         <>
-            <AppHeader/>
             <Layout style={layout} >
                 <AppTopbar/>
                 <Layout style={backgroundWhite}>
