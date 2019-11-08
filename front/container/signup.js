@@ -1,49 +1,125 @@
-import React from 'react';
+import React,{useCallback, useState} from 'react';
+import { useDispatch } from 'react-redux';
 import {Row, Col, Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
 import { layoutCenter } from '../css/Common';
 import { signUpBtn, shadowBorder } from '../css/Signup';
 import Link from 'next/link';
-
+import { SIGN_UP_REQUEST } from '../reducers/user';
 
 const {Title, Text} = Typography;
 
 const signup = () => {
 
+    const dispatch = useDispatch();
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [re_password, setRe_password] = useState('');
+    const [nickname, setNickname] = useState('');
+
     const signUpFormName = [
-            {
-                name:'이메일 주소',
+            {   
+                id:'이메일',
+                name:'email',
+                value:email,
+                onChange:setEmail,
                 iconType:'smile',
                 placeholderName:'Email',
             },
             {
-                name:'이름',
+                id:'닉네임',
+                name:'nickname',
+                value:nickname,
+                onChange:setNickname,
                 iconType:'user',
                 placeholderName:'Name',
             },
            {
-                name:'비밀번호',
+                id:'비밀번호',
+                name:'password',
+                value:password,
+                onChange:setPassword,
                 iconType:'lock',
                 placeholderName:'Password',
             },
             {
-                name:'비밀번호 확인',
+                id:'비밀번호 재입력',
+                name:'re_password',
+                value:re_password,
+                onChange:setRe_password,
                 iconType:'lock',
                 placeholderName:'Repassword',
             },
     ]
 
-    const signUpForm = signUpFormName.map((data,index)=><div style={{padding:5}}>  
-                                                        <label htmlFor="user-email" style={{fontWeight:'bold'}}>{data.name}</label>
-                                                        <div style={{marginTop:5}}>
-                                                            <Input
-                                                                prefix={<Icon type={data.iconType} style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                                                placeholder={data.placeholderName}
-                                                            />
-                                                        </div>
-                                                    </div>)
-    const _onsubmit = () => {
-
-    }
+    const emailForm = <div style={{padding:5}}>  
+                            <label htmlFor="user-email" style={{fontWeight:'bold'}}>이메일</label>
+                            <div style={{marginTop:5}}>
+                                <Input
+                                    name='email'
+                                    value={email}
+                                    onChange={(e)=>setEmail(e.target.value)}
+                                    prefix={<Icon type='smile'
+                                    style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    placeholder='Email을 기입해주세요'
+                                    required
+                                />
+                            </div>
+                        </div>
+    const nicknameForm = <div style={{padding:5}}>  
+                            <label htmlFor="user-nickname" style={{fontWeight:'bold'}}>닉네임</label>
+                            <div style={{marginTop:5}}>
+                                <Input
+                                    name='nickname'
+                                    value={nickname}
+                                    onChange={(e)=>setNickname(e.target.value)}
+                                    prefix={<Icon type='user'
+                                    style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    placeholder='Nickname을 기입해주세요'
+                                    required
+                                />
+                            </div>
+                        </div>      
+     const passwordForm = <div style={{padding:5}}>  
+                            <label htmlFor="user-password" style={{fontWeight:'bold'}}>비밀번호</label>
+                            <div style={{marginTop:5}}>
+                                <Input
+                                    type='password'
+                                    name='password'
+                                    value={password}
+                                    onChange={(e)=>setPassword(e.target.value)}
+                                    prefix={<Icon type='lock'
+                                    style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    placeholder='Password를 기입해주세요'
+                                    required
+                                />
+                            </div>
+                        </div>
+    const re_passwordForm = <div style={{padding:5}}>  
+                            <label htmlFor="user-re_password" style={{fontWeight:'bold'}}>비밀번호 재입력</label>
+                            <div style={{marginTop:5}}>
+                                <Input
+                                    type='password'
+                                    name='re_password'
+                                    value={re_password}
+                                    onChange={(e)=>setRe_password(e.target.value)}
+                                    prefix={<Icon type='lock'
+                                    style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    placeholder='Password를 한번 더 기입해주세요'
+                                    required
+                                />
+                            </div>
+                        </div>
+                                                                         
+    const _onSubmit = useCallback((e) => {
+        e.preventDefault();
+        dispatch({
+            type:SIGN_UP_REQUEST,
+            data:{
+                email,password,nickname,
+            },
+        });
+    },[email,password,nickname]);
 
 
     return(
@@ -57,8 +133,11 @@ const signup = () => {
                     <div style={{textAlign:'center'}}>
                         <Text type="danger" style={{fontWeight:'bold'}}>Remind Feedback</Text><Text> 에 오신 것을 환영합니다. <br/> 회원가입을 통해 서비스를 이용하실 수 있습니다.</Text>
                     </div>
-                    <Form onSubmit={_onsubmit} className='signUp-form'>
-                        {signUpForm}
+                    <Form onSubmit={_onSubmit} className='signUp-form'>
+                            {emailForm}
+                            {nicknameForm}
+                            {passwordForm}
+                            {re_passwordForm}
                         <Col span={24} style={{marginTop:15}}>
                             <Checkbox style={{fontWeight:'bold'}}>서비스 이용약관, 개인정보 수집 및 이용, 중요한 약관에 모두 동의합니다.</Checkbox>
                         </Col>

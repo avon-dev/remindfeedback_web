@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import withRedux from 'next-redux-wrapper';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
-import reducer from '../reducer';
+
+import reducer from '../reducers';
 import AppHeader from '../components/AppHeader';
 
 const RemindFeedback = ({Component, store}) => {

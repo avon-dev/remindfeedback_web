@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {Row, Col, Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
 import { layoutCenter } from '../css/Common';
 import { loginBtn, loginApple, loginFacebook, loginGoogle, loginKakao, shadowBorder } from '../css/login';
@@ -8,6 +9,10 @@ import logoImg from '../img/logo1.png';
 const {Text} = Typography;
 
 const login = () => {
+
+    const dispatch = useDispatch();
+    
+    const { me } = useSelector(state=>state.user);
 
     const _onsubmit = (e) => {
         e.preventDefault();
@@ -29,7 +34,9 @@ const login = () => {
                         <label htmlFor="user-email"><strong>이메일</strong></label>
                        <Form.Item>
                             <Input
-                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                value={me.email}
+                                prefix={<Icon type="user" 
+                                style={{ color: 'rgba(0,0,0,.25)' }} />}
                                 placeholder="Email"
                             />
                        </Form.Item>
