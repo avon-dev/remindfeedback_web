@@ -326,6 +326,39 @@ RemindFeedback.propTypes = {
 
 /***/ }),
 
+/***/ "./reducers/feedbackMode.js":
+/*!**********************************!*\
+  !*** ./reducers/feedbackMode.js ***!
+  \**********************************/
+/*! exports provided: initialState, FEEDBACK_MODE, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_MODE", function() { return FEEDBACK_MODE; });
+const initialState = {
+  feedbackMode: false
+};
+const FEEDBACK_MODE = 'FEEDBACK_MODE'; // GET피드백 -> SET 피드백
+
+/* harmony default export */ __webpack_exports__["default"] = ((state = initialState, action) => {
+  switch (action.type) {
+    case FEEDBACK_MODE:
+      {
+        return {
+          feedbackMode: action.data
+        };
+      }
+      ;
+
+    default:
+      return state;
+  }
+});
+
+/***/ }),
+
 /***/ "./reducers/feedbackSubject.js":
 /*!*************************************!*\
   !*** ./reducers/feedbackSubject.js ***!
@@ -742,7 +775,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _friends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./friends */ "./reducers/friends.js");
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user */ "./reducers/user.js");
 /* harmony import */ var _getfeedback__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getfeedback */ "./reducers/getfeedback.js");
-/* harmony import */ var _feedbackSubject__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./feedbackSubject */ "./reducers/feedbackSubject.js");
+/* harmony import */ var _setfeedback__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./setfeedback */ "./reducers/setfeedback.js");
+/* harmony import */ var _feedbackSubject__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./feedbackSubject */ "./reducers/feedbackSubject.js");
+/* harmony import */ var _feedbackMode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./feedbackMode */ "./reducers/feedbackMode.js");
+
+
 
 
 
@@ -751,10 +788,146 @@ __webpack_require__.r(__webpack_exports__);
 const rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   friends: _friends__WEBPACK_IMPORTED_MODULE_1__["default"],
   user: _user__WEBPACK_IMPORTED_MODULE_2__["default"],
-  feedback: _getfeedback__WEBPACK_IMPORTED_MODULE_3__["default"],
-  feedbackSubject: _feedbackSubject__WEBPACK_IMPORTED_MODULE_4__["default"]
+  getfeedback: _getfeedback__WEBPACK_IMPORTED_MODULE_3__["default"],
+  setfeedback: _setfeedback__WEBPACK_IMPORTED_MODULE_4__["default"],
+  feedbackSubject: _feedbackSubject__WEBPACK_IMPORTED_MODULE_5__["default"],
+  feedbackMode: _feedbackMode__WEBPACK_IMPORTED_MODULE_6__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
+
+/***/ }),
+
+/***/ "./reducers/setfeedback.js":
+/*!*********************************!*\
+  !*** ./reducers/setfeedback.js ***!
+  \*********************************/
+/*! exports provided: initialState, SET_FEEDBACK_READ_REQUEST, SET_FEEDBACK_READ_SUCCESS, SET_FEEDBACK_READ_FAILURE, SET_FEEDBACK_ADD_REQUEST, SET_FEEDBACK_ADD_SUCCESS, SET_FEEDBACK_ADD_FAILURE, SET_FEEDBACK_ITEM_READ_REQUEST, SET_FEEDBACK_ITEM_READ_SUCCESS, SET_FEEDBACK_ITEM_READ_FAILURE, SET_FEEDBACK_ITEM_ADD_REQUEST, SET_FEEDBACK_ITEM_ADD_SUCCESS, SET_FEEDBACK_ITEM_ADD_FAILURE, SET_FEEDBACK_DETAIL_ITEM_READ_REQUEST, SET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS, SET_FEEDBACK_DETAIL_ITEM_READ_FAILURE, SET_FEEDBACK_ITEM_COMMENT_REQUEST, SET_FEEDBACK_ITEM_COMMENT_SUCCESS, SET_FEEDBACK_ITEM_COMMENT_FAILURE, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_READ_REQUEST", function() { return SET_FEEDBACK_READ_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_READ_SUCCESS", function() { return SET_FEEDBACK_READ_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_READ_FAILURE", function() { return SET_FEEDBACK_READ_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ADD_REQUEST", function() { return SET_FEEDBACK_ADD_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ADD_SUCCESS", function() { return SET_FEEDBACK_ADD_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ADD_FAILURE", function() { return SET_FEEDBACK_ADD_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_READ_REQUEST", function() { return SET_FEEDBACK_ITEM_READ_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_READ_SUCCESS", function() { return SET_FEEDBACK_ITEM_READ_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_READ_FAILURE", function() { return SET_FEEDBACK_ITEM_READ_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_ADD_REQUEST", function() { return SET_FEEDBACK_ITEM_ADD_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_ADD_SUCCESS", function() { return SET_FEEDBACK_ITEM_ADD_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_ADD_FAILURE", function() { return SET_FEEDBACK_ITEM_ADD_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_DETAIL_ITEM_READ_REQUEST", function() { return SET_FEEDBACK_DETAIL_ITEM_READ_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS", function() { return SET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_DETAIL_ITEM_READ_FAILURE", function() { return SET_FEEDBACK_DETAIL_ITEM_READ_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_COMMENT_REQUEST", function() { return SET_FEEDBACK_ITEM_COMMENT_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_COMMENT_SUCCESS", function() { return SET_FEEDBACK_ITEM_COMMENT_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_COMMENT_FAILURE", function() { return SET_FEEDBACK_ITEM_COMMENT_FAILURE; });
+const initialState = {};
+const SET_FEEDBACK_READ_REQUEST = 'SET_FEEDBACK_READ_REQUEST'; // SET피드백 READ 시도 중
+
+const SET_FEEDBACK_READ_SUCCESS = 'SET_FEEDBACK_READ_SUCCESS'; // SET피드백 READ 성공
+
+const SET_FEEDBACK_READ_FAILURE = 'SET_FEEDBACK_READ_FAILURE'; // SET피드백 READ 실패
+
+const SET_FEEDBACK_ADD_REQUEST = 'SET_FEEDBACK_ADD_REQUEST'; // SET피드백 ADD 시도 중
+
+const SET_FEEDBACK_ADD_SUCCESS = 'SET_FEEDBACK_ADD_SUCCESS'; // SET피드백 ADD 성공
+
+const SET_FEEDBACK_ADD_FAILURE = 'SET_FEEDBACK_ADD_FAILURE'; // SET피드백 ADD 실패
+
+const SET_FEEDBACK_ITEM_READ_REQUEST = 'SET_FEEDBACK_ITEM_READ_REQUEST'; // SET피드백 게시물 READ 시도 중
+
+const SET_FEEDBACK_ITEM_READ_SUCCESS = 'SET_FEEDBACK_ITEM_READ_SUCCESS'; // SET피드백 게시물 READ 성공
+
+const SET_FEEDBACK_ITEM_READ_FAILURE = 'SET_FEEDBACK_ITEM_READ_FAILURE'; // SET피드백 게시물 READ 실패
+
+const SET_FEEDBACK_ITEM_ADD_REQUEST = 'SET_FEEDBACK_ITEM_ADD_REQUEST'; // SET피드백 게시물 ADD 시도 중
+
+const SET_FEEDBACK_ITEM_ADD_SUCCESS = 'SET_FEEDBACK_ITEM_ADD_SUCCESS'; // SET피드백 게시물 ADD 성공
+
+const SET_FEEDBACK_ITEM_ADD_FAILURE = 'SET_FEEDBACK_ITEM_ADD_FAILURE'; // SET피드백 게시물 ADD 실패
+
+const SET_FEEDBACK_DETAIL_ITEM_READ_REQUEST = 'SET_FEEDBACK_DETAIL_ITEM_READ_REQUEST'; // SET피드백 게시물 세부 READ 시도 중
+
+const SET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS = 'SET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS'; // SET피드백 게시물 세부 READ 성공
+
+const SET_FEEDBACK_DETAIL_ITEM_READ_FAILURE = 'SET_FEEDBACK_DETAIL_ITEM_READ_FAILURE'; // SET피드백 게시물 세부 READ 실패
+
+const SET_FEEDBACK_ITEM_COMMENT_REQUEST = 'SET_FEEDBACK_ITEM_COMMENT_REQUEST'; // SET피드백 게시물 댓글 ADD 시도 중
+
+const SET_FEEDBACK_ITEM_COMMENT_SUCCESS = 'SET_FEEDBACK_ITEM_COMMENT_SUCCESS'; // SET피드백 게시물 댓글 ADD 성공
+
+const SET_FEEDBACK_ITEM_COMMENT_FAILURE = 'SET_FEEDBACK_ITEM_COMMENT_FAILURE'; // SET피드백 게시물 댓글 ADD 실패
+
+/* harmony default export */ __webpack_exports__["default"] = ((state = initialState, action) => {
+  switch (action.type) {
+    // SET피드백 READ
+    case SET_FEEDBACK_READ_REQUEST:
+      return {};
+
+    case SET_FEEDBACK_READ_SUCCESS:
+      return {};
+
+    case SET_FEEDBACK_READ_FAILURE:
+      return {};
+    // SET피드백 ADD
+
+    case SET_FEEDBACK_ADD_REQUEST:
+      return {};
+
+    case SET_FEEDBACK_ADD_SUCCESS:
+      return {};
+
+    case SET_FEEDBACK_ADD_FAILURE:
+      return {};
+    // SET피드백 게시물 READ 
+
+    case SET_FEEDBACK_ITEM_READ_REQUEST:
+      return {};
+
+    case SET_FEEDBACK_ITEM_READ_SUCCESS:
+      return {};
+
+    case SET_FEEDBACK_ITEM_READ_FAILURE:
+      return {};
+    // SET피드백 게시물 ADD 
+
+    case SET_FEEDBACK_ITEM_ADD_REQUEST:
+      return {};
+
+    case SET_FEEDBACK_ITEM_ADD_SUCCESS:
+      return {};
+
+    case SET_FEEDBACK_ITEM_ADD_FAILURE:
+      return {};
+    // SET피드백 게시물 세부 READ 
+
+    case SET_FEEDBACK_DETAIL_ITEM_READ_REQUEST:
+      return {};
+
+    case SET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS:
+      return {};
+
+    case SET_FEEDBACK_DETAIL_ITEM_READ_FAILURE:
+      return {};
+    // SET피드백 게시물 댓글 ADD 
+
+    case SET_FEEDBACK_ITEM_COMMENT_REQUEST:
+      return {};
+
+    case SET_FEEDBACK_ITEM_COMMENT_SUCCESS:
+      return {};
+
+    case SET_FEEDBACK_ITEM_COMMENT_FAILURE:
+      return {};
+
+    default:
+      return state;
+  }
+});
 
 /***/ }),
 

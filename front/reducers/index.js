@@ -1,14 +1,18 @@
 import { combineReducers } from 'redux';
 import friends from './friends';
 import user from './user';
-import feedback from './getfeedback';
+import getfeedback from './getfeedback';
+import setfeedback from './setfeedback';
 import feedbackSubject from './feedbackSubject';
+import feedbackMode from './feedbackMode';
 
 const rootReducer = combineReducers({
     friends,
     user,
-    feedback,
+    getfeedback,
+    setfeedback,
     feedbackSubject,
+    feedbackMode,
 });
 
 export default rootReducer;

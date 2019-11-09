@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Menu, Icon,Button, Row, Modal, Col } from 'antd';
+import { useDispatch } from 'react-redux';
+import { Menu, Icon,Button, Row, Switch , Col, Tooltip } from 'antd';
 import AddFeedback from '../container/addFeedback';
 import Link from 'next/link';
-const { SubMenu } = Menu;
+import { FEEDBACK_MODE } from '../reducers/feedbackMode';
 
 const newFeedBack ={
   fontSize:17,
@@ -15,7 +16,11 @@ const Sidebar = {
 }
 
 const AppSidebar = () => {
+
+  const dispatch = useDispatch();
+
   const [visible, setVisible] = useState();
+  const [changeTheme, setChangeTheme] = useState(false);
 
   const showModal = () => {
     setVisible(true);
@@ -29,45 +34,53 @@ const AppSidebar = () => {
     setVisible(false);
   };
 
+  const handleSwitch  = async(value) => {
+    await setChangeTheme(value?'dark':'light');
+    await dispatch({
+      type:FEEDBACK_MODE,
+      data: value
+    })
+  };
+
     return(
       <>
       <Col span={24} style={Sidebar}>
-        <Button
-          onClick={showModal}
-          type="primary"
-          size='large'
-          style={newFeedBack}
+          <Button
+            disabled={changeTheme==="dark"?true:false}
+            onClick={showModal}
+            type="primary"
+            size='large'
+            style={newFeedBack}
         > + 새로운 피드백 작성</Button>
       </Col>
       <Col span={24} style={Sidebar}>
+        <Col span={24} style={{textAlign:'center', marginBottom:15}}>
+          <Tooltip title="내피드백 OR 요청받은 피드백">
+            <Switch
+              size="default"
+              checkedChildren="요청 피드백"
+              unCheckedChildren="내 피드백"
+              onChange={handleSwitch}
+            />
+          </Tooltip>
+        </Col>
         <Menu
-            style={{ width: '100%', borderRight:'2px solid black', height:'100%' }}
+            theme={changeTheme}
+            style={{ width: '100%', borderRight:'2px solid black', height:'70vh' }}
             defaultSelectedKeys={['1']}
             // defaultOpenKeys={['sub2']}
             mode="vertical"
         >
-        <Menu.Item key="sub1" style={{color:"#000000"}}>
+        <Menu.Item disabled={changeTheme==="dark"?true:false} key="sub1" style={{color: changeTheme==="dark"?"#FFFFFF":"#000000"}}>
           <Icon type="ordered-list"/><strong>주제 관리</strong>
           <Link href="/subject">
           <a></a></Link> 
         </Menu.Item>
-        <Menu.Item key="sub2" style={{color:"#000000"}}>
+        <Menu.Item disabled={changeTheme==="dark"?true:false} key="sub2" style={{color: changeTheme==="dark"?"#FFFFFF":"#000000"}}>
           <Icon type="team"/><strong>친구 관리</strong>
           <Link href="/friends">
           <a></a></Link> 
         </Menu.Item>
-        {/* <SubMenu
-          key="sub2"
-          title={
-            <span>
-              <Icon type="ordered-list" />
-              <span style={{color:'black', fontWeight:'bold'}}>주제</span>
-            </span>
-          }
-        >
-          <Menu.Item key="1">AVON</Menu.Item>
-          <Menu.Item key="2">운동</Menu.Item>
-        </SubMenu> */}
       </Menu>
       </Col>
       <div>
