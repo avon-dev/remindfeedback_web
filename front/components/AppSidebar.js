@@ -58,8 +58,8 @@ const AppSidebar = () => {
           <Tooltip title="내피드백 OR 요청받은 피드백">
             <Switch
               size="default"
-              checkedChildren="요청 피드백"
-              unCheckedChildren="내 피드백"
+              checkedChildren={<div style={{fontSize:15}}>요청받은 피드백</div>}
+              unCheckedChildren={<div style={{fontSize:15}}>내 피드백</div>}
               onChange={handleSwitch}
             />
           </Tooltip>

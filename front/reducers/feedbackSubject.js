@@ -2,75 +2,75 @@ export const initialState = {
     
 }
 
-export const GET_FEEDBACK_SUB_READ_REQUEST = 'GET_FEEDBACK_SUB_READ_REQUEST'; // GET피드백 주제 READ 시도 중
-export const GET_FEEDBACK_SUB_READ_SUCCESS = 'GET_FEEDBACK_SUB_READ_SUCCESS'; // GET피드백 주제 READ 성공
-export const GET_FEEDBACK_SUB_READ_FAILURE = 'GET_FEEDBACK_SUB_READ_FAILURE'; // GET피드백 주제 READ 실패
+export const FEEDBACK_SUB_READ_REQUEST = 'FEEDBACK_SUB_READ_REQUEST'; // 피드백 주제 READ 시도 중
+export const FEEDBACK_SUB_READ_SUCCESS = 'FEEDBACK_SUB_READ_SUCCESS'; // 피드백 주제 READ 성공
+export const FEEDBACK_SUB_READ_FAILURE = 'FEEDBACK_SUB_READ_FAILURE'; // 피드백 주제 READ 실패
 
-export const GET_FEEDBACK_SUB_ADD_REQUEST = 'GET_FEEDBACK_SUB_ADD_REQUEST'; // GET피드백 주제 ADD 시도 중
-export const GET_FEEDBACK_SUB_ADD_SUCCESS = 'GET_FEEDBACK_SUB_ADD_SUCCESS'; // GET피드백 주제 ADD 성공
-export const GET_FEEDBACK_SUB_ADD_FAILURE = 'GET_FEEDBACK_SUB_ADD_FAILURE'; // GET피드백 주제 ADD 실패
+export const FEEDBACK_SUB_ADD_REQUEST = 'FEEDBACK_SUB_ADD_REQUEST'; // 피드백 주제 ADD 시도 중
+export const FEEDBACK_SUB_ADD_SUCCESS = 'FEEDBACK_SUB_ADD_SUCCESS'; // 피드백 주제 ADD 성공
+export const FEEDBACK_SUB_ADD_FAILURE = 'FEEDBACK_SUB_ADD_FAILURE'; // 피드백 주제 ADD 실패
 
-export const GET_FEEDBACK_SUB_UPDATE_REQUEST = 'GET_FEEDBACK_SUB_UPDATE_REQUEST'; // GET피드백 주제 UPDATE 시도 중
-export const GET_FEEDBACK_SUB_UPDATE_SUCCESS = 'GET_FEEDBACK_SUB_UPDATE_SUCCESS'; // GET피드백 주제 UPDATE 성공
-export const GET_FEEDBACK_SUB_UPDATE_FAILURE = 'GET_FEEDBACK_SUB_UPDATE_FAILURE'; // GET피드백 주제 UPDATE 실패
+export const FEEDBACK_SUB_UPDATE_REQUEST = 'FEEDBACK_SUB_UPDATE_REQUEST'; // 피드백 주제 UPDATE 시도 중
+export const FEEDBACK_SUB_UPDATE_SUCCESS = 'FEEDBACK_SUB_UPDATE_SUCCESS'; // 피드백 주제 UPDATE 성공
+export const FEEDBACK_SUB_UPDATE_FAILURE = 'FEEDBACK_SUB_UPDATE_FAILURE'; // 피드백 주제 UPDATE 실패
 
-export const GET_FEEDBACK_SUB_DELETE_REQUEST = 'GET_FEEDBACK_SUB_DELETE_REQUEST'; // GET피드백 주제 DELETE 시도 중
-export const GET_FEEDBACK_SUB_DELETE_SUCCESS = 'GET_FEEDBACK_SUB_DELETE_SUCCESS'; // GET피드백 주제 DELETE 성공
-export const GET_FEEDBACK_SUB_DELETE_FAILURE = 'GET_FEEDBACK_SUB_DELETE_FAILURE'; // GET피드백 주제 DELETE 실패
+export const FEEDBACK_SUB_DELETE_REQUEST = 'FEEDBACK_SUB_DELETE_REQUEST'; // 피드백 주제 DELETE 시도 중
+export const FEEDBACK_SUB_DELETE_SUCCESS = 'FEEDBACK_SUB_DELETE_SUCCESS'; // 피드백 주제 DELETE 성공
+export const FEEDBACK_SUB_DELETE_FAILURE = 'FEEDBACK_SUB_DELETE_FAILURE'; // 피드백 주제 DELETE 실패
 
 export default (state = initialState, action) => {
     switch(action.type){
-        // GET피드백 주제 READ
-        case GET_FEEDBACK_SUB_READ_REQUEST:
+        // 피드백 주제 READ
+        case FEEDBACK_SUB_READ_REQUEST:
             return{
 
             };
-        case GET_FEEDBACK_SUB_READ_SUCCESS:
+        case FEEDBACK_SUB_READ_SUCCESS:
             return{
                 
             };
-        case GET_FEEDBACK_SUB_READ_FAILURE:
+        case FEEDBACK_SUB_READ_FAILURE:
             return{
                 
             };
-        // GET피드백 주제 ADD    
-        case GET_FEEDBACK_SUB_ADD_REQUEST:
+        // 피드백 주제 ADD    
+        case FEEDBACK_SUB_ADD_REQUEST:
             return{
 
             };
-        case GET_FEEDBACK_SUB_ADD_SUCCESS:
+        case FEEDBACK_SUB_ADD_SUCCESS:
             return{
                 
             };
-        case GET_FEEDBACK_SUB_ADD_FAILURE:
-            return{
-                
-            };
-
-        // GET피드백 주제 UPDATE 
-        case GET_FEEDBACK_SUB_UPDATE_REQUEST:
-            return{
-
-            };
-        case GET_FEEDBACK_SUB_UPDATE_SUCCESS:
-            return{
-                
-            };
-        case GET_FEEDBACK_SUB_UPDATE_FAILURE:
+        case FEEDBACK_SUB_ADD_FAILURE:
             return{
                 
             };
 
-        // GET피드백 주제 DELETE 
-        case GET_FEEDBACK_SUB_DELETE_REQUEST:
+        // 피드백 주제 UPDATE 
+        case FEEDBACK_SUB_UPDATE_REQUEST:
             return{
 
             };
-        case GET_FEEDBACK_SUB_DELETE_SUCCESS:
+        case FEEDBACK_SUB_UPDATE_SUCCESS:
             return{
                 
             };
-        case GET_FEEDBACK_SUB_DELETE_FAILURE:
+        case FEEDBACK_SUB_UPDATE_FAILURE:
+            return{
+                
+            };
+
+        // 피드백 주제 DELETE 
+        case FEEDBACK_SUB_DELETE_REQUEST:
+            return{
+
+            };
+        case FEEDBACK_SUB_DELETE_SUCCESS:
+            return{
+                
+            };
+        case FEEDBACK_SUB_DELETE_FAILURE:
             return{
                 
             };
