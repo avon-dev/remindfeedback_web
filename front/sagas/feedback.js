@@ -19,7 +19,7 @@ import {
     FEEDBACK_ITEM_COMMENT_REQUEST,
     FEEDBACK_ITEM_COMMENT_SUCCESS,
     FEEDBACK_ITEM_COMMENT_FAILURE,
-} from '../reducers/getfeedback';
+} from '../reducers/feedback';
 
 
 // Feedback 피드백 게시물 댓글 Read
@@ -153,15 +153,15 @@ function* watchFeedback_Add(){
 
 
 // Feedback 메인화면 Read
-function* feedback_Read_API(){
+function* feedback_Read_API(feedbackData){
     // return axios.get('/#');
 };
 
 
-function* feedback_Read(){
+function* feedback_Read(action){
     try {
         yield delay(2000);
-        yield call(feedback_Read_API);
+        yield call(feedback_Read_API, action.data);
         yield put({
             type:FEEDBACK_READ_SUCCESS,
         });

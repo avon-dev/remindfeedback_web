@@ -2,10 +2,13 @@ import React, {useState} from 'react';
 import { Row, Col, Table, Divider, Tag, Popover, Icon, Button, Popconfirm } from 'antd';
 import UpdateSubject from '../container/updateSubject';
 import AddSubject from '../container/addSubject';
+import UpdateSubjectModal from './updateSubjectModal';
 
 const Subjects = () => {
 
     const [visible, setVisible] = useState(false);
+    const [updateVisible, setUpdateVisible] = useState(false);
+    const [popOverVisible, setPopOverVisible] = useState(false);
 
     const columns = [
         {
@@ -50,6 +53,9 @@ const Subjects = () => {
             render: update => (
                 <UpdateSubject
                         update={update}
+                        PopupUpdateSubject={PopupUpdateSubject}
+                        popOverVisible={popOverVisible}
+                        handleVisible={handleVisible}
                 />
             )
             
@@ -92,6 +98,23 @@ const Subjects = () => {
         setVisible(false);
     }
 
+    const PopupUpdateSubject = () => {
+      setUpdateVisible(true);
+      setPopOverVisible(false);
+    }
+
+    const handleUpdateOk = () => {
+      setUpdateVisible(false);
+    }
+
+    const handleUpdateCancel = () => {
+      setUpdateVisible(false);
+    }
+
+    const handleVisible = () => {
+      setPopOverVisible(true)
+    }
+
     return(
         <>
             <Row>
@@ -111,6 +134,13 @@ const Subjects = () => {
                     visible={visible}
                     handleOk={handleOk}
                     handleCancel={handleCancel}
+                />
+            </div>
+            <div>
+                <UpdateSubjectModal
+                    updateVisible={updateVisible}
+                    handleUpdateOk={handleUpdateOk}
+                    handleUpdateCancel={handleUpdateCancel}
                 />
             </div>
         </>

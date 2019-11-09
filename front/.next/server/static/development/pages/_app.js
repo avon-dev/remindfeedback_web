@@ -336,6 +336,140 @@ const configureStore = (initialState, options) => {
 
 /***/ }),
 
+/***/ "./reducers/feedback.js":
+/*!******************************!*\
+  !*** ./reducers/feedback.js ***!
+  \******************************/
+/*! exports provided: initialState, FEEDBACK_READ_REQUEST, FEEDBACK_READ_SUCCESS, FEEDBACK_READ_FAILURE, FEEDBACK_ADD_REQUEST, FEEDBACK_ADD_SUCCESS, FEEDBACK_ADD_FAILURE, FEEDBACK_ITEM_READ_REQUEST, FEEDBACK_ITEM_READ_SUCCESS, FEEDBACK_ITEM_READ_FAILURE, FEEDBACK_ITEM_ADD_REQUEST, FEEDBACK_ITEM_ADD_SUCCESS, FEEDBACK_ITEM_ADD_FAILURE, FEEDBACK_DETAIL_ITEM_READ_REQUEST, FEEDBACK_DETAIL_ITEM_READ_SUCCESS, FEEDBACK_DETAIL_ITEM_READ_FAILURE, FEEDBACK_ITEM_COMMENT_REQUEST, FEEDBACK_ITEM_COMMENT_SUCCESS, FEEDBACK_ITEM_COMMENT_FAILURE, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_READ_REQUEST", function() { return FEEDBACK_READ_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_READ_SUCCESS", function() { return FEEDBACK_READ_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_READ_FAILURE", function() { return FEEDBACK_READ_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ADD_REQUEST", function() { return FEEDBACK_ADD_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ADD_SUCCESS", function() { return FEEDBACK_ADD_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ADD_FAILURE", function() { return FEEDBACK_ADD_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ITEM_READ_REQUEST", function() { return FEEDBACK_ITEM_READ_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ITEM_READ_SUCCESS", function() { return FEEDBACK_ITEM_READ_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ITEM_READ_FAILURE", function() { return FEEDBACK_ITEM_READ_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ITEM_ADD_REQUEST", function() { return FEEDBACK_ITEM_ADD_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ITEM_ADD_SUCCESS", function() { return FEEDBACK_ITEM_ADD_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ITEM_ADD_FAILURE", function() { return FEEDBACK_ITEM_ADD_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_DETAIL_ITEM_READ_REQUEST", function() { return FEEDBACK_DETAIL_ITEM_READ_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_DETAIL_ITEM_READ_SUCCESS", function() { return FEEDBACK_DETAIL_ITEM_READ_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_DETAIL_ITEM_READ_FAILURE", function() { return FEEDBACK_DETAIL_ITEM_READ_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ITEM_COMMENT_REQUEST", function() { return FEEDBACK_ITEM_COMMENT_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ITEM_COMMENT_SUCCESS", function() { return FEEDBACK_ITEM_COMMENT_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ITEM_COMMENT_FAILURE", function() { return FEEDBACK_ITEM_COMMENT_FAILURE; });
+const initialState = {};
+const FEEDBACK_READ_REQUEST = 'FEEDBACK_READ_REQUEST'; // 피드백 READ 시도 중
+
+const FEEDBACK_READ_SUCCESS = 'FEEDBACK_READ_SUCCESS'; // 피드백 READ 성공
+
+const FEEDBACK_READ_FAILURE = 'FEEDBACK_READ_FAILURE'; // 피드백 READ 실패
+
+const FEEDBACK_ADD_REQUEST = 'FEEDBACK_ADD_REQUEST'; // 피드백 ADD 시도 중
+
+const FEEDBACK_ADD_SUCCESS = 'FEEDBACK_ADD_SUCCESS'; // 피드백 ADD 성공
+
+const FEEDBACK_ADD_FAILURE = 'FEEDBACK_ADD_FAILURE'; // 피드백 ADD 실패
+
+const FEEDBACK_ITEM_READ_REQUEST = 'FEEDBACK_ITEM_READ_REQUEST'; // 피드백 게시물 READ 시도 중
+
+const FEEDBACK_ITEM_READ_SUCCESS = 'FEEDBACK_ITEM_READ_SUCCESS'; // 피드백 게시물 READ 성공
+
+const FEEDBACK_ITEM_READ_FAILURE = 'FEEDBACK_ITEM_READ_FAILURE'; // 피드백 게시물 READ 실패
+
+const FEEDBACK_ITEM_ADD_REQUEST = 'FEEDBACK_ITEM_ADD_REQUEST'; // 피드백 게시물 ADD 시도 중
+
+const FEEDBACK_ITEM_ADD_SUCCESS = 'FEEDBACK_ITEM_ADD_SUCCESS'; // 피드백 게시물 ADD 성공
+
+const FEEDBACK_ITEM_ADD_FAILURE = 'FEEDBACK_ITEM_ADD_FAILURE'; // 피드백 게시물 ADD 실패
+
+const FEEDBACK_DETAIL_ITEM_READ_REQUEST = 'FEEDBACK_DETAIL_ITEM_READ_REQUEST'; // 피드백 게시물 세부 READ 시도 중
+
+const FEEDBACK_DETAIL_ITEM_READ_SUCCESS = 'FEEDBACK_DETAIL_ITEM_READ_SUCCESS'; // 피드백 게시물 세부 READ 성공
+
+const FEEDBACK_DETAIL_ITEM_READ_FAILURE = 'FEEDBACK_DETAIL_ITEM_READ_FAILURE'; // 피드백 게시물 세부 READ 실패
+
+const FEEDBACK_ITEM_COMMENT_REQUEST = 'FEEDBACK_ITEM_COMMENT_REQUEST'; // 피드백 게시물 댓글 ADD 시도 중
+
+const FEEDBACK_ITEM_COMMENT_SUCCESS = 'FEEDBACK_ITEM_COMMENT_SUCCESS'; // 피드백 게시물 댓글 ADD 성공
+
+const FEEDBACK_ITEM_COMMENT_FAILURE = 'FEEDBACK_ITEM_COMMENT_FAILURE'; // 피드백 게시물 댓글 ADD 실패
+
+/* harmony default export */ __webpack_exports__["default"] = ((state = initialState, action) => {
+  switch (action.type) {
+    // 피드백 READ
+    case FEEDBACK_READ_REQUEST:
+      return {};
+
+    case FEEDBACK_READ_SUCCESS:
+      return {};
+
+    case FEEDBACK_READ_FAILURE:
+      return {};
+    // 피드백 ADD
+
+    case FEEDBACK_ADD_REQUEST:
+      return {};
+
+    case FEEDBACK_ADD_SUCCESS:
+      return {};
+
+    case FEEDBACK_ADD_FAILURE:
+      return {};
+    // 피드백 게시물 READ 
+
+    case FEEDBACK_ITEM_READ_REQUEST:
+      return {};
+
+    case FEEDBACK_ITEM_READ_SUCCESS:
+      return {};
+
+    case FEEDBACK_ITEM_READ_FAILURE:
+      return {};
+    // 피드백 게시물 ADD 
+
+    case FEEDBACK_ITEM_ADD_REQUEST:
+      return {};
+
+    case FEEDBACK_ITEM_ADD_SUCCESS:
+      return {};
+
+    case FEEDBACK_ITEM_ADD_FAILURE:
+      return {};
+    // 피드백 게시물 세부 READ 
+
+    case FEEDBACK_DETAIL_ITEM_READ_REQUEST:
+      return {};
+
+    case FEEDBACK_DETAIL_ITEM_READ_SUCCESS:
+      return {};
+
+    case FEEDBACK_DETAIL_ITEM_READ_FAILURE:
+      return {};
+    // 피드백 게시물 댓글 ADD 
+
+    case FEEDBACK_ITEM_COMMENT_REQUEST:
+      return {};
+
+    case FEEDBACK_ITEM_COMMENT_SUCCESS:
+      return {};
+
+    case FEEDBACK_ITEM_COMMENT_FAILURE:
+      return {};
+
+    default:
+      return state;
+  }
+});
+
+/***/ }),
+
 /***/ "./reducers/feedbackMode.js":
 /*!**********************************!*\
   !*** ./reducers/feedbackMode.js ***!
@@ -373,89 +507,89 @@ const FEEDBACK_MODE = 'FEEDBACK_MODE'; // GET피드백 -> SET 피드백
 /*!*************************************!*\
   !*** ./reducers/feedbackSubject.js ***!
   \*************************************/
-/*! exports provided: initialState, GET_FEEDBACK_SUB_READ_REQUEST, GET_FEEDBACK_SUB_READ_SUCCESS, GET_FEEDBACK_SUB_READ_FAILURE, GET_FEEDBACK_SUB_ADD_REQUEST, GET_FEEDBACK_SUB_ADD_SUCCESS, GET_FEEDBACK_SUB_ADD_FAILURE, GET_FEEDBACK_SUB_UPDATE_REQUEST, GET_FEEDBACK_SUB_UPDATE_SUCCESS, GET_FEEDBACK_SUB_UPDATE_FAILURE, GET_FEEDBACK_SUB_DELETE_REQUEST, GET_FEEDBACK_SUB_DELETE_SUCCESS, GET_FEEDBACK_SUB_DELETE_FAILURE, default */
+/*! exports provided: initialState, FEEDBACK_SUB_READ_REQUEST, FEEDBACK_SUB_READ_SUCCESS, FEEDBACK_SUB_READ_FAILURE, FEEDBACK_SUB_ADD_REQUEST, FEEDBACK_SUB_ADD_SUCCESS, FEEDBACK_SUB_ADD_FAILURE, FEEDBACK_SUB_UPDATE_REQUEST, FEEDBACK_SUB_UPDATE_SUCCESS, FEEDBACK_SUB_UPDATE_FAILURE, FEEDBACK_SUB_DELETE_REQUEST, FEEDBACK_SUB_DELETE_SUCCESS, FEEDBACK_SUB_DELETE_FAILURE, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_SUB_READ_REQUEST", function() { return GET_FEEDBACK_SUB_READ_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_SUB_READ_SUCCESS", function() { return GET_FEEDBACK_SUB_READ_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_SUB_READ_FAILURE", function() { return GET_FEEDBACK_SUB_READ_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_SUB_ADD_REQUEST", function() { return GET_FEEDBACK_SUB_ADD_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_SUB_ADD_SUCCESS", function() { return GET_FEEDBACK_SUB_ADD_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_SUB_ADD_FAILURE", function() { return GET_FEEDBACK_SUB_ADD_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_SUB_UPDATE_REQUEST", function() { return GET_FEEDBACK_SUB_UPDATE_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_SUB_UPDATE_SUCCESS", function() { return GET_FEEDBACK_SUB_UPDATE_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_SUB_UPDATE_FAILURE", function() { return GET_FEEDBACK_SUB_UPDATE_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_SUB_DELETE_REQUEST", function() { return GET_FEEDBACK_SUB_DELETE_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_SUB_DELETE_SUCCESS", function() { return GET_FEEDBACK_SUB_DELETE_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_SUB_DELETE_FAILURE", function() { return GET_FEEDBACK_SUB_DELETE_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_SUB_READ_REQUEST", function() { return FEEDBACK_SUB_READ_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_SUB_READ_SUCCESS", function() { return FEEDBACK_SUB_READ_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_SUB_READ_FAILURE", function() { return FEEDBACK_SUB_READ_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_SUB_ADD_REQUEST", function() { return FEEDBACK_SUB_ADD_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_SUB_ADD_SUCCESS", function() { return FEEDBACK_SUB_ADD_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_SUB_ADD_FAILURE", function() { return FEEDBACK_SUB_ADD_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_SUB_UPDATE_REQUEST", function() { return FEEDBACK_SUB_UPDATE_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_SUB_UPDATE_SUCCESS", function() { return FEEDBACK_SUB_UPDATE_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_SUB_UPDATE_FAILURE", function() { return FEEDBACK_SUB_UPDATE_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_SUB_DELETE_REQUEST", function() { return FEEDBACK_SUB_DELETE_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_SUB_DELETE_SUCCESS", function() { return FEEDBACK_SUB_DELETE_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_SUB_DELETE_FAILURE", function() { return FEEDBACK_SUB_DELETE_FAILURE; });
 const initialState = {};
-const GET_FEEDBACK_SUB_READ_REQUEST = 'GET_FEEDBACK_SUB_READ_REQUEST'; // GET피드백 주제 READ 시도 중
+const FEEDBACK_SUB_READ_REQUEST = 'FEEDBACK_SUB_READ_REQUEST'; // 피드백 주제 READ 시도 중
 
-const GET_FEEDBACK_SUB_READ_SUCCESS = 'GET_FEEDBACK_SUB_READ_SUCCESS'; // GET피드백 주제 READ 성공
+const FEEDBACK_SUB_READ_SUCCESS = 'FEEDBACK_SUB_READ_SUCCESS'; // 피드백 주제 READ 성공
 
-const GET_FEEDBACK_SUB_READ_FAILURE = 'GET_FEEDBACK_SUB_READ_FAILURE'; // GET피드백 주제 READ 실패
+const FEEDBACK_SUB_READ_FAILURE = 'FEEDBACK_SUB_READ_FAILURE'; // 피드백 주제 READ 실패
 
-const GET_FEEDBACK_SUB_ADD_REQUEST = 'GET_FEEDBACK_SUB_ADD_REQUEST'; // GET피드백 주제 ADD 시도 중
+const FEEDBACK_SUB_ADD_REQUEST = 'FEEDBACK_SUB_ADD_REQUEST'; // 피드백 주제 ADD 시도 중
 
-const GET_FEEDBACK_SUB_ADD_SUCCESS = 'GET_FEEDBACK_SUB_ADD_SUCCESS'; // GET피드백 주제 ADD 성공
+const FEEDBACK_SUB_ADD_SUCCESS = 'FEEDBACK_SUB_ADD_SUCCESS'; // 피드백 주제 ADD 성공
 
-const GET_FEEDBACK_SUB_ADD_FAILURE = 'GET_FEEDBACK_SUB_ADD_FAILURE'; // GET피드백 주제 ADD 실패
+const FEEDBACK_SUB_ADD_FAILURE = 'FEEDBACK_SUB_ADD_FAILURE'; // 피드백 주제 ADD 실패
 
-const GET_FEEDBACK_SUB_UPDATE_REQUEST = 'GET_FEEDBACK_SUB_UPDATE_REQUEST'; // GET피드백 주제 UPDATE 시도 중
+const FEEDBACK_SUB_UPDATE_REQUEST = 'FEEDBACK_SUB_UPDATE_REQUEST'; // 피드백 주제 UPDATE 시도 중
 
-const GET_FEEDBACK_SUB_UPDATE_SUCCESS = 'GET_FEEDBACK_SUB_UPDATE_SUCCESS'; // GET피드백 주제 UPDATE 성공
+const FEEDBACK_SUB_UPDATE_SUCCESS = 'FEEDBACK_SUB_UPDATE_SUCCESS'; // 피드백 주제 UPDATE 성공
 
-const GET_FEEDBACK_SUB_UPDATE_FAILURE = 'GET_FEEDBACK_SUB_UPDATE_FAILURE'; // GET피드백 주제 UPDATE 실패
+const FEEDBACK_SUB_UPDATE_FAILURE = 'FEEDBACK_SUB_UPDATE_FAILURE'; // 피드백 주제 UPDATE 실패
 
-const GET_FEEDBACK_SUB_DELETE_REQUEST = 'GET_FEEDBACK_SUB_DELETE_REQUEST'; // GET피드백 주제 DELETE 시도 중
+const FEEDBACK_SUB_DELETE_REQUEST = 'FEEDBACK_SUB_DELETE_REQUEST'; // 피드백 주제 DELETE 시도 중
 
-const GET_FEEDBACK_SUB_DELETE_SUCCESS = 'GET_FEEDBACK_SUB_DELETE_SUCCESS'; // GET피드백 주제 DELETE 성공
+const FEEDBACK_SUB_DELETE_SUCCESS = 'FEEDBACK_SUB_DELETE_SUCCESS'; // 피드백 주제 DELETE 성공
 
-const GET_FEEDBACK_SUB_DELETE_FAILURE = 'GET_FEEDBACK_SUB_DELETE_FAILURE'; // GET피드백 주제 DELETE 실패
+const FEEDBACK_SUB_DELETE_FAILURE = 'FEEDBACK_SUB_DELETE_FAILURE'; // 피드백 주제 DELETE 실패
 
 /* harmony default export */ __webpack_exports__["default"] = ((state = initialState, action) => {
   switch (action.type) {
-    // GET피드백 주제 READ
-    case GET_FEEDBACK_SUB_READ_REQUEST:
+    // 피드백 주제 READ
+    case FEEDBACK_SUB_READ_REQUEST:
       return {};
 
-    case GET_FEEDBACK_SUB_READ_SUCCESS:
+    case FEEDBACK_SUB_READ_SUCCESS:
       return {};
 
-    case GET_FEEDBACK_SUB_READ_FAILURE:
+    case FEEDBACK_SUB_READ_FAILURE:
       return {};
-    // GET피드백 주제 ADD    
+    // 피드백 주제 ADD    
 
-    case GET_FEEDBACK_SUB_ADD_REQUEST:
-      return {};
-
-    case GET_FEEDBACK_SUB_ADD_SUCCESS:
+    case FEEDBACK_SUB_ADD_REQUEST:
       return {};
 
-    case GET_FEEDBACK_SUB_ADD_FAILURE:
-      return {};
-    // GET피드백 주제 UPDATE 
-
-    case GET_FEEDBACK_SUB_UPDATE_REQUEST:
+    case FEEDBACK_SUB_ADD_SUCCESS:
       return {};
 
-    case GET_FEEDBACK_SUB_UPDATE_SUCCESS:
+    case FEEDBACK_SUB_ADD_FAILURE:
+      return {};
+    // 피드백 주제 UPDATE 
+
+    case FEEDBACK_SUB_UPDATE_REQUEST:
       return {};
 
-    case GET_FEEDBACK_SUB_UPDATE_FAILURE:
-      return {};
-    // GET피드백 주제 DELETE 
-
-    case GET_FEEDBACK_SUB_DELETE_REQUEST:
+    case FEEDBACK_SUB_UPDATE_SUCCESS:
       return {};
 
-    case GET_FEEDBACK_SUB_DELETE_SUCCESS:
+    case FEEDBACK_SUB_UPDATE_FAILURE:
+      return {};
+    // 피드백 주제 DELETE 
+
+    case FEEDBACK_SUB_DELETE_REQUEST:
       return {};
 
-    case GET_FEEDBACK_SUB_DELETE_FAILURE:
+    case FEEDBACK_SUB_DELETE_SUCCESS:
+      return {};
+
+    case FEEDBACK_SUB_DELETE_FAILURE:
       return {};
 
     default:
@@ -637,140 +771,6 @@ const FRIENDS_PROFILE_ADD_FAILURE = 'FRIENDS_PROFILE_ADD_FAILURE'; // 친구 프
 
 /***/ }),
 
-/***/ "./reducers/getfeedback.js":
-/*!*********************************!*\
-  !*** ./reducers/getfeedback.js ***!
-  \*********************************/
-/*! exports provided: initialState, GET_FEEDBACK_READ_REQUEST, GET_FEEDBACK_READ_SUCCESS, GET_FEEDBACK_READ_FAILURE, GET_FEEDBACK_ADD_REQUEST, GET_FEEDBACK_ADD_SUCCESS, GET_FEEDBACK_ADD_FAILURE, GET_FEEDBACK_ITEM_READ_REQUEST, GET_FEEDBACK_ITEM_READ_SUCCESS, GET_FEEDBACK_ITEM_READ_FAILURE, GET_FEEDBACK_ITEM_ADD_REQUEST, GET_FEEDBACK_ITEM_ADD_SUCCESS, GET_FEEDBACK_ITEM_ADD_FAILURE, GET_FEEDBACK_DETAIL_ITEM_READ_REQUEST, GET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS, GET_FEEDBACK_DETAIL_ITEM_READ_FAILURE, GET_FEEDBACK_ITEM_COMMENT_REQUEST, GET_FEEDBACK_ITEM_COMMENT_SUCCESS, GET_FEEDBACK_ITEM_COMMENT_FAILURE, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_READ_REQUEST", function() { return GET_FEEDBACK_READ_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_READ_SUCCESS", function() { return GET_FEEDBACK_READ_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_READ_FAILURE", function() { return GET_FEEDBACK_READ_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_ADD_REQUEST", function() { return GET_FEEDBACK_ADD_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_ADD_SUCCESS", function() { return GET_FEEDBACK_ADD_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_ADD_FAILURE", function() { return GET_FEEDBACK_ADD_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_ITEM_READ_REQUEST", function() { return GET_FEEDBACK_ITEM_READ_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_ITEM_READ_SUCCESS", function() { return GET_FEEDBACK_ITEM_READ_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_ITEM_READ_FAILURE", function() { return GET_FEEDBACK_ITEM_READ_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_ITEM_ADD_REQUEST", function() { return GET_FEEDBACK_ITEM_ADD_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_ITEM_ADD_SUCCESS", function() { return GET_FEEDBACK_ITEM_ADD_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_ITEM_ADD_FAILURE", function() { return GET_FEEDBACK_ITEM_ADD_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_DETAIL_ITEM_READ_REQUEST", function() { return GET_FEEDBACK_DETAIL_ITEM_READ_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS", function() { return GET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_DETAIL_ITEM_READ_FAILURE", function() { return GET_FEEDBACK_DETAIL_ITEM_READ_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_ITEM_COMMENT_REQUEST", function() { return GET_FEEDBACK_ITEM_COMMENT_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_ITEM_COMMENT_SUCCESS", function() { return GET_FEEDBACK_ITEM_COMMENT_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FEEDBACK_ITEM_COMMENT_FAILURE", function() { return GET_FEEDBACK_ITEM_COMMENT_FAILURE; });
-const initialState = {};
-const GET_FEEDBACK_READ_REQUEST = 'GET_FEEDBACK_READ_REQUEST'; // GET피드백 READ 시도 중
-
-const GET_FEEDBACK_READ_SUCCESS = 'GET_FEEDBACK_READ_SUCCESS'; // GET피드백 READ 성공
-
-const GET_FEEDBACK_READ_FAILURE = 'GET_FEEDBACK_READ_FAILURE'; // GET피드백 READ 실패
-
-const GET_FEEDBACK_ADD_REQUEST = 'GET_FEEDBACK_ADD_REQUEST'; // GET피드백 ADD 시도 중
-
-const GET_FEEDBACK_ADD_SUCCESS = 'GET_FEEDBACK_ADD_SUCCESS'; // GET피드백 ADD 성공
-
-const GET_FEEDBACK_ADD_FAILURE = 'GET_FEEDBACK_ADD_FAILURE'; // GET피드백 ADD 실패
-
-const GET_FEEDBACK_ITEM_READ_REQUEST = 'GET_FEEDBACK_ITEM_READ_REQUEST'; // GET피드백 게시물 READ 시도 중
-
-const GET_FEEDBACK_ITEM_READ_SUCCESS = 'GET_FEEDBACK_ITEM_READ_SUCCESS'; // GET피드백 게시물 READ 성공
-
-const GET_FEEDBACK_ITEM_READ_FAILURE = 'GET_FEEDBACK_ITEM_READ_FAILURE'; // GET피드백 게시물 READ 실패
-
-const GET_FEEDBACK_ITEM_ADD_REQUEST = 'GET_FEEDBACK_ITEM_ADD_REQUEST'; // GET피드백 게시물 ADD 시도 중
-
-const GET_FEEDBACK_ITEM_ADD_SUCCESS = 'GET_FEEDBACK_ITEM_ADD_SUCCESS'; // GET피드백 게시물 ADD 성공
-
-const GET_FEEDBACK_ITEM_ADD_FAILURE = 'GET_FEEDBACK_ITEM_ADD_FAILURE'; // GET피드백 게시물 ADD 실패
-
-const GET_FEEDBACK_DETAIL_ITEM_READ_REQUEST = 'GET_FEEDBACK_DETAIL_ITEM_READ_REQUEST'; // GET피드백 게시물 세부 READ 시도 중
-
-const GET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS = 'GET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS'; // GET피드백 게시물 세부 READ 성공
-
-const GET_FEEDBACK_DETAIL_ITEM_READ_FAILURE = 'GET_FEEDBACK_DETAIL_ITEM_READ_FAILURE'; // GET피드백 게시물 세부 READ 실패
-
-const GET_FEEDBACK_ITEM_COMMENT_REQUEST = 'GET_FEEDBACK_ITEM_COMMENT_REQUEST'; // GET피드백 게시물 댓글 ADD 시도 중
-
-const GET_FEEDBACK_ITEM_COMMENT_SUCCESS = 'GET_FEEDBACK_ITEM_COMMENT_SUCCESS'; // GET피드백 게시물 댓글 ADD 성공
-
-const GET_FEEDBACK_ITEM_COMMENT_FAILURE = 'GET_FEEDBACK_ITEM_COMMENT_FAILURE'; // GET피드백 게시물 댓글 ADD 실패
-
-/* harmony default export */ __webpack_exports__["default"] = ((state = initialState, action) => {
-  switch (action.type) {
-    // GET피드백 READ
-    case GET_FEEDBACK_READ_REQUEST:
-      return {};
-
-    case GET_FEEDBACK_READ_SUCCESS:
-      return {};
-
-    case GET_FEEDBACK_READ_FAILURE:
-      return {};
-    // GET피드백 ADD
-
-    case GET_FEEDBACK_ADD_REQUEST:
-      return {};
-
-    case GET_FEEDBACK_ADD_SUCCESS:
-      return {};
-
-    case GET_FEEDBACK_ADD_FAILURE:
-      return {};
-    // GET피드백 게시물 READ 
-
-    case GET_FEEDBACK_ITEM_READ_REQUEST:
-      return {};
-
-    case GET_FEEDBACK_ITEM_READ_SUCCESS:
-      return {};
-
-    case GET_FEEDBACK_ITEM_READ_FAILURE:
-      return {};
-    // GET피드백 게시물 ADD 
-
-    case GET_FEEDBACK_ITEM_ADD_REQUEST:
-      return {};
-
-    case GET_FEEDBACK_ITEM_ADD_SUCCESS:
-      return {};
-
-    case GET_FEEDBACK_ITEM_ADD_FAILURE:
-      return {};
-    // GET피드백 게시물 세부 READ 
-
-    case GET_FEEDBACK_DETAIL_ITEM_READ_REQUEST:
-      return {};
-
-    case GET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS:
-      return {};
-
-    case GET_FEEDBACK_DETAIL_ITEM_READ_FAILURE:
-      return {};
-    // GET피드백 게시물 댓글 ADD 
-
-    case GET_FEEDBACK_ITEM_COMMENT_REQUEST:
-      return {};
-
-    case GET_FEEDBACK_ITEM_COMMENT_SUCCESS:
-      return {};
-
-    case GET_FEEDBACK_ITEM_COMMENT_FAILURE:
-      return {};
-
-    default:
-      return state;
-  }
-});
-
-/***/ }),
-
 /***/ "./reducers/index.js":
 /*!***************************!*\
   !*** ./reducers/index.js ***!
@@ -784,11 +784,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _friends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./friends */ "./reducers/friends.js");
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user */ "./reducers/user.js");
-/* harmony import */ var _getfeedback__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getfeedback */ "./reducers/getfeedback.js");
-/* harmony import */ var _setfeedback__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./setfeedback */ "./reducers/setfeedback.js");
-/* harmony import */ var _feedbackSubject__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./feedbackSubject */ "./reducers/feedbackSubject.js");
-/* harmony import */ var _feedbackMode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./feedbackMode */ "./reducers/feedbackMode.js");
-
+/* harmony import */ var _feedback__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./feedback */ "./reducers/feedback.js");
+/* harmony import */ var _feedbackSubject__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./feedbackSubject */ "./reducers/feedbackSubject.js");
+/* harmony import */ var _feedbackMode__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./feedbackMode */ "./reducers/feedbackMode.js");
 
 
 
@@ -798,146 +796,11 @@ __webpack_require__.r(__webpack_exports__);
 const rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   friends: _friends__WEBPACK_IMPORTED_MODULE_1__["default"],
   user: _user__WEBPACK_IMPORTED_MODULE_2__["default"],
-  getfeedback: _getfeedback__WEBPACK_IMPORTED_MODULE_3__["default"],
-  setfeedback: _setfeedback__WEBPACK_IMPORTED_MODULE_4__["default"],
-  feedbackSubject: _feedbackSubject__WEBPACK_IMPORTED_MODULE_5__["default"],
-  feedbackMode: _feedbackMode__WEBPACK_IMPORTED_MODULE_6__["default"]
+  feedback: _feedback__WEBPACK_IMPORTED_MODULE_3__["default"],
+  feedbackSubject: _feedbackSubject__WEBPACK_IMPORTED_MODULE_4__["default"],
+  feedbackMode: _feedbackMode__WEBPACK_IMPORTED_MODULE_5__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
-
-/***/ }),
-
-/***/ "./reducers/setfeedback.js":
-/*!*********************************!*\
-  !*** ./reducers/setfeedback.js ***!
-  \*********************************/
-/*! exports provided: initialState, SET_FEEDBACK_READ_REQUEST, SET_FEEDBACK_READ_SUCCESS, SET_FEEDBACK_READ_FAILURE, SET_FEEDBACK_ADD_REQUEST, SET_FEEDBACK_ADD_SUCCESS, SET_FEEDBACK_ADD_FAILURE, SET_FEEDBACK_ITEM_READ_REQUEST, SET_FEEDBACK_ITEM_READ_SUCCESS, SET_FEEDBACK_ITEM_READ_FAILURE, SET_FEEDBACK_ITEM_ADD_REQUEST, SET_FEEDBACK_ITEM_ADD_SUCCESS, SET_FEEDBACK_ITEM_ADD_FAILURE, SET_FEEDBACK_DETAIL_ITEM_READ_REQUEST, SET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS, SET_FEEDBACK_DETAIL_ITEM_READ_FAILURE, SET_FEEDBACK_ITEM_COMMENT_REQUEST, SET_FEEDBACK_ITEM_COMMENT_SUCCESS, SET_FEEDBACK_ITEM_COMMENT_FAILURE, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_READ_REQUEST", function() { return SET_FEEDBACK_READ_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_READ_SUCCESS", function() { return SET_FEEDBACK_READ_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_READ_FAILURE", function() { return SET_FEEDBACK_READ_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ADD_REQUEST", function() { return SET_FEEDBACK_ADD_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ADD_SUCCESS", function() { return SET_FEEDBACK_ADD_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ADD_FAILURE", function() { return SET_FEEDBACK_ADD_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_READ_REQUEST", function() { return SET_FEEDBACK_ITEM_READ_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_READ_SUCCESS", function() { return SET_FEEDBACK_ITEM_READ_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_READ_FAILURE", function() { return SET_FEEDBACK_ITEM_READ_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_ADD_REQUEST", function() { return SET_FEEDBACK_ITEM_ADD_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_ADD_SUCCESS", function() { return SET_FEEDBACK_ITEM_ADD_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_ADD_FAILURE", function() { return SET_FEEDBACK_ITEM_ADD_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_DETAIL_ITEM_READ_REQUEST", function() { return SET_FEEDBACK_DETAIL_ITEM_READ_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS", function() { return SET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_DETAIL_ITEM_READ_FAILURE", function() { return SET_FEEDBACK_DETAIL_ITEM_READ_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_COMMENT_REQUEST", function() { return SET_FEEDBACK_ITEM_COMMENT_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_COMMENT_SUCCESS", function() { return SET_FEEDBACK_ITEM_COMMENT_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FEEDBACK_ITEM_COMMENT_FAILURE", function() { return SET_FEEDBACK_ITEM_COMMENT_FAILURE; });
-const initialState = {};
-const SET_FEEDBACK_READ_REQUEST = 'SET_FEEDBACK_READ_REQUEST'; // SET피드백 READ 시도 중
-
-const SET_FEEDBACK_READ_SUCCESS = 'SET_FEEDBACK_READ_SUCCESS'; // SET피드백 READ 성공
-
-const SET_FEEDBACK_READ_FAILURE = 'SET_FEEDBACK_READ_FAILURE'; // SET피드백 READ 실패
-
-const SET_FEEDBACK_ADD_REQUEST = 'SET_FEEDBACK_ADD_REQUEST'; // SET피드백 ADD 시도 중
-
-const SET_FEEDBACK_ADD_SUCCESS = 'SET_FEEDBACK_ADD_SUCCESS'; // SET피드백 ADD 성공
-
-const SET_FEEDBACK_ADD_FAILURE = 'SET_FEEDBACK_ADD_FAILURE'; // SET피드백 ADD 실패
-
-const SET_FEEDBACK_ITEM_READ_REQUEST = 'SET_FEEDBACK_ITEM_READ_REQUEST'; // SET피드백 게시물 READ 시도 중
-
-const SET_FEEDBACK_ITEM_READ_SUCCESS = 'SET_FEEDBACK_ITEM_READ_SUCCESS'; // SET피드백 게시물 READ 성공
-
-const SET_FEEDBACK_ITEM_READ_FAILURE = 'SET_FEEDBACK_ITEM_READ_FAILURE'; // SET피드백 게시물 READ 실패
-
-const SET_FEEDBACK_ITEM_ADD_REQUEST = 'SET_FEEDBACK_ITEM_ADD_REQUEST'; // SET피드백 게시물 ADD 시도 중
-
-const SET_FEEDBACK_ITEM_ADD_SUCCESS = 'SET_FEEDBACK_ITEM_ADD_SUCCESS'; // SET피드백 게시물 ADD 성공
-
-const SET_FEEDBACK_ITEM_ADD_FAILURE = 'SET_FEEDBACK_ITEM_ADD_FAILURE'; // SET피드백 게시물 ADD 실패
-
-const SET_FEEDBACK_DETAIL_ITEM_READ_REQUEST = 'SET_FEEDBACK_DETAIL_ITEM_READ_REQUEST'; // SET피드백 게시물 세부 READ 시도 중
-
-const SET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS = 'SET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS'; // SET피드백 게시물 세부 READ 성공
-
-const SET_FEEDBACK_DETAIL_ITEM_READ_FAILURE = 'SET_FEEDBACK_DETAIL_ITEM_READ_FAILURE'; // SET피드백 게시물 세부 READ 실패
-
-const SET_FEEDBACK_ITEM_COMMENT_REQUEST = 'SET_FEEDBACK_ITEM_COMMENT_REQUEST'; // SET피드백 게시물 댓글 ADD 시도 중
-
-const SET_FEEDBACK_ITEM_COMMENT_SUCCESS = 'SET_FEEDBACK_ITEM_COMMENT_SUCCESS'; // SET피드백 게시물 댓글 ADD 성공
-
-const SET_FEEDBACK_ITEM_COMMENT_FAILURE = 'SET_FEEDBACK_ITEM_COMMENT_FAILURE'; // SET피드백 게시물 댓글 ADD 실패
-
-/* harmony default export */ __webpack_exports__["default"] = ((state = initialState, action) => {
-  switch (action.type) {
-    // SET피드백 READ
-    case SET_FEEDBACK_READ_REQUEST:
-      return {};
-
-    case SET_FEEDBACK_READ_SUCCESS:
-      return {};
-
-    case SET_FEEDBACK_READ_FAILURE:
-      return {};
-    // SET피드백 ADD
-
-    case SET_FEEDBACK_ADD_REQUEST:
-      return {};
-
-    case SET_FEEDBACK_ADD_SUCCESS:
-      return {};
-
-    case SET_FEEDBACK_ADD_FAILURE:
-      return {};
-    // SET피드백 게시물 READ 
-
-    case SET_FEEDBACK_ITEM_READ_REQUEST:
-      return {};
-
-    case SET_FEEDBACK_ITEM_READ_SUCCESS:
-      return {};
-
-    case SET_FEEDBACK_ITEM_READ_FAILURE:
-      return {};
-    // SET피드백 게시물 ADD 
-
-    case SET_FEEDBACK_ITEM_ADD_REQUEST:
-      return {};
-
-    case SET_FEEDBACK_ITEM_ADD_SUCCESS:
-      return {};
-
-    case SET_FEEDBACK_ITEM_ADD_FAILURE:
-      return {};
-    // SET피드백 게시물 세부 READ 
-
-    case SET_FEEDBACK_DETAIL_ITEM_READ_REQUEST:
-      return {};
-
-    case SET_FEEDBACK_DETAIL_ITEM_READ_SUCCESS:
-      return {};
-
-    case SET_FEEDBACK_DETAIL_ITEM_READ_FAILURE:
-      return {};
-    // SET피드백 게시물 댓글 ADD 
-
-    case SET_FEEDBACK_ITEM_COMMENT_REQUEST:
-      return {};
-
-    case SET_FEEDBACK_ITEM_COMMENT_SUCCESS:
-      return {};
-
-    case SET_FEEDBACK_ITEM_COMMENT_FAILURE:
-      return {};
-
-    default:
-      return state;
-  }
-});
 
 /***/ }),
 
@@ -1039,12 +902,7 @@ const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'; // 로그아웃 실패
 
     case SIGN_UP_REQUEST:
       return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-        isSigningUp: true,
-        me: {
-          email: action.email,
-          password: action.email,
-          nickname: action.nickname
-        }
+        isSigningUp: true
       });
 
     case SIGN_UP_SUCCESS:
@@ -1073,6 +931,600 @@ const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'; // 로그아웃 실패
 
 /***/ }),
 
+/***/ "./sagas/feedback.js":
+/*!***************************!*\
+  !*** ./sagas/feedback.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return feedbackSaga; });
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducers/feedback */ "./reducers/feedback.js");
+
+
+ // Feedback 피드백 게시물 댓글 Read
+
+function* feedback_Item_Comment_API() {// return axios.get('/#');
+}
+
+;
+
+function* feedback_Item_Comment() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Item_Comment_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_ITEM_COMMENT_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_ITEM_COMMENT_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFeedback_Item_Comment() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_ITEM_COMMENT_REQUEST"], feedback_Item_Comment);
+}
+
+; // Feedback 피드백 게시물 세부사항 Read
+
+function* feedback_Item_Detail_API() {// return axios.get('/#');
+}
+
+;
+
+function* feedback_Item_Detail() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Item_Detail_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_DETAIL_ITEM_READ_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_DETAIL_ITEM_READ_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFeedback_Item_Detail() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_DETAIL_ITEM_READ_REQUEST"], feedback_Item_Detail);
+}
+
+; // Feedback 피드백 게시물 Add
+
+function* feedback_Item_Add_API() {// return axios.post('/#');
+}
+
+;
+
+function* feedback_Item_Add() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Item_Add_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_ITEM_ADD_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_ITEM_ADD_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFeedback_Item_Add() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_ITEM_ADD_REQUEST"], feedback_Item_Add);
+}
+
+; // Feedback 피드백 게시물 Read
+
+function* feedback_Item_Read_API() {// return axios.get('/#');
+}
+
+;
+
+function* feedback_Item_Read() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Item_Read_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_ITEM_READ_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_ITEM_READ_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFeedback_Item_Read() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_ITEM_READ_REQUEST"], feedback_Item_Read);
+}
+
+; // Feedback 새 피드백 Add
+
+function* feedback_Add_API() {// return axios.post();
+}
+
+;
+
+function* feedback_Add() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Add_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_ADD_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_ADD_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFeedback_Add() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_ADD_REQUEST"], feedback_Add);
+}
+
+; // Feedback 메인화면 Read
+
+function* feedback_Read_API(feedbackData) {// return axios.get('/#');
+}
+
+;
+
+function* feedback_Read(action) {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Read_API, action.data);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_READ_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_READ_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFeedback_Read() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_READ_REQUEST"], feedback_Read);
+}
+
+;
+function* feedbackSaga() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Item_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Item_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Item_Detail), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Item_Comment)]);
+}
+
+/***/ }),
+
+/***/ "./sagas/feedbackSubject.js":
+/*!**********************************!*\
+  !*** ./sagas/feedbackSubject.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return feedbackSubjectSaga; });
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducers/feedbackSubject */ "./reducers/feedbackSubject.js");
+
+
+ // 피드백 주제 Delete
+
+function* feedback_Sub_Delete_API() {// return axios.delete('/#');
+}
+
+;
+
+function* feedback_Sub_Delete() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Sub_Delete_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_SUB_DELETE_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_SUB_DELETE_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFeedback_Sub_Delete() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_SUB_DELETE_REQUEST"], feedback_Sub_Delete);
+}
+
+; // 피드백 주제 Update
+
+function* feedback_Sub_Update_API() {// return axios.patch('/#');
+}
+
+;
+
+function* feedback_Sub_Update() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Sub_Update_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_SUB_UPDATE_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_SUB_UPDATE_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFeedback_Sub_Update() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_SUB_UPDATE_REQUEST"], feedback_Sub_Update);
+}
+
+; // 피드백 주제 Add
+
+function* feedback_Sub_Add_API() {// return axios.post();
+}
+
+;
+
+function* feedback_Sub_Add() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Sub_Add_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_SUB_ADD_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_SUB_ADD_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFeedback_Sub_Add() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_SUB_ADD_REQUEST"], feedback_Sub_Add);
+}
+
+; // 피드백 주제 메인 Read
+
+function* feedback_Sub_Read_API() {// return axios.get('/#');
+}
+
+;
+
+function* feedback_Sub_Read() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Sub_Read_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_SUB_READ_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_SUB_READ_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFeedback_Sub_Read() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_SUB_READ_REQUEST"], feedback_Sub_Read);
+}
+
+;
+function* feedbackSubjectSaga() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Sub_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Sub_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Sub_Update), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Sub_Delete)]);
+}
+
+/***/ }),
+
+/***/ "./sagas/friends.js":
+/*!**************************!*\
+  !*** ./sagas/friends.js ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return friendsSaga; });
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _reducers_friends__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducers/friends */ "./reducers/friends.js");
+
+
+ // 친구 프로필 Add
+
+function* friends_Pro_Add_API() {// return axios.post('/#');
+}
+
+;
+
+function* friends_Pro_Add() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Pro_Add_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_PROFILE_ADD_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_PROFILE_ADD_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFriends_Pro_Add() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_PROFILE_ADD_REQUEST"], friends_Pro_Add);
+}
+
+; // 친구 프로필 Read
+
+function* friends_Pro_Read_API() {// return axios.get('/#');
+}
+
+;
+
+function* friends_Pro_Read() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Pro_Read_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_PROFILE_READ_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_PROFILE_READ_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFriends_Pro_Read() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_PROFILE_READ_REQUEST"], friends_Pro_Read);
+}
+
+; // 친구 요청 모달 Add
+
+function* friends_Req_Add_API() {// return axios.post('/#');
+}
+
+;
+
+function* friends_Req_Add() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Req_Add_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_RQ_ADD_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_RQ_ADD_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFriends_Req_Add() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_RQ_ADD_REQUEST"], friends_Req_Add);
+}
+
+; // 친구 요청 모달 Read
+
+function* friends_Req_Read_API() {// return axios.get('/#');
+}
+
+;
+
+function* friends_Req_Read() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Req_Read_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_RQ_READ_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_RQ_READ_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFriends_Req_Read() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_RQ_READ_REQUEST"], friends_Req_Read);
+}
+
+; // 친구 추가 모달 Add
+
+function* friends_Add_Add_API() {// return axios.post('/#');
+}
+
+;
+
+function* friends_Add_Add() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Add_Add_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_ADD_ADD_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_ADD_ADD_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFriends_Add_Add() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_ADD_ADD_REQUEST"], friends_Add_Add);
+}
+
+; // 친구 추가 모달 Read
+
+function* friends_Add_Read_API() {// return axios.get('/#');
+}
+
+;
+
+function* friends_Add_Read() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Add_Read_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_ADD_READ_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_ADD_READ_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFriends_Add_Read() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_ADD_READ_REQUEST"], friends_Add_Read);
+}
+
+; // 친구 차단
+
+function* friends_Block_API() {// return axios.get();
+}
+
+;
+
+function* friends_Block() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Block_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_BLOCK_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_BLOCK_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFriends_Block() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_BLOCK_REQUEST"], friends_Block);
+}
+
+; // 친구 메인창 Read
+
+function* friends_Read_API() {// return axios.get('/#');
+}
+
+;
+
+function* friends_Read() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Read_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_MAIN_READ_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_MAIN_READ_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFriends_Read() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_MAIN_READ_REQUEST"], friends_Read);
+}
+
+;
+function* friendsSaga() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Block), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Add_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Add_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Req_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Req_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Pro_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Pro_Add)]);
+}
+
+/***/ }),
+
 /***/ "./sagas/index.js":
 /*!************************!*\
   !*** ./sagas/index.js ***!
@@ -1086,10 +1538,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user */ "./sagas/user.js");
+/* harmony import */ var _feedback__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./feedback */ "./sagas/feedback.js");
+/* harmony import */ var _friends__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./friends */ "./sagas/friends.js");
+/* harmony import */ var _feedbackSubject__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./feedbackSubject */ "./sagas/feedbackSubject.js");
+
+
+
 
 
 function* rootSaga() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(_user__WEBPACK_IMPORTED_MODULE_1__["default"])]);
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(_user__WEBPACK_IMPORTED_MODULE_1__["default"]), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(_feedback__WEBPACK_IMPORTED_MODULE_2__["default"]), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(_friends__WEBPACK_IMPORTED_MODULE_3__["default"]), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(_feedbackSubject__WEBPACK_IMPORTED_MODULE_4__["default"])]);
 }
 ;
 
@@ -1172,15 +1630,15 @@ function* watchLogOut() {
 
 ; // 로그인
 
-function* loginAPI() {// return axios.get();
+function* loginAPI(loginData) {// return axios.get();
 }
 
 ;
 
-function* login() {
+function* login(action) {
   try {
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loginAPI);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loginAPI, action.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_2__["LOG_IN_SUCCESS"]
     });
@@ -1201,15 +1659,15 @@ function* watchLogin() {
 
 ; // 회원가입
 
-function* signUpAPI() {// return axios.post('/#');
+function* signUpAPI(signUpData) {// return axios.post('/#');
 }
 
 ;
 
-function* signUp() {
+function* signUp(action) {
   try {
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(signUpAPI);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(signUpAPI, action.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_2__["SIGN_UP_SUCCESS"]
     });

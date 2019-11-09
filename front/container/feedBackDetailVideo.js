@@ -45,8 +45,8 @@ const feedBackDetailVideo = ({videoVisible,videoHandleCancel,videoHandleOk}) => 
                         <Button key="back" onClick={videoHandleCancel} style={{display:'none'}}>
                             <strong>취소</strong>
                         </Button>,
-                        <Button key="submit" type="primary" size='large' onClick={videoHandleOk} style={{width:'100%'}}>
-                            <Link href='/updatepassword' key='2'><a><strong>확인</strong></a></Link>
+                        <Button key="submit" type="primary" size='large' style={{width:'100%'}}>
+                            <strong>추가</strong>
                         </Button>
                     </div>
                 ]}

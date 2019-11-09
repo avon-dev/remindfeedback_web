@@ -1,14 +1,7 @@
-import React,{useState, useEffect} from 'react';
-import Link from 'next/link';
+import React,{useState} from 'react';
 import { Modal, Layout, Form, Input, Icon, Button, Col, Typography, Row, Upload } from 'antd';
 import { backgroundWhite, backgroundLightBlue} from '../css/Common';
 import {formItemLayout} from '../css/FeedbackDetail';
-
-import logo1 from '../img/logo1.png';
-import logo2 from '../img/logo2.png';
-import logo5 from '../img/logo5.png';
-import logo4 from '../img/logo4.png';
-import logo6 from '../img/logo6.png';
 
 const {Content} = Layout;
 const {Title} = Typography;
@@ -79,7 +72,7 @@ const feedBackDetailPhoto = ({photoVisible,photoHandleCancel,photoHandleOk}) => 
                             <strong>취소</strong>
                         </Button>,
                         <Button key="submit" type="primary" size='large'  style={{width:'100%'}}>
-                            <strong>확인</strong>
+                            <strong>추가</strong>
                         </Button>
                     </div>
                 ]}

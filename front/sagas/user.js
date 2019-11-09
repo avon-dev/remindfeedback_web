@@ -68,14 +68,14 @@ function* watchLogOut() {
 
 
 // 로그인
-function* loginAPI(){
+function* loginAPI(loginData){
     // return axios.get();
 };
 
-function* login(){
+function* login(action){
     try {
         yield delay(2000);
-        yield call(loginAPI);
+        yield call(loginAPI,action.data);
         yield put({
             type:LOG_IN_SUCCESS,
         });
@@ -94,15 +94,15 @@ function* watchLogin(){
 
 
 // 회원가입
-function* signUpAPI(){
+function* signUpAPI(signUpData){
     // return axios.post('/#');
 };
 
 
-function* signUp(){
+function* signUp(action){
     try {
         yield delay(2000);
-        yield call(signUpAPI);
+        yield call(signUpAPI,action.data);
         yield put({
             type:SIGN_UP_SUCCESS,
         });

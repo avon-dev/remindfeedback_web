@@ -61,11 +61,6 @@ export default (state = initialState, action ) => {
             return{
                 ...state,
                 isSigningUp: true,
-                me:{
-                    email:action.email,
-                    password:action.email,
-                    nickname:action.nickname, 
-                 },
             }
         case SIGN_UP_SUCCESS:
             return{

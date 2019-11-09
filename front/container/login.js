@@ -1,22 +1,39 @@
-import React from 'react';
+import React, { useState , useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Row, Col, Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
 import { layoutCenter } from '../css/Common';
 import { loginBtn, loginApple, loginFacebook, loginGoogle, loginKakao, shadowBorder } from '../css/login';
 import Link from 'next/link';
 import logoImg from '../img/logo1.png';
+import {LOG_IN_REQUEST} from '../reducers/user';
 
 const {Text} = Typography;
 
 const login = () => {
 
     const dispatch = useDispatch();
+
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
     
     const { me } = useSelector(state=>state.user);
 
-    const _onsubmit = (e) => {
+    const _onsubmit = useCallback((e) => {
         e.preventDefault();
-        
+        dispatch({
+            type:LOG_IN_REQUEST,
+            data:{
+                email,password
+            }
+        });
+    },[email,password]);
+
+    const handlePassword = (e) => {
+        setPassword(e.target.value);
+    }
+
+    const handleEmail = (e) => {
+        setEmail(e.target.value);
     }
 
     return(
@@ -38,14 +55,19 @@ const login = () => {
                                 prefix={<Icon type="user" 
                                 style={{ color: 'rgba(0,0,0,.25)' }} />}
                                 placeholder="Email"
+                                value={email}
+                                onChange={handleEmail}
                             />
                        </Form.Item>
                         <label htmlFor="user-password"><strong>비밀번호</strong></label>
                        <Form.Item>
                             <Input
-                                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                prefix={<Icon type="lock" 
+                                tyle={{ color: 'rgba(0,0,0,.25)' }} />}
                                 type="password"
                                 placeholder="Password"
+                                value={password}
+                                onChange={handlePassword}
                             />
                        </Form.Item>
                        <Form.Item>
