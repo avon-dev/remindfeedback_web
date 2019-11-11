@@ -8,7 +8,7 @@ const main = () => {
 
     const { feedbackMode } = useSelector(state=> state.feedbackMode);
    
-feedbackMode?'요청받은 피드백': '내 피드백'
+// feedbackMode?'요청받은 피드백': '내 피드백'
     return(
         <>
             <Row>

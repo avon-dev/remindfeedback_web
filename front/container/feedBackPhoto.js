@@ -5,6 +5,7 @@ import { backgroundWhite, backgroundLightBlue} from '../css/Common';
 import {formItemLayout} from '../css/FeedbackDetail';
 import {FRIENDS_PROFILE_ADD_REQUEST} from '../reducers/friends';
 import {FEEDBACK_ITEM_ADD_REQUEST} from '../reducers/feedback';
+import {LOAD_USER_REQUEST} from '../reducers/user';
 
 const {Content} = Layout;
 const {Title} = Typography;
@@ -71,6 +72,13 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
                     title,
                 }
             });
+        }else if(mode===LOAD_USER_REQUEST){
+            dispatch({
+                type: LOAD_USER_REQUEST,
+                data:{
+                    title,
+                }
+            });
         }else{
             dispatch({
                 type: FEEDBACK_ITEM_ADD_REQUEST,
@@ -78,7 +86,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
                     title,name
                 }
             });
-        }
+        };
     };
        
     return(

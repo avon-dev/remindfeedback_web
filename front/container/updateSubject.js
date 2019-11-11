@@ -9,7 +9,7 @@ import {FEEDBACK_SUB_UPDATE_REQUEST} from '../reducers/feedbackSubject';
 const {Content} = Layout;
 const {Title} = Typography;
 
-const updateSubject = ({updateVisible,handleUpdateCancel,handleUpdateOk}) => {
+const updateSubject = ({updateVisible,handleUpdateCancel}) => {
 
     const dispath = useDispatch();
 
@@ -50,13 +50,12 @@ const updateSubject = ({updateVisible,handleUpdateCancel,handleUpdateOk}) => {
                     <div style={{textAlign:"center"}}><Title level={3}>주제 수정</Title></div>
                 }
                 visible={updateVisible}
-                onOk={handleUpdateOk}
                 footer={[
                     <div key="add" style={{textAlign:'center'}}>
                         <Button key="back" onClick={handleUpdateCancel} style={{display:'none'}}>
                             <strong>취소</strong>
                         </Button>,
-                        <Button key="submit" type="primary" size='large' style={{width:'100%'}}>
+                        <Button key="submit" type="primary" size='large' onClick={_onsubmit} style={{width:'100%'}}>
                             <strong>주제 수정</strong>
                         </Button>
                     </div>
@@ -65,7 +64,7 @@ const updateSubject = ({updateVisible,handleUpdateCancel,handleUpdateOk}) => {
                 centered={true}
             >
                 <Content style={backgroundWhite}>
-                    <Form {...formItemLayout} onSubmit={_onsubmit}>
+                    <Form {...formItemLayout}>
                        <Row>
                             <Col span={24}>
                                 <Form.Item label={<strong>주제 이름</strong>}>

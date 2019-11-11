@@ -22,7 +22,7 @@ const getFeedback = () => {
     const mainItem = text.map((data)=> <Link key={data} href={`/feedbackdetail?${data}`} ><a><Card
                         key={data}
                         style={{ marginTop: 15, background:'#8A2BE2' }}
-                        cover={<div style={{background:'#DCDCDC', fontSize:10, textAlign:'right', fontWeight:"bold", fontStyle:"italic",paddingRight:15}}>
+                        cover={<div style={{background:'#DCDCDC', fontSize:10, textAlign:'right', fontWeight:"bold", fontStyle:"italic",paddingRight:15,}}>
                                 요청받은 피드백</div>}
                         actions={[<div style={{ fontSize:10, textAlign:'right', fontWeight:"bold", fontStyle:"italic"}}>
                         {moment().format('YYYY MMMM Do , h:mm:ss a')}

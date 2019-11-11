@@ -8,25 +8,16 @@ import AppPhoto from '../container/feedBackPhoto';
 const {Text,Title} = Typography;
 const {Content} = Layout;
 
-const ProfileFriends = ({profileVisible,profileHandleOk,profileHandleCancel,profileName}) => {
+const ProfileFriends = ({profileVisible,profileHandleCancel,profileName}) => {
     
     
 
     const [photoVisible, setPhotoVisible] = useState(false);
-    // request server 
-    useEffect(()=>{
-
-    },[]);
-
+   
     // 사진
     const popUpPhoto = () => {
         console.log('ProfileFriends popUpPhoto');
         setPhotoVisible(true);
-    }
-
-    const photoHandleOk = () => {
-        console.log('ProfileFriends photoHandleOk');
-        setPhotoVisible(false);
     }
 
     const photoHandleCancel = () => {
@@ -42,7 +33,6 @@ const ProfileFriends = ({profileVisible,profileHandleOk,profileHandleCancel,prof
                     <div style={{textAlign:"center"}}><Title level={3}>프로필</Title></div>
                 }
                 visible={profileVisible}
-                onOk={profileHandleOk}
                 onCancel={profileHandleCancel}
                 bodyStyle={{padding:0}}
                 footer={[
@@ -50,7 +40,7 @@ const ProfileFriends = ({profileVisible,profileHandleOk,profileHandleCancel,prof
                         <Button key="back" onClick={profileHandleCancel} style={{display:'none'}}>
                             <strong>취소</strong>
                         </Button>,
-                        <Button key="submit" type="primary" onClick={profileHandleOk} size='large' style={{width:'100%'}}>
+                        <Button key="submit" type="primary" onClick={profileHandleCancel} size='large' style={{width:'100%'}}>
                             <strong>닫기</strong>
                         </Button>
                     </div>
@@ -111,7 +101,6 @@ const ProfileFriends = ({profileVisible,profileHandleOk,profileHandleCancel,prof
             <div>
               <AppPhoto
                  photoVisible={photoVisible}   
-                 photoHandleOk={photoHandleOk}
                  photoHandleCancel={photoHandleCancel}
                  mode={FRIENDS_PROFILE_ADD_REQUEST}           
               />                  

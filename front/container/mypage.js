@@ -1,13 +1,52 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect,useCallback} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Form, Avatar, Empty, Typography, Icon, Button, Timeline, Input } from 'antd';
+import AppPhoto from '../container/feedBackPhoto';
+import {LOAD_USER_REQUEST} from '../reducers/user';
+
 
 const {Text} = Typography;
 
 const mypage = () => {
 
-    const updateMypage = () => {
-      console.log('updateMypage');
+    const dispatch = useDispatch();
+
+    const [nickname, setNickname] = useState('');
+    const [intro, setIntro] = useState('');
+    const [photoVisible, setPhotoVisible] = useState(false);
+    
+    // request server 
+    useEffect(()=>{
+
+    },[]);
+
+     // 사진
+    const popUpPhoto = () => {
+        setPhotoVisible(true);
     }
+
+    const photoHandleCancel = () => {
+        setPhotoVisible(false);
+    }
+
+    const handleData = (e) => {
+      if(e.target.name==="NICKNAME"){
+        setNickname(e.target.value);
+      }else if(e.target.name==="INTRO"){
+        setIntro(e.target.value);
+      }else{
+        console.log('Default');
+      }
+    }
+
+    const updateMypage = useCallback(() => {
+      dispatch({
+          type:LOAD_USER_REQUEST,
+          data:{
+            nickname,intro
+          }
+      });
+    },[nickname,intro]);
 
     return(
         <>
@@ -24,7 +63,7 @@ const mypage = () => {
                                         }   
                             >
                                <div>
-                                    <Button style={{background:"#052749", color:"#FFFFFF"}}>프로필 사진 추가하기</Button>
+                                    <Button style={{background:"#052749", color:"#FFFFFF"}} onClick={popUpPhoto}>프로필 사진 추가하기</Button>
                                </div>
                             </Empty>
                         </Col>
@@ -37,14 +76,22 @@ const mypage = () => {
                       <Form.Item label={<strong>닉네임</strong>} colon={false}>
                         <Col span={24} style={{textAlign:'center', marginTop:5}}>
                            <Input
+                              name="NICKNAME"
                               placeholder="닉네임을 입력해주세요"
+                              value={nickname}
+                              onChange={handleData}
+                              key="mypage-nickname"
                            />
                         </Col>
                       </Form.Item>
                       <Form.Item label={<strong>상태메세지</strong>} colon={false}>
                         <Col span={24} style={{textAlign:'center', marginTop:5}}>
                            <Input
+                              name="INTRO"
                               placeholder="상태메시지를 입력해주세요"
+                              value={intro}
+                              onChange={handleData}
+                              key="mypage-intro"
                            />
                         </Col>
                       </Form.Item>  
@@ -67,6 +114,13 @@ const mypage = () => {
                    </Col>                      
                 </Col>
             </Row>
+            <div>
+              <AppPhoto
+                 photoVisible={photoVisible}   
+                 photoHandleCancel={photoHandleCancel}
+                 mode={LOAD_USER_REQUEST}           
+              />                  
+            </div>
         </>
     )
 };

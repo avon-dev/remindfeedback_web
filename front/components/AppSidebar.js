@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Menu, Icon,Button, Row, Switch , Col, Tooltip } from 'antd';
 import AddFeedback from '../container/addFeedback';
 import Link from 'next/link';
@@ -18,6 +18,7 @@ const Sidebar = {
 const AppSidebar = () => {
 
   const dispatch = useDispatch();
+  
 
   const [visible, setVisible] = useState();
   const [changeTheme, setChangeTheme] = useState(false);
@@ -76,7 +77,7 @@ const AppSidebar = () => {
           <Link href="/subject">
           <a></a></Link> 
         </Menu.Item>
-        <Menu.Item disabled={changeTheme==="dark"?true:false} key="sub2" style={{color: changeTheme==="dark"?"#FFFFFF":"#000000"}}>
+        <Menu.Item key="sub2" style={{color: changeTheme==="dark"?"#FFFFFF":"#000000"}}>
           <Icon type="team"/><strong>친구 관리</strong>
           <Link href="/friends">
           <a></a></Link> 

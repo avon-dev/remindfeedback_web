@@ -64,7 +64,7 @@ const AppTopbar = () => {
 
     const handleAlert = () => {
         console.log('handleAlert');
-        setAlertVisible(true);
+        setAlertVisible(!alertVisible);
     }
 
     const alerthHandleCancel = () => {

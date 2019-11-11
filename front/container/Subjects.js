@@ -1,10 +1,15 @@
 import React, {useState,useEffect} from 'react';
-import { Row, Col, Table, Divider, Tag, Popover, Icon, Button, Popconfirm } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { Row, Col, Table, Typography, Tag, Popover, Icon, Button, Empty  } from 'antd';
 import DeleteSubject from '../container/deleteSubject';
 import AddSubject from '../container/addSubject';
 import UpdateSubject from './updateSubject';
 
+const {Text} = Typography;
+
 const Subjects = () => {
+
+    const { feedbackMode } = useSelector(state=> state.feedbackMode);
 
     const [visible, setVisible] = useState(false);
     const [updateVisible, setUpdateVisible] = useState(false);
@@ -95,10 +100,6 @@ const Subjects = () => {
         setVisible(true);
     }
 
-    const handleOk = () => {
-        setVisible(false);
-    }
-
     const handleCancel = () => {
         setVisible(false);
     }
@@ -106,10 +107,6 @@ const Subjects = () => {
     const PopupUpdateSubject = () => {
       setUpdateVisible(true);
       setPopOverVisible(false);
-    }
-
-    const handleUpdateOk = () => {
-      setUpdateVisible(false);
     }
 
     const handleUpdateCancel = () => {
@@ -120,35 +117,44 @@ const Subjects = () => {
       setPopOverVisible(true)
     }
 
+    const setFeedback = <Col span={12} style={{marginTop:20}}>
+                            <Row style={{textAlign:'right', marginBottom:15}}>
+                                <Button type="primary" size="large" onClick={PopupAddSubject}><strong>주제 추가</strong></Button>
+                            </Row>
+                            <Row> 
+                                <Table columns={columns} dataSource={data} />
+                            </Row>
+                        </Col>
+
+    const getFeedback = <Col span={12} style={{marginTop:20}}>
+        <Row>
+            <Empty
+              description={<div style={{marginTop:70, fontSize:25, }}><Text><strong>내 피드백으로 전환해주세요~</strong></Text></div>}
+            />
+        </Row>
+    </Col>
+
     return(
-        <>
-            <Row>
-                <Col span={6}></Col>
-                <Col span={12} style={{marginTop:20}}>
-                    <Row style={{textAlign:'right', marginBottom:15}}>
-                        <Button type="primary" size="large" onClick={PopupAddSubject} ><strong>주제 추가</strong></Button>
-                    </Row>
-                    <Row> 
-                        <Table columns={columns} dataSource={data} />
-                    </Row>
-                </Col>
-                <Col span={6}></Col>
-            </Row>
-            <div>
-                <AddSubject
-                    visible={visible}
-                    handleOk={handleOk}
-                    handleCancel={handleCancel}
-                />
-            </div>
-            <div>
-                <UpdateSubject
-                    updateVisible={updateVisible}
-                    handleUpdateOk={handleUpdateOk}
-                    handleUpdateCancel={handleUpdateCancel}
-                />
-            </div>
-        </>
+      
+      <>
+        <Row>
+            <Col span={6}></Col>
+            {feedbackMode?getFeedback:setFeedback} 
+            <Col span={6}></Col>
+        </Row>
+        <div>
+            <AddSubject
+                visible={visible}
+                handleCancel={handleCancel}
+            />
+        </div>
+        <div>
+            <UpdateSubject
+                updateVisible={updateVisible}
+                handleUpdateCancel={handleUpdateCancel}
+            />
+        </div>
+    </>    
     )
 };
 
