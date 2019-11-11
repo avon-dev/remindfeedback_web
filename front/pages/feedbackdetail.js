@@ -1,7 +1,7 @@
 import React from 'react';
 import AppSidebar from '../components/AppSidebar';
 import AppTopbar from '../components/AppTopbar';
-import AppFeedbackDetail from '../components/FeedBackDetail';
+import AppFeedbackDetail from '../container/feedBackDetail';
 import AppFooter from '../components/AppFooter';
 import { layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
 import { Layout } from 'antd';

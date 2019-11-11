@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Layout, Form, Input, Icon, Button, Col, Typography, Row } from 'antd';
 import { backgroundWhite, backgroundLightBlue} from '../css/Common';
 import {formItemLayout} from '../css/Subject';
@@ -8,7 +8,7 @@ import {formItemLayout} from '../css/Subject';
 const {Content} = Layout;
 const {Title} = Typography;
 
-const feedBackDetailRecord = ({recordVisible,recordHandleCancel,recordHandleOk}) => {
+const feedBackDetailRecord = ({recordVisible,recordHandleCancel,name}) => {
 
     const [color,setColor] =  useState();
 
@@ -24,7 +24,6 @@ const feedBackDetailRecord = ({recordVisible,recordHandleCancel,recordHandleOk})
                     <div style={{textAlign:"center"}}><Title level={3}>녹음</Title></div>
                 }
                 visible={recordVisible}
-                onOk={recordHandleOk}
                 footer={[
                     <div key="add" style={{textAlign:'center'}}>
                         <Button key="back" onClick={recordHandleCancel} style={{display:'none'}}>

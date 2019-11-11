@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { Row, Col, Divider, Typography, Button, Input  } from 'antd';
 import FeedBackDetailLists from '../container/feedBackDetailList';
 import FeedBackDetailComments from '../container/feedBackDetailComment';
@@ -6,6 +6,11 @@ import FeedBackDetailComments from '../container/feedBackDetailComment';
 const {Title, Text} = Typography;
 
 const feedBackDetail = () => {
+
+    // request server 
+    useEffect(()=>{
+
+    },[]);
 
     return(
         <>

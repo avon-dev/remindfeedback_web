@@ -13,9 +13,9 @@ import {
     FEEDBACK_ITEM_ADD_REQUEST,
     FEEDBACK_ITEM_ADD_SUCCESS,
     FEEDBACK_ITEM_ADD_FAILURE,
-    FEEDBACK_DETAIL_ITEM_READ_REQUEST,
-    FEEDBACK_DETAIL_ITEM_READ_SUCCESS,
-    FEEDBACK_DETAIL_ITEM_READ_FAILURE,
+    FEEDBACK_ITEM_COMPLETE_REQUEST,
+    FEEDBACK_ITEM_COMPLETE_SUCCESS,
+    FEEDBACK_ITEM_COMPLETE_FAILURE,
     FEEDBACK_ITEM_COMMENT_REQUEST,
     FEEDBACK_ITEM_COMMENT_SUCCESS,
     FEEDBACK_ITEM_COMMENT_FAILURE,
@@ -49,28 +49,28 @@ function* watchFeedback_Item_Comment() {
 
 
 // Feedback 피드백 게시물 세부사항 Read
-function* feedback_Item_Detail_API(){
+function* feedback_Item_Complete_API(){
     // return axios.get('/#');
 };
 
-function* feedback_Item_Detail(){
+function* feedback_Item_Complete(){
     try {
         yield delay(2000);
-        yield call(feedback_Item_Detail_API);
+        yield call(feedback_Item_Complete_API);
         yield put({
-            type:FEEDBACK_DETAIL_ITEM_READ_SUCCESS,
+            type:FEEDBACK_ITEM_COMPLETE_SUCCESS,
         });
     } catch (e) {
         console.error(e);
         yield put({
-            type:FEEDBACK_DETAIL_ITEM_READ_FAILURE,
+            type:FEEDBACK_ITEM_COMPLETE_FAILURE,
             error:e,
         });
     }
 };
 
-function* watchFeedback_Item_Detail() {
-    yield takeLatest(FEEDBACK_DETAIL_ITEM_READ_REQUEST, feedback_Item_Detail);
+function* watchFeedback_Item_Complete() {
+    yield takeLatest(FEEDBACK_ITEM_COMPLETE_REQUEST, feedback_Item_Complete);
 };
 
 
@@ -184,7 +184,7 @@ export default function* feedbackSaga(){
         fork(watchFeedback_Add),
         fork(watchFeedback_Item_Read),
         fork(watchFeedback_Item_Add),
-        fork(watchFeedback_Item_Detail),
+        fork(watchFeedback_Item_Complete),
         fork(watchFeedback_Item_Comment),
     ]);
 }

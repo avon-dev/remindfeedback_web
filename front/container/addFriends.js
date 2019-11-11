@@ -15,11 +15,6 @@ const addFriends = ({addVisible,addHandleOk,addHandleCancel}) => {
 
     const [email,setEmail] =  useState('');
 
-    // request server 
-    useEffect(()=>{
-
-    },[]);
-
     const columns = [
         {
             title: 'NO',

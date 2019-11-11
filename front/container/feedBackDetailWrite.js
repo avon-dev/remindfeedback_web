@@ -1,23 +1,33 @@
-import React,{useState} from 'react';
+import React,{useState,useCallback} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Layout, Form, Input, Icon, Button, Col, Typography, Row } from 'antd';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { backgroundWhite, backgroundLightBlue} from '../css/Common';
+import {FEEDBACK_ITEM_ADD_REQUEST} from '../reducers/feedback';
 
 
 const {Content} = Layout;
 const {Title} = Typography;
 
-const feedBackDetailWrite = ({writeVisible,writeHandleCancel,writeHandleOk}) => {
+const feedBackDetailWrite = ({writeVisible,writeHandleCancel,name}) => {
 
+    const dispatch = useDispatch();
+    
     const [contents, setContents] = useState();
 
-    const _onsubmit = () => {
+    const _onsubmit = useCallback(() => {
         console.log(contents);
-    };
+        dispatch({
+            type:FEEDBACK_ITEM_ADD_REQUEST,
+            data:{
+                contents,name  
+            }
+        });
+    },[contents]);
 
-    const handleChange = (event ,editor) => {
-        setContents(editor.data);
+    const handleChange = (event,editor) => {
+        setContents(editor.getData());
     }
 
     return(
@@ -28,13 +38,12 @@ const feedBackDetailWrite = ({writeVisible,writeHandleCancel,writeHandleOk}) => 
                     <div style={{textAlign:"center"}}><Title level={3}>글쓰기</Title></div>
                 }
                 visible={writeVisible}
-                onOk={writeHandleOk}
                 footer={[
                     <div key="add" style={{textAlign:'center'}}>
                         <Button key="back" onClick={writeHandleCancel} style={{display:'none'}}>
                             <strong>취소</strong>
                         </Button>,
-                        <Button key="submit" type="primary" size='large' style={{width:'100%'}}>
+                        <Button key="submit" type="primary" size='large' onClick={_onsubmit} style={{width:'100%'}}>
                             <strong>추가</strong>
                         </Button>
                     </div>
@@ -43,7 +52,7 @@ const feedBackDetailWrite = ({writeVisible,writeHandleCancel,writeHandleOk}) => 
                 centered={true}
             >
                 <Content style={backgroundWhite}>
-                    <Form onSubmit={_onsubmit}>
+                    <Form>
                        <Row>
                             <Col span={24}>
                                 <Form.Item >

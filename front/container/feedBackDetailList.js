@@ -11,6 +11,7 @@ const CreatedAt = moment().format('YYYY-MM-DD HH:mm:ss');
 
 const feedBackDetailList = () => {
 
+    const [name, setName] = useState(false);
     const [Visible, setVisible] = useState(false);
     const [writeVisible, setWriteVisible] = useState(false);
     const [photoVisible, setPhotoVisible] = useState(false);
@@ -19,75 +20,45 @@ const feedBackDetailList = () => {
 
     // Popover 추가하기
     const popUpAdd = () => {
-        setVisible(true);
+        setVisible(!Visible);
     }
 
     // 글
-    const popUpWrite = () => {
-        console.log('FeedBackDetail popUpWrite');
-        setWriteVisible(true);
-        setVisible(false);
-    }
-
-    const writeHandleOk = () => {
-        console.log('FeedBackDetail writeHandleOk');
-        setWriteVisible(false);
-    }
-
     const writeHandleCancel = () => {
         console.log('FeedBackDetail writeHandleCancel');
         setWriteVisible(false);
     }
 
     // 사진
-    const popUpPhoto = () => {
-        console.log('FeedBackDetail popUpPhoto');
-        setPhotoVisible(true);
-        setVisible(false);
-    }
-
-    const photoHandleOk = () => {
-        console.log('FeedBackDetail photoHandleOk');
-        setPhotoVisible(false);
-    }
-
     const photoHandleCancel = () => {
         console.log('FeedBackDetail photoHandleCancel');
         setPhotoVisible(false);
     }
 
     // 비디오
-    const popUpVideo = () => {
-        console.log('FeedBackDetail popUpVideo');
-        setVideoVisible(true);
-        setVisible(false);
-    }
-
-    const videoHandleOk = () => {
-        console.log('FeedBackDetail videoHandleOk');
-        setVideoVisible(false);
-    }
-
     const videoHandleCancel = () => {
         console.log('FeedBackDetail videoHandleCancel');
         setVideoVisible(false);
     }
 
     // 녹음
-    const popUpRecord = () => {
-        console.log('FeedBackDetail popUpRecord');
-        setRecordVisible(true);
-        setVisible(false);
-    }
-
-    const recordHandleOk = () => {
-        console.log('FeedBackDetail recordHandleOk');
-        setRecordVisible(false);
-    }
-
     const recordHandleCancel = () => {
         console.log('FeedBackDetail recordHandleCancel');
         setRecordVisible(false);
+    }
+
+    const popUpModal = (e) => {
+            setName(e.target.name);
+            setVisible(false);
+        if(e.target.name=== "TEXT"){
+            setWriteVisible(true);
+        }else if(e.target.name=== "PHOTO"){
+            setPhotoVisible(true);
+        }else if(e.target.name=== "VIDEO"){
+            setVideoVisible(true);
+        }else if(e.target.name=== "RECORD"){
+            setRecordVisible(true);  
+        }
     }
 
     // 피드백 디테일 리스트
@@ -113,10 +84,10 @@ const feedBackDetailList = () => {
                         key="addModal"
                         visible={Visible}
                         content={<Group>
-                            <Button type="primary" onClick={popUpWrite} icon="file-text">글</Button>
-                            <Button type="primary" onClick={popUpPhoto} icon="picture">사진</Button>
-                            <Button type="primary" onClick={popUpVideo} icon="video-camera">동영상</Button>
-                            <Button type="primary" onClick={popUpRecord} icon="audio">녹음</Button>
+                            <Button type="primary" name="TEXT" onClick={popUpModal} icon="file-text">글</Button>
+                            <Button type="primary" name="PHOTO" onClick={popUpModal} icon="picture">사진</Button>
+                            <Button type="primary" name="VIDEO" onClick={popUpModal} icon="video-camera">동영상</Button>
+                            <Button type="primary" name="RECORD" onClick={popUpModal} icon="audio">녹음</Button>
                         </Group>}
                          trigger="click"
                     ><Button type="primary" onClick={popUpAdd}><strong>추가하기</strong></Button></Popover>
@@ -167,29 +138,29 @@ const feedBackDetailList = () => {
             <div>
               <AppWrite
                  writeVisible={writeVisible}   
-                 writeHandleOk={writeHandleOk}
-                 writeHandleCancel={writeHandleCancel}           
+                 writeHandleCancel={writeHandleCancel}
+                 name={name}           
               />                  
             </div>
             <div>
               <AppPhoto
                  photoVisible={photoVisible}   
-                 photoHandleOk={photoHandleOk}
-                 photoHandleCancel={photoHandleCancel}           
+                 photoHandleCancel={photoHandleCancel}
+                 name={name}            
               />                  
             </div>
             <div>
               <AppVideo
                  videoVisible={videoVisible}   
-                 videoHandleOk={videoHandleOk}
-                 videoHandleCancel={videoHandleCancel}           
+                 videoHandleCancel={videoHandleCancel}
+                 name={name}            
               />                  
             </div>
             <div>
               <AppRecord
                  recordVisible={recordVisible}   
-                 recordHandleOk={recordHandleOk}
-                 recordHandleCancel={recordHandleCancel}           
+                 recordHandleCancel={recordHandleCancel}
+                 name={name}            
               />                  
             </div>
         </>

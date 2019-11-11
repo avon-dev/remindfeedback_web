@@ -4,6 +4,7 @@ import { Modal, Layout, Form, Input, Icon, Button, Col, Typography, Row, Upload 
 import { backgroundWhite, backgroundLightBlue} from '../css/Common';
 import {formItemLayout} from '../css/FeedbackDetail';
 import {FRIENDS_PROFILE_ADD_REQUEST} from '../reducers/friends';
+import {FEEDBACK_ITEM_ADD_REQUEST} from '../reducers/feedback';
 
 const {Content} = Layout;
 const {Title} = Typography;
@@ -18,7 +19,7 @@ const getBase64 = (file) => {
     });
   }
 
-const feedBackPhoto = ({photoVisible,photoHandleCancel, photoHandleOk, mode}) => {
+const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
 
     const dispatch = useDispatch();
 
@@ -71,7 +72,12 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel, photoHandleOk, mode}) =>
                 }
             });
         }else{
-
+            dispatch({
+                type: FEEDBACK_ITEM_ADD_REQUEST,
+                data:{
+                    title,name
+                }
+            });
         }
     };
        
@@ -83,7 +89,6 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel, photoHandleOk, mode}) =>
                     <div style={{textAlign:"center"}}><Title level={3}>사진</Title></div>
                 }
                 visible={photoVisible}
-                onOk={_onsubmit}
                 footer={[
                     <div key="add" style={{textAlign:'center'}}>
                         <Button key="back" onClick={photoHandleCancel} style={{display:'none'}}>

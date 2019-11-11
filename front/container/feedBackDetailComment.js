@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Col, Divider, Typography, Button, Icon, Comment, Tooltip, Avatar, Input, Form } from 'antd';
 import moment from 'moment';
-
+import {FEEDBACK_ITEM_COMMENT_REQUEST} from '../reducers/feedback';
+import {FEEDBACK_ITEM_COMPLETE_REQUEST} from '../reducers/feedback';
 const { TextArea } = Input;
 
 const feedBackDetailComment = () => {
+
+    const dispatch = useDispatch();
+
+    const [comment,setComments] = useState('');
 
     // 코멘트 리스트 
     const feedbacks = ['발표가 너무 구렸다.','발표가 너무 좋았다.','발표를 너무 잘했다.','발표만 보였다.'];
@@ -54,6 +60,28 @@ const feedBackDetailComment = () => {
         }
     />)
 
+    const handleComments = (e) => {
+        setComments(e.target.value);
+    };
+
+    const _onSubmit = useCallback(() => {
+        dispatch({
+            type:FEEDBACK_ITEM_COMMENT_REQUEST,
+            data:{
+                comment,
+            }
+        });
+    },[comment]);
+
+    const handleComplete = useCallback(() => {
+        dispatch({
+            type:FEEDBACK_ITEM_COMPLETE_REQUEST,
+            data:{
+                
+            }
+        });
+    },[]);
+
     return(
         <>
             <Col span={11}>
@@ -62,10 +90,15 @@ const feedBackDetailComment = () => {
                     {comments}
                 </Col>
                 <Col span={22} style={{padding:0, margin:0}}>
-                    <Form>
+                    <Form onSubmit={_onSubmit}>
                         <Form.Item>
                             <Tooltip title="피드백에 관한 코멘트를 작성해주세요!">
-                                <TextArea rows={4} />
+                                <TextArea 
+                                    key="comments"
+                                    onChange={handleComments}
+                                    value={comment}
+                                    rows={4} 
+                                />
                             </Tooltip>
                         </Form.Item>
                         <Form.Item style={{textAlign:'right'}}>
@@ -87,6 +120,7 @@ const feedBackDetailComment = () => {
                         <Button 
                             style={{width:'100%', background:'#0B4E92', color:'#FFFFFF'}}
                             size="large"
+                            onClick={handleComplete}
                         ><strong>완료 요청</strong>
                         </Button>
                     </Tooltip>
