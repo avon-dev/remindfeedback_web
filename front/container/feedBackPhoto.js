@@ -1,7 +1,9 @@
-import React,{useState} from 'react';
+import React,{useState, useCallback, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Layout, Form, Input, Icon, Button, Col, Typography, Row, Upload } from 'antd';
 import { backgroundWhite, backgroundLightBlue} from '../css/Common';
 import {formItemLayout} from '../css/FeedbackDetail';
+import {FRIENDS_PROFILE_ADD_REQUEST} from '../reducers/friends';
 
 const {Content} = Layout;
 const {Title} = Typography;
@@ -16,10 +18,13 @@ const getBase64 = (file) => {
     });
   }
 
-const feedBackDetailPhoto = ({photoVisible,photoHandleCancel,photoHandleOk}) => {
+const feedBackPhoto = ({photoVisible,photoHandleCancel, photoHandleOk, mode}) => {
+
+    const dispatch = useDispatch();
 
     const [previewVisible, setpreviewVisible] = useState(false);
     const [previewImage, setpreviewImage] = useState('');
+    const [title, setTitle] = useState('');
 
     const handlePreview = async(file) => {
         console.log('handlePreview', file);
@@ -53,25 +58,38 @@ const feedBackDetailPhoto = ({photoVisible,photoHandleCancel,photoHandleOk}) => 
                 {uploadButton}   
                 </Upload>
 
+    const handleTitle = (e) => {
+        setTitle(e.target.value);
+    }
+
     const _onsubmit = () => {
-        console.log('feedBackDetailPhoto_onsubmit');
+        if(mode===FRIENDS_PROFILE_ADD_REQUEST){
+            dispatch({
+                type: FRIENDS_PROFILE_ADD_REQUEST,
+                data:{
+                    title,
+                }
+            });
+        }else{
+
+        }
     };
        
     return(
         <>
             <Modal
-                key='feedBackDetailPhoto'
+                key='feedBackPhoto'
                 title={
                     <div style={{textAlign:"center"}}><Title level={3}>사진</Title></div>
                 }
                 visible={photoVisible}
-                onOk={photoHandleOk}
+                onOk={_onsubmit}
                 footer={[
                     <div key="add" style={{textAlign:'center'}}>
                         <Button key="back" onClick={photoHandleCancel} style={{display:'none'}}>
                             <strong>취소</strong>
                         </Button>,
-                        <Button key="submit" type="primary" size='large'  style={{width:'100%'}}>
+                        <Button key="submit" type="primary" size='large' onClick={_onsubmit} style={{width:'100%'}}>
                             <strong>추가</strong>
                         </Button>
                     </div>
@@ -80,13 +98,15 @@ const feedBackDetailPhoto = ({photoVisible,photoHandleCancel,photoHandleOk}) => 
                 centered={true}
             >
                 <Content style={backgroundWhite}>
-                    <Form {...formItemLayout} onSubmit={_onsubmit}>
+                    <Form {...formItemLayout} >
                        <Row>
                             <Col span={24}>
                                 <Form.Item label={<strong>제목</strong>} >
                                     <Input
                                         placeholder="제목을 입력해주세요"
                                         prefix={<Icon type="edit" />}
+                                        value={title}
+                                        onChange={handleTitle}
                                     />
                                 </Form.Item>
                             </Col>
@@ -106,4 +126,4 @@ const feedBackDetailPhoto = ({photoVisible,photoHandleCancel,photoHandleOk}) => 
     )
 };
 
-export default feedBackDetailPhoto;
+export default feedBackPhoto;

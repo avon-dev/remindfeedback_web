@@ -603,7 +603,7 @@ const FEEDBACK_SUB_DELETE_FAILURE = 'FEEDBACK_SUB_DELETE_FAILURE'; // 피드백 
 /*!*****************************!*\
   !*** ./reducers/friends.js ***!
   \*****************************/
-/*! exports provided: initialState, FRIENDS_MAIN_READ_REQUEST, FRIENDS_MAIN_READ_SUCCESS, FRIENDS_MAIN_READ_FAILURE, FRIENDS_BLOCK_REQUEST, FRIENDS_BLOCK_SUCCESS, FRIENDS_BLOCK_FAILURE, FRIENDS_ADD_READ_REQUEST, FRIENDS_ADD_READ_SUCCESS, FRIENDS_ADD_READ_FAILURE, FRIENDS_ADD_ADD_REQUEST, FRIENDS_ADD_ADD_SUCCESS, FRIENDS_ADD_ADD_FAILURE, FRIENDS_RQ_READ_REQUEST, FRIENDS_RQ_READ_SUCCESS, FRIENDS_RQ_READ_FAILURE, FRIENDS_RQ_ADD_REQUEST, FRIENDS_RQ_ADD_SUCCESS, FRIENDS_RQ_ADD_FAILURE, FRIENDS_PROFILE_READ_REQUEST, FRIENDS_PROFILE_READ_SUCCESS, FRIENDS_PROFILE_READ_FAILURE, FRIENDS_PROFILE_ADD_REQUEST, FRIENDS_PROFILE_ADD_SUCCESS, FRIENDS_PROFILE_ADD_FAILURE, default */
+/*! exports provided: initialState, FRIENDS_MAIN_READ_REQUEST, FRIENDS_MAIN_READ_SUCCESS, FRIENDS_MAIN_READ_FAILURE, FRIENDS_MAIN_SEARCH_REQUEST, FRIENDS_MAIN_SEARCH_SUCCESS, FRIENDS_MAIN_SEARCH_FAILURE, FRIENDS_BLOCK_REQUEST, FRIENDS_BLOCK_SUCCESS, FRIENDS_BLOCK_FAILURE, FRIENDS_ADD_READ_REQUEST, FRIENDS_ADD_READ_SUCCESS, FRIENDS_ADD_READ_FAILURE, FRIENDS_ADD_SEARCH_REQUEST, FRIENDS_ADD_SEARCH_SUCCESS, FRIENDS_ADD_SEARCH_FAILURE, FRIENDS_ADD_ADD_REQUEST, FRIENDS_ADD_ADD_SUCCESS, FRIENDS_ADD_ADD_FAILURE, FRIENDS_RQ_READ_REQUEST, FRIENDS_RQ_READ_SUCCESS, FRIENDS_RQ_READ_FAILURE, FRIENDS_RQ_ADD_REQUEST, FRIENDS_RQ_ADD_SUCCESS, FRIENDS_RQ_ADD_FAILURE, FRIENDS_PROFILE_READ_REQUEST, FRIENDS_PROFILE_READ_SUCCESS, FRIENDS_PROFILE_READ_FAILURE, FRIENDS_PROFILE_ADD_REQUEST, FRIENDS_PROFILE_ADD_SUCCESS, FRIENDS_PROFILE_ADD_FAILURE, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -612,12 +612,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_MAIN_READ_REQUEST", function() { return FRIENDS_MAIN_READ_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_MAIN_READ_SUCCESS", function() { return FRIENDS_MAIN_READ_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_MAIN_READ_FAILURE", function() { return FRIENDS_MAIN_READ_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_MAIN_SEARCH_REQUEST", function() { return FRIENDS_MAIN_SEARCH_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_MAIN_SEARCH_SUCCESS", function() { return FRIENDS_MAIN_SEARCH_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_MAIN_SEARCH_FAILURE", function() { return FRIENDS_MAIN_SEARCH_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_BLOCK_REQUEST", function() { return FRIENDS_BLOCK_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_BLOCK_SUCCESS", function() { return FRIENDS_BLOCK_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_BLOCK_FAILURE", function() { return FRIENDS_BLOCK_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_READ_REQUEST", function() { return FRIENDS_ADD_READ_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_READ_SUCCESS", function() { return FRIENDS_ADD_READ_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_READ_FAILURE", function() { return FRIENDS_ADD_READ_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_SEARCH_REQUEST", function() { return FRIENDS_ADD_SEARCH_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_SEARCH_SUCCESS", function() { return FRIENDS_ADD_SEARCH_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_SEARCH_FAILURE", function() { return FRIENDS_ADD_SEARCH_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_ADD_REQUEST", function() { return FRIENDS_ADD_ADD_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_ADD_SUCCESS", function() { return FRIENDS_ADD_ADD_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_ADD_FAILURE", function() { return FRIENDS_ADD_ADD_FAILURE; });
@@ -640,6 +646,12 @@ const FRIENDS_MAIN_READ_SUCCESS = 'FRIENDS_MAIN_READ_SUCCESS'; // 친구 메인 
 
 const FRIENDS_MAIN_READ_FAILURE = 'FRIENDS_MAIN_READ_FAILURE'; // 친구 메인 창 READ 실패
 
+const FRIENDS_MAIN_SEARCH_REQUEST = 'FRIENDS_MAIN_SEARCH_REQUEST'; // 친구 메인 창 SEARCH 시도 중
+
+const FRIENDS_MAIN_SEARCH_SUCCESS = 'FRIENDS_MAIN_SEARCH_SUCCESS'; // 친구 메인 창 SEARCH 성공
+
+const FRIENDS_MAIN_SEARCH_FAILURE = 'FRIENDS_MAIN_SEARCH_FAILURE'; // 친구 메인 창 SEARCH 실패
+
 const FRIENDS_BLOCK_REQUEST = 'FRIENDS_BLOCK_REQUEST'; // 친구 차단 시도 중
 
 const FRIENDS_BLOCK_SUCCESS = 'FRIENDS_BLOCK_SUCCESS'; // 친구 차단 성공
@@ -651,6 +663,12 @@ const FRIENDS_ADD_READ_REQUEST = 'FRIENDS_ADD_READ_REQUEST'; // 친구 추가 �
 const FRIENDS_ADD_READ_SUCCESS = 'FRIENDS_ADD_READ_SUCCESS'; // 친구 추가 모달 READ 성공
 
 const FRIENDS_ADD_READ_FAILURE = 'FRIENDS_ADD_READ_FAILURE'; // 친구 추가 모달 READ 실패
+
+const FRIENDS_ADD_SEARCH_REQUEST = 'FRIENDS_ADD_SEARCH_REQUEST'; // 친구 추가 모달 SEARCH 시도 중
+
+const FRIENDS_ADD_SEARCH_SUCCESS = 'FRIENDS_ADD_SEARCH_SUCCESS'; // 친구 추가 모달 SEARCH 성공
+
+const FRIENDS_ADD_SEARCH_FAILURE = 'FRIENDS_ADD_SEARCH_FAILURE'; // 친구 추가 모달 SEARCH 실패
 
 const FRIENDS_ADD_ADD_REQUEST = 'FRIENDS_ADD_ADD_REQUEST'; // 친구 추가 모달 친구 ADD 중
 
@@ -693,6 +711,16 @@ const FRIENDS_PROFILE_ADD_FAILURE = 'FRIENDS_PROFILE_ADD_FAILURE'; // 친구 프
 
     case FRIENDS_MAIN_READ_FAILURE:
       return {};
+    // 친구 메인 창 SEARCH
+
+    case FRIENDS_MAIN_SEARCH_REQUEST:
+      return {};
+
+    case FRIENDS_MAIN_SEARCH_SUCCESS:
+      return {};
+
+    case FRIENDS_MAIN_SEARCH_FAILURE:
+      return {};
     // 친구 차단    
 
     case FRIENDS_BLOCK_REQUEST:
@@ -712,6 +740,16 @@ const FRIENDS_PROFILE_ADD_FAILURE = 'FRIENDS_PROFILE_ADD_FAILURE'; // 친구 프
       return {};
 
     case FRIENDS_ADD_READ_FAILURE:
+      return {};
+    // 친구 추가 모달 SEARCH
+
+    case FRIENDS_ADD_SEARCH_REQUEST:
+      return {};
+
+    case FRIENDS_ADD_SEARCH_SUCCESS:
+      return {};
+
+    case FRIENDS_ADD_SEARCH_FAILURE:
       return {};
     //친구 추가 모달 친구 ADD
 
@@ -1148,15 +1186,15 @@ __webpack_require__.r(__webpack_exports__);
 
  // 피드백 주제 Delete
 
-function* feedback_Sub_Delete_API() {// return axios.delete('/#');
+function* feedback_Sub_Delete_API(data) {// return axios.delete('/#');
 }
 
 ;
 
-function* feedback_Sub_Delete() {
+function* feedback_Sub_Delete(action) {
   try {
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Sub_Delete_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Sub_Delete_API, action.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_SUB_DELETE_SUCCESS"]
     });
@@ -1177,15 +1215,15 @@ function* watchFeedback_Sub_Delete() {
 
 ; // 피드백 주제 Update
 
-function* feedback_Sub_Update_API() {// return axios.patch('/#');
+function* feedback_Sub_Update_API(data) {// return axios.patch('/#');
 }
 
 ;
 
-function* feedback_Sub_Update() {
+function* feedback_Sub_Update(action) {
   try {
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Sub_Update_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Sub_Update_API, action.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_SUB_UPDATE_SUCCESS"]
     });
@@ -1206,15 +1244,15 @@ function* watchFeedback_Sub_Update() {
 
 ; // 피드백 주제 Add
 
-function* feedback_Sub_Add_API() {// return axios.post();
+function* feedback_Sub_Add_API(data) {// return axios.post();
 }
 
 ;
 
-function* feedback_Sub_Add() {
+function* feedback_Sub_Add(action) {
   try {
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Sub_Add_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Sub_Add_API, action.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_SUB_ADD_SUCCESS"]
     });
@@ -1288,15 +1326,15 @@ __webpack_require__.r(__webpack_exports__);
 
  // 친구 프로필 Add
 
-function* friends_Pro_Add_API() {// return axios.post('/#');
+function* friends_Pro_Add_API(data) {// return axios.post('/#');
 }
 
 ;
 
-function* friends_Pro_Add() {
+function* friends_Pro_Add(action) {
   try {
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Pro_Add_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Pro_Add_API, action.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_PROFILE_ADD_SUCCESS"]
     });
@@ -1346,15 +1384,15 @@ function* watchFriends_Pro_Read() {
 
 ; // 친구 요청 모달 Add
 
-function* friends_Req_Add_API() {// return axios.post('/#');
+function* friends_Req_Add_API(data) {// return axios.post('/#');
 }
 
 ;
 
-function* friends_Req_Add() {
+function* friends_Req_Add(action) {
   try {
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Req_Add_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Req_Add_API, action.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_RQ_ADD_SUCCESS"]
     });
@@ -1404,15 +1442,15 @@ function* watchFriends_Req_Read() {
 
 ; // 친구 추가 모달 Add
 
-function* friends_Add_Add_API() {// return axios.post('/#');
+function* friends_Add_Add_API(data) {// return axios.post('/#');
 }
 
 ;
 
-function* friends_Add_Add() {
+function* friends_Add_Add(action) {
   try {
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Add_Add_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Add_Add_API, action.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_ADD_ADD_SUCCESS"]
     });
@@ -1429,6 +1467,35 @@ function* friends_Add_Add() {
 
 function* watchFriends_Add_Add() {
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_ADD_ADD_REQUEST"], friends_Add_Add);
+}
+
+; // 친구 추가 모달 Search
+
+function* friends_Add_Search_API(data) {// return axios.get('/#');
+}
+
+;
+
+function* friends_Add_Search(action) {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Add_Search_API, action.data);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_ADD_SEARCH_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_ADD_SEARCH_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFriends_Add_Search() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_ADD_SEARCH_REQUEST"], friends_Add_Search);
 }
 
 ; // 친구 추가 모달 Read
@@ -1462,15 +1529,15 @@ function* watchFriends_Add_Read() {
 
 ; // 친구 차단
 
-function* friends_Block_API() {// return axios.get();
+function* friends_Block_API(data) {// return axios.delete();
 }
 
 ;
 
-function* friends_Block() {
+function* friends_Block(action) {
   try {
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Block_API);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Block_API, action.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_BLOCK_SUCCESS"]
     });
@@ -1487,6 +1554,35 @@ function* friends_Block() {
 
 function* watchFriends_Block() {
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_BLOCK_REQUEST"], friends_Block);
+}
+
+; // 친구 메인창 Search
+
+function* friends_Search_API(data) {// return axios.get('/#');
+}
+
+;
+
+function* friends_Search(action) {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(friends_Search_API, action.data);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_MAIN_SEARCH_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_MAIN_SEARCH_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFriends_Search() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_2__["FRIENDS_MAIN_SEARCH_REQUEST"], friends_Search);
 }
 
 ; // 친구 메인창 Read
@@ -1520,7 +1616,7 @@ function* watchFriends_Read() {
 
 ;
 function* friendsSaga() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Block), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Add_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Add_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Req_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Req_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Pro_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Pro_Add)]);
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Search), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Block), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Add_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Add_Search), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Add_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Req_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Req_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Pro_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFriends_Pro_Add)]);
 }
 
 /***/ }),

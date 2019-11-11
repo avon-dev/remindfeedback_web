@@ -1,6 +1,8 @@
-import React from 'react';
+import React,{useCallback,useState,useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Layout, Form, Input, Icon, Button, Col, Typography, Row, Divider, Table, Pagination  } from 'antd';
 import {formItemLayout} from '../css/Friends';
+import {FRIENDS_RQ_ADD_REQUEST} from '../reducers/friends';
 
 const {Group} = Button;
 const {Text,Title} = Typography;
@@ -8,6 +10,15 @@ const {Content} = Layout;
 const {Search} = Input;
 
 const requestFriends = ({requestVisible,requestHandleOk,requestHandleCancel}) => {
+
+    const dispatch = useDispatch();
+
+    const [email,setEmail] =  useState('');
+
+    // request server 
+    useEffect(()=>{
+
+    },[]);
 
     const columns = [
         {
@@ -35,7 +46,7 @@ const requestFriends = ({requestVisible,requestHandleOk,requestHandleCancel}) =>
             render: ing => (
                 <>
                     <Group>
-                        <Button type="primary">수락</Button>
+                        <Button type="primary" onClick={_onsubmit}>수락</Button>
                         <Button type="danger">{ing}</Button>
                     </Group>
                 </>
@@ -67,9 +78,15 @@ const requestFriends = ({requestVisible,requestHandleOk,requestHandleCancel}) =>
             },
         ];
 
-    const _onsubmit = () => {
-        console.log('RequestFriends_onsubmit');
-    }    
+    const _onsubmit = useCallback((e) => {
+        console.log(e)
+        dispatch({
+            type:FRIENDS_RQ_ADD_REQUEST,
+            data:{
+                email,
+            }
+        });
+    },[email]);
 
     return(
         <>
@@ -88,8 +105,8 @@ const requestFriends = ({requestVisible,requestHandleOk,requestHandleCancel}) =>
                         <Button key="back" onClick={requestHandleCancel} style={{display:'none'}}>
                             <strong>취소</strong>
                         </Button>,
-                        <Button key="submit" type="primary" onClick={requestHandleOk} size='large' style={{width:'100%'}}>
-                            <strong>친구 추가</strong>
+                        <Button key="submit" type="primary" size='large' onClick={requestHandleOk} style={{width:'100%'}}>
+                            <strong>닫기</strong>
                         </Button>
                     </div>
                 ]}
@@ -101,7 +118,7 @@ const requestFriends = ({requestVisible,requestHandleOk,requestHandleCancel}) =>
                                 <Text><strong>나에게 온 친구 요청 목록</strong></Text>
                                 <Divider style={{border:'#000000 solid 1px',marginTop:10}} />     
                             </Col>
-                        <Form {...formItemLayout} onSubmit={_onsubmit} style={{marginTop:15}} >
+                        <Form {...formItemLayout} style={{marginTop:15}} >
                             <Col span={24}>
                                 <Table columns={columns} dataSource={data} pagination={<Pagination style={{textAlign:'center'}} />} />
                             </Col>

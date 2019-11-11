@@ -1,26 +1,39 @@
-import React,{useState} from 'react';
-import { SketchPicker } from 'react-color';
+import React,{useState, useCallback} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { CirclePicker } from 'react-color';
 import { Modal, Layout, Form, Input, Icon, Button, Col, Typography, Row } from 'antd';
 import { backgroundWhite, backgroundLightBlue} from '../css/Common';
 import {formItemLayout} from '../css/Subject';
+import {FEEDBACK_SUB_ADD_REQUEST} from '../reducers/feedbackSubject';
 
 const {Content} = Layout;
 const {Title} = Typography;
 
 const addSubject = ({visible,handleCancel,handleOk}) => {
 
+    const dispath = useDispatch();
+
     const [color,setColor] =  useState();
+    const [title,setTitle] =  useState();
 
-    const _onsubmit = () => {
+    const _onsubmit = useCallback(() => {
+        dispath({
+            type:FEEDBACK_SUB_ADD_REQUEST,
+            data:{
+                color, title,
+            }
+        });
+    },[color,title]);
 
+    const handleTitle = (e) => {
+        setTitle(e.target.value);
     };
 
     const handleChangeComplete = (color) => {
         setColor(color.hex);
     };
 
-    const handleChange = (color) => {
-        console.log(color.hex);
+    const handleColor = (color) => {
         setColor(color.hex);
     };
 
@@ -38,7 +51,7 @@ const addSubject = ({visible,handleCancel,handleOk}) => {
                         <Button key="back" onClick={handleCancel} style={{display:'none'}}>
                             <strong>취소</strong>
                         </Button>,
-                        <Button key="submit" type="primary" onClick={handleOk} size='large' style={{width:'100%'}}>
+                        <Button key="submit" type="primary" size='large' style={{width:'100%'}}>
                             <strong>주제 추가</strong>
                         </Button>
                     </div>
@@ -53,16 +66,19 @@ const addSubject = ({visible,handleCancel,handleOk}) => {
                                 <Form.Item label={<strong>주제 이름</strong>}>
                                     <Input
                                         prefix={<Icon type='home' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        onChange={handleTitle}
+                                        value={title}
                                         placeholder="제목"
                                     />
                                 </Form.Item>
                             </Col>
                             <Col span={24}>
                                 <Form.Item label={<strong>색상 설정</strong>}>
-                                    <SketchPicker
+                                    <CirclePicker
+
                                         color={color}
                                         onChangeComplete={handleChangeComplete}
-                                        onChange={handleChange}
+                                        onChange={handleColor}
                                         width="10"
                                     />
                                 </Form.Item>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Col, Button, Breadcrumb, Icon, Card, Popover, Pagination, Tooltip  } from 'antd';
 import moment from 'moment';
 import AppWrite from '../container/feedBackDetailWrite';
-import AppPhoto from '../container/feedBackDetailPhoto';
+import AppPhoto from '../container/feedBackPhoto';
 import AppVideo from '../container/feedBackDetailVideo';
 import AppRecord from '../container/feedBackDetailRecord';
 
@@ -44,7 +44,6 @@ const feedBackDetailList = () => {
         console.log('FeedBackDetail popUpPhoto');
         setPhotoVisible(true);
         setVisible(false);
-
     }
 
     const photoHandleOk = () => {

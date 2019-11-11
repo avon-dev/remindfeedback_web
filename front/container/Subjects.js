@@ -1,14 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import { Row, Col, Table, Divider, Tag, Popover, Icon, Button, Popconfirm } from 'antd';
-import UpdateSubject from '../container/updateSubject';
+import DeleteSubject from '../container/deleteSubject';
 import AddSubject from '../container/addSubject';
-import UpdateSubjectModal from './updateSubjectModal';
+import UpdateSubject from './updateSubject';
 
 const Subjects = () => {
 
     const [visible, setVisible] = useState(false);
     const [updateVisible, setUpdateVisible] = useState(false);
     const [popOverVisible, setPopOverVisible] = useState(false);
+
+    // request server 
+    useEffect(()=>{
+
+    },[]);
 
     const columns = [
         {
@@ -51,7 +56,7 @@ const Subjects = () => {
             key: 'update',
             align:'center',
             render: update => (
-                <UpdateSubject
+                <DeleteSubject
                         update={update}
                         PopupUpdateSubject={PopupUpdateSubject}
                         popOverVisible={popOverVisible}
@@ -123,7 +128,7 @@ const Subjects = () => {
                     <Row style={{textAlign:'right', marginBottom:15}}>
                         <Button type="primary" size="large" onClick={PopupAddSubject} ><strong>주제 추가</strong></Button>
                     </Row>
-                    <Row>
+                    <Row> 
                         <Table columns={columns} dataSource={data} />
                     </Row>
                 </Col>
@@ -137,7 +142,7 @@ const Subjects = () => {
                 />
             </div>
             <div>
-                <UpdateSubjectModal
+                <UpdateSubject
                     updateVisible={updateVisible}
                     handleUpdateOk={handleUpdateOk}
                     handleUpdateCancel={handleUpdateCancel}

@@ -1,15 +1,43 @@
-import React from 'react';
+import React,{useCallback,useState,useEffect} from 'react';
 import { Modal, Layout, Card, Empty, Icon, Button, Col, Typography, Row, Avatar, Statistic } from 'antd';
 import {layoutProfile, layoutCenter} from '../css/Friends';
+import {FRIENDS_PROFILE_READ_REQUEST} from '../reducers/friends';
+import {FRIENDS_PROFILE_ADD_REQUEST} from '../reducers/friends';
+import AppPhoto from '../container/feedBackPhoto';
 
 const {Text,Title} = Typography;
 const {Content} = Layout;
 
 const ProfileFriends = ({profileVisible,profileHandleOk,profileHandleCancel,profileName}) => {
+    
+    
+
+    const [photoVisible, setPhotoVisible] = useState(false);
+    // request server 
+    useEffect(()=>{
+
+    },[]);
+
+    // 사진
+    const popUpPhoto = () => {
+        console.log('ProfileFriends popUpPhoto');
+        setPhotoVisible(true);
+    }
+
+    const photoHandleOk = () => {
+        console.log('ProfileFriends photoHandleOk');
+        setPhotoVisible(false);
+    }
+
+    const photoHandleCancel = () => {
+        console.log('ProfileFriends photoHandleCancel');
+        setPhotoVisible(false);
+    }
+    
     return(
         <>
             <Modal
-                 key='addFriends'
+                 key='profileFriends'
                  title={
                     <div style={{textAlign:"center"}}><Title level={3}>프로필</Title></div>
                 }
@@ -38,7 +66,7 @@ const ProfileFriends = ({profileVisible,profileHandleOk,profileHandleCancel,prof
                                         }   
                             >
                                <div>
-                                    <Button style={{background:"#052749", color:"#FFFFFF"}}>프로필 사진 추가하기</Button>
+                                    <Button style={{background:"#052749", color:"#FFFFFF"}} onClick={popUpPhoto}>프로필 사진 추가하기</Button>
                                </div>
                             </Empty>
                         </Col>
@@ -80,6 +108,14 @@ const ProfileFriends = ({profileVisible,profileHandleOk,profileHandleCancel,prof
                     </Row>
                 </Content>
             </Modal>
+            <div>
+              <AppPhoto
+                 photoVisible={photoVisible}   
+                 photoHandleOk={photoHandleOk}
+                 photoHandleCancel={photoHandleCancel}
+                 mode={FRIENDS_PROFILE_ADD_REQUEST}           
+              />                  
+            </div>
         </>
     );
 };

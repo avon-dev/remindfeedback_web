@@ -13958,7 +13958,7 @@ var FEEDBACK_SUB_DELETE_FAILURE = 'FEEDBACK_SUB_DELETE_FAILURE'; // 피드백 �
 /*!*****************************!*\
   !*** ./reducers/friends.js ***!
   \*****************************/
-/*! exports provided: initialState, FRIENDS_MAIN_READ_REQUEST, FRIENDS_MAIN_READ_SUCCESS, FRIENDS_MAIN_READ_FAILURE, FRIENDS_BLOCK_REQUEST, FRIENDS_BLOCK_SUCCESS, FRIENDS_BLOCK_FAILURE, FRIENDS_ADD_READ_REQUEST, FRIENDS_ADD_READ_SUCCESS, FRIENDS_ADD_READ_FAILURE, FRIENDS_ADD_ADD_REQUEST, FRIENDS_ADD_ADD_SUCCESS, FRIENDS_ADD_ADD_FAILURE, FRIENDS_RQ_READ_REQUEST, FRIENDS_RQ_READ_SUCCESS, FRIENDS_RQ_READ_FAILURE, FRIENDS_RQ_ADD_REQUEST, FRIENDS_RQ_ADD_SUCCESS, FRIENDS_RQ_ADD_FAILURE, FRIENDS_PROFILE_READ_REQUEST, FRIENDS_PROFILE_READ_SUCCESS, FRIENDS_PROFILE_READ_FAILURE, FRIENDS_PROFILE_ADD_REQUEST, FRIENDS_PROFILE_ADD_SUCCESS, FRIENDS_PROFILE_ADD_FAILURE, default */
+/*! exports provided: initialState, FRIENDS_MAIN_READ_REQUEST, FRIENDS_MAIN_READ_SUCCESS, FRIENDS_MAIN_READ_FAILURE, FRIENDS_MAIN_SEARCH_REQUEST, FRIENDS_MAIN_SEARCH_SUCCESS, FRIENDS_MAIN_SEARCH_FAILURE, FRIENDS_BLOCK_REQUEST, FRIENDS_BLOCK_SUCCESS, FRIENDS_BLOCK_FAILURE, FRIENDS_ADD_READ_REQUEST, FRIENDS_ADD_READ_SUCCESS, FRIENDS_ADD_READ_FAILURE, FRIENDS_ADD_SEARCH_REQUEST, FRIENDS_ADD_SEARCH_SUCCESS, FRIENDS_ADD_SEARCH_FAILURE, FRIENDS_ADD_ADD_REQUEST, FRIENDS_ADD_ADD_SUCCESS, FRIENDS_ADD_ADD_FAILURE, FRIENDS_RQ_READ_REQUEST, FRIENDS_RQ_READ_SUCCESS, FRIENDS_RQ_READ_FAILURE, FRIENDS_RQ_ADD_REQUEST, FRIENDS_RQ_ADD_SUCCESS, FRIENDS_RQ_ADD_FAILURE, FRIENDS_PROFILE_READ_REQUEST, FRIENDS_PROFILE_READ_SUCCESS, FRIENDS_PROFILE_READ_FAILURE, FRIENDS_PROFILE_ADD_REQUEST, FRIENDS_PROFILE_ADD_SUCCESS, FRIENDS_PROFILE_ADD_FAILURE, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13967,12 +13967,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_MAIN_READ_REQUEST", function() { return FRIENDS_MAIN_READ_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_MAIN_READ_SUCCESS", function() { return FRIENDS_MAIN_READ_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_MAIN_READ_FAILURE", function() { return FRIENDS_MAIN_READ_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_MAIN_SEARCH_REQUEST", function() { return FRIENDS_MAIN_SEARCH_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_MAIN_SEARCH_SUCCESS", function() { return FRIENDS_MAIN_SEARCH_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_MAIN_SEARCH_FAILURE", function() { return FRIENDS_MAIN_SEARCH_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_BLOCK_REQUEST", function() { return FRIENDS_BLOCK_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_BLOCK_SUCCESS", function() { return FRIENDS_BLOCK_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_BLOCK_FAILURE", function() { return FRIENDS_BLOCK_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_READ_REQUEST", function() { return FRIENDS_ADD_READ_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_READ_SUCCESS", function() { return FRIENDS_ADD_READ_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_READ_FAILURE", function() { return FRIENDS_ADD_READ_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_SEARCH_REQUEST", function() { return FRIENDS_ADD_SEARCH_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_SEARCH_SUCCESS", function() { return FRIENDS_ADD_SEARCH_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_SEARCH_FAILURE", function() { return FRIENDS_ADD_SEARCH_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_ADD_REQUEST", function() { return FRIENDS_ADD_ADD_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_ADD_SUCCESS", function() { return FRIENDS_ADD_ADD_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FRIENDS_ADD_ADD_FAILURE", function() { return FRIENDS_ADD_ADD_FAILURE; });
@@ -13995,6 +14001,12 @@ var FRIENDS_MAIN_READ_SUCCESS = 'FRIENDS_MAIN_READ_SUCCESS'; // 친구 메인 �
 
 var FRIENDS_MAIN_READ_FAILURE = 'FRIENDS_MAIN_READ_FAILURE'; // 친구 메인 창 READ 실패
 
+var FRIENDS_MAIN_SEARCH_REQUEST = 'FRIENDS_MAIN_SEARCH_REQUEST'; // 친구 메인 창 SEARCH 시도 중
+
+var FRIENDS_MAIN_SEARCH_SUCCESS = 'FRIENDS_MAIN_SEARCH_SUCCESS'; // 친구 메인 창 SEARCH 성공
+
+var FRIENDS_MAIN_SEARCH_FAILURE = 'FRIENDS_MAIN_SEARCH_FAILURE'; // 친구 메인 창 SEARCH 실패
+
 var FRIENDS_BLOCK_REQUEST = 'FRIENDS_BLOCK_REQUEST'; // 친구 차단 시도 중
 
 var FRIENDS_BLOCK_SUCCESS = 'FRIENDS_BLOCK_SUCCESS'; // 친구 차단 성공
@@ -14006,6 +14018,12 @@ var FRIENDS_ADD_READ_REQUEST = 'FRIENDS_ADD_READ_REQUEST'; // 친구 추가 모�
 var FRIENDS_ADD_READ_SUCCESS = 'FRIENDS_ADD_READ_SUCCESS'; // 친구 추가 모달 READ 성공
 
 var FRIENDS_ADD_READ_FAILURE = 'FRIENDS_ADD_READ_FAILURE'; // 친구 추가 모달 READ 실패
+
+var FRIENDS_ADD_SEARCH_REQUEST = 'FRIENDS_ADD_SEARCH_REQUEST'; // 친구 추가 모달 SEARCH 시도 중
+
+var FRIENDS_ADD_SEARCH_SUCCESS = 'FRIENDS_ADD_SEARCH_SUCCESS'; // 친구 추가 모달 SEARCH 성공
+
+var FRIENDS_ADD_SEARCH_FAILURE = 'FRIENDS_ADD_SEARCH_FAILURE'; // 친구 추가 모달 SEARCH 실패
 
 var FRIENDS_ADD_ADD_REQUEST = 'FRIENDS_ADD_ADD_REQUEST'; // 친구 추가 모달 친구 ADD 중
 
@@ -14051,6 +14069,16 @@ var FRIENDS_PROFILE_ADD_FAILURE = 'FRIENDS_PROFILE_ADD_FAILURE'; // 친구 프�
 
     case FRIENDS_MAIN_READ_FAILURE:
       return {};
+    // 친구 메인 창 SEARCH
+
+    case FRIENDS_MAIN_SEARCH_REQUEST:
+      return {};
+
+    case FRIENDS_MAIN_SEARCH_SUCCESS:
+      return {};
+
+    case FRIENDS_MAIN_SEARCH_FAILURE:
+      return {};
     // 친구 차단    
 
     case FRIENDS_BLOCK_REQUEST:
@@ -14070,6 +14098,16 @@ var FRIENDS_PROFILE_ADD_FAILURE = 'FRIENDS_PROFILE_ADD_FAILURE'; // 친구 프�
       return {};
 
     case FRIENDS_ADD_READ_FAILURE:
+      return {};
+    // 친구 추가 모달 SEARCH
+
+    case FRIENDS_ADD_SEARCH_REQUEST:
+      return {};
+
+    case FRIENDS_ADD_SEARCH_SUCCESS:
+      return {};
+
+    case FRIENDS_ADD_SEARCH_FAILURE:
       return {};
     //친구 추가 모달 친구 ADD
 
@@ -14900,7 +14938,7 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(f
 
  // 피드백 주제 Delete
 
-function feedback_Sub_Delete_API() {
+function feedback_Sub_Delete_API(data) {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Delete_API$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -14914,7 +14952,7 @@ function feedback_Sub_Delete_API() {
 
 ;
 
-function feedback_Sub_Delete() {
+function feedback_Sub_Delete(action) {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Delete$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -14925,7 +14963,7 @@ function feedback_Sub_Delete() {
 
         case 3:
           _context2.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Sub_Delete_API);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Sub_Delete_API, action.data);
 
         case 5:
           _context2.next = 7;
@@ -14975,7 +15013,7 @@ function watchFeedback_Sub_Delete() {
 
 ; // 피드백 주제 Update
 
-function feedback_Sub_Update_API() {
+function feedback_Sub_Update_API(data) {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Update_API$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
@@ -14989,7 +15027,7 @@ function feedback_Sub_Update_API() {
 
 ;
 
-function feedback_Sub_Update() {
+function feedback_Sub_Update(action) {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Update$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
@@ -15000,7 +15038,7 @@ function feedback_Sub_Update() {
 
         case 3:
           _context5.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Sub_Update_API);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Sub_Update_API, action.data);
 
         case 5:
           _context5.next = 7;
@@ -15050,7 +15088,7 @@ function watchFeedback_Sub_Update() {
 
 ; // 피드백 주제 Add
 
-function feedback_Sub_Add_API() {
+function feedback_Sub_Add_API(data) {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Add_API$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
@@ -15064,7 +15102,7 @@ function feedback_Sub_Add_API() {
 
 ;
 
-function feedback_Sub_Add() {
+function feedback_Sub_Add(action) {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Add$(_context8) {
     while (1) {
       switch (_context8.prev = _context8.next) {
@@ -15075,7 +15113,7 @@ function feedback_Sub_Add() {
 
         case 3:
           _context8.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Sub_Add_API);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Sub_Add_API, action.data);
 
         case 5:
           _context8.next = 7;
@@ -15282,32 +15320,50 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(f
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFriends_Add_Add),
     _marked16 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friends_Add_Read_API),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friends_Add_Search_API),
     _marked17 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friends_Add_Read),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friends_Add_Search),
     _marked18 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFriends_Add_Read),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFriends_Add_Search),
     _marked19 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friends_Block_API),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friends_Add_Read_API),
     _marked20 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friends_Block),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friends_Add_Read),
     _marked21 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFriends_Block),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFriends_Add_Read),
     _marked22 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friends_Read_API),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friends_Block_API),
     _marked23 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friends_Read),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friends_Block),
     _marked24 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFriends_Read),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFriends_Block),
     _marked25 =
+/*#__PURE__*/
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friends_Search_API),
+    _marked26 =
+/*#__PURE__*/
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friends_Search),
+    _marked27 =
+/*#__PURE__*/
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFriends_Search),
+    _marked28 =
+/*#__PURE__*/
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friends_Read_API),
+    _marked29 =
+/*#__PURE__*/
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friends_Read),
+    _marked30 =
+/*#__PURE__*/
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFriends_Read),
+    _marked31 =
 /*#__PURE__*/
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(friendsSaga);
 
@@ -15315,7 +15371,7 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(f
 
  // 친구 프로필 Add
 
-function friends_Pro_Add_API() {
+function friends_Pro_Add_API(data) {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Pro_Add_API$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -15329,7 +15385,7 @@ function friends_Pro_Add_API() {
 
 ;
 
-function friends_Pro_Add() {
+function friends_Pro_Add(action) {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Pro_Add$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -15340,7 +15396,7 @@ function friends_Pro_Add() {
 
         case 3:
           _context2.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(friends_Pro_Add_API);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(friends_Pro_Add_API, action.data);
 
         case 5:
           _context2.next = 7;
@@ -15465,7 +15521,7 @@ function watchFriends_Pro_Read() {
 
 ; // 친구 요청 모달 Add
 
-function friends_Req_Add_API() {
+function friends_Req_Add_API(data) {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Req_Add_API$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
@@ -15479,7 +15535,7 @@ function friends_Req_Add_API() {
 
 ;
 
-function friends_Req_Add() {
+function friends_Req_Add(action) {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Req_Add$(_context8) {
     while (1) {
       switch (_context8.prev = _context8.next) {
@@ -15490,7 +15546,7 @@ function friends_Req_Add() {
 
         case 3:
           _context8.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(friends_Req_Add_API);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(friends_Req_Add_API, action.data);
 
         case 5:
           _context8.next = 7;
@@ -15615,7 +15671,7 @@ function watchFriends_Req_Read() {
 
 ; // 친구 추가 모달 Add
 
-function friends_Add_Add_API() {
+function friends_Add_Add_API(data) {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Add_Add_API$(_context13) {
     while (1) {
       switch (_context13.prev = _context13.next) {
@@ -15629,7 +15685,7 @@ function friends_Add_Add_API() {
 
 ;
 
-function friends_Add_Add() {
+function friends_Add_Add(action) {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Add_Add$(_context14) {
     while (1) {
       switch (_context14.prev = _context14.next) {
@@ -15640,7 +15696,7 @@ function friends_Add_Add() {
 
         case 3:
           _context14.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(friends_Add_Add_API);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(friends_Add_Add_API, action.data);
 
         case 5:
           _context14.next = 7;
@@ -15688,10 +15744,10 @@ function watchFriends_Add_Add() {
   }, _marked15);
 }
 
-; // 친구 추가 모달 Read
+; // 친구 추가 모달 Search
 
-function friends_Add_Read_API() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Add_Read_API$(_context16) {
+function friends_Add_Search_API(data) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Add_Search_API$(_context16) {
     while (1) {
       switch (_context16.prev = _context16.next) {
         case 0:
@@ -15704,8 +15760,8 @@ function friends_Add_Read_API() {
 
 ;
 
-function friends_Add_Read() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Add_Read$(_context17) {
+function friends_Add_Search(action) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Add_Search$(_context17) {
     while (1) {
       switch (_context17.prev = _context17.next) {
         case 0:
@@ -15715,12 +15771,12 @@ function friends_Add_Read() {
 
         case 3:
           _context17.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(friends_Add_Read_API);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(friends_Add_Search_API, action.data);
 
         case 5:
           _context17.next = 7;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_ADD_READ_SUCCESS"]
+            type: _reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_ADD_SEARCH_SUCCESS"]
           });
 
         case 7:
@@ -15733,7 +15789,7 @@ function friends_Add_Read() {
           console.error(_context17.t0);
           _context17.next = 14;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_ADD_READ_FAILURE"],
+            type: _reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_ADD_SEARCH_FAILURE"],
             error: _context17.t0
           });
 
@@ -15747,13 +15803,13 @@ function friends_Add_Read() {
 
 ;
 
-function watchFriends_Add_Read() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFriends_Add_Read$(_context18) {
+function watchFriends_Add_Search() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFriends_Add_Search$(_context18) {
     while (1) {
       switch (_context18.prev = _context18.next) {
         case 0:
           _context18.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_ADD_READ_REQUEST"], friends_Add_Read);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_ADD_SEARCH_REQUEST"], friends_Add_Search);
 
         case 2:
         case "end":
@@ -15763,10 +15819,10 @@ function watchFriends_Add_Read() {
   }, _marked18);
 }
 
-; // 친구 차단
+; // 친구 추가 모달 Read
 
-function friends_Block_API() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Block_API$(_context19) {
+function friends_Add_Read_API() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Add_Read_API$(_context19) {
     while (1) {
       switch (_context19.prev = _context19.next) {
         case 0:
@@ -15779,8 +15835,8 @@ function friends_Block_API() {
 
 ;
 
-function friends_Block() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Block$(_context20) {
+function friends_Add_Read() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Add_Read$(_context20) {
     while (1) {
       switch (_context20.prev = _context20.next) {
         case 0:
@@ -15790,12 +15846,12 @@ function friends_Block() {
 
         case 3:
           _context20.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(friends_Block_API);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(friends_Add_Read_API);
 
         case 5:
           _context20.next = 7;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_BLOCK_SUCCESS"]
+            type: _reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_ADD_READ_SUCCESS"]
           });
 
         case 7:
@@ -15808,7 +15864,7 @@ function friends_Block() {
           console.error(_context20.t0);
           _context20.next = 14;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_BLOCK_FAILURE"],
+            type: _reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_ADD_READ_FAILURE"],
             error: _context20.t0
           });
 
@@ -15822,13 +15878,13 @@ function friends_Block() {
 
 ;
 
-function watchFriends_Block() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFriends_Block$(_context21) {
+function watchFriends_Add_Read() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFriends_Add_Read$(_context21) {
     while (1) {
       switch (_context21.prev = _context21.next) {
         case 0:
           _context21.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_BLOCK_REQUEST"], friends_Block);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_ADD_READ_REQUEST"], friends_Add_Read);
 
         case 2:
         case "end":
@@ -15838,10 +15894,10 @@ function watchFriends_Block() {
   }, _marked21);
 }
 
-; // 친구 메인창 Read
+; // 친구 차단
 
-function friends_Read_API() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Read_API$(_context22) {
+function friends_Block_API(data) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Block_API$(_context22) {
     while (1) {
       switch (_context22.prev = _context22.next) {
         case 0:
@@ -15854,8 +15910,8 @@ function friends_Read_API() {
 
 ;
 
-function friends_Read() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Read$(_context23) {
+function friends_Block(action) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Block$(_context23) {
     while (1) {
       switch (_context23.prev = _context23.next) {
         case 0:
@@ -15865,12 +15921,12 @@ function friends_Read() {
 
         case 3:
           _context23.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(friends_Read_API);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(friends_Block_API, action.data);
 
         case 5:
           _context23.next = 7;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_MAIN_READ_SUCCESS"]
+            type: _reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_BLOCK_SUCCESS"]
           });
 
         case 7:
@@ -15883,7 +15939,7 @@ function friends_Read() {
           console.error(_context23.t0);
           _context23.next = 14;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_MAIN_READ_FAILURE"],
+            type: _reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_BLOCK_FAILURE"],
             error: _context23.t0
           });
 
@@ -15897,13 +15953,13 @@ function friends_Read() {
 
 ;
 
-function watchFriends_Read() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFriends_Read$(_context24) {
+function watchFriends_Block() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFriends_Block$(_context24) {
     while (1) {
       switch (_context24.prev = _context24.next) {
         case 0:
           _context24.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_MAIN_READ_REQUEST"], friends_Read);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_BLOCK_REQUEST"], friends_Block);
 
         case 2:
         case "end":
@@ -15913,21 +15969,171 @@ function watchFriends_Read() {
   }, _marked24);
 }
 
-;
-function friendsSaga() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friendsSaga$(_context25) {
+; // 친구 메인창 Search
+
+function friends_Search_API(data) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Search_API$(_context25) {
     while (1) {
       switch (_context25.prev = _context25.next) {
         case 0:
-          _context25.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Block), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Add_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Add_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Req_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Req_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Pro_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Pro_Add)]);
-
-        case 2:
         case "end":
           return _context25.stop();
       }
     }
   }, _marked25);
+}
+
+;
+
+function friends_Search(action) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Search$(_context26) {
+    while (1) {
+      switch (_context26.prev = _context26.next) {
+        case 0:
+          _context26.prev = 0;
+          _context26.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
+
+        case 3:
+          _context26.next = 5;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(friends_Search_API, action.data);
+
+        case 5:
+          _context26.next = 7;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: _reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_MAIN_SEARCH_SUCCESS"]
+          });
+
+        case 7:
+          _context26.next = 14;
+          break;
+
+        case 9:
+          _context26.prev = 9;
+          _context26.t0 = _context26["catch"](0);
+          console.error(_context26.t0);
+          _context26.next = 14;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: _reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_MAIN_SEARCH_FAILURE"],
+            error: _context26.t0
+          });
+
+        case 14:
+        case "end":
+          return _context26.stop();
+      }
+    }
+  }, _marked26, null, [[0, 9]]);
+}
+
+;
+
+function watchFriends_Search() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFriends_Search$(_context27) {
+    while (1) {
+      switch (_context27.prev = _context27.next) {
+        case 0:
+          _context27.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_MAIN_SEARCH_REQUEST"], friends_Search);
+
+        case 2:
+        case "end":
+          return _context27.stop();
+      }
+    }
+  }, _marked27);
+}
+
+; // 친구 메인창 Read
+
+function friends_Read_API() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Read_API$(_context28) {
+    while (1) {
+      switch (_context28.prev = _context28.next) {
+        case 0:
+        case "end":
+          return _context28.stop();
+      }
+    }
+  }, _marked28);
+}
+
+;
+
+function friends_Read() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friends_Read$(_context29) {
+    while (1) {
+      switch (_context29.prev = _context29.next) {
+        case 0:
+          _context29.prev = 0;
+          _context29.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
+
+        case 3:
+          _context29.next = 5;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(friends_Read_API);
+
+        case 5:
+          _context29.next = 7;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: _reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_MAIN_READ_SUCCESS"]
+          });
+
+        case 7:
+          _context29.next = 14;
+          break;
+
+        case 9:
+          _context29.prev = 9;
+          _context29.t0 = _context29["catch"](0);
+          console.error(_context29.t0);
+          _context29.next = 14;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: _reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_MAIN_READ_FAILURE"],
+            error: _context29.t0
+          });
+
+        case 14:
+        case "end":
+          return _context29.stop();
+      }
+    }
+  }, _marked29, null, [[0, 9]]);
+}
+
+;
+
+function watchFriends_Read() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFriends_Read$(_context30) {
+    while (1) {
+      switch (_context30.prev = _context30.next) {
+        case 0:
+          _context30.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_friends__WEBPACK_IMPORTED_MODULE_3__["FRIENDS_MAIN_READ_REQUEST"], friends_Read);
+
+        case 2:
+        case "end":
+          return _context30.stop();
+      }
+    }
+  }, _marked30);
+}
+
+;
+function friendsSaga() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function friendsSaga$(_context31) {
+    while (1) {
+      switch (_context31.prev = _context31.next) {
+        case 0:
+          _context31.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Search), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Block), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Add_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Add_Search), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Add_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Req_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Req_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Pro_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFriends_Pro_Add)]);
+
+        case 2:
+        case "end":
+          return _context31.stop();
+      }
+    }
+  }, _marked31);
 }
 
 /***/ }),

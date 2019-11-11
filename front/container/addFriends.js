@@ -1,12 +1,24 @@
-import React from 'react';
+import React,{useState, useCallback, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Layout, Form, Input, Icon, Button, Col, Typography, Row, Divider, Table, Pagination  } from 'antd';
 import {formItemLayout} from '../css/Friends';
+import {FRIENDS_ADD_SEARCH_REQUEST} from '../reducers/friends';
+import {FRIENDS_ADD_ADD_REQUEST} from '../reducers/friends';
 
 const {Text,Title} = Typography;
 const {Content} = Layout;
 const {Search} = Input;
 
 const addFriends = ({addVisible,addHandleOk,addHandleCancel}) => {
+
+    const dispatch = useDispatch();
+
+    const [email,setEmail] =  useState('');
+
+    // request server 
+    useEffect(()=>{
+
+    },[]);
 
     const columns = [
         {
@@ -61,9 +73,28 @@ const addFriends = ({addVisible,addHandleOk,addHandleCancel}) => {
             },
         ];
 
-    const _onsubmit = () => {
-        console.log('AddFriends onsubmit');
+    const _onsubmit = useCallback(() => {
+        dispatch({
+            type:FRIENDS_ADD_ADD_REQUEST,
+            data:{
+                email,
+            }
+        });
+    },[email]);
+
+    const handleSearch = (e) => {
+        setEmail(e.target.value);
     }
+
+    const handleSearchOk = useCallback(() => {
+        dispatch({
+            type:FRIENDS_ADD_SEARCH_REQUEST,
+            data:{
+                email,
+            }
+        });
+    },[email]);
+
     return(
         <>
             <Modal
@@ -81,7 +112,7 @@ const addFriends = ({addVisible,addHandleOk,addHandleCancel}) => {
                         <Button key="back" onClick={addHandleCancel} style={{display:'none'}}>
                             <strong>취소</strong>
                         </Button>,
-                        <Button key="submit" type="primary" onClick={addHandleOk} size='large' style={{width:'100%'}}>
+                        <Button key="submit" type="primary" size='large' style={{width:'100%'}}>
                             <strong>친구 요청</strong>
                         </Button>
                     </div>
@@ -96,6 +127,9 @@ const addFriends = ({addVisible,addHandleOk,addHandleCancel}) => {
                                         style={{width:'100%'}}
                                         placeholder="이메일을 검색하세요"
                                         enterButton="검색"
+                                        value={email}
+                                        onChange={handleSearch}
+                                        onClick={handleSearchOk}
                                     />
                                 </Col>
                             </Form.Item>

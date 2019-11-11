@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Link from 'next/link';
 import { Row, Col, Card, Avatar, Icon, message, Menu, Dropdown, Button, Breadcrumb,Typography} from 'antd';
 import moment from 'moment';
@@ -10,6 +10,11 @@ const {Meta} = Card;
 const setFeedback = () => {
 
     const [inProgress, setInProgress] = useState(false);
+
+    // request server 
+    useEffect(()=>{
+
+    },[]);
 
     const text = ['하하하','호호호','후후후','키키키'];
     

@@ -4,12 +4,18 @@ import {
     FRIENDS_MAIN_READ_REQUEST,
     FRIENDS_MAIN_READ_SUCCESS,
     FRIENDS_MAIN_READ_FAILURE,
+    FRIENDS_MAIN_SEARCH_REQUEST,
+    FRIENDS_MAIN_SEARCH_SUCCESS,
+    FRIENDS_MAIN_SEARCH_FAILURE,
     FRIENDS_BLOCK_REQUEST,
     FRIENDS_BLOCK_SUCCESS,
     FRIENDS_BLOCK_FAILURE,
     FRIENDS_ADD_READ_REQUEST,
     FRIENDS_ADD_READ_SUCCESS,
     FRIENDS_ADD_READ_FAILURE,
+    FRIENDS_ADD_SEARCH_REQUEST,
+    FRIENDS_ADD_SEARCH_SUCCESS,
+    FRIENDS_ADD_SEARCH_FAILURE,
     FRIENDS_ADD_ADD_REQUEST,
     FRIENDS_ADD_ADD_SUCCESS,
     FRIENDS_ADD_ADD_FAILURE,
@@ -28,14 +34,14 @@ import {
 } from '../reducers/friends';
 
 // 친구 프로필 Add
-function* friends_Pro_Add_API(){
+function* friends_Pro_Add_API(data){
     // return axios.post('/#');
 };
 
-function* friends_Pro_Add(){
+function* friends_Pro_Add(action){
     try {
         yield delay(2000);
-        yield call(friends_Pro_Add_API);
+        yield call(friends_Pro_Add_API, action.data);
         yield put({
             type:FRIENDS_PROFILE_ADD_SUCCESS,
         });
@@ -80,14 +86,14 @@ function* watchFriends_Pro_Read() {
 
 
 // 친구 요청 모달 Add
-function* friends_Req_Add_API(){
+function* friends_Req_Add_API(data){
     // return axios.post('/#');
 };
 
-function* friends_Req_Add(){
+function* friends_Req_Add(action){
     try {
         yield delay(2000);
-        yield call(friends_Req_Add_API);
+        yield call(friends_Req_Add_API, action.data);
         yield put({
             type:FRIENDS_RQ_ADD_SUCCESS,
         });
@@ -103,7 +109,6 @@ function* friends_Req_Add(){
 function* watchFriends_Req_Add() {
     yield takeLatest(FRIENDS_RQ_ADD_REQUEST, friends_Req_Add);
 };
-
 
 // 친구 요청 모달 Read
 function* friends_Req_Read_API(){
@@ -132,14 +137,14 @@ function* watchFriends_Req_Read() {
 
 
 // 친구 추가 모달 Add
-function* friends_Add_Add_API(){
+function* friends_Add_Add_API(data){
     // return axios.post('/#');
 };
 
-function* friends_Add_Add(){
+function* friends_Add_Add(action){
     try {
         yield delay(2000);
-        yield call(friends_Add_Add_API);
+        yield call(friends_Add_Add_API, action.data);
         yield put({
             type:FRIENDS_ADD_ADD_SUCCESS,
         });
@@ -154,6 +159,31 @@ function* friends_Add_Add(){
 
 function* watchFriends_Add_Add() {
     yield takeLatest(FRIENDS_ADD_ADD_REQUEST, friends_Add_Add);
+};
+
+// 친구 추가 모달 Search
+function* friends_Add_Search_API(data){
+    // return axios.get('/#');
+};
+
+function* friends_Add_Search(action){
+    try {
+        yield delay(2000);
+        yield call(friends_Add_Search_API, action.data);
+        yield put({
+            type:FRIENDS_ADD_SEARCH_SUCCESS,
+        });
+    } catch (e) {
+        console.error(e);
+        yield put({
+            type:FRIENDS_ADD_SEARCH_FAILURE,
+            error:e,
+        });
+    }
+};
+
+function* watchFriends_Add_Search() {
+    yield takeLatest(FRIENDS_ADD_SEARCH_REQUEST, friends_Add_Search);
 };
 
 
@@ -184,14 +214,14 @@ function* watchFriends_Add_Read() {
 
 
 // 친구 차단
-function* friends_Block_API(){
-    // return axios.get();
+function* friends_Block_API(data){
+    // return axios.delete();
 };
 
-function* friends_Block(){
+function* friends_Block(action){
     try {
         yield delay(2000);
-        yield call(friends_Block_API);
+        yield call(friends_Block_API, action.data);
         yield put({
             type:FRIENDS_BLOCK_SUCCESS,
         });
@@ -206,14 +236,39 @@ function* friends_Block(){
 
 function* watchFriends_Block(){
     yield takeLatest( FRIENDS_BLOCK_REQUEST, friends_Block);
-}; 
+};
+
+
+// 친구 메인창 Search
+function* friends_Search_API(data){
+    // return axios.get('/#');
+};
+
+function* friends_Search(action){
+    try {
+        yield delay(2000);
+        yield call(friends_Search_API, action.data);
+        yield put({
+            type:FRIENDS_MAIN_SEARCH_SUCCESS,
+        });
+    } catch (e) {
+        console.error(e);
+        yield put({
+            type:FRIENDS_MAIN_SEARCH_FAILURE,
+            error:e,
+        });
+    }
+};
+
+function* watchFriends_Search() {
+    yield takeLatest(FRIENDS_MAIN_SEARCH_REQUEST, friends_Search);
+};
 
 
 // 친구 메인창 Read
 function* friends_Read_API(){
     // return axios.get('/#');
 };
-
 
 function* friends_Read(){
     try {
@@ -238,8 +293,10 @@ function* watchFriends_Read() {
 export default function* friendsSaga(){
     yield all([
         fork(watchFriends_Read),
+        fork(watchFriends_Search),
         fork(watchFriends_Block),
         fork(watchFriends_Add_Read),
+        fork(watchFriends_Add_Search),
         fork(watchFriends_Add_Add),
         fork(watchFriends_Req_Read),
         fork(watchFriends_Req_Add),

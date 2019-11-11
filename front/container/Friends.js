@@ -1,8 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Input, Icon, Button, Card, Avatar, Popover,Popconfirm } from 'antd';
 import AddFriends from '../container/addFriends';
 import RequestFriends from '../container/requestFriends';
 import ProfileFriends from '../components/ProfileFriends';
+import {FRIENDS_MAIN_SEARCH_REQUEST} from '../reducers/friends';
+import {FRIENDS_MAIN_READ_REQUEST} from '../reducers/friends';
+import {FRIENDS_BLOCK_REQUEST} from '../reducers/friends';
 
 const ButtonGroup = Button.Group;
 const { Meta } = Card;
@@ -10,10 +14,18 @@ const { Search } = Input;
 
 const Friends = () => {
  
+    const dispatch = useDispatch();
+
     const [addVisible, setAddVisible] = useState(false);
     const [requestVisible, setRequestVisible] = useState(false);
     const [profileVisible, setProfileVisible] = useState(false);
     const [profileName, setProfileName] = useState('');
+    const [id,setId] = useState('');
+
+    // request server 
+    useEffect(()=>{
+
+    },[]);
 
     const title = [
       {
@@ -43,6 +55,19 @@ const Friends = () => {
     ];
  
     
+    // 친구 차단
+    const handleConfirm = useCallback(() => {
+      dispatch({
+        type:FRIENDS_BLOCK_REQUEST,
+        data:{
+          id,
+        }
+      });
+    },[]);
+
+    const handleBlock = (e) => {
+      setId(e.target.name); 
+    }
 
     // 친구 추가
     const PopupAddFriends = () => {
@@ -86,9 +111,14 @@ const Friends = () => {
     }
 
     // 친구 검색
-    const handleSearch = () => {
-      console.log('handleSearch');
-    }
+    const handleSearch = useCallback((value) => {
+      dispatch({
+        type: FRIENDS_MAIN_SEARCH_REQUEST,
+        data:{
+          value,
+        }
+      });
+    },[]);
 
     const Item = title.map((item)=> {
       return(
@@ -101,11 +131,12 @@ const Friends = () => {
                               <>
                                   <div id={item.name} style={{display:'flex', justifyContent:'space-around' }}>
                                       <Popconfirm
+                                          onConfirm={handleConfirm}
                                           title="정말로 차단하시겠습니까?"  
                                           okText="네"
                                           cancelText="아니오"
                                       >
-                                          <Button key="ban" type="danger" name={item.name} size="small">차단</Button> 
+                                          <Button key="ban" type="danger" name={item.name} onClick={handleBlock} size="small">차단</Button> 
                                       </Popconfirm>
                                   </div>
                               </>
@@ -146,8 +177,8 @@ const Friends = () => {
                     </Col>
                     <Col span={24} style={{marginBottom:15}}>
                         <Search
-                          placeholder="input search text"
-                          enterButton="Search"
+                          placeholder="이메일을 검색하세요"
+                          enterButton="검색"
                           size="large"
                           onSearch={handleSearch}
                         />

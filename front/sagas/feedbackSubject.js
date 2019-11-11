@@ -16,14 +16,14 @@ import {
 } from '../reducers/feedbackSubject';
 
 // 피드백 주제 Delete
-function* feedback_Sub_Delete_API(){
+function* feedback_Sub_Delete_API(data){
     // return axios.delete('/#');
 };
 
-function* feedback_Sub_Delete(){
+function* feedback_Sub_Delete(action){
     try {
         yield delay(2000);
-        yield call(feedback_Sub_Delete_API);
+        yield call(feedback_Sub_Delete_API, action.data);
         yield put({
             type:FEEDBACK_SUB_DELETE_SUCCESS,
         });
@@ -42,14 +42,14 @@ function* watchFeedback_Sub_Delete() {
 
 
 // 피드백 주제 Update
-function* feedback_Sub_Update_API(){
+function* feedback_Sub_Update_API(data){
     // return axios.patch('/#');
 };
 
-function* feedback_Sub_Update(){
+function* feedback_Sub_Update(action){
     try {
         yield delay(2000);
-        yield call(feedback_Sub_Update_API);
+        yield call(feedback_Sub_Update_API, action.data);
         yield put({
             type:FEEDBACK_SUB_UPDATE_SUCCESS,
         });
@@ -68,14 +68,14 @@ function* watchFeedback_Sub_Update() {
 
 
 // 피드백 주제 Add
-function* feedback_Sub_Add_API(){
+function* feedback_Sub_Add_API(data){
     // return axios.post();
 };
 
-function* feedback_Sub_Add(){
+function* feedback_Sub_Add(action){
     try {
         yield delay(2000);
-        yield call(feedback_Sub_Add_API);
+        yield call(feedback_Sub_Add_API, action.data);
         yield put({
             type:FEEDBACK_SUB_ADD_SUCCESS,
         });
