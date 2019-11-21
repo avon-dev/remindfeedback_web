@@ -25,6 +25,10 @@ RemindFeedback.propTypes = {
     store: PropTypes.object.isRequired,
 };
 
+RemindFeedback.getInitialProps = async(context) => {
+    console.log(context);
+}
+
 const configureStore = (initialState,options) => {
     const sagaMiddleware = createSagaMiddleware();
     const middlewares = [sagaMiddleware];

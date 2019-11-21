@@ -323,6 +323,10 @@ RemindFeedback.propTypes = {
   store: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
 };
 
+RemindFeedback.getInitialProps = async context => {
+  console.log(context);
+};
+
 const configureStore = (initialState, options) => {
   const sagaMiddleware = redux_saga__WEBPACK_IMPORTED_MODULE_5___default()();
   const middlewares = [sagaMiddleware];
@@ -1755,8 +1759,7 @@ function* watchLogin() {
 
 ; // 회원가입
 
-function* signUpAPI(data) {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/signup', data);
+function* signUpAPI(data) {// return axios.post('/signup', data);
 }
 
 ;

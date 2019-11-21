@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {Row, Col, Form, Icon, Input, Button, Checkbox, Typography, Alert  } from 'antd';
 import { layoutCenter } from '../css/Common';
 import { signUpBtn, shadowBorder } from '../css/Signup';
+import {useRouter} from 'next/router'
 import Router from 'next/router';
 import Link from 'next/link';
 import { SIGN_UP_REQUEST } from '../reducers/user';
