@@ -1,8 +1,9 @@
-import React,{useCallback, useState} from 'react';
-import { useDispatch } from 'react-redux';
-import {Row, Col, Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
+import React,{useCallback, useState, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {Row, Col, Form, Icon, Input, Button, Checkbox, Typography, Alert  } from 'antd';
 import { layoutCenter } from '../css/Common';
 import { signUpBtn, shadowBorder } from '../css/Signup';
+import Router from 'next/router';
 import Link from 'next/link';
 import { SIGN_UP_REQUEST } from '../reducers/user';
 
@@ -11,11 +12,14 @@ const {Title, Text} = Typography;
 const signup = () => {
 
     const dispatch = useDispatch();
+    const {isSigningUp,me,isSignedUp} = useSelector(state => state.user);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [re_password, setRe_password] = useState('');
     const [nickname, setNickname] = useState('');
+    const [term, setTerm] = useState(false);
+    const [termError, setTermError] = useState(false);
 
     const signUpFormName = [
             {   
@@ -56,10 +60,11 @@ const signup = () => {
                             <label htmlFor="user-email" style={{fontWeight:'bold'}}>이메일</label>
                             <div style={{marginTop:5}}>
                                 <Input
+                                    type='text'
                                     name='email'
                                     value={email}
                                     onChange={(e)=>setEmail(e.target.value)}
-                                    prefix={<Icon type='smile'
+                                    suffix={<Icon type='smile'
                                     style={{ color: 'rgba(0,0,0,.25)' }} />}
                                     placeholder='Email을 기입해주세요'
                                     required
@@ -70,10 +75,11 @@ const signup = () => {
                             <label htmlFor="user-nickname" style={{fontWeight:'bold'}}>닉네임</label>
                             <div style={{marginTop:5}}>
                                 <Input
+                                    type='text'
                                     name='nickname'
                                     value={nickname}
                                     onChange={(e)=>setNickname(e.target.value)}
-                                    prefix={<Icon type='user'
+                                    suffix={<Icon type='user'
                                     style={{ color: 'rgba(0,0,0,.25)' }} />}
                                     placeholder='Nickname을 기입해주세요'
                                     required
@@ -88,7 +94,7 @@ const signup = () => {
                                     name='password'
                                     value={password}
                                     onChange={(e)=>setPassword(e.target.value)}
-                                    prefix={<Icon type='lock'
+                                    suffix={<Icon type='lock'
                                     style={{ color: 'rgba(0,0,0,.25)' }} />}
                                     placeholder='Password를 기입해주세요'
                                     required
@@ -103,23 +109,39 @@ const signup = () => {
                                     name='re_password'
                                     value={re_password}
                                     onChange={(e)=>setRe_password(e.target.value)}
-                                    prefix={<Icon type='lock'
+                                    suffix={<Icon type='lock'
                                     style={{ color: 'rgba(0,0,0,.25)' }} />}
                                     placeholder='Password를 한번 더 기입해주세요'
                                     required
                                 />
                             </div>
                         </div>
-                                                                         
+
+      const onChangeTerm = useCallback((e) => {
+        setTermError(false);
+        setTerm(e.target.checked);
+      }, []);
+
+     useEffect(() => {
+        if (isSignedUp) {
+          alert('로그인창으로 이동합니다.');
+          Router.push('/login');
+        }
+      }, [isSignedUp&&isSignedUp])
+         
     const _onSubmit = useCallback((e) => {
         e.preventDefault();
+        if(!term){
+            alert('약관동의를 클릭해주세요');
+            return setTermError(true);
+        }
         dispatch({
             type:SIGN_UP_REQUEST,
             data:{
                 email,password,nickname,
             },
         });
-    },[email,password,nickname]);
+    },[email,password,nickname,term]);
 
 
     return(
@@ -139,10 +161,10 @@ const signup = () => {
                             {passwordForm}
                             {re_passwordForm}
                         <Col span={24} style={{marginTop:15}}>
-                            <Checkbox style={{fontWeight:'bold'}}>서비스 이용약관, 개인정보 수집 및 이용, 중요한 약관에 모두 동의합니다.</Checkbox>
+                            <Checkbox style={{fontWeight:'bold'}} onChange={onChangeTerm}>서비스 이용약관, 개인정보 수집 및 이용, 중요한 약관에 모두 동의합니다.</Checkbox>
                         </Col>
                         <Col span={24} style={{marginTop:15}}>
-                            <Button size="large" htmlType="submit" className="signup-form-button" style={signUpBtn}>
+                            <Button size="large" htmlType="submit" className="signup-form-button" style={signUpBtn} loading={isSigningUp}>
                                 회원가입
                             </Button>
                         </Col>

@@ -12017,7 +12017,7 @@ module.exports = (__webpack_require__(/*! dll-reference dll_ea92a4d9664833a26066
 /*!***********************************************************************!*\
   !*** ./node_modules/redux-saga/dist/redux-saga-core-npm-proxy.esm.js ***!
   \***********************************************************************/
-/*! exports provided: CANCEL, SAGA_LOCATION, buffers, detach, END, channel, eventChannel, isEnd, multicastChannel, runSaga, stdChannel, default */
+/*! exports provided: default, CANCEL, SAGA_LOCATION, buffers, detach, END, channel, eventChannel, isEnd, multicastChannel, runSaga, stdChannel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14309,7 +14309,6 @@ var LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'; // 로그아웃 실패
         isSignedUp: true,
         me: {
           email: action.email,
-          password: action.email,
           nickname: action.nickname
         }
       });
@@ -16245,7 +16244,8 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(u
 
 
 
- // 마이페이지
+
+axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.baseURL = 'http://localhost:8000/auth'; // 마이페이지
 
 function logUserAPI() {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function logUserAPI$(_context) {
@@ -16472,11 +16472,14 @@ function watchLogin() {
 
 ; // 회원가입
 
-function signUpAPI(signUpData) {
+function signUpAPI(data) {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function signUpAPI$(_context10) {
     while (1) {
       switch (_context10.prev = _context10.next) {
         case 0:
+          return _context10.abrupt("return", axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/signup', data));
+
+        case 1:
         case "end":
           return _context10.stop();
       }
@@ -16487,6 +16490,7 @@ function signUpAPI(signUpData) {
 ;
 
 function signUp(action) {
+  var result;
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function signUp$(_context11) {
     while (1) {
       switch (_context11.prev = _context11.next) {
@@ -16500,31 +16504,33 @@ function signUp(action) {
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(signUpAPI, action.data);
 
         case 5:
-          _context11.next = 7;
+          result = _context11.sent;
+          _context11.next = 8;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP_SUCCESS"]
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP_SUCCESS"],
+            data: result.data
           });
 
-        case 7:
-          _context11.next = 14;
+        case 8:
+          _context11.next = 15;
           break;
 
-        case 9:
-          _context11.prev = 9;
+        case 10:
+          _context11.prev = 10;
           _context11.t0 = _context11["catch"](0);
           console.error(_context11.t0);
-          _context11.next = 14;
+          _context11.next = 15;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
             type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP_FAILURE"],
             error: _context11.t0
           });
 
-        case 14:
+        case 15:
         case "end":
           return _context11.stop();
       }
     }
-  }, _marked11, null, [[0, 9]]);
+  }, _marked11, null, [[0, 10]]);
 }
 
 ;

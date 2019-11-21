@@ -69,7 +69,6 @@ export default (state = initialState, action ) => {
                 isSignedUp: true,
                 me:{
                    email:action.email,
-                   password:action.email,
                    nickname:action.nickname, 
                 },
             }

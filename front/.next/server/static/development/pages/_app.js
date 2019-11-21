@@ -949,7 +949,6 @@ const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'; // 로그아웃 실패
         isSignedUp: true,
         me: {
           email: action.email,
-          password: action.email,
           nickname: action.nickname
         }
       });
@@ -1666,7 +1665,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
 
 
- // 마이페이지
+
+axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = 'http://localhost:8000/auth'; // 마이페이지
 
 function* logUserAPI() {// return axios.get('/#');
 }
@@ -1755,7 +1755,8 @@ function* watchLogin() {
 
 ; // 회원가입
 
-function* signUpAPI(signUpData) {// return axios.post('/#');
+function* signUpAPI(data) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/signup', data);
 }
 
 ;
@@ -1763,9 +1764,10 @@ function* signUpAPI(signUpData) {// return axios.post('/#');
 function* signUp(action) {
   try {
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(signUpAPI, action.data);
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(signUpAPI, action.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
-      type: _reducers_user__WEBPACK_IMPORTED_MODULE_2__["SIGN_UP_SUCCESS"]
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_2__["SIGN_UP_SUCCESS"],
+      data: result.data
     });
   } catch (e) {
     console.error(e);

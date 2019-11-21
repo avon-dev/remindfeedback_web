@@ -15,6 +15,8 @@ import {
     LOG_OUT_FAILURE,
 } from '../reducers/user';
 
+axios.defaults.baseURL = 'http://localhost:8000/auth';
+
 // 마이페이지
 function* logUserAPI(){
     // return axios.get('/#');
@@ -94,17 +96,18 @@ function* watchLogin(){
 
 
 // 회원가입
-function* signUpAPI(signUpData){
-    // return axios.post('/#');
+function* signUpAPI(data){
+    // return axios.post('/signup', data);
 };
 
 
 function* signUp(action){
     try {
         yield delay(2000);
-        yield call(signUpAPI,action.data);
+        const result = yield call(signUpAPI,action.data);
         yield put({
             type:SIGN_UP_SUCCESS,
+            data:result.data,
         });
     } catch (e) {
         console.error(e);
