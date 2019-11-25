@@ -6,6 +6,7 @@ import {
     LOG_IN_FAILURE,
     SIGN_UP_REQUEST,
     SIGN_UP_SUCCESS,
+    SIGN_UP_HASEMAIL,
     SIGN_UP_FAILURE,
     LOAD_USER_REQUEST,
     LOAD_USER_SUCCESS,
@@ -97,15 +98,21 @@ function* watchLogin(){
 
 // 회원가입
 function signUpAPI(data){
-    return axios.post('/signup', data);
-                        
+    return axios.post('/signup', data);                       
 };
 
 
 function* signUp(action){
     try {
         const result = yield call(signUpAPI, action.data);
-       console.log(result.data);
+        console.log(result);
+        result.data.msg
+        ?
+        yield put({
+            type:SIGN_UP_HASEMAIL,
+            data:result.data,
+        })
+        :
         yield put({
             type:SIGN_UP_SUCCESS,
             data:result.data,

@@ -16,7 +16,7 @@ import {
 } from '../reducers/feedbackSubject';
 
 // 피드백 주제 Delete
-function* feedback_Sub_Delete_API(data){
+function feedback_Sub_Delete_API(data){
     // return axios.delete('/#');
 };
 
@@ -42,7 +42,7 @@ function* watchFeedback_Sub_Delete() {
 
 
 // 피드백 주제 Update
-function* feedback_Sub_Update_API(data){
+function feedback_Sub_Update_API(data){
     // return axios.patch('/#');
 };
 
@@ -68,7 +68,7 @@ function* watchFeedback_Sub_Update() {
 
 
 // 피드백 주제 Add
-function* feedback_Sub_Add_API(data){
+function feedback_Sub_Add_API(data){
     // return axios.post();
 };
 
@@ -94,7 +94,7 @@ function* watchFeedback_Sub_Add(){
 
 
 // 피드백 주제 메인 Read
-function* feedback_Sub_Read_API(){
+function feedback_Sub_Read_API(){
     // return axios.get('/#');
 };
 

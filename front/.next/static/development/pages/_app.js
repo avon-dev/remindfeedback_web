@@ -14976,17 +14976,19 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!**************************!*\
   !*** ./reducers/user.js ***!
   \**************************/
-/*! exports provided: initialState, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, default */
+/*! exports provided: initialState, MOVE_TO_SIGNUP, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_HASEMAIL, SIGN_UP_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MOVE_TO_SIGNUP", function() { return MOVE_TO_SIGNUP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_REQUEST", function() { return LOG_IN_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_SUCCESS", function() { return LOG_IN_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_FAILURE", function() { return LOG_IN_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP_REQUEST", function() { return SIGN_UP_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP_SUCCESS", function() { return SIGN_UP_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP_HASEMAIL", function() { return SIGN_UP_HASEMAIL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP_FAILURE", function() { return SIGN_UP_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_USER_REQUEST", function() { return LOAD_USER_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_USER_SUCCESS", function() { return LOAD_USER_SUCCESS; });
@@ -15007,6 +15009,8 @@ var initialState = {
   // 회원가입 성공
   isSigningUp: false,
   // 회원가입 시도중
+  hasMessage: false,
+  // 회원가입 실패 - 메시지
   signUpErrorReason: '',
   // 회원가입 실패 사유 
   isLoggingOut: false,
@@ -15018,10 +15022,13 @@ var initialState = {
   me: {
     email: '',
     password: '',
-    nickname: ''
+    nickname: '',
+    msg: ''
   } // 내 정보 
 
 };
+var MOVE_TO_SIGNUP = 'MOVE_TO_SIGNUP'; // 회원가입 창 이동
+
 var LOG_IN_REQUEST = 'LOG_IN_REQUEST'; // 로그인 시도 중
 
 var LOG_IN_SUCCESS = 'LOG_IN_SUCCESS'; // 로그인 성공
@@ -15031,6 +15038,8 @@ var LOG_IN_FAILURE = 'LOG_IN_FAILURE'; // 로그인 실패
 var SIGN_UP_REQUEST = 'SIGN_UP_REQUEST'; // 회원가입 시도 중
 
 var SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS'; // 회원가입 성공
+
+var SIGN_UP_HASEMAIL = 'SIGN_UP_HASEMAIL'; // 회원가입 이메일 있는 경우
 
 var SIGN_UP_FAILURE = 'SIGN_UP_FAILURE'; // 회원가입 실패
 
@@ -15051,6 +15060,19 @@ var LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'; // 로그아웃 실패
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
+    case MOVE_TO_SIGNUP:
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isSigningUp: false,
+        isSignedUp: false,
+        hasMessage: false,
+        me: {
+          email: '',
+          password: '',
+          nickname: '',
+          msg: ''
+        }
+      });
+
     case LOG_IN_REQUEST:
       return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
         isLoggingIn: true
@@ -15076,13 +15098,27 @@ var LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'; // 로그아웃 실패
         isSigningUp: true
       });
 
+    case SIGN_UP_HASEMAIL:
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isSigningUp: false,
+        isSignedUp: false,
+        hasMessage: true,
+        me: {
+          email: '',
+          nickname: '',
+          msg: action.data.msg
+        }
+      });
+
     case SIGN_UP_SUCCESS:
       return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
         isSigningUp: false,
         isSignedUp: true,
+        hasMessage: false,
         me: {
-          email: action.email,
-          nickname: action.nickname
+          email: action.data.email,
+          nickname: action.data.nickname,
+          msg: ''
         }
       });
 
@@ -15090,6 +15126,7 @@ var LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'; // 로그아웃 실패
       return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
         isSigningUp: false,
         isSignedUp: false,
+        hasMessage: false,
         signUpErrorReason: action.error,
         me: null
       });
@@ -15121,59 +15158,41 @@ __webpack_require__.r(__webpack_exports__);
 
 var _marked =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Item_Comment_API),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Item_Comment),
     _marked2 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Item_Comment),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Item_Comment),
     _marked3 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Item_Comment),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Item_Complete),
     _marked4 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Item_Complete_API),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Item_Complete),
     _marked5 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Item_Complete),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Item_Add),
     _marked6 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Item_Complete),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Item_Add),
     _marked7 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Item_Add_API),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Item_Read),
     _marked8 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Item_Add),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Item_Read),
     _marked9 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Item_Add),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Add),
     _marked10 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Item_Read_API),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Add),
     _marked11 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Item_Read),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Read),
     _marked12 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Item_Read),
-    _marked13 =
-/*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Add_API),
-    _marked14 =
-/*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Add),
-    _marked15 =
-/*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Add),
-    _marked16 =
-/*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Read_API),
-    _marked17 =
-/*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Read),
-    _marked18 =
-/*#__PURE__*/
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Read),
-    _marked19 =
+    _marked13 =
 /*#__PURE__*/
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedbackSaga);
 
@@ -15181,86 +15200,129 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(f
 
  // Feedback 피드백 게시물 댓글 Read
 
-function feedback_Item_Comment_API() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Item_Comment_API$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, _marked);
+function feedback_Item_Comment_API() {// return axios.get('/#');
 }
 
 ;
 
 function feedback_Item_Comment() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Item_Comment$(_context2) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Item_Comment$(_context) {
     while (1) {
-      switch (_context2.prev = _context2.next) {
+      switch (_context.prev = _context.next) {
         case 0:
-          _context2.prev = 0;
-          _context2.next = 3;
+          _context.prev = 0;
+          _context.next = 3;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
 
         case 3:
-          _context2.next = 5;
+          _context.next = 5;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Item_Comment_API);
 
         case 5:
-          _context2.next = 7;
+          _context.next = 7;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
             type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_COMMENT_SUCCESS"]
           });
 
         case 7:
-          _context2.next = 14;
+          _context.next = 14;
           break;
 
         case 9:
-          _context2.prev = 9;
-          _context2.t0 = _context2["catch"](0);
-          console.error(_context2.t0);
-          _context2.next = 14;
+          _context.prev = 9;
+          _context.t0 = _context["catch"](0);
+          console.error(_context.t0);
+          _context.next = 14;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
             type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_COMMENT_FAILURE"],
-            error: _context2.t0
+            error: _context.t0
           });
 
         case 14:
         case "end":
-          return _context2.stop();
+          return _context.stop();
       }
     }
-  }, _marked2, null, [[0, 9]]);
+  }, _marked, null, [[0, 9]]);
 }
 
 ;
 
 function watchFeedback_Item_Comment() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Item_Comment$(_context3) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Item_Comment$(_context2) {
     while (1) {
-      switch (_context3.prev = _context3.next) {
+      switch (_context2.prev = _context2.next) {
         case 0:
-          _context3.next = 2;
+          _context2.next = 2;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_COMMENT_REQUEST"], feedback_Item_Comment);
 
         case 2:
         case "end":
-          return _context3.stop();
+          return _context2.stop();
       }
     }
-  }, _marked3);
+  }, _marked2);
 }
 
 ; // Feedback 피드백 게시물 세부사항 Read
 
-function feedback_Item_Complete_API() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Item_Complete_API$(_context4) {
+function feedback_Item_Complete_API() {// return axios.get('/#');
+}
+
+;
+
+function feedback_Item_Complete() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Item_Complete$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.prev = 0;
+          _context3.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
+
+        case 3:
+          _context3.next = 5;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Item_Complete_API);
+
+        case 5:
+          _context3.next = 7;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_COMPLETE_SUCCESS"]
+          });
+
+        case 7:
+          _context3.next = 14;
+          break;
+
+        case 9:
+          _context3.prev = 9;
+          _context3.t0 = _context3["catch"](0);
+          console.error(_context3.t0);
+          _context3.next = 14;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_COMPLETE_FAILURE"],
+            error: _context3.t0
+          });
+
+        case 14:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, _marked3, null, [[0, 9]]);
+}
+
+;
+
+function watchFeedback_Item_Complete() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Item_Complete$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
+          _context4.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_COMPLETE_REQUEST"], feedback_Item_Complete);
+
+        case 2:
         case "end":
           return _context4.stop();
       }
@@ -15268,10 +15330,15 @@ function feedback_Item_Complete_API() {
   }, _marked4);
 }
 
+; // Feedback 피드백 게시물 Add
+
+function feedback_Item_Add_API() {// return axios.post('/#');
+}
+
 ;
 
-function feedback_Item_Complete() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Item_Complete$(_context5) {
+function feedback_Item_Add() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Item_Add$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
@@ -15281,12 +15348,12 @@ function feedback_Item_Complete() {
 
         case 3:
           _context5.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Item_Complete_API);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Item_Add_API);
 
         case 5:
           _context5.next = 7;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_COMPLETE_SUCCESS"]
+            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_ADD_SUCCESS"]
           });
 
         case 7:
@@ -15299,7 +15366,7 @@ function feedback_Item_Complete() {
           console.error(_context5.t0);
           _context5.next = 14;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_COMPLETE_FAILURE"],
+            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_ADD_FAILURE"],
             error: _context5.t0
           });
 
@@ -15313,13 +15380,13 @@ function feedback_Item_Complete() {
 
 ;
 
-function watchFeedback_Item_Complete() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Item_Complete$(_context6) {
+function watchFeedback_Item_Add() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Item_Add$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
           _context6.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_COMPLETE_REQUEST"], feedback_Item_Complete);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_ADD_REQUEST"], feedback_Item_Add);
 
         case 2:
         case "end":
@@ -15329,88 +15396,131 @@ function watchFeedback_Item_Complete() {
   }, _marked6);
 }
 
-; // Feedback 피드백 게시물 Add
+; // Feedback 피드백 게시물 Read
 
-function feedback_Item_Add_API() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Item_Add_API$(_context7) {
-    while (1) {
-      switch (_context7.prev = _context7.next) {
-        case 0:
-        case "end":
-          return _context7.stop();
-      }
-    }
-  }, _marked7);
+function feedback_Item_Read_API() {// return axios.get('/#');
 }
 
 ;
 
-function feedback_Item_Add() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Item_Add$(_context8) {
+function feedback_Item_Read() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Item_Read$(_context7) {
     while (1) {
-      switch (_context8.prev = _context8.next) {
+      switch (_context7.prev = _context7.next) {
         case 0:
-          _context8.prev = 0;
-          _context8.next = 3;
+          _context7.prev = 0;
+          _context7.next = 3;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
 
         case 3:
-          _context8.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Item_Add_API);
+          _context7.next = 5;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Item_Read_API);
 
         case 5:
-          _context8.next = 7;
+          _context7.next = 7;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_ADD_SUCCESS"]
+            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_READ_SUCCESS"]
           });
 
         case 7:
-          _context8.next = 14;
+          _context7.next = 14;
           break;
 
         case 9:
-          _context8.prev = 9;
-          _context8.t0 = _context8["catch"](0);
-          console.error(_context8.t0);
-          _context8.next = 14;
+          _context7.prev = 9;
+          _context7.t0 = _context7["catch"](0);
+          console.error(_context7.t0);
+          _context7.next = 14;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_ADD_FAILURE"],
-            error: _context8.t0
+            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_READ_FAILURE"],
+            error: _context7.t0
           });
 
         case 14:
         case "end":
-          return _context8.stop();
+          return _context7.stop();
       }
     }
-  }, _marked8, null, [[0, 9]]);
+  }, _marked7, null, [[0, 9]]);
 }
 
 ;
 
-function watchFeedback_Item_Add() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Item_Add$(_context9) {
+function watchFeedback_Item_Read() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Item_Read$(_context8) {
+    while (1) {
+      switch (_context8.prev = _context8.next) {
+        case 0:
+          _context8.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_READ_REQUEST"], feedback_Item_Read);
+
+        case 2:
+        case "end":
+          return _context8.stop();
+      }
+    }
+  }, _marked8);
+}
+
+; // Feedback 새 피드백 Add
+
+function feedback_Add_API() {// return axios.post();
+}
+
+;
+
+function feedback_Add() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Add$(_context9) {
     while (1) {
       switch (_context9.prev = _context9.next) {
         case 0:
-          _context9.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_ADD_REQUEST"], feedback_Item_Add);
+          _context9.prev = 0;
+          _context9.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
 
-        case 2:
+        case 3:
+          _context9.next = 5;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Add_API);
+
+        case 5:
+          _context9.next = 7;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ADD_SUCCESS"]
+          });
+
+        case 7:
+          _context9.next = 14;
+          break;
+
+        case 9:
+          _context9.prev = 9;
+          _context9.t0 = _context9["catch"](0);
+          console.error(_context9.t0);
+          _context9.next = 14;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ADD_FAILURE"],
+            error: _context9.t0
+          });
+
+        case 14:
         case "end":
           return _context9.stop();
       }
     }
-  }, _marked9);
+  }, _marked9, null, [[0, 9]]);
 }
 
-; // Feedback 피드백 게시물 Read
+;
 
-function feedback_Item_Read_API() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Item_Read_API$(_context10) {
+function watchFeedback_Add() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Add$(_context10) {
     while (1) {
       switch (_context10.prev = _context10.next) {
         case 0:
+          _context10.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ADD_REQUEST"], feedback_Add);
+
+        case 2:
         case "end":
           return _context10.stop();
       }
@@ -15418,10 +15528,15 @@ function feedback_Item_Read_API() {
   }, _marked10);
 }
 
+; // Feedback 메인화면 Read
+
+function feedback_Read_API(feedbackData) {// return axios.get('/#');
+}
+
 ;
 
-function feedback_Item_Read() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Item_Read$(_context11) {
+function feedback_Read(action) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Read$(_context11) {
     while (1) {
       switch (_context11.prev = _context11.next) {
         case 0:
@@ -15431,12 +15546,12 @@ function feedback_Item_Read() {
 
         case 3:
           _context11.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Item_Read_API);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Read_API, action.data);
 
         case 5:
           _context11.next = 7;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_READ_SUCCESS"]
+            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_READ_SUCCESS"]
           });
 
         case 7:
@@ -15449,7 +15564,7 @@ function feedback_Item_Read() {
           console.error(_context11.t0);
           _context11.next = 14;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_READ_FAILURE"],
+            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_READ_FAILURE"],
             error: _context11.t0
           });
 
@@ -15463,13 +15578,13 @@ function feedback_Item_Read() {
 
 ;
 
-function watchFeedback_Item_Read() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Item_Read$(_context12) {
+function watchFeedback_Read() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Read$(_context12) {
     while (1) {
       switch (_context12.prev = _context12.next) {
         case 0:
           _context12.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_READ_REQUEST"], feedback_Item_Read);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_READ_REQUEST"], feedback_Read);
 
         case 2:
         case "end":
@@ -15479,171 +15594,21 @@ function watchFeedback_Item_Read() {
   }, _marked12);
 }
 
-; // Feedback 새 피드백 Add
-
-function feedback_Add_API() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Add_API$(_context13) {
+;
+function feedbackSaga() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedbackSaga$(_context13) {
     while (1) {
       switch (_context13.prev = _context13.next) {
         case 0:
+          _context13.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Item_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Item_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Item_Complete), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Item_Comment)]);
+
+        case 2:
         case "end":
           return _context13.stop();
       }
     }
   }, _marked13);
-}
-
-;
-
-function feedback_Add() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Add$(_context14) {
-    while (1) {
-      switch (_context14.prev = _context14.next) {
-        case 0:
-          _context14.prev = 0;
-          _context14.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
-
-        case 3:
-          _context14.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Add_API);
-
-        case 5:
-          _context14.next = 7;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ADD_SUCCESS"]
-          });
-
-        case 7:
-          _context14.next = 14;
-          break;
-
-        case 9:
-          _context14.prev = 9;
-          _context14.t0 = _context14["catch"](0);
-          console.error(_context14.t0);
-          _context14.next = 14;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ADD_FAILURE"],
-            error: _context14.t0
-          });
-
-        case 14:
-        case "end":
-          return _context14.stop();
-      }
-    }
-  }, _marked14, null, [[0, 9]]);
-}
-
-;
-
-function watchFeedback_Add() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Add$(_context15) {
-    while (1) {
-      switch (_context15.prev = _context15.next) {
-        case 0:
-          _context15.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ADD_REQUEST"], feedback_Add);
-
-        case 2:
-        case "end":
-          return _context15.stop();
-      }
-    }
-  }, _marked15);
-}
-
-; // Feedback 메인화면 Read
-
-function feedback_Read_API(feedbackData) {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Read_API$(_context16) {
-    while (1) {
-      switch (_context16.prev = _context16.next) {
-        case 0:
-        case "end":
-          return _context16.stop();
-      }
-    }
-  }, _marked16);
-}
-
-;
-
-function feedback_Read(action) {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Read$(_context17) {
-    while (1) {
-      switch (_context17.prev = _context17.next) {
-        case 0:
-          _context17.prev = 0;
-          _context17.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
-
-        case 3:
-          _context17.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Read_API, action.data);
-
-        case 5:
-          _context17.next = 7;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_READ_SUCCESS"]
-          });
-
-        case 7:
-          _context17.next = 14;
-          break;
-
-        case 9:
-          _context17.prev = 9;
-          _context17.t0 = _context17["catch"](0);
-          console.error(_context17.t0);
-          _context17.next = 14;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_READ_FAILURE"],
-            error: _context17.t0
-          });
-
-        case 14:
-        case "end":
-          return _context17.stop();
-      }
-    }
-  }, _marked17, null, [[0, 9]]);
-}
-
-;
-
-function watchFeedback_Read() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Read$(_context18) {
-    while (1) {
-      switch (_context18.prev = _context18.next) {
-        case 0:
-          _context18.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_READ_REQUEST"], feedback_Read);
-
-        case 2:
-        case "end":
-          return _context18.stop();
-      }
-    }
-  }, _marked18);
-}
-
-;
-function feedbackSaga() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedbackSaga$(_context19) {
-    while (1) {
-      switch (_context19.prev = _context19.next) {
-        case 0:
-          _context19.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Item_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Item_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Item_Complete), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Item_Comment)]);
-
-        case 2:
-        case "end":
-          return _context19.stop();
-      }
-    }
-  }, _marked19);
 }
 
 /***/ }),
@@ -15668,41 +15633,29 @@ __webpack_require__.r(__webpack_exports__);
 
 var _marked =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Sub_Delete_API),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Sub_Delete),
     _marked2 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Sub_Delete),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Sub_Delete),
     _marked3 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Sub_Delete),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Sub_Update),
     _marked4 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Sub_Update_API),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Sub_Update),
     _marked5 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Sub_Update),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Sub_Add),
     _marked6 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Sub_Update),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Sub_Add),
     _marked7 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Sub_Add_API),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Sub_Read),
     _marked8 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Sub_Add),
-    _marked9 =
-/*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Sub_Add),
-    _marked10 =
-/*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Sub_Read_API),
-    _marked11 =
-/*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Sub_Read),
-    _marked12 =
-/*#__PURE__*/
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Sub_Read),
-    _marked13 =
+    _marked9 =
 /*#__PURE__*/
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedbackSubjectSaga);
 
@@ -15710,86 +15663,129 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(f
 
  // 피드백 주제 Delete
 
-function feedback_Sub_Delete_API(data) {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Delete_API$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, _marked);
+function feedback_Sub_Delete_API(data) {// return axios.delete('/#');
 }
 
 ;
 
 function feedback_Sub_Delete(action) {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Delete$(_context2) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Delete$(_context) {
     while (1) {
-      switch (_context2.prev = _context2.next) {
+      switch (_context.prev = _context.next) {
         case 0:
-          _context2.prev = 0;
-          _context2.next = 3;
+          _context.prev = 0;
+          _context.next = 3;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
 
         case 3:
-          _context2.next = 5;
+          _context.next = 5;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Sub_Delete_API, action.data);
 
         case 5:
-          _context2.next = 7;
+          _context.next = 7;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
             type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_DELETE_SUCCESS"]
           });
 
         case 7:
-          _context2.next = 14;
+          _context.next = 14;
           break;
 
         case 9:
-          _context2.prev = 9;
-          _context2.t0 = _context2["catch"](0);
-          console.error(_context2.t0);
-          _context2.next = 14;
+          _context.prev = 9;
+          _context.t0 = _context["catch"](0);
+          console.error(_context.t0);
+          _context.next = 14;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
             type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_DELETE_FAILURE"],
-            error: _context2.t0
+            error: _context.t0
           });
 
         case 14:
         case "end":
-          return _context2.stop();
+          return _context.stop();
       }
     }
-  }, _marked2, null, [[0, 9]]);
+  }, _marked, null, [[0, 9]]);
 }
 
 ;
 
 function watchFeedback_Sub_Delete() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Sub_Delete$(_context3) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Sub_Delete$(_context2) {
     while (1) {
-      switch (_context3.prev = _context3.next) {
+      switch (_context2.prev = _context2.next) {
         case 0:
-          _context3.next = 2;
+          _context2.next = 2;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_DELETE_REQUEST"], feedback_Sub_Delete);
 
         case 2:
         case "end":
-          return _context3.stop();
+          return _context2.stop();
       }
     }
-  }, _marked3);
+  }, _marked2);
 }
 
 ; // 피드백 주제 Update
 
-function feedback_Sub_Update_API(data) {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Update_API$(_context4) {
+function feedback_Sub_Update_API(data) {// return axios.patch('/#');
+}
+
+;
+
+function feedback_Sub_Update(action) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Update$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.prev = 0;
+          _context3.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
+
+        case 3:
+          _context3.next = 5;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Sub_Update_API, action.data);
+
+        case 5:
+          _context3.next = 7;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_UPDATE_SUCCESS"]
+          });
+
+        case 7:
+          _context3.next = 14;
+          break;
+
+        case 9:
+          _context3.prev = 9;
+          _context3.t0 = _context3["catch"](0);
+          console.error(_context3.t0);
+          _context3.next = 14;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_UPDATE_FAILURE"],
+            error: _context3.t0
+          });
+
+        case 14:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, _marked3, null, [[0, 9]]);
+}
+
+;
+
+function watchFeedback_Sub_Update() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Sub_Update$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
+          _context4.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_UPDATE_REQUEST"], feedback_Sub_Update);
+
+        case 2:
         case "end":
           return _context4.stop();
       }
@@ -15797,10 +15793,15 @@ function feedback_Sub_Update_API(data) {
   }, _marked4);
 }
 
+; // 피드백 주제 Add
+
+function feedback_Sub_Add_API(data) {// return axios.post();
+}
+
 ;
 
-function feedback_Sub_Update(action) {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Update$(_context5) {
+function feedback_Sub_Add(action) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Add$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
@@ -15810,12 +15811,12 @@ function feedback_Sub_Update(action) {
 
         case 3:
           _context5.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Sub_Update_API, action.data);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Sub_Add_API, action.data);
 
         case 5:
           _context5.next = 7;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_UPDATE_SUCCESS"]
+            type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_ADD_SUCCESS"]
           });
 
         case 7:
@@ -15828,7 +15829,7 @@ function feedback_Sub_Update(action) {
           console.error(_context5.t0);
           _context5.next = 14;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_UPDATE_FAILURE"],
+            type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_ADD_FAILURE"],
             error: _context5.t0
           });
 
@@ -15842,13 +15843,13 @@ function feedback_Sub_Update(action) {
 
 ;
 
-function watchFeedback_Sub_Update() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Sub_Update$(_context6) {
+function watchFeedback_Sub_Add() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Sub_Add$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
           _context6.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_UPDATE_REQUEST"], feedback_Sub_Update);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_ADD_REQUEST"], feedback_Sub_Add);
 
         case 2:
         case "end":
@@ -15858,72 +15859,80 @@ function watchFeedback_Sub_Update() {
   }, _marked6);
 }
 
-; // 피드백 주제 Add
+; // 피드백 주제 메인 Read
 
-function feedback_Sub_Add_API(data) {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Add_API$(_context7) {
-    while (1) {
-      switch (_context7.prev = _context7.next) {
-        case 0:
-        case "end":
-          return _context7.stop();
-      }
-    }
-  }, _marked7);
+function feedback_Sub_Read_API() {// return axios.get('/#');
 }
 
 ;
 
-function feedback_Sub_Add(action) {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Add$(_context8) {
+function feedback_Sub_Read() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Read$(_context7) {
     while (1) {
-      switch (_context8.prev = _context8.next) {
+      switch (_context7.prev = _context7.next) {
         case 0:
-          _context8.prev = 0;
-          _context8.next = 3;
+          _context7.prev = 0;
+          _context7.next = 3;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
 
         case 3:
-          _context8.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Sub_Add_API, action.data);
+          _context7.next = 5;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Sub_Read_API);
 
         case 5:
-          _context8.next = 7;
+          _context7.next = 7;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_ADD_SUCCESS"]
+            type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_READ_SUCCESS"]
           });
 
         case 7:
-          _context8.next = 14;
+          _context7.next = 14;
           break;
 
         case 9:
-          _context8.prev = 9;
-          _context8.t0 = _context8["catch"](0);
-          console.error(_context8.t0);
-          _context8.next = 14;
+          _context7.prev = 9;
+          _context7.t0 = _context7["catch"](0);
+          console.error(_context7.t0);
+          _context7.next = 14;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_ADD_FAILURE"],
-            error: _context8.t0
+            type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_READ_FAILURE"],
+            error: _context7.t0
           });
 
         case 14:
         case "end":
-          return _context8.stop();
+          return _context7.stop();
       }
     }
-  }, _marked8, null, [[0, 9]]);
+  }, _marked7, null, [[0, 9]]);
 }
 
 ;
 
-function watchFeedback_Sub_Add() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Sub_Add$(_context9) {
+function watchFeedback_Sub_Read() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Sub_Read$(_context8) {
+    while (1) {
+      switch (_context8.prev = _context8.next) {
+        case 0:
+          _context8.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_READ_REQUEST"], feedback_Sub_Read);
+
+        case 2:
+        case "end":
+          return _context8.stop();
+      }
+    }
+  }, _marked8);
+}
+
+;
+function feedbackSubjectSaga() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedbackSubjectSaga$(_context9) {
     while (1) {
       switch (_context9.prev = _context9.next) {
         case 0:
           _context9.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_ADD_REQUEST"], feedback_Sub_Add);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Sub_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Sub_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Sub_Update), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Sub_Delete)]);
 
         case 2:
         case "end":
@@ -15931,98 +15940,6 @@ function watchFeedback_Sub_Add() {
       }
     }
   }, _marked9);
-}
-
-; // 피드백 주제 메인 Read
-
-function feedback_Sub_Read_API() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Read_API$(_context10) {
-    while (1) {
-      switch (_context10.prev = _context10.next) {
-        case 0:
-        case "end":
-          return _context10.stop();
-      }
-    }
-  }, _marked10);
-}
-
-;
-
-function feedback_Sub_Read() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Sub_Read$(_context11) {
-    while (1) {
-      switch (_context11.prev = _context11.next) {
-        case 0:
-          _context11.prev = 0;
-          _context11.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
-
-        case 3:
-          _context11.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Sub_Read_API);
-
-        case 5:
-          _context11.next = 7;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_READ_SUCCESS"]
-          });
-
-        case 7:
-          _context11.next = 14;
-          break;
-
-        case 9:
-          _context11.prev = 9;
-          _context11.t0 = _context11["catch"](0);
-          console.error(_context11.t0);
-          _context11.next = 14;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_READ_FAILURE"],
-            error: _context11.t0
-          });
-
-        case 14:
-        case "end":
-          return _context11.stop();
-      }
-    }
-  }, _marked11, null, [[0, 9]]);
-}
-
-;
-
-function watchFeedback_Sub_Read() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Sub_Read$(_context12) {
-    while (1) {
-      switch (_context12.prev = _context12.next) {
-        case 0:
-          _context12.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedbackSubject__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_SUB_READ_REQUEST"], feedback_Sub_Read);
-
-        case 2:
-        case "end":
-          return _context12.stop();
-      }
-    }
-  }, _marked12);
-}
-
-;
-function feedbackSubjectSaga() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedbackSubjectSaga$(_context13) {
-    while (1) {
-      switch (_context13.prev = _context13.next) {
-        case 0:
-          _context13.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Sub_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Sub_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Sub_Update), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Sub_Delete)]);
-
-        case 2:
-        case "end":
-          return _context13.stop();
-      }
-    }
-  }, _marked13);
 }
 
 /***/ }),
@@ -17104,33 +17021,50 @@ function signUp(action) {
 
         case 3:
           result = _context7.sent;
-          console.log(result.data);
-          _context7.next = 7;
+          console.log(result);
+
+          if (!result.data.msg) {
+            _context7.next = 10;
+            break;
+          }
+
+          _context7.next = 8;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP_HASEMAIL"],
+            data: result.data
+          });
+
+        case 8:
+          _context7.next = 12;
+          break;
+
+        case 10:
+          _context7.next = 12;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
             type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP_SUCCESS"],
             data: result.data
           });
 
-        case 7:
-          _context7.next = 14;
+        case 12:
+          _context7.next = 19;
           break;
 
-        case 9:
-          _context7.prev = 9;
+        case 14:
+          _context7.prev = 14;
           _context7.t0 = _context7["catch"](0);
           console.error(_context7.t0);
-          _context7.next = 14;
+          _context7.next = 19;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
             type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP_FAILURE"],
             error: _context7.t0
           });
 
-        case 14:
+        case 19:
         case "end":
           return _context7.stop();
       }
     }
-  }, _marked7, null, [[0, 9]]);
+  }, _marked7, null, [[0, 14]]);
 }
 
 ;

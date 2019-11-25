@@ -6,13 +6,14 @@ import { signUpBtn, shadowBorder } from '../css/Signup';
 import Router from 'next/router';
 import Link from 'next/link';
 import { SIGN_UP_REQUEST } from '../reducers/user';
+import { MOVE_TO_SIGNUP } from '../reducers/user';
 
 const {Title, Text} = Typography;
 
 const signup = () => {
 
     const dispatch = useDispatch();
-    const {isSigningUp,me,isSignedUp} = useSelector(state => state.user);
+    const {isSigningUp,me,isSignedUp,hasMessage} = useSelector(state => state.user);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -87,15 +88,31 @@ const signup = () => {
         setTerm(e.target.checked);
       }, []);
 
-    //  useEffect(() => {
-    //     if (isSignedUp) {
-    //       alert('로그인창으로 이동합니다.');
-    //       Router.push('/login');
-    //     }
-    //   }, [isSignedUp&&isSignedUp])
+     useEffect(() => {
+        if (isSignedUp) {
+          alert('회원가입이 완료되었습니다. 로그인창으로 이동합니다.');
+          Router.push('/login');
+        }
+      }, [isSignedUp&&isSignedUp]);
+
+      useEffect(() => {
+        if (hasMessage) {
+          alert(me.msg);
+          dispatch({
+              type:MOVE_TO_SIGNUP
+          });
+        }
+      }, [hasMessage&&hasMessage])
          
     const _onSubmit = useCallback((e) => {
         e.preventDefault();
+        
+        if(password!==re_password){
+            alert('비밀번호가 다릅니다.');
+            setPassword('');
+            setRe_password('');
+            return;
+        }
         if(!term){
             alert('약관동의를 클릭해주세요');
             return setTermError(true);

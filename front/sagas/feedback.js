@@ -23,7 +23,7 @@ import {
 
 
 // Feedback 피드백 게시물 댓글 Read
-function* feedback_Item_Comment_API(){
+function feedback_Item_Comment_API(){
     // return axios.get('/#');
 };
 
@@ -49,7 +49,7 @@ function* watchFeedback_Item_Comment() {
 
 
 // Feedback 피드백 게시물 세부사항 Read
-function* feedback_Item_Complete_API(){
+function feedback_Item_Complete_API(){
     // return axios.get('/#');
 };
 
@@ -75,7 +75,7 @@ function* watchFeedback_Item_Complete() {
 
 
 // Feedback 피드백 게시물 Add
-function* feedback_Item_Add_API(){
+function feedback_Item_Add_API(){
     // return axios.post('/#');
 };
 
@@ -101,7 +101,7 @@ function* watchFeedback_Item_Add() {
 
 
 // Feedback 피드백 게시물 Read
-function* feedback_Item_Read_API(){
+function feedback_Item_Read_API(){
     // return axios.get('/#');
 };
 
@@ -127,7 +127,7 @@ function* watchFeedback_Item_Read() {
 
 
 // Feedback 새 피드백 Add
-function* feedback_Add_API(){
+function feedback_Add_API(){
     // return axios.post();
 };
 
@@ -153,7 +153,7 @@ function* watchFeedback_Add(){
 
 
 // Feedback 메인화면 Read
-function* feedback_Read_API(feedbackData){
+function feedback_Read_API(feedbackData){
     // return axios.get('/#');
 };
 

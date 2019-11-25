@@ -850,17 +850,19 @@ const rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"]
 /*!**************************!*\
   !*** ./reducers/user.js ***!
   \**************************/
-/*! exports provided: initialState, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, default */
+/*! exports provided: initialState, MOVE_TO_SIGNUP, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_HASEMAIL, SIGN_UP_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MOVE_TO_SIGNUP", function() { return MOVE_TO_SIGNUP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_REQUEST", function() { return LOG_IN_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_SUCCESS", function() { return LOG_IN_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_FAILURE", function() { return LOG_IN_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP_REQUEST", function() { return SIGN_UP_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP_SUCCESS", function() { return SIGN_UP_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP_HASEMAIL", function() { return SIGN_UP_HASEMAIL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP_FAILURE", function() { return SIGN_UP_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_USER_REQUEST", function() { return LOAD_USER_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_USER_SUCCESS", function() { return LOAD_USER_SUCCESS; });
@@ -881,6 +883,8 @@ const initialState = {
   // 회원가입 성공
   isSigningUp: false,
   // 회원가입 시도중
+  hasMessage: false,
+  // 회원가입 실패 - 메시지
   signUpErrorReason: '',
   // 회원가입 실패 사유 
   isLoggingOut: false,
@@ -892,10 +896,13 @@ const initialState = {
   me: {
     email: '',
     password: '',
-    nickname: ''
+    nickname: '',
+    msg: ''
   } // 내 정보 
 
 };
+const MOVE_TO_SIGNUP = 'MOVE_TO_SIGNUP'; // 회원가입 창 이동
+
 const LOG_IN_REQUEST = 'LOG_IN_REQUEST'; // 로그인 시도 중
 
 const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS'; // 로그인 성공
@@ -905,6 +912,8 @@ const LOG_IN_FAILURE = 'LOG_IN_FAILURE'; // 로그인 실패
 const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST'; // 회원가입 시도 중
 
 const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS'; // 회원가입 성공
+
+const SIGN_UP_HASEMAIL = 'SIGN_UP_HASEMAIL'; // 회원가입 이메일 있는 경우
 
 const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE'; // 회원가입 실패
 
@@ -922,6 +931,19 @@ const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'; // 로그아웃 실패
 
 /* harmony default export */ __webpack_exports__["default"] = ((state = initialState, action) => {
   switch (action.type) {
+    case MOVE_TO_SIGNUP:
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isSigningUp: false,
+        isSignedUp: false,
+        hasMessage: false,
+        me: {
+          email: '',
+          password: '',
+          nickname: '',
+          msg: ''
+        }
+      });
+
     case LOG_IN_REQUEST:
       return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
         isLoggingIn: true
@@ -947,13 +969,27 @@ const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'; // 로그아웃 실패
         isSigningUp: true
       });
 
+    case SIGN_UP_HASEMAIL:
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isSigningUp: false,
+        isSignedUp: false,
+        hasMessage: true,
+        me: {
+          email: '',
+          nickname: '',
+          msg: action.data.msg
+        }
+      });
+
     case SIGN_UP_SUCCESS:
       return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
         isSigningUp: false,
         isSignedUp: true,
+        hasMessage: false,
         me: {
-          email: action.email,
-          nickname: action.nickname
+          email: action.data.email,
+          nickname: action.data.nickname,
+          msg: ''
         }
       });
 
@@ -961,6 +997,7 @@ const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'; // 로그아웃 실패
       return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
         isSigningUp: false,
         isSignedUp: false,
+        hasMessage: false,
         signUpErrorReason: action.error,
         me: null
       });
@@ -991,7 +1028,7 @@ __webpack_require__.r(__webpack_exports__);
 
  // Feedback 피드백 게시물 댓글 Read
 
-function* feedback_Item_Comment_API() {// return axios.get('/#');
+function feedback_Item_Comment_API() {// return axios.get('/#');
 }
 
 ;
@@ -1020,7 +1057,7 @@ function* watchFeedback_Item_Comment() {
 
 ; // Feedback 피드백 게시물 세부사항 Read
 
-function* feedback_Item_Complete_API() {// return axios.get('/#');
+function feedback_Item_Complete_API() {// return axios.get('/#');
 }
 
 ;
@@ -1049,7 +1086,7 @@ function* watchFeedback_Item_Complete() {
 
 ; // Feedback 피드백 게시물 Add
 
-function* feedback_Item_Add_API() {// return axios.post('/#');
+function feedback_Item_Add_API() {// return axios.post('/#');
 }
 
 ;
@@ -1078,7 +1115,7 @@ function* watchFeedback_Item_Add() {
 
 ; // Feedback 피드백 게시물 Read
 
-function* feedback_Item_Read_API() {// return axios.get('/#');
+function feedback_Item_Read_API() {// return axios.get('/#');
 }
 
 ;
@@ -1107,7 +1144,7 @@ function* watchFeedback_Item_Read() {
 
 ; // Feedback 새 피드백 Add
 
-function* feedback_Add_API() {// return axios.post();
+function feedback_Add_API() {// return axios.post();
 }
 
 ;
@@ -1136,7 +1173,7 @@ function* watchFeedback_Add() {
 
 ; // Feedback 메인화면 Read
 
-function* feedback_Read_API(feedbackData) {// return axios.get('/#');
+function feedback_Read_API(feedbackData) {// return axios.get('/#');
 }
 
 ;
@@ -1189,7 +1226,7 @@ __webpack_require__.r(__webpack_exports__);
 
  // 피드백 주제 Delete
 
-function* feedback_Sub_Delete_API(data) {// return axios.delete('/#');
+function feedback_Sub_Delete_API(data) {// return axios.delete('/#');
 }
 
 ;
@@ -1218,7 +1255,7 @@ function* watchFeedback_Sub_Delete() {
 
 ; // 피드백 주제 Update
 
-function* feedback_Sub_Update_API(data) {// return axios.patch('/#');
+function feedback_Sub_Update_API(data) {// return axios.patch('/#');
 }
 
 ;
@@ -1247,7 +1284,7 @@ function* watchFeedback_Sub_Update() {
 
 ; // 피드백 주제 Add
 
-function* feedback_Sub_Add_API(data) {// return axios.post();
+function feedback_Sub_Add_API(data) {// return axios.post();
 }
 
 ;
@@ -1276,7 +1313,7 @@ function* watchFeedback_Sub_Add() {
 
 ; // 피드백 주제 메인 Read
 
-function* feedback_Sub_Read_API() {// return axios.get('/#');
+function feedback_Sub_Read_API() {// return axios.get('/#');
 }
 
 ;
@@ -1768,8 +1805,11 @@ function signUpAPI(data) {
 function* signUp(action) {
   try {
     const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(signUpAPI, action.data);
-    console.log(result.data);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+    console.log(result);
+    result.data.msg ? yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_2__["SIGN_UP_HASEMAIL"],
+      data: result.data
+    }) : yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_2__["SIGN_UP_SUCCESS"],
       data: result.data
     });

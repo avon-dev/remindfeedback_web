@@ -6,6 +6,8 @@ import { loginBtn, loginApple, loginFacebook, loginGoogle, loginKakao, shadowBor
 import Link from 'next/link';
 import logoImg from '../img/logo1.png';
 import {LOG_IN_REQUEST} from '../reducers/user';
+import { MOVE_TO_SIGNUP } from '../reducers/user';
+import Router from 'next/router';
 
 const {Text} = Typography;
 
@@ -36,6 +38,14 @@ const login = () => {
         setEmail(e.target.value);
     }
 
+    const handleSignUp = async(e) => {
+        e.preventDefault();
+        await dispatch({
+            type:MOVE_TO_SIGNUP
+        });
+        await Router.push('/signup');
+    }
+
     return(
         <>
             <Row style={layoutCenter}>
@@ -51,11 +61,10 @@ const login = () => {
                         <label htmlFor="user-email"><strong>이메일</strong></label>
                        <Form.Item>
                             <Input
-                                value={me.email}
                                 prefix={<Icon type="user" 
                                 style={{ color: 'rgba(0,0,0,.25)' }} />}
                                 placeholder="Email"
-                                value={email}
+                                value={me.email?me.email:email}
                                 onChange={handleEmail}
                             />
                        </Form.Item>
@@ -105,7 +114,7 @@ const login = () => {
                        </Form.Item>
                     </Form>
                     <div style={{textAlign:'center'}}>
-                        <span>계정이 없으신가요? </span><Link href="/signup" ><a><strong>시작하기</strong></a></Link>
+                        <span>계정이 없으신가요? </span><Button type="ghost" style={{border:"white"}} onClick={handleSignUp}><strong>시작하기</strong></Button>
                     </div> 
                 </Col>
                 <Col span={9}></Col>
