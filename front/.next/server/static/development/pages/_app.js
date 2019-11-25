@@ -1329,7 +1329,7 @@ __webpack_require__.r(__webpack_exports__);
 
  // 친구 프로필 Add
 
-function* friends_Pro_Add_API(data) {// return axios.post('/#');
+function friends_Pro_Add_API(data) {// return axios.post('/#');
 }
 
 ;
@@ -1358,7 +1358,7 @@ function* watchFriends_Pro_Add() {
 
 ; // 친구 프로필 Read
 
-function* friends_Pro_Read_API() {// return axios.get('/#');
+function friends_Pro_Read_API() {// return axios.get('/#');
 }
 
 ;
@@ -1387,7 +1387,7 @@ function* watchFriends_Pro_Read() {
 
 ; // 친구 요청 모달 Add
 
-function* friends_Req_Add_API(data) {// return axios.post('/#');
+function friends_Req_Add_API(data) {// return axios.post('/#');
 }
 
 ;
@@ -1416,7 +1416,7 @@ function* watchFriends_Req_Add() {
 
 ; // 친구 요청 모달 Read
 
-function* friends_Req_Read_API() {// return axios.get('/#');
+function friends_Req_Read_API() {// return axios.get('/#');
 }
 
 ;
@@ -1445,7 +1445,7 @@ function* watchFriends_Req_Read() {
 
 ; // 친구 추가 모달 Add
 
-function* friends_Add_Add_API(data) {// return axios.post('/#');
+function friends_Add_Add_API(data) {// return axios.post('/#');
 }
 
 ;
@@ -1474,7 +1474,7 @@ function* watchFriends_Add_Add() {
 
 ; // 친구 추가 모달 Search
 
-function* friends_Add_Search_API(data) {// return axios.get('/#');
+function friends_Add_Search_API(data) {// return axios.get('/#');
 }
 
 ;
@@ -1503,7 +1503,7 @@ function* watchFriends_Add_Search() {
 
 ; // 친구 추가 모달 Read
 
-function* friends_Add_Read_API() {// return axios.get('/#');
+function friends_Add_Read_API() {// return axios.get('/#');
 }
 
 ;
@@ -1532,7 +1532,7 @@ function* watchFriends_Add_Read() {
 
 ; // 친구 차단
 
-function* friends_Block_API(data) {// return axios.delete();
+function friends_Block_API(data) {// return axios.delete();
 }
 
 ;
@@ -1561,7 +1561,7 @@ function* watchFriends_Block() {
 
 ; // 친구 메인창 Search
 
-function* friends_Search_API(data) {// return axios.get('/#');
+function friends_Search_API(data) {// return axios.get('/#');
 }
 
 ;
@@ -1590,7 +1590,7 @@ function* watchFriends_Search() {
 
 ; // 친구 메인창 Read
 
-function* friends_Read_API() {// return axios.get('/#');
+function friends_Read_API() {// return axios.get('/#');
 }
 
 ;
@@ -1670,9 +1670,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = 'http://localhost:8000/auth'; // 마이페이지
+axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = 'http://54.180.118.35/auth'; // 마이페이지
 
-function* logUserAPI() {// return axios.get('/#');
+function logUserAPI() {// return axios.get('/#');
 }
 
 ;
@@ -1701,12 +1701,12 @@ function* watchLoadUser() {
 
 ; // 로그아웃
 
-function* logOutAPI() {// return axios.get('/#');
+function logOutAPI() {// return axios.get('/#');
 }
 
 ;
 
-function* logoOut() {
+function* logOut() {
   try {
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(logOutAPI);
@@ -1725,12 +1725,12 @@ function* logoOut() {
 ;
 
 function* watchLogOut() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_2__["LOG_OUT_REQUEST"], logoOut);
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_2__["LOG_OUT_REQUEST"], logOut);
 }
 
 ; // 로그인
 
-function* loginAPI(loginData) {// return axios.get();
+function loginAPI(loginData) {// return axios.get();
 }
 
 ;
@@ -1759,15 +1759,16 @@ function* watchLogin() {
 
 ; // 회원가입
 
-function* signUpAPI(data) {// return axios.post('/signup', data);
+function signUpAPI(data) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/signup', data);
 }
 
 ;
 
 function* signUp(action) {
   try {
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
     const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(signUpAPI, action.data);
+    console.log(result.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_2__["SIGN_UP_SUCCESS"],
       data: result.data

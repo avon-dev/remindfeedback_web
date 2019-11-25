@@ -15,10 +15,10 @@ import {
     LOG_OUT_FAILURE,
 } from '../reducers/user';
 
-axios.defaults.baseURL = 'http://localhost:8000/auth';
+axios.defaults.baseURL = 'http://54.180.118.35/auth';
 
 // 마이페이지
-function* logUserAPI(){
+function logUserAPI(){
     // return axios.get('/#');
 };
 
@@ -44,11 +44,11 @@ function* watchLoadUser() {
 
 
 // 로그아웃
-function* logOutAPI(){
+function logOutAPI(){
     // return axios.get('/#');
 };
 
-function* logoOut(){
+function* logOut(){
     try {
         yield delay(2000);
         yield call(logOutAPI);
@@ -65,12 +65,12 @@ function* logoOut(){
 };
 
 function* watchLogOut() {
-    yield takeLatest(LOG_OUT_REQUEST, logoOut);
+    yield takeLatest(LOG_OUT_REQUEST, logOut);
 };
 
 
 // 로그인
-function* loginAPI(loginData){
+function loginAPI(loginData){
     // return axios.get();
 };
 
@@ -96,15 +96,16 @@ function* watchLogin(){
 
 
 // 회원가입
-function* signUpAPI(data){
-    // return axios.post('/signup', data);
+function signUpAPI(data){
+    return axios.post('/signup', data);
+                        
 };
 
 
 function* signUp(action){
     try {
-        yield delay(2000);
-        const result = yield call(signUpAPI,action.data);
+        const result = yield call(signUpAPI, action.data);
+       console.log(result.data);
         yield put({
             type:SIGN_UP_SUCCESS,
             data:result.data,

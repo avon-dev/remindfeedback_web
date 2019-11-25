@@ -34,7 +34,7 @@ import {
 } from '../reducers/friends';
 
 // 친구 프로필 Add
-function* friends_Pro_Add_API(data){
+function friends_Pro_Add_API(data){
     // return axios.post('/#');
 };
 
@@ -60,7 +60,7 @@ function* watchFriends_Pro_Add() {
 
 
 // 친구 프로필 Read
-function* friends_Pro_Read_API(){
+function friends_Pro_Read_API(){
     // return axios.get('/#');
 };
 
@@ -86,7 +86,7 @@ function* watchFriends_Pro_Read() {
 
 
 // 친구 요청 모달 Add
-function* friends_Req_Add_API(data){
+function friends_Req_Add_API(data){
     // return axios.post('/#');
 };
 
@@ -111,7 +111,7 @@ function* watchFriends_Req_Add() {
 };
 
 // 친구 요청 모달 Read
-function* friends_Req_Read_API(){
+function friends_Req_Read_API(){
     // return axios.get('/#');
 };
 
@@ -137,7 +137,7 @@ function* watchFriends_Req_Read() {
 
 
 // 친구 추가 모달 Add
-function* friends_Add_Add_API(data){
+function friends_Add_Add_API(data){
     // return axios.post('/#');
 };
 
@@ -162,7 +162,7 @@ function* watchFriends_Add_Add() {
 };
 
 // 친구 추가 모달 Search
-function* friends_Add_Search_API(data){
+function friends_Add_Search_API(data){
     // return axios.get('/#');
 };
 
@@ -188,7 +188,7 @@ function* watchFriends_Add_Search() {
 
 
 // 친구 추가 모달 Read
-function* friends_Add_Read_API(){
+function friends_Add_Read_API(){
     // return axios.get('/#');
 };
 
@@ -214,7 +214,7 @@ function* watchFriends_Add_Read() {
 
 
 // 친구 차단
-function* friends_Block_API(data){
+function friends_Block_API(data){
     // return axios.delete();
 };
 
@@ -240,7 +240,7 @@ function* watchFriends_Block(){
 
 
 // 친구 메인창 Search
-function* friends_Search_API(data){
+function friends_Search_API(data){
     // return axios.get('/#');
 };
 
@@ -266,7 +266,7 @@ function* watchFriends_Search() {
 
 
 // 친구 메인창 Read
-function* friends_Read_API(){
+function friends_Read_API(){
     // return axios.get('/#');
 };
 

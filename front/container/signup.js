@@ -21,41 +21,6 @@ const signup = () => {
     const [term, setTerm] = useState(false);
     const [termError, setTermError] = useState(false);
 
-    const signUpFormName = [
-            {   
-                id:'이메일',
-                name:'email',
-                value:email,
-                onChange:setEmail,
-                iconType:'smile',
-                placeholderName:'Email',
-            },
-            {
-                id:'닉네임',
-                name:'nickname',
-                value:nickname,
-                onChange:setNickname,
-                iconType:'user',
-                placeholderName:'Name',
-            },
-           {
-                id:'비밀번호',
-                name:'password',
-                value:password,
-                onChange:setPassword,
-                iconType:'lock',
-                placeholderName:'Password',
-            },
-            {
-                id:'비밀번호 재입력',
-                name:'re_password',
-                value:re_password,
-                onChange:setRe_password,
-                iconType:'lock',
-                placeholderName:'Repassword',
-            },
-    ]
-
     const emailForm = <div style={{padding:5}}>  
                             <label htmlFor="user-email" style={{fontWeight:'bold'}}>이메일</label>
                             <div style={{marginTop:5}}>
@@ -122,12 +87,12 @@ const signup = () => {
         setTerm(e.target.checked);
       }, []);
 
-     useEffect(() => {
-        if (isSignedUp) {
-          alert('로그인창으로 이동합니다.');
-          Router.push('/login');
-        }
-      }, [isSignedUp&&isSignedUp])
+    //  useEffect(() => {
+    //     if (isSignedUp) {
+    //       alert('로그인창으로 이동합니다.');
+    //       Router.push('/login');
+    //     }
+    //   }, [isSignedUp&&isSignedUp])
          
     const _onSubmit = useCallback((e) => {
         e.preventDefault();
