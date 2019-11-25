@@ -14976,7 +14976,7 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!**************************!*\
   !*** ./reducers/user.js ***!
   \**************************/
-/*! exports provided: initialState, MOVE_TO_SIGNUP, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_HASEMAIL, SIGN_UP_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, default */
+/*! exports provided: initialState, MOVE_TO_SIGNUP, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_HASEMAIL, LOG_IN_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_HASEMAIL, SIGN_UP_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14985,6 +14985,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MOVE_TO_SIGNUP", function() { return MOVE_TO_SIGNUP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_REQUEST", function() { return LOG_IN_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_SUCCESS", function() { return LOG_IN_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_HASEMAIL", function() { return LOG_IN_HASEMAIL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_FAILURE", function() { return LOG_IN_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP_REQUEST", function() { return SIGN_UP_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP_SUCCESS", function() { return SIGN_UP_SUCCESS; });
@@ -15010,7 +15011,7 @@ var initialState = {
   isSigningUp: false,
   // 회원가입 시도중
   hasMessage: false,
-  // 회원가입 실패 - 메시지
+  // 로그인, 회원가입 실패 - 메시지
   signUpErrorReason: '',
   // 회원가입 실패 사유 
   isLoggingOut: false,
@@ -15023,7 +15024,9 @@ var initialState = {
     email: '',
     password: '',
     nickname: '',
-    msg: ''
+    msg: '',
+    accessToken: '',
+    refreshToken: ''
   } // 내 정보 
 
 };
@@ -15032,6 +15035,8 @@ var MOVE_TO_SIGNUP = 'MOVE_TO_SIGNUP'; // 회원가입 창 이동
 var LOG_IN_REQUEST = 'LOG_IN_REQUEST'; // 로그인 시도 중
 
 var LOG_IN_SUCCESS = 'LOG_IN_SUCCESS'; // 로그인 성공
+
+var LOG_IN_HASEMAIL = 'LOG_IN_HASEMAIL'; // 회원가입 이메일 있는 경우
 
 var LOG_IN_FAILURE = 'LOG_IN_FAILURE'; // 로그인 실패
 
@@ -15073,6 +15078,18 @@ var LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'; // 로그아웃 실패
         }
       });
 
+    case LOG_IN_HASEMAIL:
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isLoggingIn: false,
+        isLoggedIn: false,
+        hasMessage: true,
+        me: {
+          email: '',
+          nickname: '',
+          msg: action.data.message
+        }
+      });
+
     case LOG_IN_REQUEST:
       return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
         isLoggingIn: true
@@ -15082,7 +15099,11 @@ var LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'; // 로그아웃 실패
       return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
         isLoggingIn: false,
         isLoggedIn: true,
-        me: dummyUser
+        hasMessage: false,
+        me: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.me, {
+          accessToken: action.data.accessToken.data,
+          refreshToken: action.data.refreshToken.data
+        })
       });
 
     case LOG_IN_FAILURE:
@@ -16937,50 +16958,68 @@ function watchLogOut() {
 
 ; // 로그인
 
-function loginAPI(loginData) {// return axios.get();
+function loginAPI(data) {
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/login', data);
 }
 
 ;
 
 function login(action) {
+  var result;
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function login$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.prev = 0;
           _context5.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
-
-        case 3:
-          _context5.next = 5;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(loginAPI, action.data);
 
-        case 5:
-          _context5.next = 7;
+        case 3:
+          result = _context5.sent;
+          console.log(result.data);
+
+          if (result.data.accessToken) {
+            _context5.next = 10;
+            break;
+          }
+
+          _context5.next = 8;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_SUCCESS"]
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_HASEMAIL"],
+            data: result.data
           });
 
-        case 7:
-          _context5.next = 14;
+        case 8:
+          _context5.next = 12;
           break;
 
-        case 9:
-          _context5.prev = 9;
+        case 10:
+          _context5.next = 12;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_SUCCESS"],
+            data: result.data
+          });
+
+        case 12:
+          _context5.next = 19;
+          break;
+
+        case 14:
+          _context5.prev = 14;
           _context5.t0 = _context5["catch"](0);
           console.error(_context5.t0);
-          _context5.next = 14;
+          _context5.next = 19;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
             type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_FAILURE"],
             error: _context5.t0
           });
 
-        case 14:
+        case 19:
         case "end":
           return _context5.stop();
       }
     }
-  }, _marked5, null, [[0, 9]]);
+  }, _marked5, null, [[0, 14]]);
 }
 
 ;

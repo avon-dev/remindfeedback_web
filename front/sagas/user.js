@@ -2,6 +2,7 @@ import {all, delay, fork, put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 import {
     LOG_IN_REQUEST,
+    LOG_IN_HASEMAIL,
     LOG_IN_SUCCESS,
     LOG_IN_FAILURE,
     SIGN_UP_REQUEST,
@@ -71,17 +72,25 @@ function* watchLogOut() {
 
 
 // 로그인
-function loginAPI(loginData){
-    // return axios.get();
+function loginAPI(data){
+    return axios.post('/login', data);
 };
 
 function* login(action){
     try {
-        yield delay(2000);
-        yield call(loginAPI,action.data);
+        const result = yield call(loginAPI,action.data);
+        console.log(result.data);
+        !result.data.accessToken
+        ?
+        yield put({
+            type:LOG_IN_HASEMAIL,
+            data:result.data
+        })
+        :
         yield put({
             type:LOG_IN_SUCCESS,
-        });
+            data:result.data
+        })     
     } catch (e) {
         console.error(e);
         yield put({

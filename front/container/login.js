@@ -1,4 +1,4 @@
-import React, { useState , useCallback } from 'react';
+import React, { useState , useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Row, Col, Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
 import { layoutCenter } from '../css/Common';
@@ -18,7 +18,7 @@ const login = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     
-    const { me } = useSelector(state=>state.user);
+    const { me,isLoggedIn,isLoggingIn,logInErrorReason,hasMessage } = useSelector(state=>state.user);
 
     const _onsubmit = useCallback((e) => {
         e.preventDefault();
@@ -29,6 +29,25 @@ const login = () => {
             }
         });
     },[email,password]);
+
+    useEffect(()=>{
+        if(isLoggedIn){
+            // localStorage.setItem("token",{"accessToken":me.accessToken,"refreshToken":me.refreshToken});
+            localStorage.setItem("accessToken",me.accessToken);
+            localStorage.setItem("refreshToken",me.refreshToken);
+            alert('메인페이지로 이동합니다.');
+            Router.push('/main');
+        }
+    },[isLoggedIn&&isLoggedIn]);
+
+    useEffect(()=>{
+        if(hasMessage){
+            alert(me.msg);
+            dispatch({
+                type:MOVE_TO_SIGNUP
+            });
+        }
+    },[hasMessage&&hasMessage]);
 
     const handlePassword = (e) => {
         setPassword(e.target.value);
@@ -66,17 +85,19 @@ const login = () => {
                                 placeholder="Email"
                                 value={me.email?me.email:email}
                                 onChange={handleEmail}
+                                required
                             />
                        </Form.Item>
                         <label htmlFor="user-password"><strong>비밀번호</strong></label>
                        <Form.Item>
                             <Input
                                 prefix={<Icon type="lock" 
-                                tyle={{ color: 'rgba(0,0,0,.25)' }} />}
+                                style={{ color: 'rgba(0,0,0,.25)' }} />}
                                 type="password"
                                 placeholder="Password"
                                 value={password}
                                 onChange={handlePassword}
+                                required
                             />
                        </Form.Item>
                        <Form.Item>
@@ -84,8 +105,8 @@ const login = () => {
                        </Form.Item>
                        <Form.Item style={{textAlign:'center'}}>
                            <Col span={24}>
-                                <Button type="primary" size="large" className="login-form-button" style={loginBtn}>
-                                    <Link href="/main" ><a><strong>로그인</strong></a></Link>
+                                <Button type="primary" htmlType="submit" size="large" className="login-form-button" style={loginBtn}>
+                                    <strong>로그인</strong>
                                 </Button>
                            </Col>
                        </Form.Item>
@@ -114,7 +135,7 @@ const login = () => {
                        </Form.Item>
                     </Form>
                     <div style={{textAlign:'center'}}>
-                        <span>계정이 없으신가요? </span><Button type="ghost" style={{border:"white"}} onClick={handleSignUp}><strong>시작하기</strong></Button>
+                        <span>계정이 없으신가요? </span><Button type="ghost" style={{border:"white"}} onClick={handleSignUp} loading={isLoggingIn}><strong>시작하기</strong></Button>
                     </div> 
                 </Col>
                 <Col span={9}></Col>

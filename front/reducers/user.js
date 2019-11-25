@@ -6,7 +6,7 @@ export const initialState = {
 
     isSignedUp: false, // 회원가입 성공
     isSigningUp: false, // 회원가입 시도중
-    hasMessage:false, // 회원가입 실패 - 메시지
+    hasMessage:false, // 로그인, 회원가입 실패 - 메시지
     signUpErrorReason: '', // 회원가입 실패 사유 
 
     isLoggingOut: false, // 로그아웃 시도중
@@ -18,6 +18,8 @@ export const initialState = {
         password: '',
         nickname: '',
         msg:'',
+        accessToken:'',
+        refreshToken:'',
     }, // 내 정보 
 }
 
@@ -25,6 +27,7 @@ export const MOVE_TO_SIGNUP = 'MOVE_TO_SIGNUP'; // 회원가입 창 이동
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST'; // 로그인 시도 중
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS'; // 로그인 성공
+export const LOG_IN_HASEMAIL = 'LOG_IN_HASEMAIL'; // 회원가입 이메일 있는 경우
 export const LOG_IN_FAILURE = 'LOG_IN_FAILURE'; // 로그인 실패
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST'; // 회원가입 시도 중
@@ -55,6 +58,19 @@ export default (state = initialState, action ) => {
                     msg:'',
                 }
             }  
+        case LOG_IN_HASEMAIL:
+            return{
+                ...state,
+                isLoggingIn: false,
+                isLoggedIn: false,
+                hasMessage: true,
+                me:{
+                    email:'',
+                    nickname:'',
+                    msg: action.data.message,
+                },
+            }
+
         case LOG_IN_REQUEST:
             return{
                 ...state,
@@ -65,7 +81,12 @@ export default (state = initialState, action ) => {
                 ...state,
                 isLoggingIn: false,
                 isLoggedIn: true,
-                me:dummyUser,
+                hasMessage: false,
+                me:{
+                    ...state.me,
+                    accessToken:action.data.accessToken.data,
+                    refreshToken:action.data.refreshToken.data,
+                },
             }
         case LOG_IN_FAILURE:
             return{

@@ -850,7 +850,7 @@ const rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"]
 /*!**************************!*\
   !*** ./reducers/user.js ***!
   \**************************/
-/*! exports provided: initialState, MOVE_TO_SIGNUP, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_HASEMAIL, SIGN_UP_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, default */
+/*! exports provided: initialState, MOVE_TO_SIGNUP, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_HASEMAIL, LOG_IN_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_HASEMAIL, SIGN_UP_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -859,6 +859,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MOVE_TO_SIGNUP", function() { return MOVE_TO_SIGNUP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_REQUEST", function() { return LOG_IN_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_SUCCESS", function() { return LOG_IN_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_HASEMAIL", function() { return LOG_IN_HASEMAIL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_FAILURE", function() { return LOG_IN_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP_REQUEST", function() { return SIGN_UP_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP_SUCCESS", function() { return SIGN_UP_SUCCESS; });
@@ -884,7 +885,7 @@ const initialState = {
   isSigningUp: false,
   // 회원가입 시도중
   hasMessage: false,
-  // 회원가입 실패 - 메시지
+  // 로그인, 회원가입 실패 - 메시지
   signUpErrorReason: '',
   // 회원가입 실패 사유 
   isLoggingOut: false,
@@ -897,7 +898,9 @@ const initialState = {
     email: '',
     password: '',
     nickname: '',
-    msg: ''
+    msg: '',
+    accessToken: '',
+    refreshToken: ''
   } // 내 정보 
 
 };
@@ -906,6 +909,8 @@ const MOVE_TO_SIGNUP = 'MOVE_TO_SIGNUP'; // 회원가입 창 이동
 const LOG_IN_REQUEST = 'LOG_IN_REQUEST'; // 로그인 시도 중
 
 const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS'; // 로그인 성공
+
+const LOG_IN_HASEMAIL = 'LOG_IN_HASEMAIL'; // 회원가입 이메일 있는 경우
 
 const LOG_IN_FAILURE = 'LOG_IN_FAILURE'; // 로그인 실패
 
@@ -944,6 +949,18 @@ const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'; // 로그아웃 실패
         }
       });
 
+    case LOG_IN_HASEMAIL:
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isLoggingIn: false,
+        isLoggedIn: false,
+        hasMessage: true,
+        me: {
+          email: '',
+          nickname: '',
+          msg: action.data.message
+        }
+      });
+
     case LOG_IN_REQUEST:
       return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
         isLoggingIn: true
@@ -953,7 +970,11 @@ const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'; // 로그아웃 실패
       return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
         isLoggingIn: false,
         isLoggedIn: true,
-        me: dummyUser
+        hasMessage: false,
+        me: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.me, {
+          accessToken: action.data.accessToken.data,
+          refreshToken: action.data.refreshToken.data
+        })
       });
 
     case LOG_IN_FAILURE:
@@ -1767,17 +1788,22 @@ function* watchLogOut() {
 
 ; // 로그인
 
-function loginAPI(loginData) {// return axios.get();
+function loginAPI(data) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/login', data);
 }
 
 ;
 
 function* login(action) {
   try {
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loginAPI, action.data);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
-      type: _reducers_user__WEBPACK_IMPORTED_MODULE_2__["LOG_IN_SUCCESS"]
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loginAPI, action.data);
+    console.log(result.data);
+    !result.data.accessToken ? yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_2__["LOG_IN_HASEMAIL"],
+      data: result.data
+    }) : yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_2__["LOG_IN_SUCCESS"],
+      data: result.data
     });
   } catch (e) {
     console.error(e);

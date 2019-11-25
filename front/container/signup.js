@@ -94,7 +94,7 @@ const signup = () => {
           Router.push('/login');
         }
       }, [isSignedUp&&isSignedUp]);
-
+      
       useEffect(() => {
         if (hasMessage) {
           alert(me.msg);
