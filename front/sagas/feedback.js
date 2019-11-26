@@ -153,17 +153,18 @@ function* watchFeedback_Add(){
 
 
 // Feedback 메인화면 Read
-function feedback_Read_API(feedbackData){
-    // return axios.get('/#');
+function feedback_Read_API(){
+    return axios.get('http://54.180.118.35/auth/me');
 };
 
 
 function* feedback_Read(action){
     try {
-        yield delay(2000);
-        yield call(feedback_Read_API, action.data);
+        const result = yield call(feedback_Read_API, action.data);
+        console.log(result);
         yield put({
             type:FEEDBACK_READ_SUCCESS,
+            data:result.data,
         });
     } catch (e) {
         console.error(e);
