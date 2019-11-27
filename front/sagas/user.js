@@ -79,8 +79,8 @@ function loginAPI(data){
 function* login(action){
     try {
         const result = yield call(loginAPI,action.data);
-        console.log(result.data);
-        !result.data.accessToken
+        console.log(result);
+        !result.data.email
         ?
         yield put({
             type:LOG_IN_HASEMAIL,

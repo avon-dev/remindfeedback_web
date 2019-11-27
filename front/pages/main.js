@@ -1,13 +1,15 @@
 import React from 'react';
 import AppSidebar from '../components/AppSidebar';
 import AppTopbar from '../components/AppTopbar';
-import AppMain from '../components/Main';
+import AppMain from '../container/main';
 import AppFooter from '../components/AppFooter';
 import { layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
 import { Layout } from 'antd';
+import {FEEDBACK_READ_REQUEST} from '../reducers/feedback';
 const { Footer, Content, Sider } = Layout;
 
 const Main = () => {
+
     return(
         <>
             <Layout style={layout} >
@@ -24,9 +26,15 @@ const Main = () => {
                     <AppFooter/>
                 </Footer>
             </Layout>
-            
         </>
     );
+};
+
+Main.getInitialProps = async(context) => {
+    
+    context.store.dispatch({
+        type:FEEDBACK_READ_REQUEST,
+    });
 };
 
 export default Main;

@@ -15,11 +15,6 @@ const mypage = () => {
     const [intro, setIntro] = useState('');
     const [photoVisible, setPhotoVisible] = useState(false);
     
-    // request server 
-    useEffect(()=>{
-
-    },[]);
-
      // 사진
     const popUpPhoto = () => {
         setPhotoVisible(true);

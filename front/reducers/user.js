@@ -17,9 +17,8 @@ export const initialState = {
         email: '',
         password: '',
         nickname: '',
+        tutorial:null,
         msg:'',
-        accessToken:'',
-        refreshToken:'',
     }, // 내 정보 
 }
 
@@ -67,7 +66,7 @@ export default (state = initialState, action ) => {
                 me:{
                     email:'',
                     nickname:'',
-                    msg: action.data.message,
+                    msg: action.data,
                 },
             }
 
@@ -84,8 +83,9 @@ export default (state = initialState, action ) => {
                 hasMessage: false,
                 me:{
                     ...state.me,
-                    accessToken:action.data.accessToken.data,
-                    refreshToken:action.data.refreshToken.data,
+                    email:action.data.email,
+                    nickname:action.data.nickname,
+                    tutorial:action.data.tutorial,
                 },
             }
         case LOG_IN_FAILURE:

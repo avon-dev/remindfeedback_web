@@ -123,7 +123,7 @@ const signup = () => {
                 email,password,nickname,
             },
         });
-    },[email,password,nickname,term]);
+    },[email,password,nickname,term,re_password]);
 
 
     return(
