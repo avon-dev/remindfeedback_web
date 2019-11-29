@@ -1,6 +1,7 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import Link from 'next/link';
 import { Menu, Icon, Input, Typography, Dropdown, Col, Row, Button, Avatar, Popconfirm} from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 import AppTutorial from '../components/TutorialMain';
 import AppAlert from '../container/alert';
 
@@ -20,6 +21,7 @@ const commonStyle = {
 
 const AppTopbar = () => {
 
+    const { me } = useSelector( state => state.user);
     const [visible, setVisible] = useState(false);
     const [alertVisible, setAlertVisible] = useState(false);
 
@@ -35,6 +37,12 @@ const AppTopbar = () => {
         setVisible(false);
     };
 
+    useEffect(()=>{
+        if(me.tutorial){
+            setVisible(true);
+        }
+    },[]);
+
      
     const items = (
         <div>
@@ -44,11 +52,6 @@ const AppTopbar = () => {
                     <strong>마이페이지</strong>
                     <Link href="/mypage" ><a>></a></Link>
                 </Menu.Item>
-                {/* <Menu.Item key="2">
-                    <Icon type="setting" />
-                    <strong>환경설정</strong>
-                    <Link href="/setting" ><a>></a></Link>
-                </Menu.Item> */}
                 <Menu.Item key="2" onClick={showModal}>
                     <Icon type="book" />
                     <strong>튜토리얼</strong>

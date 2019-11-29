@@ -9,7 +9,6 @@ import {FEEDBACK_READ_REQUEST} from '../reducers/feedback';
 const { Footer, Content, Sider } = Layout;
 
 const Main = () => {
-
     return(
         <>
             <Layout style={layout} >
@@ -31,10 +30,12 @@ const Main = () => {
 };
 
 Main.getInitialProps = async(context) => {
-    
-    context.store.dispatch({
-        type:FEEDBACK_READ_REQUEST,
-    });
+
+    const cookie = context.isServer?context.req.headers.cookie:'';
+    console.log('cookie',cookie);
+    // context.store.dispatch({
+    //     type:FEEDBACK_READ_REQUEST,
+    // });
 };
 
 export default Main;

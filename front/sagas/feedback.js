@@ -154,7 +154,9 @@ function* watchFeedback_Add(){
 
 // Feedback 메인화면 Read
 function feedback_Read_API(){
-    return axios.get('http://54.180.118.35/auth/me',{withCredentials:true});
+    return axios.get('http://54.180.118.35/auth/me',{
+        withCredentials:true
+    });
 };
 
 
