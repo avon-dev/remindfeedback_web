@@ -4,8 +4,5 @@ node_modules
 // next
 .next
 
-// image
-img
-
 //.env
 .env
