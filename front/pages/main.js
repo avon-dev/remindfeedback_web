@@ -33,9 +33,9 @@ Main.getInitialProps = async(context) => {
 
     const cookie = context.isServer?context.req.headers.cookie:'';
     console.log('cookie',cookie);
-    // context.store.dispatch({
-    //     type:FEEDBACK_READ_REQUEST,
-    // });
+    context.store.dispatch({
+        type:FEEDBACK_READ_REQUEST,
+    });
 };
 
 export default Main;
