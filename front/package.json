@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development PORT=2323 pm2 start server.js",
     "build": "next build",
-    "start": "cross-env NODE_ENV=production PORT=2323 pm2 start server"
+    "start": "cross-env NODE_ENV=production PORT=2323 pm2 start server.js"
   },
   "author": "Santos",
   "license": "MIT",
