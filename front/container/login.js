@@ -2,7 +2,7 @@ import React, { useState , useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Row, Col, Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
 import { layoutCenter } from '../css/Common';
-import { loginBtn, loginApple, loginFacebook, loginGoogle, loginKakao, shadowBorder } from '../css/login';
+import { loginBtn, loginApple, loginFacebook, loginGoogle, loginKakao, shadowBorder } from '../css/Login';
 import Link from 'next/link';
 import logoImg from '../img/logo1.png';
 import {LOG_IN_REQUEST} from '../reducers/user';
