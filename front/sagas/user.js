@@ -73,7 +73,9 @@ function* watchLogOut() {
 
 // 로그인
 function loginAPI(data){
-    return axios.post('/login', data);
+    return axios.post('/login', data,{
+        withCredentials:true
+    });
 };
 
 function* login(action){
