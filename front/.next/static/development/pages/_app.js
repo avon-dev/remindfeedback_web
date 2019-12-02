@@ -14839,12 +14839,15 @@ var configureStore = function configureStore(initialState, options) {
 /*!******************************!*\
   !*** ./reducers/feedback.js ***!
   \******************************/
-/*! exports provided: initialState, FEEDBACK_READ_REQUEST, FEEDBACK_READ_SUCCESS, FEEDBACK_READ_FAILURE, FEEDBACK_ADD_REQUEST, FEEDBACK_ADD_SUCCESS, FEEDBACK_ADD_FAILURE, FEEDBACK_ITEM_READ_REQUEST, FEEDBACK_ITEM_READ_SUCCESS, FEEDBACK_ITEM_READ_FAILURE, FEEDBACK_ITEM_ADD_REQUEST, FEEDBACK_ITEM_ADD_SUCCESS, FEEDBACK_ITEM_ADD_FAILURE, FEEDBACK_ITEM_COMPLETE_REQUEST, FEEDBACK_ITEM_COMPLETE_SUCCESS, FEEDBACK_ITEM_COMPLETE_FAILURE, FEEDBACK_ITEM_COMMENT_REQUEST, FEEDBACK_ITEM_COMMENT_SUCCESS, FEEDBACK_ITEM_COMMENT_FAILURE, default */
+/*! exports provided: initialState, FEEDBACK_TUTORIAL_REQUEST, FEEDBACK_TUTORIAL_SUCCESS, FEEDBACK_TUTORIAL_FAILURE, FEEDBACK_READ_REQUEST, FEEDBACK_READ_SUCCESS, FEEDBACK_READ_FAILURE, FEEDBACK_ADD_REQUEST, FEEDBACK_ADD_SUCCESS, FEEDBACK_ADD_FAILURE, FEEDBACK_ITEM_READ_REQUEST, FEEDBACK_ITEM_READ_SUCCESS, FEEDBACK_ITEM_READ_FAILURE, FEEDBACK_ITEM_ADD_REQUEST, FEEDBACK_ITEM_ADD_SUCCESS, FEEDBACK_ITEM_ADD_FAILURE, FEEDBACK_ITEM_COMPLETE_REQUEST, FEEDBACK_ITEM_COMPLETE_SUCCESS, FEEDBACK_ITEM_COMPLETE_FAILURE, FEEDBACK_ITEM_COMMENT_REQUEST, FEEDBACK_ITEM_COMMENT_SUCCESS, FEEDBACK_ITEM_COMMENT_FAILURE, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_TUTORIAL_REQUEST", function() { return FEEDBACK_TUTORIAL_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_TUTORIAL_SUCCESS", function() { return FEEDBACK_TUTORIAL_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_TUTORIAL_FAILURE", function() { return FEEDBACK_TUTORIAL_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_READ_REQUEST", function() { return FEEDBACK_READ_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_READ_SUCCESS", function() { return FEEDBACK_READ_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_READ_FAILURE", function() { return FEEDBACK_READ_FAILURE; });
@@ -14863,7 +14866,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ITEM_COMMENT_REQUEST", function() { return FEEDBACK_ITEM_COMMENT_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ITEM_COMMENT_SUCCESS", function() { return FEEDBACK_ITEM_COMMENT_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ITEM_COMMENT_FAILURE", function() { return FEEDBACK_ITEM_COMMENT_FAILURE; });
-var initialState = {};
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+
+var initialState = {
+  isLoadedFeedback: false,
+  // 피드백 데이터 여부
+  isLoadingFeedback: false,
+  // 피드백 데이터 가지고 오는중
+  LoadedFeedbackErrorReason: '',
+  // 피드백 데이터 실패 사유
+  isLoadedFirstSubject: false,
+  // 피드백 첫번째 주제 저장 완료
+  isLoadingFirstSubject: false,
+  // 피드백 첫번째 주제 저장 중
+  LoadedFirstSubjectErrorReason: '' // 피드백 첫번째 주제 저장 실패 사유
+
+};
+var FEEDBACK_TUTORIAL_REQUEST = 'FEEDBACK_TUTORIAL_REQUEST'; // 피드백 튜토리얼 시도 중
+
+var FEEDBACK_TUTORIAL_SUCCESS = 'FEEDBACK_TUTORIAL_SUCCESS'; // 피드백 튜토리얼 성공
+
+var FEEDBACK_TUTORIAL_FAILURE = 'FEEDBACK_TUTORIAL_FAILURE'; // 피드백 튜토리얼 실패
+
 var FEEDBACK_READ_REQUEST = 'FEEDBACK_READ_REQUEST'; // 피드백 READ 시도 중
 
 var FEEDBACK_READ_SUCCESS = 'FEEDBACK_READ_SUCCESS'; // 피드백 READ 성공
@@ -14905,15 +14929,45 @@ var FEEDBACK_ITEM_COMMENT_FAILURE = 'FEEDBACK_ITEM_COMMENT_FAILURE'; // 피드�
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
+    // 피드백 튜토리얼 
+    case FEEDBACK_TUTORIAL_REQUEST:
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isLoadingFirstSubject: true,
+        isLoadedFirstSubject: false
+      });
+
+    case FEEDBACK_TUTORIAL_SUCCESS:
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isLoadingFirstSubject: false,
+        isLoadedFirstSubject: true
+      });
+
+    case FEEDBACK_TUTORIAL_FAILURE:
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isLoadingFirstSubject: false,
+        isLoadedFirstSubject: false,
+        LoadedFirstSubjectErrorReason: action.error
+      });
     // 피드백 READ
+
     case FEEDBACK_READ_REQUEST:
-      return {};
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isLoadingFeedback: true,
+        isLoadedFeedback: false
+      });
 
     case FEEDBACK_READ_SUCCESS:
-      return {};
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isLoadingFeedback: false,
+        isLoadedFeedback: true
+      });
 
     case FEEDBACK_READ_FAILURE:
-      return {};
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isLoadingFeedback: false,
+        isLoadedFeedback: false,
+        LoadedFeedbackErrorReason: action.error
+      });
     // 피드백 ADD
 
     case FEEDBACK_ADD_REQUEST:
@@ -15402,7 +15456,6 @@ var initialState = {
   // 로그아웃 실패 사유
   me: {
     email: '',
-    password: '',
     nickname: '',
     tutorial: null,
     msg: ''
@@ -15594,6 +15647,12 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(f
 /*#__PURE__*/
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Read),
     _marked13 =
+/*#__PURE__*/
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedback_Tutorial),
+    _marked14 =
+/*#__PURE__*/
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFeedback_Toturial),
+    _marked15 =
 /*#__PURE__*/
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(feedbackSaga);
 
@@ -15954,30 +16013,37 @@ function feedback_Read() {
           console.log(result);
           _context11.next = 7;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_READ_SUCCESS"],
+            type: LOG_IN_SUCCESS,
             data: result.data
           });
 
         case 7:
-          _context11.next = 14;
-          break;
+          _context11.next = 9;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_READ_SUCCESS"],
+            data: result.data
+          });
 
         case 9:
-          _context11.prev = 9;
+          _context11.next = 16;
+          break;
+
+        case 11:
+          _context11.prev = 11;
           _context11.t0 = _context11["catch"](0);
           console.error(_context11.t0);
-          _context11.next = 14;
+          _context11.next = 16;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
             type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_READ_FAILURE"],
             error: _context11.t0
           });
 
-        case 14:
+        case 16:
         case "end":
           return _context11.stop();
       }
     }
-  }, _marked11, null, [[0, 9]]);
+  }, _marked11, null, [[0, 11]]);
 }
 
 ;
@@ -15998,21 +16064,88 @@ function watchFeedback_Read() {
   }, _marked12);
 }
 
+; // Feedback 튜토리얼
+
+function feedback_Tutorial_API(data) {// return axios.get('http://54.180.118.35/auth/me',{
+  //     withCredentials:true
+  // });
+}
+
 ;
-function feedbackSaga() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedbackSaga$(_context13) {
+
+function feedback_Tutorial(action) {
+  var result;
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Tutorial$(_context13) {
     while (1) {
       switch (_context13.prev = _context13.next) {
         case 0:
-          _context13.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Item_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Item_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Item_Complete), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Item_Comment)]);
+          _context13.prev = 0;
+          _context13.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Tutorial_API, action.data);
 
-        case 2:
+        case 3:
+          result = _context13.sent;
+          _context13.next = 6;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_TUTORIAL_SUCCESS"],
+            data: result.data
+          });
+
+        case 6:
+          _context13.next = 13;
+          break;
+
+        case 8:
+          _context13.prev = 8;
+          _context13.t0 = _context13["catch"](0);
+          console.error(_context13.t0);
+          _context13.next = 13;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_TUTORIAL_FAILURE"],
+            error: _context13.t0
+          });
+
+        case 13:
         case "end":
           return _context13.stop();
       }
     }
-  }, _marked13);
+  }, _marked13, null, [[0, 8]]);
+}
+
+;
+
+function watchFeedback_Toturial() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFeedback_Toturial$(_context14) {
+    while (1) {
+      switch (_context14.prev = _context14.next) {
+        case 0:
+          _context14.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_TUTORIAL_REQUEST"], feedback_Tutorial);
+
+        case 2:
+        case "end":
+          return _context14.stop();
+      }
+    }
+  }, _marked14);
+}
+
+;
+function feedbackSaga() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedbackSaga$(_context15) {
+    while (1) {
+      switch (_context15.prev = _context15.next) {
+        case 0:
+          _context15.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Toturial), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Item_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Item_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Item_Complete), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchFeedback_Item_Comment)]);
+
+        case 2:
+        case "end":
+          return _context15.stop();
+      }
+    }
+  }, _marked15);
 }
 
 /***/ }),
@@ -17342,7 +17475,9 @@ function watchLogOut() {
 ; // 로그인
 
 function loginAPI(data) {
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/login', data);
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/login', data, {
+    withCredentials: true
+  });
 }
 
 ;

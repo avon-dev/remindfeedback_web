@@ -4,6 +4,7 @@ import { Menu, Icon, Input, Typography, Dropdown, Col, Row, Button, Avatar, Popc
 import { useDispatch, useSelector } from 'react-redux';
 import AppTutorial from '../components/TutorialMain';
 import AppAlert from '../container/alert';
+import { FEEDBACK_TUTORIAL_REQUEST } from '../reducers/feedback';
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -21,17 +22,28 @@ const commonStyle = {
 
 const AppTopbar = () => {
 
+    const dispatch = useDispatch();
     const { me } = useSelector( state => state.user);
     const [visible, setVisible] = useState(false);
     const [alertVisible, setAlertVisible] = useState(false);
+    const [firstSubject, setFirstSubject] = useState('첫번째 피드백');
 
     const showModal = () => {
         setVisible(true);
     }
 
     const handleCancel = e => {
+        e.preventDefault();
+        dispatch({
+            type:FEEDBACK_TUTORIAL_REQUEST,
+            data:firstSubject,
+        });
         setVisible(false);
     };
+
+    const handleSetFirstSubject = (e) => {
+        setFirstSubject(e.target.value);
+    }
 
     const handleOk  = e => {
         setVisible(false);
@@ -151,6 +163,8 @@ const AppTopbar = () => {
                 handleCancel={handleCancel}
                 handleOk={handleOk}
                 visible={visible}
+                firstSubject={firstSubject}
+                handleSetFirstSubject={handleSetFirstSubject}
               />
           </div>
           <div>

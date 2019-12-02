@@ -102,7 +102,7 @@ const login = () => {
                        </Form.Item>
                        <Form.Item style={{textAlign:'center'}}>
                            <Col span={24}>
-                                <Button type="primary" htmlType="submit" size="large" className="login-form-button" style={loginBtn}>
+                                <Button type="primary" htmlType="submit" size="large" className="login-form-button" style={loginBtn} loading={isLoggingIn}>
                                     <strong>로그인</strong>
                                 </Button>
                            </Col>
@@ -132,7 +132,7 @@ const login = () => {
                        </Form.Item>
                     </Form>
                     <div style={{textAlign:'center'}}>
-                        <span>계정이 없으신가요? </span><Button type="ghost" style={{border:"white"}} onClick={handleSignUp} loading={isLoggingIn}><strong>시작하기</strong></Button>
+                        <span>계정이 없으신가요? </span><Button type="ghost" style={{border:"white"}} onClick={handleSignUp} ><strong>시작하기</strong></Button>
                     </div> 
                 </Col>
                 <Col span={9}></Col>
