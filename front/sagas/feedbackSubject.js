@@ -15,6 +15,8 @@ import {
     FEEDBACK_SUB_DELETE_FAILURE,
 } from '../reducers/feedbackSubject';
 
+axios.defaults.baseURL="http://54.180.118.35/";
+
 // 피드백 주제 Delete
 function feedback_Sub_Delete_API(data){
     // return axios.delete('/#');
@@ -69,7 +71,9 @@ function* watchFeedback_Sub_Update() {
 
 // 피드백 주제 Add
 function feedback_Sub_Add_API(data){
-    // return axios.post();
+    return axios.post('/st', data ,{
+        withCredentials:true,
+    });
 };
 
 function* feedback_Sub_Add(action){

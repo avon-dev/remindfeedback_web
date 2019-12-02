@@ -1,11 +1,18 @@
 export const initialState = {
-    isLoadedFeedback: false, // 피드백 데이터 여부
-    isLoadingFeedback: false, // 피드백 데이터 가지고 오는중
+
+    feedback:[],
+
+    isAdddingFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 중
+    isAddedFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 완료
+    AddedFirstSubjectErrorReason: '', // 피드백 튜토리얼 첫번째 주제 저장 실패 사유
+
+    isLoadingFeedback: false, // 피드백 데이터 로드 중
+    isLoadedFeedback: false, // 피드백 데이터 로드 성공
     LoadedFeedbackErrorReason: '', // 피드백 데이터 실패 사유
 
-    isLoadedFirstSubject: false, // 피드백 첫번째 주제 저장 완료
-    isLoadingFirstSubject: false, // 피드백 첫번째 주제 저장 중
-    LoadedFirstSubjectErrorReason: '', // 피드백 첫번째 주제 저장 실패 사유
+    isAdddingFeedback: false, // 피드백 추가 중
+    isAddedFeedback: false, // 피드백 추가 완료
+    AddedFeedbackErrorReason: '', // 피드백 추가 실패 사유
 }
 
 export const FEEDBACK_TUTORIAL_REQUEST = 'FEEDBACK_TUTORIAL_REQUEST'; // 피드백 튜토리얼 시도 중
@@ -43,22 +50,21 @@ export default (state = initialState, action) => {
         case FEEDBACK_TUTORIAL_REQUEST:
             return{
                 ...state,
-                isLoadingFirstSubject:true,
-                isLoadedFirstSubject:false,
+                isAdddingFirstSubject:true,
+                isAddedFirstSubject:false,
             };
         case FEEDBACK_TUTORIAL_SUCCESS:
             return{
                ...state,
-               isLoadingFirstSubject:false,
-               isLoadedFirstSubject:true,
-
+               isAdddingFirstSubject:false,
+               isAddedFirstSubject:true,
             };
         case FEEDBACK_TUTORIAL_FAILURE:
             return{
                ...state,
-               isLoadingFirstSubject:false,
-               isLoadedFirstSubject:false,
-               LoadedFirstSubjectErrorReason:action.error
+               isAdddingFirstSubject:false,
+               isAddedFirstSubject:false,
+               AddedFirstSubjectErrorReason:action.error
             };
         
         // 피드백 READ
@@ -73,7 +79,7 @@ export default (state = initialState, action) => {
                ...state,
                isLoadingFeedback:false,
                isLoadedFeedback:true,
-
+               feedback:action.data.feedback,
             };
         case FEEDBACK_READ_FAILURE:
             return{
@@ -86,15 +92,23 @@ export default (state = initialState, action) => {
         // 피드백 ADD
         case FEEDBACK_ADD_REQUEST:
             return{
-
+                ...state,
+                isAdddingFeedback:true,
+                isAdddingFeedback:false,
             };
         case FEEDBACK_ADD_SUCCESS:
             return{
-                
+                ...state,
+                isAdddingFeedback:false,
+                isAdddingFeedback:true,
+
             };
         case FEEDBACK_ADD_FAILURE:
             return{
-                
+                ...state,
+                isAdddingFeedback:false,
+                isAdddingFeedback:false,
+                AddedFeedbackErrorReason:action.error,
             };
 
          // 피드백 게시물 READ 

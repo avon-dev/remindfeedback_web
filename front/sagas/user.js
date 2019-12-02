@@ -21,15 +21,17 @@ axios.defaults.baseURL = 'http://54.180.118.35/auth';
 
 // 마이페이지
 function logUserAPI(){
-    // return axios.get('/#');
+    return axios.get('/me',{
+        withCredentials:true
+    });
 };
 
 function* loadUser(){
     try {
-        yield delay(2000);
-        yield call(logUserAPI);
+        const result = yield call(logUserAPI);
         yield put({
             type:LOAD_USER_SUCCESS,
+            data:result.data,
         });
     } catch (e) {
         console.error(e);
@@ -47,12 +49,13 @@ function* watchLoadUser() {
 
 // 로그아웃
 function logOutAPI(){
-    // return axios.get('/#');
+    return axios.get('/logout',{
+        withCredentials:true
+    });
 };
 
 function* logOut(){
     try {
-        yield delay(2000);
         yield call(logOutAPI);
         yield put({
             type:LOG_OUT_SUCCESS,

@@ -15,11 +15,6 @@ const Subjects = () => {
     const [updateVisible, setUpdateVisible] = useState(false);
     const [popOverVisible, setPopOverVisible] = useState(false);
 
-    // request server 
-    useEffect(()=>{
-
-    },[]);
-
     const columns = [
         {
             title: 'NO',
