@@ -10,11 +10,18 @@ export const initialState = {
     signUpErrorReason: '', // 회원가입 실패 사유 
 
     isLoggingOut: false, // 로그아웃 시도중
-    isisLoggingOut: false, // 로그아웃 여부
+    isLogout: false, // 로그아웃 여부
     logOutReason: '', // 로그아웃 실패 사유
+
+    isLoadingMyInfo: false, // 마이페이지 로드 중
+    isLoadedMyInfo: false, // 마이페이지 성공
+    LoadedMyInfoReason: '', // 마이페이지 실패 사유
+
     me:{
         email: '',
         nickname: '',
+        introduction:'',
+        portrait:'',
         tutorial:null,
         msg:'',
     }, // 내 정보 
@@ -49,6 +56,7 @@ export default (state = initialState, action ) => {
                 isSignedUp: false,
                 hasMessage: false,
                 me:{
+                    ...state.me,
                     email: '',
                     password: '',
                     nickname: '',
@@ -62,6 +70,7 @@ export default (state = initialState, action ) => {
                 isLoggedIn: false,
                 hasMessage: true,
                 me:{
+                    ...state.me,
                     email:'',
                     nickname:'',
                     msg: action.data,
@@ -82,6 +91,8 @@ export default (state = initialState, action ) => {
                 me:{
                     ...state.me,
                     email:action.data.email,
+                    introduction:action.data.introduction,
+                    portrait:action.data.portrait,
                     nickname:action.data.nickname,
                     tutorial:action.data.tutorial,
                 },
@@ -106,6 +117,7 @@ export default (state = initialState, action ) => {
                 isSignedUp: false,
                 hasMessage: true,
                 me:{
+                    ...state.me,
                     email:'',
                     nickname:'',
                     msg: action.data.msg,
@@ -118,6 +130,7 @@ export default (state = initialState, action ) => {
                 isSignedUp: true,
                 hasMessage: false,
                 me:{
+                    ...state.me,
                    email:action.data.email,
                    nickname:action.data.nickname,
                    msg:'', 
@@ -131,7 +144,54 @@ export default (state = initialState, action ) => {
                 hasMessage: false,
                 signUpErrorReason:action.error,
                 me:null,
-            }            
+            }
+        case LOAD_USER_REQUEST:
+            return{
+                ...state,
+                isLoadingMyInfo: true,
+                isLoadedMyInfo:false,
+            }
+        case LOAD_USER_SUCCESS:
+            return{
+                ...state,
+                isLoadingMyInfo: false,
+                isLoadedMyInfo:true,
+                me:{
+                    ...state.me,
+                    email:action.data.email,
+                    introduction:action.data.introduction,
+                    portrait:action.data.portrait,
+                    nickname:action.data.nickname,
+                    tutorial:action.data.tutorial,
+                },
+            }
+        case LOAD_USER_FAILURE:
+            return{
+                ...state,
+                isLoadingMyInfo:false,
+                isLoadedMyInfo:false,
+                LoadedMyInfoReason:action.error,
+                me:null,
+            }
+        case LOG_OUT_REQUEST:
+            return{
+                ...state,
+                isLoggingOut: true,
+                isLogout:false,
+            }
+        case LOG_OUT_SUCCESS:
+            return{
+                ...state,
+                isLoggingOut: false,
+                isLogout:true,
+            }
+        case LOG_OUT_FAILURE:
+            return{
+                ...state,
+                isLoggingOut: false,
+                isLogout:false,
+                logOutReason:action.error,
+            }                    
         default:
             return state;    
     }

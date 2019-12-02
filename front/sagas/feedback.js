@@ -26,6 +26,8 @@ import {
 
 import {LOG_IN_SUCCESS} from '../reducers/user';
 
+axios.defaults.baseURL="http://54.180.118.35/";
+
 // Feedback 피드백 게시물 댓글 Read
 function feedback_Item_Comment_API(){
     // return axios.get('/#');
@@ -158,7 +160,7 @@ function* watchFeedback_Add(){
 
 // Feedback 메인화면 Read
 function feedback_Read_API(){
-    return axios.get('http://54.180.118.35/auth/me',{
+    return axios.get('auth/me',{
         withCredentials:true
     });
 };

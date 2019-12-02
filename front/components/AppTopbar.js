@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AppTutorial from '../components/TutorialMain';
 import AppAlert from '../container/alert';
 import { FEEDBACK_TUTORIAL_REQUEST } from '../reducers/feedback';
+import { LOG_OUT_REQUEST } from '../reducers/user';
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -55,6 +56,12 @@ const AppTopbar = () => {
         }
     },[]);
 
+    const handleLogout = (e) => {
+        e.preventDefault();
+        dispatch({
+            type:LOG_OUT_REQUEST,
+        })
+    }
      
     const items = (
         <div>
@@ -68,10 +75,9 @@ const AppTopbar = () => {
                     <Icon type="book" />
                     <strong>튜토리얼</strong>
                 </Menu.Item>
-                <Menu.Item key="3">
+                <Menu.Item key="3" onClick={handleLogout}>
                     <Icon type="logout" />
                     <strong>로그아웃</strong>
-                    <Link href="/logout" ><a>></a></Link>
                 </Menu.Item>
             </Menu>
         </div>

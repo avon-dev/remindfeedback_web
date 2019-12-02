@@ -10,9 +10,10 @@ const {Text} = Typography;
 const mypage = () => {
 
     const dispatch = useDispatch();
+    const {me} = useSelector(state=>state.user);
 
-    const [nickname, setNickname] = useState('');
-    const [intro, setIntro] = useState('');
+    const [nickname, setNickname] = useState(me.nickname?me.nickname:'');
+    const [intro, setIntro] = useState(me.introduction?me.introduction:'');
     const [photoVisible, setPhotoVisible] = useState(false);
     
      // 사진
@@ -34,14 +35,14 @@ const mypage = () => {
       }
     }
 
-    const updateMypage = useCallback(() => {
-      dispatch({
-          type:LOAD_USER_REQUEST,
-          data:{
-            nickname,intro
-          }
-      });
-    },[nickname,intro]);
+    // const updateMypage = useCallback(() => {
+    //   dispatch({
+    //       type:LOAD_USER_REQUEST,
+    //       data:{
+    //         nickname,intro
+    //       }
+    //   });
+    // },[nickname,intro]);
 
     return(
         <>
@@ -65,7 +66,7 @@ const mypage = () => {
                       </Form.Item>
                       <Form.Item>
                         <Col span={24} style={{textAlign:'center'}}>
-                            <Text style={{color:"#000000", fontSize:20}}><strong>test@naver.com</strong></Text>
+                                      <Text style={{color:"#000000", fontSize:20}}><strong>{me.email}</strong></Text>
                         </Col>
                       </Form.Item>
                       <Form.Item label={<strong>닉네임</strong>} colon={false}>
@@ -119,5 +120,7 @@ const mypage = () => {
         </>
     )
 };
+
+
 
 export default mypage;

@@ -74,7 +74,6 @@ const addSubject = ({visible,handleCancel}) => {
                             <Col span={24}>
                                 <Form.Item label={<strong>색상 설정</strong>}>
                                     <CirclePicker
-
                                         color={color}
                                         onChangeComplete={handleChangeComplete}
                                         onChange={handleColor}
