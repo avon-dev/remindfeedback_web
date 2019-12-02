@@ -1856,9 +1856,7 @@ function* watchLogOut() {
 ; // 로그인
 
 function loginAPI(data) {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/login', data, {
-    withCredentials: true
-  });
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/login', data);
 }
 
 ;
