@@ -24,6 +24,7 @@ import {
     FEEDBACK_ITEM_COMMENT_FAILURE,
 } from '../reducers/feedback';
 
+import {LOG_IN_SUCCESS} from '../reducers/user';
 
 // Feedback 피드백 게시물 댓글 Read
 function feedback_Item_Comment_API(){
@@ -173,7 +174,6 @@ function* feedback_Read(){
         }) 
         yield put({
             type:FEEDBACK_READ_SUCCESS,
-            data:result.data,
         });
     } catch (e) {
         console.error(e);
