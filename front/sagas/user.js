@@ -17,11 +17,11 @@ import {
     LOG_OUT_FAILURE,
 } from '../reducers/user';
 
-axios.defaults.baseURL = 'http://54.180.118.35/auth';
+axios.defaults.baseURL = "http://54.180.118.35";
 
 // 마이페이지
 function logUserAPI(){
-    return axios.get('/me',{
+    return axios.get('/auth/me',{
         withCredentials:true
     });
 };
@@ -49,7 +49,7 @@ function* watchLoadUser() {
 
 // 로그아웃
 function logOutAPI(){
-    return axios.get('/logout',{
+    return axios.get('/auth/logout',{
         withCredentials:true
     });
 };
@@ -76,7 +76,7 @@ function* watchLogOut() {
 
 // 로그인
 function loginAPI(data){
-    return axios.post('/login', data,{
+    return axios.post('/auth/login', data,{
         withCredentials:true
     });
 };
@@ -112,7 +112,7 @@ function* watchLogin(){
 
 // 회원가입
 function signUpAPI(data){
-    return axios.post('/signup', data);                       
+    return axios.post('/auth/signup', data);                       
 };
 
 

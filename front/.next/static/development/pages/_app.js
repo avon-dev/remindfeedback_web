@@ -15911,7 +15911,7 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(f
 
 
 
-axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.baseURL = "http://54.180.118.35/"; // Feedback 피드백 게시물 댓글 Read
+axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.baseURL = "http://54.180.118.35"; // Feedback 피드백 게시물 댓글 Read
 
 function feedback_Item_Comment_API() {// return axios.get('/#');
 }
@@ -16050,45 +16050,44 @@ function feedback_Item_Add_API() {// return axios.post('/#');
 
 ;
 
-function feedback_Item_Add() {
+function feedback_Item_Add(action) {
+  var result;
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Item_Add$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.prev = 0;
           _context5.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Item_Add_API, action.data);
 
         case 3:
-          _context5.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Item_Add_API);
-
-        case 5:
-          _context5.next = 7;
+          result = _context5.sent;
+          _context5.next = 6;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_ADD_SUCCESS"]
+            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_ADD_SUCCESS"],
+            data: result.data
           });
 
-        case 7:
-          _context5.next = 14;
+        case 6:
+          _context5.next = 13;
           break;
 
-        case 9:
-          _context5.prev = 9;
+        case 8:
+          _context5.prev = 8;
           _context5.t0 = _context5["catch"](0);
           console.error(_context5.t0);
-          _context5.next = 14;
+          _context5.next = 13;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
             type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ITEM_ADD_FAILURE"],
             error: _context5.t0
           });
 
-        case 14:
+        case 13:
         case "end":
           return _context5.stop();
       }
     }
-  }, _marked5, null, [[0, 9]]);
+  }, _marked5, null, [[0, 8]]);
 }
 
 ;
@@ -16244,7 +16243,7 @@ function watchFeedback_Add() {
 ; // Feedback 메인화면 Read
 
 function feedback_Read_API() {
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('auth/me', {
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/auth/me', {
     withCredentials: true
   });
 }
@@ -17596,10 +17595,10 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(u
 
 
 
-axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.baseURL = 'http://54.180.118.35/auth'; // 마이페이지
+axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.baseURL = "http://54.180.118.35"; // 마이페이지
 
 function logUserAPI() {
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/me', {
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/auth/me', {
     withCredentials: true
   });
 }
@@ -17667,7 +17666,7 @@ function watchLoadUser() {
 ; // 로그아웃
 
 function logOutAPI() {
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/logout', {
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/auth/logout', {
     withCredentials: true
   });
 }
@@ -17732,7 +17731,7 @@ function watchLogOut() {
 ; // 로그인
 
 function loginAPI(data) {
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/login', data, {
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/auth/login', data, {
     withCredentials: true
   });
 }
@@ -17818,7 +17817,7 @@ function watchLogin() {
 ; // 회원가입
 
 function signUpAPI(data) {
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/signup', data);
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/auth/signup', data);
 }
 
 ;

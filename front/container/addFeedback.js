@@ -19,12 +19,14 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
     
     
     const _onSubmit = useCallback((e) => {
-        dispatch({
-            type: FEEDBACK_ADD_REQUEST,
-            data:{
-                subject,title,date,advisor 
-            },
-        });
+        console.log(subject,title,date,advisor);
+
+        // dispatch({
+        //     type: FEEDBACK_ADD_REQUEST,
+        //     data:{
+        //         subject,title,date,advisor 
+        //     },
+        // });
     },[subject,title,date,advisor]);
 
     const handleSubject = (value) =>  {
@@ -58,7 +60,7 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
                         <Button key="back" onClick={handleCancel} style={{display:'none'}}>
                             <strong>취소</strong>
                         </Button>,
-                        <Button key="submit" type="primary" size='large' style={{width:'100%'}}>
+                        <Button key="submit" type="primary" size='large' style={{width:'100%'}} onClick={_onSubmit}>
                             <strong>피드백 생성</strong>
                         </Button>
                     </div>
@@ -67,7 +69,7 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
                 centered={true}
                 >
                 <Content style={backgroundWhite}>
-                    <Form  {...formItemLayout} onSubmit={_onSubmit}>
+                    <Form  {...formItemLayout} >
                         <Form.Item label={<strong>피드백 주제선택</strong>} >
                             <Col span={24}>
                                 <Select defaultValue={subject} onChange={handleSubject} style={{width:'100%', textAlign:'left'}} >
@@ -82,6 +84,7 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
                                 value={title}
                                 suffix={<Icon type='form' style={{ color: 'rgba(0,0,0,.25)' }} />}
                                 placeholder="피드백 제목"
+                                required
                             />
                         </Form.Item>
                         <Form.Item label={<strong>피드백 날짜</strong>} >
@@ -101,6 +104,7 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
                                     style={{width:'100%'}}
                                     placeholder="조언자 이름을 입력하세요"
                                     enterButton="검색"
+                                    required
                                 />
                             </Col>   
                         </Form.Item>
