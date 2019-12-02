@@ -10,19 +10,23 @@ const { Panel } = Collapse;
 const {Content} = Layout;
 
 const steps = [
-    {
+    {   
+      key:'sub1',
       title: <div style={{fontSize:13}}><strong>Welcome</strong></div>,
       content:<><TutorialFirst/></>,
     },
     {
+      key:'sub2',
       title: <div style={{fontSize:13}}><strong>주제선정</strong></div>,
       content:<><TutorialSecond/></>,
     },
     {
+      key:'sub3',
       title: <div style={{fontSize:13}}><strong>피드백기능</strong></div>,
       content:<><TutorialThird/></>,
     },
     {
+      key:'sub4',
       title: <div style={{fontSize:13}}><strong>조언자기능</strong></div>,
       content:<><TutorialForth/></>,
     },
@@ -45,11 +49,11 @@ const TutorialMain = ({visible,handleCancel,handleOk}) => {
     return(
         <>
            <Modal 
-                key='tutorial'
+                key='1'
                 title={
-                    <Steps current={current}>
+                    <Steps current={current} key='2'>
                         {steps.map(item => (
-                            <Step key={item.title} title={item.title} />
+                            <Step key={item.key} title={item.title} />
                         ))}
                     </Steps>
                 }
