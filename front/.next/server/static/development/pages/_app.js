@@ -1441,17 +1441,20 @@ function* watchFeedback_Item_Read() {
 
 ; // Feedback 새 피드백 Add
 
-function feedback_Add_API() {// return axios.post();
+function feedback_Add_API(data) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/create', data, {
+    withCredentials: true
+  });
 }
 
 ;
 
-function* feedback_Add() {
+function* feedback_Add(action) {
   try {
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Add_API);
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Add_API, action.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
-      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_ADD_SUCCESS"]
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_ADD_SUCCESS"],
+      data: result.data
     });
   } catch (e) {
     console.error(e);
@@ -1471,7 +1474,7 @@ function* watchFeedback_Add() {
 ; // Feedback 메인화면 Read
 
 function feedback_Read_API() {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/auth/me', {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/feedback/all', {
     withCredentials: true
   });
 }
@@ -1481,13 +1484,13 @@ function feedback_Read_API() {
 function* feedback_Read() {
   try {
     const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Read_API);
-    console.log(result);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_SUCCESS"],
       data: result.data
     });
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
-      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_READ_SUCCESS"]
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_READ_SUCCESS"],
+      data: result.data
     });
   } catch (e) {
     console.error(e);

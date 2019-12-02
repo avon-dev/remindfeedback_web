@@ -16176,50 +16176,52 @@ function watchFeedback_Item_Read() {
 
 ; // Feedback 새 피드백 Add
 
-function feedback_Add_API() {// return axios.post();
+function feedback_Add_API(data) {
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/create', data, {
+    withCredentials: true
+  });
 }
 
 ;
 
-function feedback_Add() {
+function feedback_Add(action) {
+  var result;
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function feedback_Add$(_context9) {
     while (1) {
       switch (_context9.prev = _context9.next) {
         case 0:
           _context9.prev = 0;
           _context9.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Add_API, action.data);
 
         case 3:
-          _context9.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(feedback_Add_API);
-
-        case 5:
-          _context9.next = 7;
+          result = _context9.sent;
+          _context9.next = 6;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ADD_SUCCESS"]
+            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ADD_SUCCESS"],
+            data: result.data
           });
 
-        case 7:
-          _context9.next = 14;
+        case 6:
+          _context9.next = 13;
           break;
 
-        case 9:
-          _context9.prev = 9;
+        case 8:
+          _context9.prev = 8;
           _context9.t0 = _context9["catch"](0);
           console.error(_context9.t0);
-          _context9.next = 14;
+          _context9.next = 13;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
             type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_ADD_FAILURE"],
             error: _context9.t0
           });
 
-        case 14:
+        case 13:
         case "end":
           return _context9.stop();
       }
     }
-  }, _marked9, null, [[0, 9]]);
+  }, _marked9, null, [[0, 8]]);
 }
 
 ;
@@ -16243,7 +16245,7 @@ function watchFeedback_Add() {
 ; // Feedback 메인화면 Read
 
 function feedback_Read_API() {
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/auth/me', {
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/feedback/all', {
     withCredentials: true
   });
 }
@@ -16262,39 +16264,39 @@ function feedback_Read() {
 
         case 3:
           result = _context11.sent;
-          console.log(result);
-          _context11.next = 7;
+          _context11.next = 6;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
             type: _reducers_user__WEBPACK_IMPORTED_MODULE_4__["LOG_IN_SUCCESS"],
             data: result.data
           });
 
-        case 7:
-          _context11.next = 9;
+        case 6:
+          _context11.next = 8;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_READ_SUCCESS"]
+            type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_READ_SUCCESS"],
+            data: result.data
           });
 
-        case 9:
-          _context11.next = 16;
+        case 8:
+          _context11.next = 15;
           break;
 
-        case 11:
-          _context11.prev = 11;
+        case 10:
+          _context11.prev = 10;
           _context11.t0 = _context11["catch"](0);
           console.error(_context11.t0);
-          _context11.next = 16;
+          _context11.next = 15;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
             type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_3__["FEEDBACK_READ_FAILURE"],
             error: _context11.t0
           });
 
-        case 16:
+        case 15:
         case "end":
           return _context11.stop();
       }
     }
-  }, _marked11, null, [[0, 11]]);
+  }, _marked11, null, [[0, 10]]);
 }
 
 ;

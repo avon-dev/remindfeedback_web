@@ -133,16 +133,19 @@ function* watchFeedback_Item_Read() {
 
 
 // Feedback 새 피드백 Add
-function feedback_Add_API(){
-    // return axios.post();
+function feedback_Add_API(data){
+    
+    return axios.post('/create',data,{
+        withCredentials:true
+    });
 };
 
-function* feedback_Add(){
+function* feedback_Add(action){
     try {
-        yield delay(2000);
-        yield call(feedback_Add_API);
+        const result = yield call(feedback_Add_API, action.data);
         yield put({
             type:FEEDBACK_ADD_SUCCESS,
+            data:result.data,
         });
     } catch (e) {
         console.error(e);
@@ -160,22 +163,21 @@ function* watchFeedback_Add(){
 
 // Feedback 메인화면 Read
 function feedback_Read_API(){
-    return axios.get('/auth/me',{
+    return axios.get('/feedback/all',{
         withCredentials:true
     });
 };
 
-
 function* feedback_Read(){
     try {
         const result = yield call(feedback_Read_API);
-        console.log(result);
         yield put({
             type:LOG_IN_SUCCESS,
             data:result.data
         }) 
         yield put({
             type:FEEDBACK_READ_SUCCESS,
+            data:result.data,
         });
     } catch (e) {
         console.error(e);

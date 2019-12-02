@@ -19,14 +19,22 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
     
     
     const _onSubmit = useCallback((e) => {
-        console.log(subject,title,date,advisor);
-
-        // dispatch({
-        //     type: FEEDBACK_ADD_REQUEST,
-        //     data:{
-        //         subject,title,date,advisor 
-        //     },
-        // });
+        e.preventDefault();
+        if(!title){
+            return alert('피드백 제목을 입력해 주세요');
+        }
+        if(!date){
+            return alert('피드백 날짜를 선택해 주세요');
+        }
+        if(!advisor){
+            return alert('피드백 조언자를 입력해 주세요');
+        }
+        dispatch({
+            type: FEEDBACK_ADD_REQUEST,
+            data:{
+                subject,title,date,advisor 
+            },
+        });
     },[subject,title,date,advisor]);
 
     const handleSubject = (value) =>  {
@@ -73,8 +81,8 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
                         <Form.Item label={<strong>피드백 주제선택</strong>} >
                             <Col span={24}>
                                 <Select defaultValue={subject} onChange={handleSubject} style={{width:'100%', textAlign:'left'}} >
-                                    <Select.Option value="jack"><Icon type="user" /><strong>AVON</strong></Select.Option>
-                                    <Select.Option value="lucy"><Icon type="user" /><strong>운동</strong></Select.Option>
+                                    <Select.Option value="AVON"><Icon type="user" /><strong>AVON</strong></Select.Option>
+                                    <Select.Option value="운동"><Icon type="user" /><strong>운동</strong></Select.Option>
                                 </Select>
                             </Col>
                         </Form.Item>
