@@ -12,10 +12,8 @@ export const initialState = {
     isLoggingOut: false, // 로그아웃 시도중
     isisLoggingOut: false, // 로그아웃 여부
     logOutReason: '', // 로그아웃 실패 사유
-
     me:{
         email: '',
-        password: '',
         nickname: '',
         tutorial:null,
         msg:'',

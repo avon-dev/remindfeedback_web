@@ -1,6 +1,9 @@
 import {all, delay, fork, put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 import {
+    FEEDBACK_TUTORIAL_REQUEST,
+    FEEDBACK_TUTORIAL_SUCCESS,
+    FEEDBACK_TUTORIAL_FAILURE,
     FEEDBACK_READ_REQUEST,
     FEEDBACK_READ_SUCCESS,
     FEEDBACK_READ_FAILURE,
@@ -165,6 +168,10 @@ function* feedback_Read(){
         const result = yield call(feedback_Read_API);
         console.log(result);
         yield put({
+            type:LOG_IN_SUCCESS,
+            data:result.data
+        }) 
+        yield put({
             type:FEEDBACK_READ_SUCCESS,
             data:result.data,
         });
@@ -181,8 +188,37 @@ function* watchFeedback_Read() {
     yield takeLatest(FEEDBACK_READ_REQUEST, feedback_Read);
 };
 
+// Feedback 튜토리얼
+function feedback_Tutorial_API(data){
+    // return axios.get('http://54.180.118.35/auth/me',{
+    //     withCredentials:true
+    // });
+};
+
+
+function* feedback_Tutorial(action){
+    try {
+        const result = yield call(feedback_Tutorial_API, action.data);
+        yield put({
+            type:FEEDBACK_TUTORIAL_SUCCESS,
+            data:result.data
+        }) 
+    } catch (e) {
+        console.error(e);
+        yield put({
+            type:FEEDBACK_TUTORIAL_FAILURE,
+            error:e,
+        });
+    }
+};
+
+function* watchFeedback_Toturial() {
+    yield takeLatest(FEEDBACK_TUTORIAL_REQUEST, feedback_Tutorial);
+};
+
 export default function* feedbackSaga(){
     yield all([
+        fork(watchFeedback_Toturial),
         fork(watchFeedback_Read),
         fork(watchFeedback_Add),
         fork(watchFeedback_Item_Read),

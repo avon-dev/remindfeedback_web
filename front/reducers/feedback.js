@@ -1,6 +1,16 @@
 export const initialState = {
-    
+    isLoadedFeedback: false, // 피드백 데이터 여부
+    isLoadingFeedback: false, // 피드백 데이터 가지고 오는중
+    LoadedFeedbackErrorReason: '', // 피드백 데이터 실패 사유
+
+    isLoadedFirstSubject: false, // 피드백 첫번째 주제 저장 완료
+    isLoadingFirstSubject: false, // 피드백 첫번째 주제 저장 중
+    LoadedFirstSubjectErrorReason: '', // 피드백 첫번째 주제 저장 실패 사유
 }
+
+export const FEEDBACK_TUTORIAL_REQUEST = 'FEEDBACK_TUTORIAL_REQUEST'; // 피드백 튜토리얼 시도 중
+export const FEEDBACK_TUTORIAL_SUCCESS = 'FEEDBACK_TUTORIAL_SUCCESS'; // 피드백 튜토리얼 성공
+export const FEEDBACK_TUTORIAL_FAILURE = 'FEEDBACK_TUTORIAL_FAILURE'; // 피드백 튜토리얼 실패
 
 export const FEEDBACK_READ_REQUEST = 'FEEDBACK_READ_REQUEST'; // 피드백 READ 시도 중
 export const FEEDBACK_READ_SUCCESS = 'FEEDBACK_READ_SUCCESS'; // 피드백 READ 성공
@@ -28,19 +38,49 @@ export const FEEDBACK_ITEM_COMMENT_FAILURE = 'FEEDBACK_ITEM_COMMENT_FAILURE'; //
 
 export default (state = initialState, action) => {
     switch(action.type){
+
+        // 피드백 튜토리얼 
+        case FEEDBACK_TUTORIAL_REQUEST:
+            return{
+                ...state,
+                isLoadingFirstSubject:true,
+                isLoadedFirstSubject:false,
+            };
+        case FEEDBACK_TUTORIAL_SUCCESS:
+            return{
+               ...state,
+               isLoadingFirstSubject:false,
+               isLoadedFirstSubject:true,
+
+            };
+        case FEEDBACK_TUTORIAL_FAILURE:
+            return{
+               ...state,
+               isLoadingFirstSubject:false,
+               isLoadedFirstSubject:false,
+               LoadedFirstSubjectErrorReason:action.error
+            };
         
         // 피드백 READ
         case FEEDBACK_READ_REQUEST:
             return{
-
+                ...state,
+                isLoadingFeedback:true,
+                isLoadedFeedback:false,
             };
         case FEEDBACK_READ_SUCCESS:
             return{
-                
+               ...state,
+               isLoadingFeedback:false,
+               isLoadedFeedback:true,
+
             };
         case FEEDBACK_READ_FAILURE:
             return{
-                
+                ...state,
+                isLoadingFeedback:false,
+                isLoadedFeedback:false,
+                LoadedFeedbackErrorReason:action.error
             };
 
         // 피드백 ADD

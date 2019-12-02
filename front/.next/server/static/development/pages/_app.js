@@ -407,12 +407,15 @@ const configureStore = (initialState, options) => {
 /*!******************************!*\
   !*** ./reducers/feedback.js ***!
   \******************************/
-/*! exports provided: initialState, FEEDBACK_READ_REQUEST, FEEDBACK_READ_SUCCESS, FEEDBACK_READ_FAILURE, FEEDBACK_ADD_REQUEST, FEEDBACK_ADD_SUCCESS, FEEDBACK_ADD_FAILURE, FEEDBACK_ITEM_READ_REQUEST, FEEDBACK_ITEM_READ_SUCCESS, FEEDBACK_ITEM_READ_FAILURE, FEEDBACK_ITEM_ADD_REQUEST, FEEDBACK_ITEM_ADD_SUCCESS, FEEDBACK_ITEM_ADD_FAILURE, FEEDBACK_ITEM_COMPLETE_REQUEST, FEEDBACK_ITEM_COMPLETE_SUCCESS, FEEDBACK_ITEM_COMPLETE_FAILURE, FEEDBACK_ITEM_COMMENT_REQUEST, FEEDBACK_ITEM_COMMENT_SUCCESS, FEEDBACK_ITEM_COMMENT_FAILURE, default */
+/*! exports provided: initialState, FEEDBACK_TUTORIAL_REQUEST, FEEDBACK_TUTORIAL_SUCCESS, FEEDBACK_TUTORIAL_FAILURE, FEEDBACK_READ_REQUEST, FEEDBACK_READ_SUCCESS, FEEDBACK_READ_FAILURE, FEEDBACK_ADD_REQUEST, FEEDBACK_ADD_SUCCESS, FEEDBACK_ADD_FAILURE, FEEDBACK_ITEM_READ_REQUEST, FEEDBACK_ITEM_READ_SUCCESS, FEEDBACK_ITEM_READ_FAILURE, FEEDBACK_ITEM_ADD_REQUEST, FEEDBACK_ITEM_ADD_SUCCESS, FEEDBACK_ITEM_ADD_FAILURE, FEEDBACK_ITEM_COMPLETE_REQUEST, FEEDBACK_ITEM_COMPLETE_SUCCESS, FEEDBACK_ITEM_COMPLETE_FAILURE, FEEDBACK_ITEM_COMMENT_REQUEST, FEEDBACK_ITEM_COMMENT_SUCCESS, FEEDBACK_ITEM_COMMENT_FAILURE, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_TUTORIAL_REQUEST", function() { return FEEDBACK_TUTORIAL_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_TUTORIAL_SUCCESS", function() { return FEEDBACK_TUTORIAL_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_TUTORIAL_FAILURE", function() { return FEEDBACK_TUTORIAL_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_READ_REQUEST", function() { return FEEDBACK_READ_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_READ_SUCCESS", function() { return FEEDBACK_READ_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_READ_FAILURE", function() { return FEEDBACK_READ_FAILURE; });
@@ -431,7 +434,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ITEM_COMMENT_REQUEST", function() { return FEEDBACK_ITEM_COMMENT_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ITEM_COMMENT_SUCCESS", function() { return FEEDBACK_ITEM_COMMENT_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEEDBACK_ITEM_COMMENT_FAILURE", function() { return FEEDBACK_ITEM_COMMENT_FAILURE; });
-const initialState = {};
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+
+const initialState = {
+  isLoadedFeedback: false,
+  // 피드백 데이터 여부
+  isLoadingFeedback: false,
+  // 피드백 데이터 가지고 오는중
+  LoadedFeedbackErrorReason: '',
+  // 피드백 데이터 실패 사유
+  isLoadedFirstSubject: false,
+  // 피드백 첫번째 주제 저장 완료
+  isLoadingFirstSubject: false,
+  // 피드백 첫번째 주제 저장 중
+  LoadedFirstSubjectErrorReason: '' // 피드백 첫번째 주제 저장 실패 사유
+
+};
+const FEEDBACK_TUTORIAL_REQUEST = 'FEEDBACK_TUTORIAL_REQUEST'; // 피드백 튜토리얼 시도 중
+
+const FEEDBACK_TUTORIAL_SUCCESS = 'FEEDBACK_TUTORIAL_SUCCESS'; // 피드백 튜토리얼 성공
+
+const FEEDBACK_TUTORIAL_FAILURE = 'FEEDBACK_TUTORIAL_FAILURE'; // 피드백 튜토리얼 실패
+
 const FEEDBACK_READ_REQUEST = 'FEEDBACK_READ_REQUEST'; // 피드백 READ 시도 중
 
 const FEEDBACK_READ_SUCCESS = 'FEEDBACK_READ_SUCCESS'; // 피드백 READ 성공
@@ -470,15 +494,45 @@ const FEEDBACK_ITEM_COMMENT_FAILURE = 'FEEDBACK_ITEM_COMMENT_FAILURE'; // 피드
 
 /* harmony default export */ __webpack_exports__["default"] = ((state = initialState, action) => {
   switch (action.type) {
+    // 피드백 튜토리얼 
+    case FEEDBACK_TUTORIAL_REQUEST:
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isLoadingFirstSubject: true,
+        isLoadedFirstSubject: false
+      });
+
+    case FEEDBACK_TUTORIAL_SUCCESS:
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isLoadingFirstSubject: false,
+        isLoadedFirstSubject: true
+      });
+
+    case FEEDBACK_TUTORIAL_FAILURE:
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isLoadingFirstSubject: false,
+        isLoadedFirstSubject: false,
+        LoadedFirstSubjectErrorReason: action.error
+      });
     // 피드백 READ
+
     case FEEDBACK_READ_REQUEST:
-      return {};
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isLoadingFeedback: true,
+        isLoadedFeedback: false
+      });
 
     case FEEDBACK_READ_SUCCESS:
-      return {};
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isLoadingFeedback: false,
+        isLoadedFeedback: true
+      });
 
     case FEEDBACK_READ_FAILURE:
-      return {};
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        isLoadingFeedback: false,
+        isLoadedFeedback: false,
+        LoadedFeedbackErrorReason: action.error
+      });
     // 피드백 ADD
 
     case FEEDBACK_ADD_REQUEST:
@@ -959,7 +1013,6 @@ const initialState = {
   // 로그아웃 실패 사유
   me: {
     email: '',
-    password: '',
     nickname: '',
     tutorial: null,
     msg: ''
@@ -1270,6 +1323,10 @@ function* feedback_Read() {
     const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Read_API);
     console.log(result);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: LOG_IN_SUCCESS,
+      data: result.data
+    });
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_READ_SUCCESS"],
       data: result.data
     });
@@ -1288,9 +1345,40 @@ function* watchFeedback_Read() {
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_READ_REQUEST"], feedback_Read);
 }
 
+; // Feedback 튜토리얼
+
+function feedback_Tutorial_API(data) {// return axios.get('http://54.180.118.35/auth/me',{
+  //     withCredentials:true
+  // });
+}
+
+;
+
+function* feedback_Tutorial(action) {
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Tutorial_API, action.data);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_TUTORIAL_SUCCESS"],
+      data: result.data
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_TUTORIAL_FAILURE"],
+      error: e
+    });
+  }
+}
+
+;
+
+function* watchFeedback_Toturial() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_TUTORIAL_REQUEST"], feedback_Tutorial);
+}
+
 ;
 function* feedbackSaga() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Item_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Item_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Item_Complete), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Item_Comment)]);
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Toturial), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Item_Read), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Item_Add), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Item_Complete), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFeedback_Item_Comment)]);
 }
 
 /***/ }),
@@ -1856,7 +1944,9 @@ function* watchLogOut() {
 ; // 로그인
 
 function loginAPI(data) {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/login', data);
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/login', data, {
+    withCredentials: true
+  });
 }
 
 ;

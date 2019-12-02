@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Layout,  Button, Modal, Steps, Collapse, Input, Popconfirm  } from 'antd';
+import {useDispatch,useSelector} from 'react-redux';
 import TutorialFirst from '../components/TutorialFirst';
 import TutorialSecond from '../components/TutorialSecond';
 import TutorialThird from '../components/TutorialThird';
 import TutorialForth from '../components/TutorialForth';
+import { FEEDBACK_TUTORIAL_REQUEST } from '../reducers/feedback';
 
 const { Step } = Steps;
 const { Panel } = Collapse;
@@ -32,8 +34,10 @@ const steps = [
     },
   ];
 
-const TutorialMain = ({visible,handleCancel,handleOk}) => {
+const TutorialMain = ({visible,handleCancel,handleOk,handleSetFirstSubject,firstSubject}) => {
 
+    const dispatch = useDispatch();
+    const {isLoadingFirstSubject,isLoadedFirstSubject} = useSelector(state => state.feedback);
     const [current, setCurrent] = useState(0);
 
     const next = () =>  {
@@ -46,12 +50,20 @@ const TutorialMain = ({visible,handleCancel,handleOk}) => {
         setCurrent(currents);
     }
 
+    const onHandleSubject = (e) => {
+        e.preventDefault();
+        dispatch({
+            type:FEEDBACK_TUTORIAL_REQUEST,
+            data:firstSubject
+        });
+    }
+
     return(
         <>
            <Modal 
-                key='1'
+                key='mainModal1'
                 title={
-                    <Steps current={current} key='2'>
+                    <Steps current={current} key='mainModal2'>
                         {steps.map(item => (
                             <Step key={item.key} title={item.title} />
                         ))}
@@ -75,9 +87,11 @@ const TutorialMain = ({visible,handleCancel,handleOk}) => {
                                 <Panel showArrow={false} header={<strong>주제 선정하기</strong>} key="1">
                                     <Input 
                                         placeholder='첫번째 주제를 작성해주세요'
+                                        onChange={handleSetFirstSubject}
+                                        value={firstSubject}
                                     />
                                     <Popconfirm title="이대로 괜찮습니까?" okText="네" cancelText="아니오">
-                                        <Button type="danger" key="confirm" style={{width:'100%',marginTop:5}}>
+                                        <Button type="danger" key="confirm" style={{width:'100%',marginTop:5}} onClick={onHandleSubject} loading={isLoadingFirstSubject}>
                                             <strong>확인</strong>
                                         </Button>
                                     </Popconfirm>
