@@ -1,8 +1,8 @@
 import React,{useState,useCallback} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Layout, Form, Input, Icon, Button, Col, Typography, Row } from 'antd';
-import CKEditor from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import CKEditor from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { backgroundWhite, backgroundLightBlue} from '../css/Common';
 import {FEEDBACK_ITEM_ADD_REQUEST} from '../reducers/feedback';
 
@@ -56,10 +56,10 @@ const feedBackDetailWrite = ({writeVisible,writeHandleCancel,name}) => {
                        <Row>
                             <Col span={24}>
                                 <Form.Item >
-                                    <CKEditor
+                                    {/* <CKEditor
                                         editor={ClassicEditor}
                                         onChange={handleChange}
-                                    />
+                                    /> */}
                                 </Form.Item>
                             </Col>
                        </Row> 
