@@ -17,7 +17,15 @@ import {
     LOG_OUT_FAILURE,
 } from '../reducers/user';
 
-axios.defaults.baseURL = "http://54.180.118.35";
+const dev = process.env.NODE_ENV !== "production";
+const prod = process.env.NODE_ENV === "production";
+
+if(prod){
+    axios.defaults.baseURL = "http://54.180.118.35";
+}else{
+    axios.defaults.baseURL = "http://localhost:8000";
+}
+
 
 // 마이페이지
 function logUserAPI(){

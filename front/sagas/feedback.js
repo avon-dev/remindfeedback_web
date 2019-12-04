@@ -26,7 +26,14 @@ import {
 
 import {LOG_IN_SUCCESS} from '../reducers/user';
 
-axios.defaults.baseURL="http://54.180.118.35";
+const dev = process.env.NODE_ENV !== "production";
+const prod = process.env.NODE_ENV === "production";
+
+if(prod){
+    axios.defaults.baseURL = "http://54.180.118.35";
+}else{
+    axios.defaults.baseURL = "http://localhost:8000";
+}
 
 // Feedback 피드백 게시물 댓글 Read
 function feedback_Item_Comment_API(){
@@ -135,7 +142,7 @@ function* watchFeedback_Item_Read() {
 // Feedback 새 피드백 Add
 function feedback_Add_API(data){
     
-    return axios.post('/create',data,{
+    return axios.post('/feedback/create',data,{
         withCredentials:true
     });
 };
@@ -171,10 +178,6 @@ function feedback_Read_API(){
 function* feedback_Read(){
     try {
         const result = yield call(feedback_Read_API);
-        yield put({
-            type:LOG_IN_SUCCESS,
-            data:result.data
-        }) 
         yield put({
             type:FEEDBACK_READ_SUCCESS,
             data:result.data,

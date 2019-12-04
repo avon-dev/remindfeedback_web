@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import AppMypageSidebar from '../components/AppMypageSidebar';
 import AppTopbar from '../components/AppTopbar';
 import AppFooter from '../components/AppFooter';

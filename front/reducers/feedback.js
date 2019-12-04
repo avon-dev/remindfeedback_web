@@ -94,20 +94,20 @@ export default (state = initialState, action) => {
             return{
                 ...state,
                 isAdddingFeedback:true,
-                isAdddingFeedback:false,
+                isAddedFeedback:false,
             };
         case FEEDBACK_ADD_SUCCESS:
             return{
                 ...state,
                 isAdddingFeedback:false,
-                isAdddingFeedback:true,
+                isAddedFeedback:true,
 
             };
         case FEEDBACK_ADD_FAILURE:
             return{
                 ...state,
                 isAdddingFeedback:false,
-                isAdddingFeedback:false,
+                isAddedFeedback:false,
                 AddedFeedbackErrorReason:action.error,
             };
 

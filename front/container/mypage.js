@@ -12,8 +12,8 @@ const mypage = () => {
     const dispatch = useDispatch();
     const {me} = useSelector(state=>state.user);
 
-    const [nickname, setNickname] = useState(me.nickname?me.nickname:'');
-    const [intro, setIntro] = useState(me.introduction?me.introduction:'');
+    const [nickname, setNickname] = useState('');
+    const [intro, setIntro] = useState('');
     const [photoVisible, setPhotoVisible] = useState(false);
     
      // 사진
@@ -35,14 +35,23 @@ const mypage = () => {
       }
     }
 
-    // const updateMypage = useCallback(() => {
-    //   dispatch({
-    //       type:LOAD_USER_REQUEST,
-    //       data:{
-    //         nickname,intro
-    //       }
-    //   });
-    // },[nickname,intro]);
+    const updateMypage = useCallback(() => {
+      dispatch({
+          type:LOAD_USER_REQUEST,
+          data:{
+            nickname,intro
+          }
+      });
+    },[nickname,intro]);
+
+    useEffect(()=>{
+      if(me.nickname){
+        setNickname(me.nickname);
+      }
+      if(me.introducion){
+        setIntro(me.introducion);
+      }
+    },[me&&me]);
 
     return(
         <>

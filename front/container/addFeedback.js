@@ -1,9 +1,10 @@
-import React,{useState,useCallback} from 'react';
+import React,{useState,useCallback, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Layout, Form, Input, Dropdown, Menu, Icon, Button, Col, Typography, DatePicker, Select  } from 'antd';
 import { backgroundWhite, backgroundLightBlue} from '../css/Common';
 import { subjectBtn, formBoder, formItemLayout } from '../css/Main';
 import {FEEDBACK_ADD_REQUEST} from '../reducers/feedback';
+
 
 const { Search } = Input;
 const {Content} = Layout;
@@ -11,11 +12,11 @@ const {Title} = Typography;
 
 const addFeedback = ({visible,handleCancel,handleOk}) => {
     const dispatch = useDispatch();
-    
-    const [subject,setSubject] = useState('AVON');
+    const {isAdddingFeedback,isAddedFeedback} = useSelector(state => state.feedback);
+    const [category,setCategory] = useState('AVON');
     const [title,setTitle] = useState('');
-    const [date,setDate] = useState('');
-    const [advisor,setAdvisor] = useState('');
+    const [write_date,setWrite_date] = useState('');
+    const [adviser,setAdvisor] = useState('');
     
     
     const _onSubmit = useCallback((e) => {
@@ -23,22 +24,22 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
         if(!title){
             return alert('피드백 제목을 입력해 주세요');
         }
-        if(!date){
+        if(!write_date){
             return alert('피드백 날짜를 선택해 주세요');
         }
-        if(!advisor){
+        if(!adviser){
             return alert('피드백 조언자를 입력해 주세요');
         }
         dispatch({
             type: FEEDBACK_ADD_REQUEST,
             data:{
-                subject,title,date,advisor 
+                category,title,write_date,adviser 
             },
         });
-    },[subject,title,date,advisor]);
+    },[category,title,write_date,adviser]);
 
     const handleSubject = (value) =>  {
-        setSubject(value);
+        setCategory(value);
     };
 
     const handleTitle = (e) =>  {
@@ -46,13 +47,24 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
     };
 
     const handleData = (e) =>  {
-        setDate(e._d)
+       if(e!==null){
+        setWrite_date(e._d);
+       }
     };
 
     const handleAdvisor = (e) =>  {
         setAdvisor(e.target.value);
     };
-    
+
+    useEffect(()=>{
+        if(isAddedFeedback){
+            setCategory('AVON');
+            setAdvisor('');
+            setTitle('');
+            setWrite_date(null);
+            handleCancel();
+        }
+    },[isAdddingFeedback&&isAdddingFeedback]);
     
     return(
         <>  
@@ -68,7 +80,7 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
                         <Button key="back" onClick={handleCancel} style={{display:'none'}}>
                             <strong>취소</strong>
                         </Button>,
-                        <Button key="submit" type="primary" size='large' style={{width:'100%'}} onClick={_onSubmit}>
+                        <Button key="submit" type="primary" size='large' style={{width:'100%'}} onClick={_onSubmit} loading={isAdddingFeedback}>
                             <strong>피드백 생성</strong>
                         </Button>
                     </div>
@@ -80,7 +92,7 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
                     <Form  {...formItemLayout} >
                         <Form.Item label={<strong>피드백 주제선택</strong>} >
                             <Col span={24}>
-                                <Select defaultValue={subject} onChange={handleSubject} style={{width:'100%', textAlign:'left'}} >
+                                <Select defaultValue={category} onChange={handleSubject} style={{width:'100%', textAlign:'left'}} >
                                     <Select.Option value="AVON"><Icon type="user" /><strong>AVON</strong></Select.Option>
                                     <Select.Option value="운동"><Icon type="user" /><strong>운동</strong></Select.Option>
                                 </Select>
@@ -107,7 +119,7 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
                         <Form.Item label={<strong>피드백 조언자</strong>} >
                             <Col span={24}>
                                 <Search
-                                    value={advisor}
+                                    value={adviser}
                                     onChange={handleAdvisor}
                                     style={{width:'100%'}}
                                     placeholder="조언자 이름을 입력하세요"
