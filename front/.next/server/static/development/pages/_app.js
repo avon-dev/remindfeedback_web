@@ -1323,7 +1323,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = "http://54.180.118.35/"; // Feedback 피드백 게시물 댓글 Read
+axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = "http://54.180.118.35"; // Feedback 피드백 게시물 댓글 Read
 
 function feedback_Item_Comment_API() {// return axios.get('/#');
 }
@@ -1388,12 +1388,12 @@ function feedback_Item_Add_API() {// return axios.post('/#');
 
 ;
 
-function* feedback_Item_Add() {
+function* feedback_Item_Add(action) {
   try {
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Item_Add_API);
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(feedback_Item_Add_API, action.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
-      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_ITEM_ADD_SUCCESS"]
+      type: _reducers_feedback__WEBPACK_IMPORTED_MODULE_2__["FEEDBACK_ITEM_ADD_SUCCESS"],
+      data: result.data
     });
   } catch (e) {
     console.error(e);
@@ -1471,7 +1471,7 @@ function* watchFeedback_Add() {
 ; // Feedback 메인화면 Read
 
 function feedback_Read_API() {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('auth/me', {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/auth/me', {
     withCredentials: true
   });
 }
@@ -2046,10 +2046,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = 'http://54.180.118.35/auth'; // 마이페이지
+axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = "http://54.180.118.35"; // 마이페이지
 
 function logUserAPI() {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/me', {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/auth/me', {
     withCredentials: true
   });
 }
@@ -2081,7 +2081,7 @@ function* watchLoadUser() {
 ; // 로그아웃
 
 function logOutAPI() {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/logout', {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/auth/logout', {
     withCredentials: true
   });
 }
@@ -2112,7 +2112,7 @@ function* watchLogOut() {
 ; // 로그인
 
 function loginAPI(data) {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/login', data, {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/auth/login', data, {
     withCredentials: true
   });
 }
@@ -2148,7 +2148,7 @@ function* watchLogin() {
 ; // 회원가입
 
 function signUpAPI(data) {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/signup', data);
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/auth/signup', data);
 }
 
 ;

@@ -26,7 +26,7 @@ import {
 
 import {LOG_IN_SUCCESS} from '../reducers/user';
 
-axios.defaults.baseURL="http://54.180.118.35/";
+axios.defaults.baseURL="http://54.180.118.35";
 
 // Feedback 피드백 게시물 댓글 Read
 function feedback_Item_Comment_API(){
@@ -85,12 +85,12 @@ function feedback_Item_Add_API(){
     // return axios.post('/#');
 };
 
-function* feedback_Item_Add(){
+function* feedback_Item_Add(action){
     try {
-        yield delay(2000);
-        yield call(feedback_Item_Add_API);
+        const result = yield call(feedback_Item_Add_API, action.data);
         yield put({
             type:FEEDBACK_ITEM_ADD_SUCCESS,
+            data:result.data,
         });
     } catch (e) {
         console.error(e);
@@ -160,7 +160,7 @@ function* watchFeedback_Add(){
 
 // Feedback 메인화면 Read
 function feedback_Read_API(){
-    return axios.get('auth/me',{
+    return axios.get('/auth/me',{
         withCredentials:true
     });
 };

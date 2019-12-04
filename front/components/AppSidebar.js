@@ -19,7 +19,6 @@ const AppSidebar = () => {
 
   const dispatch = useDispatch();
   
-
   const [visible, setVisible] = useState();
   const [changeTheme, setChangeTheme] = useState(false);
 
@@ -69,7 +68,6 @@ const AppSidebar = () => {
             theme={changeTheme}
             style={{ width: '100%', borderRight:'2px solid black', height:'70vh' }}
             defaultSelectedKeys={['1']}
-            // defaultOpenKeys={['sub2']}
             mode="vertical"
         >
         <Menu.Item disabled={changeTheme==="dark"?true:false} key="sub1" style={{color: changeTheme==="dark"?"#FFFFFF":"#000000"}}>
