@@ -171,9 +171,9 @@ function feedback_Read_API(lastId = 0, limit = 10){
     });
 };
 
-function* feedback_Read(){
+function* feedback_Read(action){
     try {
-        const result = yield call(feedback_Read_API,action.lastId);
+        const result = yield call(feedback_Read_API, action.data);
         yield put({
             type:FEEDBACK_READ_SUCCESS,
             data:result.data,

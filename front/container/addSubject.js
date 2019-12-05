@@ -13,17 +13,17 @@ const addSubject = ({visible,handleCancel}) => {
 
     const dispath = useDispatch();
 
-    const [color,setColor] =  useState();
-    const [title,setTitle] =  useState();
+    const [category_color,setColor] =  useState();
+    const [category_title,setTitle] =  useState();
 
     const _onsubmit = useCallback(() => {
         dispath({
             type:FEEDBACK_SUB_ADD_REQUEST,
             data:{
-                color, title,
+                category_color, category_title,
             }
         });
-    },[color,title]);
+    },[category_color,category_title]);
 
     const handleTitle = (e) => {
         setTitle(e.target.value);
@@ -66,7 +66,7 @@ const addSubject = ({visible,handleCancel}) => {
                                     <Input
                                         prefix={<Icon type='home' style={{ color: 'rgba(0,0,0,.25)' }} />}
                                         onChange={handleTitle}
-                                        value={title}
+                                        value={category_title}
                                         placeholder="제목"
                                     />
                                 </Form.Item>
@@ -74,7 +74,7 @@ const addSubject = ({visible,handleCancel}) => {
                             <Col span={24}>
                                 <Form.Item label={<strong>색상 설정</strong>}>
                                     <CirclePicker
-                                        color={color}
+                                        color={category_color}
                                         onChangeComplete={handleChangeComplete}
                                         onChange={handleColor}
                                         width="10"

@@ -18,6 +18,8 @@ import {
 const dev = process.env.NODE_ENV !== "production";
 const prod = process.env.NODE_ENV === "production";
 
+axios.defaults.baseURL = "http://localhost:8000"
+
 if(prod){
     axios.defaults.baseURL = "http://54.180.118.35";
 }else{
@@ -78,15 +80,14 @@ function* watchFeedback_Sub_Update() {
 
 // 피드백 주제 Add
 function feedback_Sub_Add_API(data){
-    return axios.post('/st', data ,{
+    return axios.post('/feedback/insert', data ,{
         withCredentials:true,
     });
 };
 
 function* feedback_Sub_Add(action){
     try {
-        yield delay(2000);
-        yield call(feedback_Sub_Add_API, action.data);
+        const result = yield call(feedback_Sub_Add_API, action.data);
         yield put({
             type:FEEDBACK_SUB_ADD_SUCCESS,
         });
@@ -106,16 +107,19 @@ function* watchFeedback_Sub_Add(){
 
 // 피드백 주제 메인 Read
 function feedback_Sub_Read_API(){
-    // return axios.get('/#');
+    return axios.get('/category/selectall',{
+        withCredentials:true,
+    });
 };
-
 
 function* feedback_Sub_Read(){
     try {
-        yield delay(2000);
-        yield call(feedback_Sub_Read_API);
+        const result = yield call(feedback_Sub_Read_API);
+        const r = result.data;
+        console.log(r);
         yield put({
             type:FEEDBACK_SUB_READ_SUCCESS,
+            data:result.data,
         });
     } catch (e) {
         console.error(e);

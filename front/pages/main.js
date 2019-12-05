@@ -6,7 +6,7 @@ import AppMain from '../container/main';
 import AppFooter from '../components/AppFooter';
 import { layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
 import { Layout } from 'antd';
-import {FEEDBACK_READ_REQUEST} from '../reducers/feedback';
+import { FEEDBACK_READ_REQUEST } from '../reducers/feedback';
 import { useDispatch, useSelector } from 'react-redux';
 import Router  from 'next/router';
 import Error from 'next/error';
@@ -17,9 +17,9 @@ const Main = () => {
     const dispatch = useDispatch();
     const {LoadedFeedbackErrorReason, feedback, hasMorePost  } = useSelector(state=>state.feedback);
 
-    if(LoadedFeedbackErrorReason.config.headers.Cookie===""){
-        return <Error statusCode={LoadedFeedbackErrorReason.message}/>
-    }
+    // if(LoadedFeedbackErrorReason.config.headers.Cookie===""){
+    //     return <Error statusCode={LoadedFeedbackErrorReason.message}/>
+    // }
 
     const onScroll = useCallback(()=>{
         if(window.scrollY+document.documentElement.clientHeight > document.documentElement.scrollHeight - 300){
@@ -64,11 +64,15 @@ Main.getInitialProps = async(context) => {
 
     const cookie = context.isServer?context.req.headers.cookie:'';
     axios.defaults.headers.Cookie = '';
+    const {feedback} = context.store.getState();
+    const lastId = 0;
+
     if(context.isServer&&cookie){
         axios.defaults.headers.Cookie = cookie;
     }
     context.store.dispatch({
         type:FEEDBACK_READ_REQUEST,
+        lastId,
     });
 };
 
