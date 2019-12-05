@@ -1,4 +1,4 @@
-import {all, delay, fork, put, takeLatest, call } from 'redux-saga/effects';
+import {all, delay, fork, put, takeLatest, call, throttle } from 'redux-saga/effects';
 import axios from 'axios';
 import {
     FEEDBACK_TUTORIAL_REQUEST,
@@ -74,7 +74,6 @@ function* feedback_Item_Complete(){
             type:FEEDBACK_ITEM_COMPLETE_SUCCESS,
         });
     } catch (e) {
-        console.error(e);
         yield put({
             type:FEEDBACK_ITEM_COMPLETE_FAILURE,
             error:e,
@@ -100,7 +99,6 @@ function* feedback_Item_Add(action){
             data:result.data,
         });
     } catch (e) {
-        console.error(e);
         yield put({
             type:FEEDBACK_ITEM_ADD_FAILURE,
             error:e,
@@ -126,7 +124,6 @@ function* feedback_Item_Read(){
             type:FEEDBACK_ITEM_READ_SUCCESS,
         });
     } catch (e) {
-        console.error(e);
         yield put({
             type:FEEDBACK_ITEM_READ_FAILURE,
             error:e,
@@ -155,7 +152,6 @@ function* feedback_Add(action){
             data:result.data,
         });
     } catch (e) {
-        console.error(e);
         yield put({
             type:FEEDBACK_ADD_FAILURE,
             error:e,
@@ -169,21 +165,20 @@ function* watchFeedback_Add(){
 
 
 // Feedback 메인화면 Read
-function feedback_Read_API(){
-    return axios.get('/feedback/all',{
+function feedback_Read_API(lastId = 0, limit = 10){
+    return axios.get(`/feedback/all?lastId=${lastId}&limit=${limit}`,{
         withCredentials:true
     });
 };
 
 function* feedback_Read(){
     try {
-        const result = yield call(feedback_Read_API);
+        const result = yield call(feedback_Read_API,action.lastId);
         yield put({
             type:FEEDBACK_READ_SUCCESS,
             data:result.data,
         });
     } catch (e) {
-        console.error(e);
         yield put({
             type:FEEDBACK_READ_FAILURE,
             error:e,
@@ -192,7 +187,7 @@ function* feedback_Read(){
 };
 
 function* watchFeedback_Read() {
-    yield takeLatest(FEEDBACK_READ_REQUEST, feedback_Read);
+    yield throttle(2000 , FEEDBACK_READ_REQUEST, feedback_Read);
 };
 
 // Feedback 튜토리얼
@@ -211,7 +206,6 @@ function* feedback_Tutorial(action){
             data:result.data
         }) 
     } catch (e) {
-        console.error(e);
         yield put({
             type:FEEDBACK_TUTORIAL_FAILURE,
             error:e,

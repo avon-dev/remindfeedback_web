@@ -182,6 +182,7 @@ export default (state = initialState, action ) => {
         case LOG_OUT_SUCCESS:
             return{
                 ...state,
+                isLoggedIn:false,
                 isLoggingOut: false,
                 isLogout:true,
             }

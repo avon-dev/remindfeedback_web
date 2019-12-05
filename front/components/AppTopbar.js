@@ -6,6 +6,7 @@ import AppTutorial from '../components/TutorialMain';
 import AppAlert from '../container/alert';
 import { FEEDBACK_TUTORIAL_REQUEST } from '../reducers/feedback';
 import { LOG_OUT_REQUEST } from '../reducers/user';
+import Router from 'next/router';
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -24,7 +25,7 @@ const commonStyle = {
 const AppTopbar = () => {
 
     const dispatch = useDispatch();
-    const { me } = useSelector( state => state.user);
+    const { me, isLogout } = useSelector( state => state.user);
     const [visible, setVisible] = useState(false);
     const [alertVisible, setAlertVisible] = useState(false);
     const [firstSubject, setFirstSubject] = useState('첫번째 피드백');
@@ -56,12 +57,17 @@ const AppTopbar = () => {
         }
     },[]);
 
-    const handleLogout = (e) => {
-        e.preventDefault();
+    const handleLogout = () => {
         dispatch({
             type:LOG_OUT_REQUEST,
         })
     }
+
+    useEffect(()=>{
+        if(isLogout){
+           Router.push('/login'); 
+        }
+    },[isLogout&&isLogout]);
      
     const items = (
         <div>
