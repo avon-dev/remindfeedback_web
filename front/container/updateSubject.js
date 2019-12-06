@@ -9,7 +9,7 @@ import {FEEDBACK_SUB_UPDATE_REQUEST} from '../reducers/feedbackSubject';
 const {Content} = Layout;
 const {Title} = Typography;
 
-const updateSubject = ({updateVisible,handleUpdateCancel}) => {
+const updateSubject = ({updateVisible,handleUpdateCancel,category_title}) => {
 
     const dispath = useDispatch();
 
@@ -72,7 +72,7 @@ const updateSubject = ({updateVisible,handleUpdateCancel}) => {
                                         prefix={<Icon type='home' style={{ color: 'rgba(0,0,0,.25)' }} />}
                                         placeholder="제목"
                                         onChange={handleTitle}
-                                        value={title}
+                                        value={category_title?category_title:title}
                                     />
                                 </Form.Item>
                             </Col>

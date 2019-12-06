@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Popover, Icon, Button, Popconfirm} from 'antd';
 import {FEEDBACK_SUB_DELETE_REQUEST} from '../reducers/feedbackSubject';
@@ -6,21 +6,23 @@ import {FEEDBACK_SUB_DELETE_REQUEST} from '../reducers/feedbackSubject';
 const deleteSubject = ({update,PopupUpdateSubject,popOverVisible,handleVisible}) => {
     
     const dispatch = useDispatch();
-
+    
     const [id,setId] = useState('');
 
     const handleDelete = (e) => {
-        setId(e.target.name); 
+        e.preventDefault();
+        console.log(e.target.id);
+        setId(e.target.id); 
     }
    
     const handleConfirm = useCallback(() => {
         dispatch({
             type:FEEDBACK_SUB_DELETE_REQUEST,
-            data:{
-                id,
-            },
+            id,
         });
     },[id]);
+
+   
 
     return(
         update.map((update) => {
@@ -28,22 +30,22 @@ const deleteSubject = ({update,PopupUpdateSubject,popOverVisible,handleVisible})
                 <Popover
                 // onVisibleChange={handleVisible}
                 // visible={popOverVisible}
-                key={update}
-                title={update}
+                key={update.category_id}
+                title={update.category_title}
                 placement="rightBottom"
                 overlayStyle={{textAlign:'center'}}
                 content={
                     <>
-                        <div id={update} style={{display:'flex', justifyContent:'space-around' }}>
-                            <Button key="modify" type="primary" name={update} size="small" onClick={PopupUpdateSubject}>수정</Button> 
+                        <div id={update.category_id} style={{display:'flex', justifyContent:'space-around' }}>
+                            <Button key="modify" id={update.category_id} type="primary" size="small" onClick={PopupUpdateSubject}>수정</Button> 
                             <Popconfirm
-                                key = {update}
+                                key = {update.category_id}
                                 onConfirm={handleConfirm}
                                 title="정말로 삭제하시겠습니까?"  
                                 okText="네"
                                 cancelText="아니오"
                             >
-                                <Button key={update} type="danger" name={update}  onClick={handleDelete} size="small">삭제</Button> 
+                                <Button type="danger" id={update.category_id} onClick={handleDelete} size="small">삭제</Button> 
                             </Popconfirm>
                         </div>
                     </>

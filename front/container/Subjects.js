@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Table, Typography, Tag, Popover, Icon, Button, Empty  } from 'antd';
+import { Row, Col, Table, Typography, Tag, Popover, Alert , Button, Empty  } from 'antd';
 import DeleteSubject from '../container/deleteSubject';
 import AddSubject from '../container/addSubject';
 import UpdateSubject from './updateSubject';
@@ -10,10 +10,13 @@ const {Text} = Typography;
 const Subjects = () => {
 
     const { feedbackMode } = useSelector(state=> state.feedbackMode);
+    const { subject, isAddedSubject, isDeletedSubject, message  } = useSelector(state=> state.feedbackSubject);
 
     const [visible, setVisible] = useState(false);
     const [updateVisible, setUpdateVisible] = useState(false);
     const [popOverVisible, setPopOverVisible] = useState(false);
+    const [category_title, setCategory_title] = useState('');
+
 
     const columns = [
         {
@@ -37,12 +40,8 @@ const Subjects = () => {
             render: tags => (
               <span>
                 {tags.map(tag => {
-                  let color = tag.length > 4 ? 'green' : 'geekblue';
-                  if (tag === 'red') {
-                    color = 'volcano';
-                  }
                   return (
-                    <Tag color={color} key={tag}>
+                    <Tag color={tag} key={tag}>
                       {tag.toUpperCase()}
                     </Tag>
                   );
@@ -67,30 +66,28 @@ const Subjects = () => {
           },
         ]
 
-    const data = [
-        {
-          key: '1',
-          number: '1',
-          subject: 'AVON',
-          tags: ['green', 'blue'],
-          update:['AVON']
-        },
-        {
-          key: '2',
-          number: '2',
-          subject: '운동',
-          tags: ['red'],
-          update:['운동']
-        },
-        {
-          key: '3',
-          number: '3',
-          subject: "Test",
-          tags: ['blue', 'green'],
-          update:["Test"],
-        },
-    ];
+    const data = subject.map((data, index)=>{
+      return ({
+        key: data.category_id + data.category_title,
+        number: index+1,
+        subject: data.category_title,
+        tags: [data.category_color],
+        update: [{category_title:data.category_title, category_id:data.category_id}],
+      })
+    });
 
+    useEffect(()=>{
+      if(isAddedSubject){
+        handleCancel();
+      }
+    },[isAddedSubject&&isAddedSubject]);
+       
+    useEffect(()=>{
+      if(isDeletedSubject){
+         alert(message);
+      }
+    },[isDeletedSubject&&isDeletedSubject]);
+   
     const PopupAddSubject = () => {
         setVisible(true);
     }
@@ -99,7 +96,10 @@ const Subjects = () => {
         setVisible(false);
     }
 
-    const PopupUpdateSubject = () => {
+    const PopupUpdateSubject = (e) => {
+      const index = subject.findIndex(v=>parseInt(v.category_id)===parseInt(e.target.id));
+      const category_title = subject[index].category_title;
+      setCategory_title(category_title);
       setUpdateVisible(true);
       setPopOverVisible(false);
     }
@@ -145,9 +145,12 @@ const Subjects = () => {
         </div>
         <div>
             <UpdateSubject
+                category_title={category_title}
                 updateVisible={updateVisible}
                 handleUpdateCancel={handleUpdateCancel}
             />
+        </div>
+        <div>
         </div>
     </>    
     )

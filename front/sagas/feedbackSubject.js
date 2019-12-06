@@ -27,16 +27,18 @@ if(prod){
 }
 
 // 피드백 주제 Delete
-function feedback_Sub_Delete_API(data){
-    // return axios.delete('/#');
+function feedback_Sub_Delete_API(category_id){
+    return axios.delete(`/category/deleteone/${category_id}`,{
+        withCredentials:true,
+    });
 };
 
 function* feedback_Sub_Delete(action){
     try {
-        yield delay(2000);
-        yield call(feedback_Sub_Delete_API, action.data);
+        const result = yield call(feedback_Sub_Delete_API, action.id);
         yield put({
             type:FEEDBACK_SUB_DELETE_SUCCESS,
+            data:result.data,
         });
     } catch (e) {
         console.error(e);
@@ -80,7 +82,7 @@ function* watchFeedback_Sub_Update() {
 
 // 피드백 주제 Add
 function feedback_Sub_Add_API(data){
-    return axios.post('/feedback/insert', data ,{
+    return axios.post('/category/insert', data ,{
         withCredentials:true,
     });
 };
@@ -90,6 +92,7 @@ function* feedback_Sub_Add(action){
         const result = yield call(feedback_Sub_Add_API, action.data);
         yield put({
             type:FEEDBACK_SUB_ADD_SUCCESS,
+            data:result.data,
         });
     } catch (e) {
         console.error(e);
@@ -115,8 +118,6 @@ function feedback_Sub_Read_API(){
 function* feedback_Sub_Read(){
     try {
         const result = yield call(feedback_Sub_Read_API);
-        const r = result.data;
-        console.log(r);
         yield put({
             type:FEEDBACK_SUB_READ_SUCCESS,
             data:result.data,

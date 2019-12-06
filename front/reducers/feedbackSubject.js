@@ -49,11 +49,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoadingSubject:false,
                 isLoadedSubject:true,
-                subject:[{
-                    index: action.data.index,
-                    name:action.data.name,
-                    color:action.data.color,
-                }]      
+                subject:action.data.success?action.data.data:state.subject,  
             };
         case FEEDBACK_SUB_READ_FAILURE:
             return{
@@ -71,18 +67,12 @@ export default (state = initialState, action) => {
 
             };
         case FEEDBACK_SUB_ADD_SUCCESS:
+            const addedData = action.data.success?action.data.data[action.data.data.length-1]:'';
             return{
                 ...state,
                 isAddingSubject:false,
                 isAddedSubject:true,
-                subject:[
-                    ...state.subject,
-                    {
-                        index: action.data.index,
-                        name:action.data.name,
-                        color:action.data.color,  
-                    }
-                ]
+                subject:action.data.success?[...state.subject, addedData]:state.subject
             };
         case FEEDBACK_SUB_ADD_FAILURE:
             return{
@@ -125,11 +115,16 @@ export default (state = initialState, action) => {
                 isDeletedSubject:false,
             };
         case FEEDBACK_SUB_DELETE_SUCCESS:
+            
+            const index = state.subject.findIndex(v=>parseInt(v.category_id)===parseInt(action.data.data));
+            const deletedFeedback = state.subject.filter((v,i)=>i!==index);
+
             return{
                 ...state,
                 isDeletingSubject:false,
                 isDeletedSubject:true,
-                subject:state.subject.filter((v,i) => i !== action.data.index),
+                message:action.data.message,
+                subject:action.data.success?deletedFeedback:state.subject,
             };
         case FEEDBACK_SUB_DELETE_FAILURE:
             return{

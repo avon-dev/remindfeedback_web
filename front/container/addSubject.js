@@ -12,7 +12,7 @@ const {Title} = Typography;
 const addSubject = ({visible,handleCancel}) => {
 
     const dispath = useDispatch();
-
+    const { isAddingSubject } = useSelector(state=> state.feedbackSubject);
     const [category_color,setColor] =  useState();
     const [category_title,setTitle] =  useState();
 
@@ -50,7 +50,7 @@ const addSubject = ({visible,handleCancel}) => {
                         <Button key="back" onClick={handleCancel} style={{display:'none'}}>
                             <strong>취소</strong>
                         </Button>,
-                        <Button key="submit" type="primary" size='large' onClick={_onsubmit} style={{width:'100%'}}>
+                        <Button key="submit" type="primary" size='large' onClick={_onsubmit} style={{width:'100%'}} loading={isAddingSubject}>
                             <strong>주제 추가</strong>
                         </Button>
                     </div>
