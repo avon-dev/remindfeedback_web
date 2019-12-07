@@ -5,6 +5,8 @@ import AddFeedback from '../container/addFeedback';
 import Link from 'next/link';
 import { FEEDBACK_MODE } from '../reducers/feedbackMode';
 
+const { SubMenu } = Menu;
+
 const newFeedBack ={
   fontSize:17,
   fontWeight:'bold',
@@ -18,9 +20,16 @@ const Sidebar = {
 const AppSidebar = () => {
 
   const dispatch = useDispatch();
-  
+  const {subject} = useSelector(state=>state.feedbackSubject); 
   const [visible, setVisible] = useState();
   const [changeTheme, setChangeTheme] = useState(false);
+
+  const category = subject?subject.map((v,i)=>
+          <Menu.Item  key={v.category_id} style={{color: v.category_color?v.category_color:"#000000"}}>
+            <Icon type="right" />
+            <strong>{v.category_title}</strong>
+          </Menu.Item>
+    ):<Menu.Item  key="default" title={<strong>Default</strong>} />
 
   const showModal = () => {
     setVisible(true);
@@ -41,6 +50,7 @@ const AppSidebar = () => {
       data: value
     })
   };
+
 
     return(
       <>
@@ -64,23 +74,36 @@ const AppSidebar = () => {
             />
           </Tooltip>
         </Col>
+        <Col span={24}>
         <Menu
             theme={changeTheme}
-            style={{ width: '100%', borderRight:'2px solid black', height:'70vh' }}
+            style={{ width: '100%', borderRight:'2px solid black'}}
             defaultSelectedKeys={['1']}
-            mode="vertical"
+            mode="inline"
         >
-        <Menu.Item disabled={changeTheme==="dark"?true:false} key="sub1" style={{color: changeTheme==="dark"?"#FFFFFF":"#000000"}}>
-          <Icon type="ordered-list"/><strong>주제 관리</strong>
-          <Link href="/subject">
-          <a></a></Link> 
-        </Menu.Item>
+        <SubMenu key="title1"
+          disabled={changeTheme==="dark"?true:false}
+          style={{color: changeTheme==="dark"?"#FFFFFF":"#000000"}}
+          title={
+            <span>
+              <Icon type="ordered-list"/>
+              <strong>주제 관리</strong>
+            </span>
+          }>
+          <Menu.Item  key="sub1" style={{color: changeTheme==="dark"?"#FFFFFF":"#000000"}}>
+            <Icon type="setting"/><strong>주제 설정</strong>
+            <Link href="/subject">
+            <a></a></Link> 
+          </Menu.Item>
+          {category}
+        </SubMenu>
         <Menu.Item key="sub2" style={{color: changeTheme==="dark"?"#FFFFFF":"#000000"}}>
           <Icon type="team"/><strong>친구 관리</strong>
           <Link href="/friends">
           <a></a></Link> 
         </Menu.Item>
       </Menu>
+      </Col>
       </Col>
       <div>
         <AddFeedback

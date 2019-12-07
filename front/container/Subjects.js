@@ -10,13 +10,13 @@ const {Text} = Typography;
 const Subjects = () => {
 
     const { feedbackMode } = useSelector(state=> state.feedbackMode);
-    const { subject, isAddedSubject, isDeletedSubject, message  } = useSelector(state=> state.feedbackSubject);
+    const { subject, isAddedSubject, isDeletedSubject, message, isUpdatedSubject } = useSelector(state=> state.feedbackSubject);
 
     const [visible, setVisible] = useState(false);
     const [updateVisible, setUpdateVisible] = useState(false);
     const [popOverVisible, setPopOverVisible] = useState(false);
     const [category_title, setCategory_title] = useState('');
-
+    const [category_id, setCategory_id] = useState();
 
     const columns = [
         {
@@ -78,16 +78,25 @@ const Subjects = () => {
 
     useEffect(()=>{
       if(isAddedSubject){
-        handleCancel();
+        alert(message);
+        setVisible(false);
       }
     },[isAddedSubject&&isAddedSubject]);
        
     useEffect(()=>{
       if(isDeletedSubject){
          alert(message);
+         setPopOverVisible(false);
       }
     },[isDeletedSubject&&isDeletedSubject]);
    
+    useEffect(()=>{
+      if(isUpdatedSubject){
+        alert(message);
+        setUpdateVisible(false);
+      }
+    },[isUpdatedSubject&&isUpdatedSubject]);
+
     const PopupAddSubject = () => {
         setVisible(true);
     }
@@ -97,6 +106,7 @@ const Subjects = () => {
     }
 
     const PopupUpdateSubject = (e) => {
+      setCategory_id(e.target.id);
       const index = subject.findIndex(v=>parseInt(v.category_id)===parseInt(e.target.id));
       const category_title = subject[index].category_title;
       setCategory_title(category_title);
@@ -145,7 +155,8 @@ const Subjects = () => {
         </div>
         <div>
             <UpdateSubject
-                category_title={category_title}
+                category_id = {category_id}
+                title={category_title}
                 updateVisible={updateVisible}
                 handleUpdateCancel={handleUpdateCancel}
             />

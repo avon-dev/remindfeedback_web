@@ -56,15 +56,18 @@ function* watchFeedback_Sub_Delete() {
 
 // 피드백 주제 Update
 function feedback_Sub_Update_API(data){
-    // return axios.patch('/#');
+    return axios.post(`/category/update/${data.category_id}`,data,{
+        withCredentials:true,
+    });
 };
 
 function* feedback_Sub_Update(action){
     try {
-        yield delay(2000);
-        yield call(feedback_Sub_Update_API, action.data);
+        const result = yield call(feedback_Sub_Update_API, action.data);
+        
         yield put({
             type:FEEDBACK_SUB_UPDATE_SUCCESS,
+               data: result.data,
         });
     } catch (e) {
         console.error(e);

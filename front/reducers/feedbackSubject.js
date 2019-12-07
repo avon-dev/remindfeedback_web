@@ -72,6 +72,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isAddingSubject:false,
                 isAddedSubject:true,
+                message:action.data.success?action.data.message:'',
                 subject:action.data.success?[...state.subject, addedData]:state.subject
             };
         case FEEDBACK_SUB_ADD_FAILURE:
@@ -90,13 +91,22 @@ export default (state = initialState, action) => {
                 isUpdatedSubject:false,
             };
         case FEEDBACK_SUB_UPDATE_SUCCESS:
-            const subjectIndex = state.subject.findIndex(v => v.index === action.data.index);
-            state.subject[subjectIndex] = {...action.data};
-            const originalSubject = [...state.subject];
+            let originalSubject = [];
+            let message = '';
+            if(action.data.success){
+                const subjectIndex = state.subject.findIndex(v => v.category_id === action.data.data.category_id);
+                state.subject[subjectIndex] = {...action.data.data};
+                originalSubject = [...state.subject];
+                message = action.data.message;
+            }else{
+                originalSubject = [...state.subject];
+                message = action.data.message;
+            }
             return{
                 ...state,
                 isUpdatingSubject:false,
                 isUpdatedSubject:true,
+                message:message,
                 subject:originalSubject
             };
         case FEEDBACK_SUB_UPDATE_FAILURE:
