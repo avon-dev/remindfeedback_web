@@ -9,7 +9,7 @@ const main = () => {
 
     const dispatch = useDispatch();
     const { feedbackMode, isLoggedIn } = useSelector(state=> state.feedbackMode);
-   
+    const { feedback } = useSelector(state=> state.feedback);
     
 // feedbackMode?'요청받은 피드백': '내 피드백'
     return(
@@ -17,7 +17,14 @@ const main = () => {
             <Row>
                 <Col span={6}/>
                 <Col span={12}>
-                    {feedbackMode?<GetFeedBack/>:<SetFeedBack/>}
+                    {feedbackMode?
+                    <GetFeedBack 
+                        requestedFeedback={feedback.myFeedback} 
+                    />
+                    :<SetFeedBack 
+                        myFeedback={feedback.yourFeedback}
+                        category={feedback.category}
+                     />}
                 </Col>
                 <Col span={6}/>
             </Row>

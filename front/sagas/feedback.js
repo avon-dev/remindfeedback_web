@@ -165,8 +165,8 @@ function* watchFeedback_Add(){
 
 
 // Feedback 메인화면 Read
-function feedback_Read_API(lastId = 0, limit = 10){
-    return axios.get(`/feedback/all?lastId=${lastId}&limit=${limit}`,{
+function feedback_Read_API(lastId = 0, start = 10){
+    return axios.get(`/feedback/all/${start}`,{
         withCredentials:true
     });
 };
@@ -174,9 +174,14 @@ function feedback_Read_API(lastId = 0, limit = 10){
 function* feedback_Read(action){
     try {
         const result = yield call(feedback_Read_API, action.data);
+        console.log(result.data,"result");
         yield put({
             type:FEEDBACK_READ_SUCCESS,
             data:result.data,
+        });
+        yield put({
+            type:LOG_IN_SUCCESS,
+            data:result.data.data.user,
         });
     } catch (e) {
         yield put({

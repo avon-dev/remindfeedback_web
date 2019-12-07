@@ -4,7 +4,7 @@ import { Menu, Icon, Input, Typography, Dropdown, Col, Row, Button, Avatar, Popc
 import { useDispatch, useSelector } from 'react-redux';
 import AppTutorial from '../components/TutorialMain';
 import AppAlert from '../container/alert';
-import { FEEDBACK_TUTORIAL_REQUEST } from '../reducers/feedback';
+import { FEEDBACK_TUTORIAL_REQUEST, FEEDBACK_READ_REQUEST } from '../reducers/feedback';
 import { LOG_OUT_REQUEST } from '../reducers/user';
 import Router from 'next/router';
 
@@ -30,6 +30,38 @@ const AppTopbar = () => {
     const [alertVisible, setAlertVisible] = useState(false);
     const [firstSubject, setFirstSubject] = useState('첫번째 피드백');
 
+    const items = (
+        <div>
+            <Menu style={{border:"gray solid 1px"}}>
+                <Menu.Item key="1">
+                    <Icon type="user"/>
+                    <strong>마이페이지</strong>
+                    <Link href="/mypage" ><a>></a></Link>
+                </Menu.Item>
+                <Menu.Item key="2" onClick={showModal}>
+                    <Icon type="book" />
+                    <strong>튜토리얼</strong>
+                </Menu.Item>
+                <Menu.Item key="3" onClick={handleLogout}>
+                    <Icon type="logout" />
+                    <strong>로그아웃</strong>
+                </Menu.Item>
+            </Menu>
+        </div>
+    );
+
+    useEffect(()=>{
+        if(me.tutorial){
+            setVisible(true);
+        }
+    },[]);
+
+    useEffect(()=>{
+        if(isLogout){
+           Router.push('/login'); 
+        }
+    },[isLogout&&isLogout]);
+
     const showModal = () => {
         setVisible(true);
     }
@@ -51,43 +83,11 @@ const AppTopbar = () => {
         setVisible(false);
     };
 
-    useEffect(()=>{
-        if(me.tutorial){
-            setVisible(true);
-        }
-    },[]);
-
     const handleLogout = () => {
         dispatch({
             type:LOG_OUT_REQUEST,
         })
     }
-
-    useEffect(()=>{
-        if(isLogout){
-           Router.push('/login'); 
-        }
-    },[isLogout&&isLogout]);
-     
-    const items = (
-        <div>
-            <Menu style={{border:"gray solid 1px"}}>
-                <Menu.Item key="1">
-                    <Icon type="user"/>
-                    <strong>마이페이지</strong>
-                    <Link href="/mypage" ><a>></a></Link>
-                </Menu.Item>
-                <Menu.Item key="2" onClick={showModal}>
-                    <Icon type="book" />
-                    <strong>튜토리얼</strong>
-                </Menu.Item>
-                <Menu.Item key="3" onClick={handleLogout}>
-                    <Icon type="logout" />
-                    <strong>로그아웃</strong>
-                </Menu.Item>
-            </Menu>
-        </div>
-    );
 
     const handleAlert = () => {
         console.log('handleAlert');
@@ -104,15 +104,17 @@ const AppTopbar = () => {
         setAlertVisible(false);
     }
 
+    const handleHome = () => {
+        dispatch({
+            type:FEEDBACK_READ_REQUEST,
+        })
+    }
+
     return(
         <>
           <Menu mode="horizontal" key="topbar" style={{backgroundColor:'#0B4E92'}}>
             <Menu.Item key="home">
-                <Link href="/main">
-                    <a>
-                        <Icon type="home" style={{fontSize:'23px', color:'#FFFFFF'}} />
-                    </a>
-                </Link>    
+                <Icon type="home" style={{fontSize:'23px', color:'#FFFFFF'}} onClick={handleHome} /> 
             </Menu.Item>
             <Menu.Item key="search" style >
                 <Search

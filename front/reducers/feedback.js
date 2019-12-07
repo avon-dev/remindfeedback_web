@@ -81,7 +81,7 @@ export default (state = initialState, action) => {
                ...state,
                isLoadingFeedback:false,
                isLoadedFeedback:true,
-               feedback:state.feedback.concat(action.data.feedback),
+               feedback:action.data.success?action.data.data:[],
             };
         case FEEDBACK_READ_FAILURE:
             return{
