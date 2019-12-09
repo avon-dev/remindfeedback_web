@@ -92,7 +92,6 @@ function loginAPI(data){
 function* login(action){
     try {
         const result = yield call(loginAPI,action.data);
-        console.log(result);
         !result.data.email
         ?
         yield put({

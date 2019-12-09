@@ -121,6 +121,7 @@ function feedback_Sub_Read_API(){
 function* feedback_Sub_Read(){
     try {
         const result = yield call(feedback_Sub_Read_API);
+        console.log(result,"result_sub")
         yield put({
             type:FEEDBACK_SUB_READ_SUCCESS,
             data:result.data,

@@ -23,7 +23,6 @@ const main = () => {
                     />
                     :<SetFeedBack 
                         myFeedback={feedback.myFeedback}
-                        category={feedback.category}
                      />}
                 </Col>
                 <Col span={6}/>

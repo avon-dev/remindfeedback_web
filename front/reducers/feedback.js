@@ -109,8 +109,7 @@ export default (state = initialState, action) => {
                 feedback:{
                     ...state.feedback, 
                     myFeedback:[
-                        ...state.feedback.myFeedback,
-                        addedFeedback
+                        addedFeedback, ...state.feedback.myFeedback
                     ]
                 }
             };

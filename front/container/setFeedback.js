@@ -8,31 +8,52 @@ import { subjectBtn } from '../css/Main';
 const {Title} = Typography;
 const {Meta} = Card;
 
-const setFeedback = ({myFeedback , category}) => {
+const setFeedback = ({myFeedback}) => {
+
 
     const [inProgress, setInProgress] = useState(false);
+    const { subject } = useSelector(state=> state.feedbackSubject);
 
-    // request server 
     // useEffect(()=>{
+    //     if(myFeedback.message){
+    //         alert(feedback.myFeedback.message);
+    //     }
+    // },[myFeedback.message&&myFeedback.message]);
 
-    // },[]);
+    const handleFilter = () => {
+        setInProgress(!inProgress);
+    }
+
+    const handleMenuClick = (e) => {
+        message.info(e.target.name);
+    }  
+
+    const setCategory = (val) => {
+        const index = subject.findIndex((v,i) => parseInt(v.category_id)===parseInt(val));
+        return subject[index].category_title;
+};
+
+    const setColor = (val) => {
+        const index = subject.findIndex((v,i) => parseInt(v.category_id)===parseInt(val));
+        return subject[index].category_color;
+    };
 
     const mainItem = myFeedback.length>=1?
-                     myFeedback.map((data)=> <Link key={data} href={`/feedbackdetail?${data}`} ><a><Card
-                        key={data}
-                        style={{ marginTop: 15, background:'#FFFF00' }}
+                     myFeedback.map((v,i)=> <Link key={v.id} as={`/feedbackdetail/${v.category}`} href={`/feedbackdetail?category_id=${v.category}`} ><a>
+                        <Card
+                        key={v.id}
+                        style={{ marginTop: 15, background:setColor(v.category) }}
                         cover={<div style={{background:'#DCDCDC', fontSize:10,textAlign:'right', fontWeight:"bold", fontStyle:"italic",paddingRight:15}}>
-                                내 피드백</div>}
+                                {<strong>{setCategory(v.category)}</strong>}</div>}
                         actions={[<div style={{ fontSize:10, textAlign:'right', fontWeight:"bold", fontStyle:"italic"}}>
-                        {moment().format('YYYY MMMM Do , h:mm:ss a')}
+                        {moment(v.write_date).format('YYYY MMMM Do , h:mm:ss a')}
                         </div>]}
                     >
                         <Meta
                             avatar={
-                            <Avatar icon="user" />
+                            <Avatar>{v.adviser_uid.split('')[0]}</Avatar>
                             }
-                            title="제목"
-                            description={data}
+                            title={<strong>{v.title}</strong>}
                         />
                     </Card></a></Link>)
                     :
@@ -61,9 +82,9 @@ const setFeedback = ({myFeedback , category}) => {
                     :
                     <div></div>
          
-    const menu = category.length>=1?
+    const menu = subject.length>=1?
                     <Menu>  
-                        {category.map((v,i)=>
+                        {subject.map((v,i)=>
                             <Menu.Item key={v.category_id+v.category_title}>
                                 <div style={{color:v.category_color}}>
                                     <strong>{v.category_title}</strong>
@@ -74,7 +95,7 @@ const setFeedback = ({myFeedback , category}) => {
                     :
                     <div></div>
 
-    const subject = category.length>=1?
+    const subjects = subject.length>=1?
                     <Dropdown overlay={menu}>
                         <Button 
                             style={subjectBtn}
@@ -107,21 +128,13 @@ const setFeedback = ({myFeedback , category}) => {
             :
             <div></div>
 
-    const handleFilter = () => {
-        setInProgress(!inProgress);
-    }
-
-    const handleMenuClick = (e) => {
-        message.info(e.target.name);
-    }  
-
     return(
         <>          
             <Col span={24} style={{textAlign:'center',marginTop:15, fontStyle:"italic", textShadow:"2px 2px 2px gray", }}>
                 <Title level={2}><strong>내 피드백</strong></Title>
             </Col>
             <Col span={24} style={{marginTop:15, textAlign:'center'}}>
-                {subject}
+                {subjects}
             </Col>
             <Col span={24} style={{marginTop:20, textAlign:'right'}}> 
                {filter} 

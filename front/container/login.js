@@ -5,8 +5,9 @@ import { layoutCenter } from '../css/Common';
 import { loginBtn, loginApple, loginFacebook, loginGoogle, loginKakao, shadowBorder } from '../css/Login';
 import Link from 'next/link';
 import logoImg from '../img/logo1.png';
-import {LOG_IN_REQUEST} from '../reducers/user';
-import { MOVE_TO_SIGNUP } from '../reducers/user';
+import {LOG_IN_REQUEST, MOVE_TO_SIGNUP} from '../reducers/user';
+import { FEEDBACK_READ_REQUEST } from '../reducers/feedback';
+import { FEEDBACK_SUB_READ_REQUEST } from '../reducers/feedbackSubject';
 import Router from 'next/router';
 
 const {Text} = Typography;
@@ -19,6 +20,7 @@ const login = () => {
     const [password, setPassword] = useState();
     
     const { me,isLoggedIn,isLoggingIn,logInErrorReason,hasMessage } = useSelector(state=>state.user);
+    const { isLoadedFeedback } = useSelector(state=>state.feedback);
 
     const _onsubmit = useCallback((e) => {
         e.preventDefault();
@@ -32,11 +34,14 @@ const login = () => {
 
     useEffect(()=>{
         if(isLoggedIn){
-            alert('메인페이지로 이동합니다.');
             dispatch({
                 type:MOVE_TO_SIGNUP
             });
-            Router.push('/main');
+            alert('메인페이지로 이동합니다.');
+            setTimeout(() => {
+                Router.push('/main');
+            }, 2000);
+            
         }
     },[isLoggedIn&&isLoggedIn]);
 

@@ -13,7 +13,9 @@ const {Title} = Typography;
 const addFeedback = ({visible,handleCancel,handleOk}) => {
 
     const dispatch = useDispatch();
-    const {isAdddingFeedback,isAddedFeedback,feedback} = useSelector(state => state.feedback);
+    const {isAdddingFeedback,isAddedFeedback} = useSelector(state => state.feedback);
+    const {subject} = useSelector(state => state.feedbackSubject);
+    
     const [category,setCategory] = useState();
     const [title,setTitle] = useState('');
     const [write_date,setWrite_date] = useState('');
@@ -70,9 +72,9 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
 
     const feedback_category = (<Form.Item label={<strong>피드백 주제선택</strong>} >
                                     <Col span={24}>
-                                    <Select defaultValue={feedback.category[0].category_title} onChange={handleSubject} style={{width:'100%', textAlign:'left'}} >
-                                    {feedback.category.length>=1?
-                                        feedback.category.map((v,i)=>
+                                    <Select defaultValue={subject[0].category_title} onChange={handleSubject} style={{width:'100%', textAlign:'left'}} >
+                                    {subject.length>=1?
+                                        subject.map((v,i)=>
                                     <Select.Option key={v.category_id} value={v.category_id} style={{color:v.category_color}}><strong>{v.category_title}</strong></Select.Option>
                                         )
                                         : 
