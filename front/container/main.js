@@ -19,10 +19,10 @@ const main = () => {
                 <Col span={12}>
                     {feedbackMode?
                     <GetFeedBack 
-                        requestedFeedback={feedback.myFeedback} 
+                        requestedFeedback={feedback.yourFeedback} 
                     />
                     :<SetFeedBack 
-                        myFeedback={feedback.yourFeedback}
+                        myFeedback={feedback.myFeedback}
                         category={feedback.category}
                      />}
                 </Col>

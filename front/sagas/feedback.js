@@ -138,7 +138,7 @@ function* watchFeedback_Item_Read() {
 
 // Feedback 새 피드백 Add
 function feedback_Add_API(data){
-    
+    console.log(data,"result");
     return axios.post('/feedback/create',data,{
         withCredentials:true
     });
@@ -174,7 +174,7 @@ function feedback_Read_API(lastId = 0, start = 10){
 function* feedback_Read(action){
     try {
         const result = yield call(feedback_Read_API, action.data);
-        console.log(result.data,"result");
+        console.log(result.data);
         yield put({
             type:FEEDBACK_READ_SUCCESS,
             data:result.data,

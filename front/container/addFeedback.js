@@ -11,9 +11,10 @@ const {Content} = Layout;
 const {Title} = Typography;
 
 const addFeedback = ({visible,handleCancel,handleOk}) => {
+
     const dispatch = useDispatch();
-    const {isAdddingFeedback,isAddedFeedback} = useSelector(state => state.feedback);
-    const [category,setCategory] = useState('AVON');
+    const {isAdddingFeedback,isAddedFeedback,feedback} = useSelector(state => state.feedback);
+    const [category,setCategory] = useState();
     const [title,setTitle] = useState('');
     const [write_date,setWrite_date] = useState('');
     const [adviser,setAdvisor] = useState('');
@@ -66,6 +67,57 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
         }
     },[isAdddingFeedback&&isAdddingFeedback]);
     
+
+    const feedback_category = (<Form.Item label={<strong>피드백 주제선택</strong>} >
+                                    <Col span={24}>
+                                    <Select defaultValue={feedback.category[0].category_title} onChange={handleSubject} style={{width:'100%', textAlign:'left'}} >
+                                    {feedback.category.length>=1?
+                                        feedback.category.map((v,i)=>
+                                    <Select.Option key={v.category_id} value={v.category_id} style={{color:v.category_color}}><strong>{v.category_title}</strong></Select.Option>
+                                        )
+                                        : 
+                                    <Select.Option value="default"style={{color:"#FFFFFF"}}><strong>Default</strong></Select.Option>    
+                                    } 
+                                    </Select>
+                                    </Col>
+                                </Form.Item>
+                                );
+    
+    const feedback_title = (<Form.Item label={<strong>피드백 제목</strong>} >
+                                <Input
+                                    onChange={handleTitle}
+                                    value={title}
+                                    suffix={<Icon type='form' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    placeholder="피드백 제목"
+                                    required
+                                />
+                            </Form.Item>
+                            );
+
+    const feedback_date = (<Form.Item label={<strong>피드백 날짜</strong>} >
+                            <Col span={24}  style={{ width: '100%' ,  borderRadius: 4 }}>
+                                <DatePicker
+                                    style={{width:'100%'}}
+                                    onChange={handleData}
+                                    placeholder="날짜 선택" 
+                                />
+                            </Col>   
+                            </Form.Item>
+                            );
+
+    const feedback_advisor = (<Form.Item label={<strong>피드백 조언자</strong>} >
+                                <Col span={24}>
+                                    <Search
+                                        value={adviser}
+                                        onChange={handleAdvisor}
+                                        style={{width:'100%'}}
+                                        placeholder="조언자 이름을 입력하세요"
+                                        enterButton="검색"
+                                        required
+                                    />
+                                </Col>   
+                            </Form.Item>
+                            );
     return(
         <>  
            <Modal
@@ -90,44 +142,10 @@ const addFeedback = ({visible,handleCancel,handleOk}) => {
                 >
                 <Content style={backgroundWhite}>
                     <Form  {...formItemLayout} >
-                        <Form.Item label={<strong>피드백 주제선택</strong>} >
-                            <Col span={24}>
-                                <Select defaultValue={category} onChange={handleSubject} style={{width:'100%', textAlign:'left'}} >
-                                    <Select.Option value="AVON"><Icon type="user" /><strong>AVON</strong></Select.Option>
-                                    <Select.Option value="운동"><Icon type="user" /><strong>운동</strong></Select.Option>
-                                </Select>
-                            </Col>
-                        </Form.Item>
-                        <Form.Item label={<strong>피드백 제목</strong>} >
-                            <Input
-                                onChange={handleTitle}
-                                value={title}
-                                suffix={<Icon type='form' style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                placeholder="피드백 제목"
-                                required
-                            />
-                        </Form.Item>
-                        <Form.Item label={<strong>피드백 날짜</strong>} >
-                            <Col span={24}  style={{ width: '100%' ,  borderRadius: 4 }}>
-                                <DatePicker
-                                    style={{width:'100%'}}
-                                    onChange={handleData}
-                                    placeholder="날짜 선택" 
-                                />
-                            </Col>   
-                        </Form.Item>
-                        <Form.Item label={<strong>피드백 조언자</strong>} >
-                            <Col span={24}>
-                                <Search
-                                    value={adviser}
-                                    onChange={handleAdvisor}
-                                    style={{width:'100%'}}
-                                    placeholder="조언자 이름을 입력하세요"
-                                    enterButton="검색"
-                                    required
-                                />
-                            </Col>   
-                        </Form.Item>
+                        {feedback_category}
+                        {feedback_title}
+                        {feedback_date}
+                        {feedback_advisor}
                     </Form>
                 </Content>
             </Modal>  

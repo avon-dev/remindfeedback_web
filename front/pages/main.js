@@ -7,6 +7,7 @@ import AppFooter from '../components/AppFooter';
 import { layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
 import { Layout } from 'antd';
 import { FEEDBACK_READ_REQUEST } from '../reducers/feedback';
+import { FEEDBACK_SUB_READ_REQUEST } from '../reducers/feedbackSubject';
 import { useDispatch, useSelector } from 'react-redux';
 import Router  from 'next/router';
 import Error from 'next/error';
@@ -73,6 +74,9 @@ Main.getInitialProps = async(context) => {
     context.store.dispatch({
         type:FEEDBACK_READ_REQUEST,
         lastId,
+    });
+    context.store.dispatch({
+        type:FEEDBACK_SUB_READ_REQUEST,
     });
 };
 

@@ -1,6 +1,6 @@
 export const initialState = {
 
-    feedback:[],
+    feedback:{},
 
     isAdddingFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 중
     isAddedFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 완료
@@ -81,7 +81,7 @@ export default (state = initialState, action) => {
                ...state,
                isLoadingFeedback:false,
                isLoadedFeedback:true,
-               feedback:action.data.success?action.data.data:[],
+               feedback:action.data.success?action.data.data:{},
             };
         case FEEDBACK_READ_FAILURE:
             return{
@@ -99,11 +99,20 @@ export default (state = initialState, action) => {
                 isAddedFeedback:false,
             };
         case FEEDBACK_ADD_SUCCESS:
+            const addedFeedback = action.data.success?action.data.data:{};
+
             return{
                 ...state,
                 isAdddingFeedback:false,
                 isAddedFeedback:true,
-
+                message:action.data.message,
+                feedback:{
+                    ...state.feedback, 
+                    myFeedback:[
+                        ...state.feedback.myFeedback,
+                        addedFeedback
+                    ]
+                }
             };
         case FEEDBACK_ADD_FAILURE:
             return{

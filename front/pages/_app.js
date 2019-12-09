@@ -28,7 +28,6 @@ RemindFeedback.propTypes = {
 
 RemindFeedback.getInitialProps = async(context) => {
     const { ctx, Component } = context;
-    // console.log(context);
     let pageProps = {};
     if(Component.getInitialProps){
         pageProps = await Component.getInitialProps(ctx);

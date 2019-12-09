@@ -30,25 +30,7 @@ const AppTopbar = () => {
     const [alertVisible, setAlertVisible] = useState(false);
     const [firstSubject, setFirstSubject] = useState('첫번째 피드백');
 
-    const items = (
-        <div>
-            <Menu style={{border:"gray solid 1px"}}>
-                <Menu.Item key="1">
-                    <Icon type="user"/>
-                    <strong>마이페이지</strong>
-                    <Link href="/mypage" ><a>></a></Link>
-                </Menu.Item>
-                <Menu.Item key="2" onClick={showModal}>
-                    <Icon type="book" />
-                    <strong>튜토리얼</strong>
-                </Menu.Item>
-                <Menu.Item key="3" onClick={handleLogout}>
-                    <Icon type="logout" />
-                    <strong>로그아웃</strong>
-                </Menu.Item>
-            </Menu>
-        </div>
-    );
+    
 
     useEffect(()=>{
         if(me.tutorial){
@@ -110,6 +92,26 @@ const AppTopbar = () => {
         })
     }
 
+    const items = (
+        <div>
+            <Menu style={{border:"gray solid 1px"}}>
+                <Menu.Item key="1">
+                    <Icon type="user"/>
+                    <strong>마이페이지</strong>
+                    <Link href="/mypage" ><a>></a></Link>
+                </Menu.Item>
+                <Menu.Item key="2" onClick={showModal}>
+                    <Icon type="book" />
+                    <strong>튜토리얼</strong>
+                </Menu.Item>
+                <Menu.Item key="3" onClick={handleLogout}>
+                    <Icon type="logout" />
+                    <strong>로그아웃</strong>
+                </Menu.Item>
+            </Menu>
+        </div>
+    );
+
     return(
         <>
           <Menu mode="horizontal" key="topbar" style={{backgroundColor:'#0B4E92'}}>
@@ -155,7 +157,7 @@ const AppTopbar = () => {
                                     shape="circle"
                                     style={{background:'gray', border:'none' }}
                                 >
-                                <Avatar>U</Avatar>
+                                <Avatar src={me.portrait&&me.portrait}>{!me.portrait&&me.nickname.split('')[0]}</Avatar>
                                 </Button>
                             </div>
                         </Dropdown>
