@@ -37,11 +37,7 @@ const login = () => {
             dispatch({
                 type:MOVE_TO_SIGNUP
             });
-            alert('메인페이지로 이동합니다.');
-            setTimeout(() => {
-                Router.push('/main');
-            }, 2000);
-            
+            alert('메인페이지로 이동합니다.');  
         }
     },[isLoggedIn&&isLoggedIn]);
 
