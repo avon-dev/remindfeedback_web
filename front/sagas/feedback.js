@@ -10,6 +10,12 @@ import {
     FEEDBACK_ADD_REQUEST,
     FEEDBACK_ADD_SUCCESS,
     FEEDBACK_ADD_FAILURE,
+    FEEDBACK_UPDATE_REQUEST,
+    FEEDBACK_UPDATE_SUCCESS,
+    FEEDBACK_UPDATE_FAILURE,
+    FEEDBACK_DELETE_REQUEST,
+    FEEDBACK_DELETE_SUCCESS,
+    FEEDBACK_DELETE_FAILURE,
     FEEDBACK_ITEM_READ_REQUEST,
     FEEDBACK_ITEM_READ_SUCCESS,
     FEEDBACK_ITEM_READ_FAILURE,
@@ -135,10 +141,65 @@ function* watchFeedback_Item_Read() {
     yield takeLatest(FEEDBACK_ITEM_READ_REQUEST, feedback_Item_Read);
 };
 
+// Feedback 피드백 Delete
+function feedback_Delete_API(feedback_id){
+    return axios.delete(`/feedback/${feedback_id}`,{
+        withCredentials:true
+    });
+};
+
+function* feedback_Delete(action){
+    try {
+        const result = yield call(feedback_Delete_API, action.feedback_id);
+        console.log("delete",result.data);
+        
+        yield put({
+            type:FEEDBACK_DELETE_SUCCESS,
+            data:result.data,
+        });
+    } catch (e) {
+        console.error(e);
+        yield put({
+            type:FEEDBACK_DELETE_FAILURE,
+            error:e,
+        });
+    }
+};
+
+function* watchFeedback_Delete(){
+    yield takeLatest( FEEDBACK_DELETE_REQUEST, feedback_Delete);
+}; 
+
+// Feedback 피드백 Update
+function feedback_Update_API(data){
+    
+    return axios.put(`/feedback/update/${data.feedback_id}`,data,{
+        withCredentials:true
+    });
+};
+
+function* feedback_Update(action){
+    try {
+        const result = yield call(feedback_Update_API, action.data);
+        console.log(result.data,"result");
+        yield put({
+            type:FEEDBACK_UPDATE_SUCCESS,
+            data:result.data,
+        });
+    } catch (e) {
+        yield put({
+            type:FEEDBACK_UPDATE_FAILURE,
+            error:e,
+        });
+    }
+};
+
+function* watchFeedback_Update(){
+    yield takeLatest( FEEDBACK_UPDATE_REQUEST, feedback_Update);
+}; 
 
 // Feedback 새 피드백 Add
 function feedback_Add_API(data){
-    console.log(data,"result");
     return axios.post('/feedback/create',data,{
         withCredentials:true
     });
@@ -227,6 +288,8 @@ export default function* feedbackSaga(){
         fork(watchFeedback_Toturial),
         fork(watchFeedback_Read),
         fork(watchFeedback_Add),
+        fork(watchFeedback_Update),
+        fork(watchFeedback_Delete),
         fork(watchFeedback_Item_Read),
         fork(watchFeedback_Item_Add),
         fork(watchFeedback_Item_Complete),

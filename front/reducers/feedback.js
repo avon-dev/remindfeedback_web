@@ -13,6 +13,14 @@ export const initialState = {
     isAdddingFeedback: false, // 피드백 추가 중
     isAddedFeedback: false, // 피드백 추가 완료
     AddedFeedbackErrorReason: '', // 피드백 추가 실패 사유
+
+    isUpdatingFeedback: false, // 피드백 업데이트 중
+    isUpdatedFeedback: false, // 피드백 업데이트 완료
+    UpdatedFeedbackErrorReason: '', // 피드백 업데이트 실패 사유
+
+    isDeletingFeedback: false, // 피드백 삭제 중
+    isDeletedFeedback: false, // 피드백 삭제 완료
+    DeletedFeedbackErrorReason: '', // 피드백 삭제 실패 사유
 }
 
 export const FEEDBACK_TUTORIAL_REQUEST = 'FEEDBACK_TUTORIAL_REQUEST'; // 피드백 튜토리얼 시도 중
@@ -26,6 +34,14 @@ export const FEEDBACK_READ_FAILURE = 'FEEDBACK_READ_FAILURE'; // 피드백 READ 
 export const FEEDBACK_ADD_REQUEST = 'FEEDBACK_ADD_REQUEST'; // 피드백 ADD 시도 중
 export const FEEDBACK_ADD_SUCCESS = 'FEEDBACK_ADD_SUCCESS'; // 피드백 ADD 성공
 export const FEEDBACK_ADD_FAILURE = 'FEEDBACK_ADD_FAILURE'; // 피드백 ADD 실패
+
+export const FEEDBACK_UPDATE_REQUEST = 'FEEDBACK_UPDATE_REQUEST'; // 피드백 Update 시도 중
+export const FEEDBACK_UPDATE_SUCCESS = 'FEEDBACK_UPDATE_SUCCESS'; // 피드백 Update 성공
+export const FEEDBACK_UPDATE_FAILURE = 'FEEDBACK_UPDATE_FAILURE'; // 피드백 Update 실패
+
+export const FEEDBACK_DELETE_REQUEST = 'FEEDBACK_DELETE_REQUEST'; // 피드백 DELETE 시도 중
+export const FEEDBACK_DELETE_SUCCESS = 'FEEDBACK_DELETE_SUCCESS'; // 피드백 DELETE 성공
+export const FEEDBACK_DELETE_FAILURE = 'FEEDBACK_DELETE_FAILURE'; // 피드백 DELETE 실패
 
 export const FEEDBACK_ITEM_READ_REQUEST = 'FEEDBACK_ITEM_READ_REQUEST'; // 피드백 게시물 READ 시도 중
 export const FEEDBACK_ITEM_READ_SUCCESS = 'FEEDBACK_ITEM_READ_SUCCESS'; // 피드백 게시물 READ 성공
@@ -119,6 +135,72 @@ export default (state = initialState, action) => {
                 isAdddingFeedback:false,
                 isAddedFeedback:false,
                 AddedFeedbackErrorReason:action.error,
+            };
+        
+         // 피드백 UPDATE 
+         case FEEDBACK_UPDATE_REQUEST:
+            return{
+                ...state,
+                isUpdatingFeedback:true,
+                isUpdatedFeedback:false,
+            };
+        case FEEDBACK_UPDATE_SUCCESS:
+            let updatedFeedback = state.feedback.myFeedback;
+            let message = '';
+            if(action.data.success){
+                const index = state.feedback.myFeedback.findIndex((v,i)=>parseInt(v.id)===parseInt(action.data.data.id));
+                state.feedback.myFeedback[index] = {...action.data.data};
+                updatedFeedback = [...state.feedback.myFeedback];
+                message = action.data.message; 
+            }
+            return{
+                ...state,
+                isUpdatingFeedback:false,
+                isUpdatedFeedback:true,
+                feedback:{
+                    ...state.feedback,
+                    myFeedback:updatedFeedback
+                },
+                message:message,
+            };
+        case FEEDBACK_UPDATE_FAILURE:
+            return{
+                ...state,
+                isUpdatingFeedback:false,
+                isUpdatedFeedback:false,
+                UpdatedFeedbackErrorReason:action.error, 
+            };
+
+         // 피드백 DELETE 
+         case FEEDBACK_DELETE_REQUEST:
+            return{
+                ...state,
+                isDeletingFeedback:true,
+                isDeletedFeedback:false,
+            };
+            
+        case FEEDBACK_DELETE_SUCCESS:
+            let deletedFeedback = state.feedback.myFeedback;
+            if(action.data.success){
+                const index = state.feedback.myFeedback.findIndex((v,i)=>parseInt(v.id)===parseInt(action.data.data.id));
+                deletedFeedback = state.feedback.myFeedback.filter((v,i)=>i!==index);
+            }
+            return{
+                ...state,
+                isDeletingFeedback:false,
+                isDeletedFeedback:true,
+                feedback:{
+                    ...state.feedback,
+                    myFeedback:deletedFeedback
+                },
+                message: action.data.success?action.data.message:''
+            };
+        case FEEDBACK_DELETE_FAILURE:
+            return{
+                ...state,
+                isDeletingFeedback:false,
+                isDeletedFeedback:false,
+                DeletedFeedbackErrorReason:action.error
             };
 
          // 피드백 게시물 READ 

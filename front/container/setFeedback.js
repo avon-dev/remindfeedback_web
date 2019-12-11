@@ -1,71 +1,35 @@
-import React,{useState,useEffect} from 'react';
-import Link from 'next/link';
+import React,{useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Card, Avatar, Icon, message, Menu, Dropdown, Button, Breadcrumb,Typography,Empty } from 'antd';
-import moment from 'moment';
+import { Col, Card,Icon, message, Menu, Dropdown, Button, Breadcrumb,Typography } from 'antd';
 import { subjectBtn } from '../css/Main';
 
+import SetFeedbackContents from './setFeedbackContents';
+
 const {Title} = Typography;
-const {Meta} = Card;
 
 const setFeedback = ({myFeedback}) => {
 
+    
+    const { subject } = useSelector(state=> state.feedbackSubject);
+    const { feedback } = useSelector(state=> state.feedback);
 
     const [inProgress, setInProgress] = useState(false);
-    const { subject } = useSelector(state=> state.feedbackSubject);
+    
 
-    // useEffect(()=>{
-    //     if(myFeedback.message){
-    //         alert(feedback.myFeedback.message);
-    //     }
-    // },[myFeedback.message&&myFeedback.message]);
+    useEffect(()=>{
+        if(feedback.message){
+            alert(feedback.message);
+        }
+    },[feedback.message&&feedback.message]);
+
 
     const handleFilter = () => {
         setInProgress(!inProgress);
     }
 
-    const handleMenuClick = (e) => {
-        message.info(e.target.name);
-    }  
-
-    const setCategory = (val) => {
-        const index = subject.findIndex((v,i) => parseInt(v.category_id)===parseInt(val));
-        return subject[index].category_title;
-};
-
-    const setColor = (val) => {
-        const index = subject.findIndex((v,i) => parseInt(v.category_id)===parseInt(val));
-        return subject[index].category_color;
-    };
-
-    const mainItem = myFeedback.length>=1?
-                     myFeedback.map((v,i)=> <Link key={v.id} as={`/feedbackdetail/${v.category}`} href={`/feedbackdetail?category_id=${v.category}`} ><a>
-                        <Card
-                        key={v.id}
-                        style={{ marginTop: 15, background:setColor(v.category) }}
-                        cover={<div style={{background:'#DCDCDC', fontSize:10,textAlign:'right', fontWeight:"bold", fontStyle:"italic",paddingRight:15}}>
-                                {<strong>{setCategory(v.category)}</strong>}</div>}
-                        actions={[<div style={{ fontSize:10, textAlign:'right', fontWeight:"bold", fontStyle:"italic"}}>
-                        {moment(v.write_date).format('YYYY MMMM Do , h:mm:ss a')}
-                        </div>]}
-                    >
-                        <Meta
-                            avatar={
-                            <Avatar>{v.adviser_uid.split('')[0]}</Avatar>
-                            }
-                            title={<strong>{v.title}</strong>}
-                        />
-                    </Card></a></Link>)
-                    :
-                    <Col span={24} style={{marginTop:30}}>
-                    <Empty 
-                    description={
-                        <span>
-                          <strong>피드백이 없습니다.<br/>피드백을 생성해 주세요</strong>
-                        </span>
-                      }
+    const mainItem = <SetFeedbackContents
+                        myFeedback={myFeedback}    
                     />
-                    </Col>
 
     const filter =  myFeedback.length>=1?
                     <Breadcrumb>
@@ -143,7 +107,7 @@ const setFeedback = ({myFeedback}) => {
             <div>
                 {mainItem}  
             </div>
-                    
+                   
         </>
     )
 }

@@ -37,7 +37,8 @@ const login = () => {
             dispatch({
                 type:MOVE_TO_SIGNUP
             });
-            alert('메인페이지로 이동합니다.');  
+            alert('메인페이지로 이동합니다.');
+            Router.push('/main');  
         }
     },[isLoggedIn&&isLoggedIn]);
 
@@ -146,3 +147,4 @@ const login = () => {
 }
 
 export default login;
+
