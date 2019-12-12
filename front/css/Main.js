@@ -9,9 +9,18 @@ const formItemLayout = {
       sm: { span: 18 },
     },
   };
+  const feedbackItemLayout = {
+    labelCol: {
+      xs: { span: 4 },
+    },
+    wrapperCol: {
+      sm: { span: 18 },
+    },
+  };  
 export {
     contentsBoder, 
     subjectBtn,
     formBoder,
     formItemLayout,
+    feedbackItemLayout,
 };

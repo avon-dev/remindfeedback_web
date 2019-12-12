@@ -37,6 +37,12 @@ const login = () => {
             dispatch({
                 type:MOVE_TO_SIGNUP
             });
+            dispatch({
+                type:FEEDBACK_READ_REQUEST
+            });
+            dispatch({
+                type:FEEDBACK_SUB_READ_REQUEST
+            });
             alert('메인페이지로 이동합니다.');
             Router.push('/main');  
         }

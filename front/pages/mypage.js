@@ -33,15 +33,18 @@ const mypage = () => {
 };
 
 mypage.getInitialProps = async(context) => {
-
-    const cookie = context.isServer?context.req.headers.cookie:'';
-    axios.defaults.headers.Cookie = '';
-    if(context.isServer&&cookie){
+    console.log("서버냐",context.isServer);
+    if(context.isServer){
+        const cookie = context.req.headers.cookie;
         axios.defaults.headers.Cookie = cookie;
+        context.store.dispatch({
+            type:LOAD_USER_REQUEST,
+        });
+    }else{
+        context.store.dispatch({
+            type:LOAD_USER_REQUEST,
+        });
     }
-    context.store.dispatch({
-        type:LOAD_USER_REQUEST,
-    });
 };
 
 export default mypage;

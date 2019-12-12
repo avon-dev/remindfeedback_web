@@ -32,15 +32,18 @@ const subject = () => {
 };
 
 subject.getInitialProps = async(context) => {
-
-    const cookie = context.isServer?context.req.headers.cookie:'';
-    axios.defaults.headers.Cookie = '';
-    if(context.isServer&&cookie){
+    console.log("서버냐",context.isServer);
+    if(context.isServer){
+        const cookie = context.req.headers.cookie;
         axios.defaults.headers.Cookie = cookie;
+        context.store.dispatch({
+            type:FEEDBACK_SUB_READ_REQUEST,
+        });
+    }else{
+        context.store.dispatch({
+            type:FEEDBACK_SUB_READ_REQUEST,
+        });
     }
-    context.store.dispatch({
-        type:FEEDBACK_SUB_READ_REQUEST,
-    });
 };
 
 export default subject;

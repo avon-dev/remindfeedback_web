@@ -62,22 +62,22 @@ const Main = () => {
 };
 
 Main.getInitialProps = async(context) => {
-
-    const cookie = context.isServer?context.req.headers.cookie:'';
-    axios.defaults.headers.Cookie = '';
-    const {feedback} = context.store.getState();
-    const lastId = 0;
-
-    if(context.isServer&&cookie){
+    console.log("서버냐",context.isServer);
+    if(context.isServer){
+        const {feedback} = context.store.getState();
+        const lastId = 0;
+        const cookie = context.req.headers.cookie;
         axios.defaults.headers.Cookie = cookie;
+        context.store.dispatch({
+            type:FEEDBACK_READ_REQUEST,
+            lastId,
+        });
+        context.store.dispatch({
+            type:FEEDBACK_SUB_READ_REQUEST,
+        });
+    }else{
+       
     }
-    context.store.dispatch({
-        type:FEEDBACK_READ_REQUEST,
-        lastId,
-    });
-    context.store.dispatch({
-        type:FEEDBACK_SUB_READ_REQUEST,
-    });
 };
 
 export default Main;

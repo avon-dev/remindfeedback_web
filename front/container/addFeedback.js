@@ -1,9 +1,9 @@
 import React,{useState,useCallback, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { Modal, Layout, Form, Input, Dropdown, Menu, Icon, Button, Col, Typography, DatePicker, Select  } from 'antd';
+import { Modal, Layout, Form, Input, Tooltip , Menu, Icon, Button, Col, Typography, DatePicker, Select  } from 'antd';
 import { backgroundWhite, backgroundLightBlue} from '../css/Common';
-import { subjectBtn, formBoder, formItemLayout } from '../css/Main';
+import { subjectBtn, feedbackItemLayout, formItemLayout } from '../css/Main';
 import {FEEDBACK_ADD_REQUEST,FEEDBACK_UPDATE_REQUEST} from '../reducers/feedback';
 
 
@@ -89,7 +89,7 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
         }  
     },[feedback_titles,category_titles,feedback_adviser_uid,feedback_write_date]);
 
-    const feedback_category = (<Form.Item label={<strong>피드백 주제선택</strong>} >
+    const feedback_category = (<Form.Item label={<strong>주제선택</strong>} >
                                     <Col span={24}>
                                     <Select value={category?category:subject[0].category_title} onChange={handleSubject} style={{width:'100%', textAlign:'left'}} >
                                     {subject.length>=1?
@@ -104,7 +104,8 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                                 </Form.Item>
                                 );
     
-    const feedback_title = (<Form.Item label={<strong>피드백 제목</strong>} >
+    const feedback_title = (<Form.Item label={<strong>제목</strong>} >
+                                <Col span={24}>
                                 <Input
                                     onChange={handleTitle}
                                     value={title}
@@ -112,11 +113,12 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                                     placeholder="피드백 제목"
                                     required
                                 />
+                                </Col>
                             </Form.Item>
                             );
-
-    const feedback_date = (<Form.Item label={<strong>피드백 날짜</strong>} >
-                            <Col span={24}  style={{ width: '100%' ,  borderRadius: 4 }}>
+    const feedback_dateInfo = <strong>피드백의 만료 날짜를 선택해 주세요.</strong>;
+    const feedback_date = (<Form.Item label={<><Tooltip title={feedback_dateInfo}><Icon type="question-circle" /></Tooltip><strong>만료날짜</strong></>}>
+                            <Col span={24}  style={{ width: '100%'}}>
                                 <DatePicker
                                     style={{width:'100%'}}
                                     onChange={handleData}
@@ -126,8 +128,8 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                             </Col>   
                             </Form.Item>
                             );
-
-    const feedback_advisor = (<Form.Item label={<strong>피드백 조언자</strong>} >
+    const feedback_advisorInfo = <strong>피드백을 통해 조언을 받고 싶은 조언자를 검색해주세요</strong>;
+    const feedback_advisor = (<Form.Item label={<><Tooltip title={feedback_advisorInfo}><Icon type="question-circle" /></Tooltip><strong>조언자</strong></>} >
                                 <Col span={24}>
                                     <Search
                                         value={adviser}
@@ -137,7 +139,7 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                                         enterButton="검색"
                                         required
                                     />
-                                </Col>   
+                                </Col>  
                             </Form.Item>
                             );
     return(
@@ -163,7 +165,7 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                 centered={true}
                 >
                 <Content style={backgroundWhite}>
-                    <Form  {...formItemLayout} >
+                    <Form  {...feedbackItemLayout} >
                         {feedback_category}
                         {feedback_title}
                         {feedback_date}
