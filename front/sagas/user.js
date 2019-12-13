@@ -12,6 +12,9 @@ import {
     LOAD_USER_REQUEST,
     LOAD_USER_SUCCESS,
     LOAD_USER_FAILURE,
+    UPDATE_USER_REQUEST,
+    UPDATE_USER_SUCCESS,
+    UPDATE_USER_FAILURE,
     LOG_OUT_REQUEST,
     LOG_OUT_SUCCESS,
     LOG_OUT_FAILURE,
@@ -27,9 +30,9 @@ if(prod){
 }
 
 
-// 마이페이지
+// 마이페이지 LOAD
 function logUserAPI(){
-    return axios.get('/auth/me',{
+    return axios.get('/mypage',{
         withCredentials:true
     });
 };
@@ -52,6 +55,35 @@ function* loadUser(){
 
 function* watchLoadUser() {
     yield takeLatest(LOAD_USER_REQUEST, loadUser);
+};
+
+// 마이페이지 UPDATE
+function updateUserAPI(data){
+    console.log(data);
+    return axios.put('/mypage/update',data,{
+        withCredentials:true
+    });
+};
+
+function* updateUser(action){
+    try {
+        const result = yield call(updateUserAPI, action.data);
+        console.log(result);
+        // yield put({
+        //     type:UPDATE_USER_SUCCESS,
+        //     data:result.data,
+        // });
+    } catch (e) {
+        console.error(e);
+        yield put({
+            type:UPDATE_USER_FAILURE,
+            error:e,
+        });
+    }
+};
+
+function* watchUpateUser() {
+    yield takeLatest(UPDATE_USER_REQUEST, updateUser);
 };
 
 
@@ -157,5 +189,6 @@ export default function* userSaga(){
         fork(watchSignUp),
         fork(watchLogOut),
         fork(watchLoadUser),
+        fork(watchUpateUser),
     ]);
 }

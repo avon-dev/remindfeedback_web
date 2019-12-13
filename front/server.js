@@ -15,8 +15,8 @@ dotenv.config();
 
 app.prepare().then(()=>{
     const server = express();
-
     server.use(morgan('dev'));
+    server.use('/image', express.static(path.join(__dirname,'img/mypage')));
     server.use('/', express.static(path.join(__dirname,'public')));
     server.use(express.json());
     server.use(express.urlencoded({extended:true}));
@@ -31,6 +31,7 @@ app.prepare().then(()=>{
         },
     }));
 
+    
     server.get('*',(req,res)=>{
         return handle(req,res);
     });

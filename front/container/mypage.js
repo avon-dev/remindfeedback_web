@@ -2,7 +2,7 @@ import React, {useState,useEffect,useCallback} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Form, Avatar, Empty, Typography, Icon, Button, Timeline, Input } from 'antd';
 import AppPhoto from '../container/feedBackPhoto';
-import {LOAD_USER_REQUEST} from '../reducers/user';
+import {UPDATE_USER_REQUEST} from '../reducers/user';
 
 
 const {Text} = Typography;
@@ -13,7 +13,7 @@ const mypage = () => {
     const {me} = useSelector(state=>state.user);
 
     const [nickname, setNickname] = useState('');
-    const [intro, setIntro] = useState('');
+    const [introduction, setIntro] = useState('');
     const [photoVisible, setPhotoVisible] = useState(false);
     
      // 사진
@@ -35,14 +35,17 @@ const mypage = () => {
       }
     }
 
-    const updateMypage = useCallback(() => {
+    const updateMypage = useCallback((e) => {
+      // 서버 단에서 수정 필요 
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append('nickname',nickname);
+      formData.append('introduction',introduction);
       dispatch({
-          type:LOAD_USER_REQUEST,
-          data:{
-            nickname,intro
-          }
+          type:UPDATE_USER_REQUEST,
+          data:formData,
       });
-    },[nickname,intro]);
+    },[nickname,introduction]);
 
     useEffect(()=>{
       if(me.nickname){
@@ -94,7 +97,7 @@ const mypage = () => {
                            <Input
                               name="INTRO"
                               placeholder="상태메시지를 입력해주세요"
-                              value={intro}
+                              value={introduction}
                               onChange={handleData}
                               key="mypage-intro"
                            />
@@ -123,7 +126,7 @@ const mypage = () => {
               <AppPhoto
                  photoVisible={photoVisible}   
                  photoHandleCancel={photoHandleCancel}
-                 mode={LOAD_USER_REQUEST}           
+                 mode={UPDATE_USER_REQUEST}           
               />                  
             </div>
         </>

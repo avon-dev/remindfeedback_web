@@ -14,8 +14,12 @@ export const initialState = {
     logOutReason: '', // 로그아웃 실패 사유
 
     isLoadingMyInfo: false, // 마이페이지 로드 중
-    isLoadedMyInfo: false, // 마이페이지 성공
-    LoadedMyInfoReason: '', // 마이페이지 실패 사유
+    isLoadedMyInfo: false, // 마이페이지 로드 성공
+    LoadedMyInfoReason: '', // 마이페이지 로드 실패 사유
+
+    isUpdatingMyInfo: false, // 마이페이지 업데이트 중
+    isUpdatedMyInfo: false, // 마이페이지 업데이트 성공
+    UpdatedMyInfoReason: '', // 마이페이지 업데이트 실패 사유
 
     me:{
         email: '',
@@ -42,6 +46,10 @@ export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE'; // 회원가입 실패
 export const LOAD_USER_REQUEST = 'LOAD_USER_REQUEST'; // 사용자 정보 가져오는 중
 export const LOAD_USER_SUCCESS = 'LOAD_USER_SUCCESS'; // 사용자 정보 가져오기 성공
 export const LOAD_USER_FAILURE = 'LOAD_USER_FAILURE'; // 사용자 정보 가져오기 실패
+
+export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST'; // 사용자 정보 업데이트 중
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS'; // 사용자 정보 업데이트 성공
+export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE'; // 사용자 정보 업데이트 실패
 
 export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST'; // 로그아웃 시도 중
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS'; // 로그아웃 성공
@@ -158,11 +166,10 @@ export default (state = initialState, action ) => {
                 isLoadedMyInfo:true,
                 me:{
                     ...state.me,
-                    email:action.data.email,
-                    introduction:action.data.introduction,
-                    portrait:action.data.portrait,
-                    nickname:action.data.nickname,
-                    tutorial:action.data.tutorial,
+                    email:action.data.data.email,
+                    introduction:action.data.data.introduction,
+                    portrait:action.data.data.portrait,
+                    nickname:action.data.data.nickname,
                 },
             }
         case LOAD_USER_FAILURE:
@@ -173,6 +180,35 @@ export default (state = initialState, action ) => {
                 LoadedMyInfoReason:action.error,
                 me:null,
             }
+
+            case UPDATE_USER_REQUEST:
+                return{
+                    ...state,
+                    isUpatingMyInfo: true,
+                    isUpatdedMyInfo:false,
+                }
+            case UPDATE_USER_SUCCESS:
+                return{
+                    ...state,
+                    isUpatingMyInfo: false,
+                    isUpatdedMyInfo:true,
+                    me:{
+                        ...state.me,
+                        email:action.data.data.email,
+                        introduction:action.data.data.introduction,
+                        portrait:action.data.data.portrait,
+                        nickname:action.data.data.nickname,
+                    },
+                }
+            case UPDATE_USER_FAILURE:
+                return{
+                    ...state,
+                    isUpatingMyInfo: false,
+                    isUpatdedMyInfo:false,
+                    UpatdedMyInfoReason:action.error,
+                    me:null,
+                }
+
         case LOG_OUT_REQUEST:
             return{
                 ...state,
