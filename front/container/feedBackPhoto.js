@@ -7,7 +7,6 @@ import {FRIENDS_PROFILE_ADD_REQUEST} from '../reducers/friends';
 import {FEEDBACK_ITEM_ADD_REQUEST} from '../reducers/feedback';
 import {UPDATE_USER_REQUEST} from '../reducers/user';
 
-
 const {Content} = Layout;
 const {Title} = Typography;
 
@@ -28,6 +27,8 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
     const [previewVisible, setpreviewVisible] = useState(false);
     const [previewImage, setpreviewImage] = useState('');
     const [title, setTitle] = useState('');
+    const [number, setNumber] = useState([]);
+    const [portrait, setPortrait] = useState();
 
     const handlePreview = async(file) => {
         console.log('handlePreview', file);
@@ -40,7 +41,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
     };
 
     const uploadButton = (
-        <Button >
+        <Button disabled={number.length==1?true:false}>
             <Icon type="upload" /> Upload
         </Button>
     );
@@ -49,14 +50,25 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
         setpreviewVisible(false);
     }
 
-    const handlePreviewFile = file => getBase64(file);
+    const handlePreviewFile = (file) => getBase64(file);
+    
+    const handleCheck = (e) => {
+        setNumber('1');
+        console.log(e);
+        setPortrait(e);
+    }
+
+    const handleRemove = () => {
+        setNumber([]);
+    }
 
     const up = <Upload
-                    action="http://localhost:2323/imagePath"          
+                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"         
                     listType="picture" 
                     onPreview={handlePreview}
                     previewFile={handlePreviewFile}
-                    
+                    onRemove={handleRemove}
+                    beforeUpload={handleCheck}   
                 >
                 {uploadButton}   
                 </Upload>
@@ -65,7 +77,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
         setTitle(e.target.value);
     }
 
-    const _onsubmit = () => {
+    const _onsubmit = async() => {
         if(mode===FRIENDS_PROFILE_ADD_REQUEST){
             dispatch({
                 type: FRIENDS_PROFILE_ADD_REQUEST,
@@ -74,11 +86,18 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
                 }
             });
         }else if(mode===UPDATE_USER_REQUEST){
+            if(!title){
+                return alert('제목을 입력해 주세요');
+            }
+            if(!portrait){
+                return alert('사진을 선택해 주세요');
+            }
+            const formData = new FormData();
+            console.log(portrait);
+            formData.append('portrait',portrait, title);
             dispatch({
                 type: UPDATE_USER_REQUEST,
-                data:{
-                    title,
-                }
+                data:formData,
             });
         }else{
             dispatch({

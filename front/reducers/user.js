@@ -199,6 +199,7 @@ export default (state = initialState, action ) => {
                         portrait:action.data.data.portrait,
                         nickname:action.data.data.nickname,
                     },
+                    message:action.data.success?action.data.message:''
                 }
             case UPDATE_USER_FAILURE:
                 return{

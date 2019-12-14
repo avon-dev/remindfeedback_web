@@ -10,7 +10,7 @@ const {Text} = Typography;
 const mypage = () => {
 
     const dispatch = useDispatch();
-    const {me} = useSelector(state=>state.user);
+    const {me,message} = useSelector(state=>state.user);
 
     const [nickname, setNickname] = useState('');
     const [introduction, setIntro] = useState('');
@@ -51,10 +51,16 @@ const mypage = () => {
       if(me.nickname){
         setNickname(me.nickname);
       }
-      if(me.introducion){
-        setIntro(me.introducion);
+      if(me.introduction){
+        setIntro(me.introduction);
       }
     },[me&&me]);
+
+    useEffect(()=>{
+      if(message){
+        alert(message);
+      }
+    },[message&&message]);
 
     return(
         <>

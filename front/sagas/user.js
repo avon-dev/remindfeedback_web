@@ -40,6 +40,7 @@ function logUserAPI(){
 function* loadUser(){
     try {
         const result = yield call(logUserAPI);
+        
         yield put({
             type:LOAD_USER_SUCCESS,
             data:result.data,
@@ -61,18 +62,21 @@ function* watchLoadUser() {
 function updateUserAPI(data){
     console.log(data);
     return axios.put('/mypage/update',data,{
-        withCredentials:true
+        withCredentials:true,
+        // headers:{
+        //     'Content-Type': 'multipart/form-data'
+        // }
     });
 };
 
 function* updateUser(action){
     try {
         const result = yield call(updateUserAPI, action.data);
-        console.log(result);
-        // yield put({
-        //     type:UPDATE_USER_SUCCESS,
-        //     data:result.data,
-        // });
+        console.log(result.data);
+        yield put({
+            type:UPDATE_USER_SUCCESS,
+            data:result.data,
+        });
     } catch (e) {
         console.error(e);
         yield put({
