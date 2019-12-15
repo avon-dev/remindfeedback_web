@@ -160,3 +160,13 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
 };
 
 export default feedBackPhoto;
+
+
+NaN == null
+// false
+
+NaN == undefined
+// false
+
+NaN == NaN
+// false
