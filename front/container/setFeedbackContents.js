@@ -105,7 +105,7 @@ const setFeedbackContents = ({myFeedback}) => {
               
               ]}
           >
-              <Link key={v.id} as={`/feedbackdetail/${v.category}`} href={`/feedbackdetail?category_id=${v.category}`} ><a><Meta
+              <Link key={v.id} as={`/feedbackdetail/${v.id}`} href={`/feedbackdetail?id=${v.id}`} ><a><Meta
                   avatar={
                   <Avatar>{v.adviser_uid.split('')[0]}</Avatar>
                   }

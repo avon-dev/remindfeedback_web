@@ -31,6 +31,11 @@ app.prepare().then(()=>{
         },
     }));
 
+    server.get('/feedbackdetail/:id',(req,res)=>{
+        const actualPage = '/feedbackdetail';
+        const queryParams = {id:req.params.id};
+        app.render(req,res,actualPage,queryParams);
+    });
     
     server.get('*',(req,res)=>{
         return handle(req,res);
