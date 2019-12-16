@@ -60,13 +60,16 @@ function* watchLoadUser() {
 
 // 마이페이지 UPDATE
 function updateUserAPI(data){
-    console.log(data);
-    return axios.put('/mypage/update',data,{
-        withCredentials:true,
-        // headers:{
-        //     'Content-Type': 'multipart/form-data'
-        // }
-    });
+    if(data.order==="portrait"){
+        return axios.patch('/mypage/update/portrait', data.formData,{
+            withCredentials:true,
+        });
+    }else{
+        return axios.put('/mypage/update/',data,{
+            withCredentials:true,
+        });
+    }
+    
 };
 
 function* updateUser(action){

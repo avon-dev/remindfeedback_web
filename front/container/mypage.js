@@ -71,13 +71,14 @@ const mypage = () => {
                       <Form.Item>
                         <Col span={24} style={{textAlign:'center'}}>
                             <Empty
-                                image={<Avatar style={{width: "20vh", height:'20vh', marginTop:15}}>
-                                          <Icon type="user" style={{fontSize: "20vh"}} />
+                                image={<Avatar style={{width: "20vh", height:'20vh', marginTop:15}} 
+                                        src={me.portrait&&`http://localhost:8000/mypage/${me.portrait}`}>
+                                          {!me.portrait&&<Icon type="user" style={{fontSize: "20vh"}} />}
                                        </Avatar>
                                         }   
                             >
                                <div>
-                                    <Button style={{background:"#052749", color:"#FFFFFF"}} onClick={popUpPhoto}>프로필 사진 추가하기</Button>
+                                    <Button style={{background:"#052749", color:"#FFFFFF"}} onClick={popUpPhoto}>{me.portrait?"프로필 사진 수정하기":"프로필 사진 추가하기"}</Button>
                                </div>
                             </Empty>
                         </Col>

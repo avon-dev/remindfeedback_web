@@ -12,6 +12,10 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
+    "/main": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
     "/mypage": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"

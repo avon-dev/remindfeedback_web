@@ -162,7 +162,7 @@ const AppTopbar = () => {
                                     shape="circle"
                                     style={{background:'gray', border:'none' }}
                                 >
-                                <Avatar src={me.portrait&&me.portrait}>{!me.portrait&&me.nickname.split('')[0]}</Avatar>
+                                <Avatar src={me.portrait&&`http://localhost:8000/mypage/${me.portrait}`}>{!me.portrait&&me.nickname.split('')[0]}</Avatar>
                                 </Button>
                             </div>
                         </Dropdown>

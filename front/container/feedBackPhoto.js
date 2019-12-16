@@ -54,9 +54,12 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
     
     const handleCheck = (e) => {
         setNumber('1');
-        console.log(e);
         setPortrait(e);
     }
+
+    // const handleUpload = ({file}) => {
+    //     setPortrait(file);
+    // }
 
     const handleRemove = () => {
         setNumber([]);
@@ -66,9 +69,11 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
                     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"         
                     listType="picture" 
                     onPreview={handlePreview}
+                    // onChange={handleUpload}
                     previewFile={handlePreviewFile}
                     onRemove={handleRemove}
-                    beforeUpload={handleCheck}   
+                    beforeUpload={handleCheck} 
+                    withCredentials={true}  
                 >
                 {uploadButton}   
                 </Upload>
@@ -86,18 +91,17 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
                 }
             });
         }else if(mode===UPDATE_USER_REQUEST){
-            if(!title){
-                return alert('제목을 입력해 주세요');
-            }
             if(!portrait){
                 return alert('사진을 선택해 주세요');
             }
             const formData = new FormData();
-            console.log(portrait);
-            formData.append('portrait',portrait, title);
+            formData.append('portrait', portrait);
             dispatch({
                 type: UPDATE_USER_REQUEST,
-                data:formData,
+                data:{
+                    formData,
+                    order:'portrait'
+                },
             });
         }else{
             dispatch({
@@ -134,7 +138,8 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
                     <Form {...formItemLayout} >
                        <Row>
                             <Col span={24}>
-                                <Form.Item label={<strong>제목</strong>} >
+                                {mode!==UPDATE_USER_REQUEST&&
+                                 <Form.Item label={<strong>제목</strong>} >
                                     <Input
                                         placeholder="제목을 입력해주세요"
                                         prefix={<Icon type="edit" />}
@@ -142,6 +147,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
                                         onChange={handleTitle}
                                     />
                                 </Form.Item>
+                                }
                             </Col>
                             <Col span={24}>
                                 <Form.Item label={<strong>사진 업로드</strong>} >
@@ -160,13 +166,3 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
 };
 
 export default feedBackPhoto;
-
-
-NaN == null
-// false
-
-NaN == undefined
-// false
-
-NaN == NaN
-// false
