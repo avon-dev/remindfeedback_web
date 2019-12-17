@@ -101,6 +101,7 @@ export default (state = initialState, action) => {
             };
         case FEEDBACK_READ_SUCCESS:
             // let added = {};
+            // action.data.lastId === 0이 아니라면 인피니티 스크롤링 쪽
             // if(action.data.success){
             //     if(!state.feedbackMode){
             //         // 내 피드백

@@ -27,6 +27,7 @@ const AppTopbar = () => {
 
     const dispatch = useDispatch();
     const { me, isLogout } = useSelector( state => state.user);
+    const {feedbackMode} = useSelector(state => state.feedbackMode);
     const [visible, setVisible] = useState(false);
     const [alertVisible, setAlertVisible] = useState(false);
     const [firstSubject, setFirstSubject] = useState('첫번째 피드백');
@@ -88,12 +89,17 @@ const AppTopbar = () => {
     }
 
     const handleHome = () => {
+        const feedbackModes = feedbackMode;
+        const lastId = 0;
         dispatch({
             type:FEEDBACK_READ_REQUEST,
+            data:{
+                lastId, feedbackModes
+            }
         })
         dispatch({
             type:FEEDBACK_SUB_READ_REQUEST,
-        })
+        });
         Router.push('/main');
     }
 

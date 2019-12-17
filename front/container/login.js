@@ -21,6 +21,7 @@ const login = () => {
     
     const { me,isLoggedIn,isLoggingIn,logInErrorReason,hasMessage } = useSelector(state=>state.user);
     const { isLoadedFeedback } = useSelector(state=>state.feedback);
+    const {feedbackMode} = useSelector(state => state.feedbackMode);
 
     const _onsubmit = useCallback((e) => {
         e.preventDefault();
@@ -33,12 +34,17 @@ const login = () => {
     },[email,password]);
 
     useEffect(()=>{
+        const feedbackModes = feedbackMode;
+        const lastId = 0;
         if(isLoggedIn){
             dispatch({
                 type:MOVE_TO_SIGNUP
             });
             dispatch({
-                type:FEEDBACK_READ_REQUEST
+                type:FEEDBACK_READ_REQUEST,
+                data:{
+                    feedbackModes,lastId
+                }
             });
             dispatch({
                 type:FEEDBACK_SUB_READ_REQUEST
