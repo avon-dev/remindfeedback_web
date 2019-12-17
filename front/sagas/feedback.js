@@ -122,14 +122,15 @@ function feedback_Item_Read_API(){
     // return axios.get('/#');
 };
 
-function* feedback_Item_Read(){
+function* feedback_Item_Read(action){
     try {
-        yield delay(2000);
-        yield call(feedback_Item_Read_API);
+        const result = yield call(feedback_Item_Read_API, action.data);
         yield put({
             type:FEEDBACK_ITEM_READ_SUCCESS,
+            data:result.data,
         });
     } catch (e) {
+        console.log(e);
         yield put({
             type:FEEDBACK_ITEM_READ_FAILURE,
             error:e,
@@ -151,8 +152,6 @@ function feedback_Delete_API(feedback_id){
 function* feedback_Delete(action){
     try {
         const result = yield call(feedback_Delete_API, action.feedback_id);
-        console.log("delete",result.data);
-        
         yield put({
             type:FEEDBACK_DELETE_SUCCESS,
             data:result.data,
@@ -181,7 +180,6 @@ function feedback_Update_API(data){
 function* feedback_Update(action){
     try {
         const result = yield call(feedback_Update_API, action.data);
-        console.log(result.data,"result");
         yield put({
             type:FEEDBACK_UPDATE_SUCCESS,
             data:result.data,
@@ -226,8 +224,8 @@ function* watchFeedback_Add(){
 
 
 // Feedback 메인화면 Read
-function feedback_Read_API(lastId = 0, start = 0){
-    return axios.get(`/feedback/all/${start}`,{
+function feedback_Read_API(data){
+    return axios.get(`/feedback/all/${data.lastId}`,{
         withCredentials:true
     });
 };

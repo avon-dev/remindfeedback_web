@@ -2,6 +2,10 @@ const layout = {
     background:'white', height:'100vh', width:'auto'
 };
 
+const layouts = {
+    background:'white', width:'auto'
+};
+
 const backgroundWhite ={
     background:'white',
 };
@@ -21,6 +25,7 @@ const layoutCenter = {
 
 export {
     layout,
+    layouts,
     backgroundWhite,
     layoutCenter,
     backgroundLightBlue,

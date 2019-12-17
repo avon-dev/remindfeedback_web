@@ -4,7 +4,7 @@ import AppSidebar from '../components/AppSidebar';
 import AppTopbar from '../components/AppTopbar';
 import AppMain from '../container/main';
 import AppFooter from '../components/AppFooter';
-import { layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
+import { layouts,layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
 import { Layout } from 'antd';
 import { FEEDBACK_READ_REQUEST } from '../reducers/feedback';
 import { FEEDBACK_SUB_READ_REQUEST } from '../reducers/feedbackSubject';
@@ -16,34 +16,40 @@ const { Footer, Content, Sider } = Layout;
 const Main = () => {
 
     const dispatch = useDispatch();
-    const {LoadedFeedbackErrorReason, feedback, hasMorePost  } = useSelector(state=>state.feedback);
+    const {LoadedFeedbackErrorReason, feedback } = useSelector(state=>state.feedback);
+    const {feedbackMode} = useSelector(state => state.feedbackMode);
 
     // if(LoadedFeedbackErrorReason.config.headers.Cookie===""){
     //     return <Error statusCode={LoadedFeedbackErrorReason.message}/>
     // }
-
-    const onScroll = useCallback(()=>{
+    const handleScroll = useCallback(() => {
         if(window.scrollY+document.documentElement.clientHeight > document.documentElement.scrollHeight - 300){
-            const lastId = feedback[feedback.length - 1].index;
-            if(hasMorePost){
-                dispatch({
-                    type:FEEDBACK_READ_REQUEST,
-                    lastId,
-                });
-            }
+            const lastId = feedback.myFeedback[feedback.myFeedback.length - 1].id;
+            const feedbackModes = feedbackMode;
+            console.log(lastId,"lastId");
+            dispatch({
+                type:FEEDBACK_READ_REQUEST,
+                data:{
+                    lastId, feedbackModes
+                }
+            });
+            
         }
-    },[hasMorePost, feedback.length]);
+    },[feedback.myFeedback.length]);
+    
 
-    // useEffect(()=>{
-    //     window.addEventListener('scroll',onScroll);
-    //     return() => {
-    //         window.removeEventListener('scroll',onScroll);
-    //     }
-    // },[feedback.length]);
+    useEffect(()=>{
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll",handleScroll);
+        };
+    },[feedback.myFeedback.length]);
+
+    
 
     return(
         <>
-            <Layout style={layout} >
+            <Layout style={feedback.myFeedback.length>=7?layouts:layout} >
                 <AppTopbar/>
                 <Layout style={backgroundWhite}>
                     <Sider style={backgroundWhite}>
@@ -64,13 +70,16 @@ const Main = () => {
 Main.getInitialProps = async(context) => {
     console.log("서버냐",context.isServer);
     if(context.isServer){
-        const {feedback} = context.store.getState();
+        const {feedbackMode} = context.store.getState();
+        const feedbackModes = feedbackMode.feedbackMode;
         const lastId = 0;
         const cookie = context.req.headers.cookie;
         axios.defaults.headers.Cookie = cookie;
         context.store.dispatch({
             type:FEEDBACK_READ_REQUEST,
-            lastId,
+            data:{
+                lastId, feedbackModes
+            }
         });
         context.store.dispatch({
             type:FEEDBACK_SUB_READ_REQUEST,

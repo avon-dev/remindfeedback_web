@@ -1,6 +1,8 @@
 export const initialState = {
+    feedbackMode:false,
 
     feedback:{},
+    feedbackItem:{},
 
     isAdddingFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 중
     isAddedFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 완료
@@ -21,6 +23,10 @@ export const initialState = {
     isDeletingFeedback: false, // 피드백 삭제 중
     isDeletedFeedback: false, // 피드백 삭제 완료
     DeletedFeedbackErrorReason: '', // 피드백 삭제 실패 사유
+
+    isLoadingFeedbackItem: false, // 피드백아이템 로드 중
+    isLoadedFeedbackItem: false, // 피드백아이템 로드완료
+    LoadedFeedbackItemErrorReason: '', // 피드백아이템 로드 실패 사유
 }
 
 export const FEEDBACK_TUTORIAL_REQUEST = 'FEEDBACK_TUTORIAL_REQUEST'; // 피드백 튜토리얼 시도 중
@@ -89,10 +95,23 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoadingFeedback:true,
                 isLoadedFeedback:false,
-                feedback:action.lastId === 0 ? [] : state.feedback,
+                feedbackMode:action.data.feedbackModes,
+                feedback:action.data.lastId === 0 ? {} : state.feedback,
                 hasMoreFeedback: action.lastId?state.hasMoreFeedback:true,
             };
         case FEEDBACK_READ_SUCCESS:
+            // let added = {};
+            // if(action.data.success){
+            //     if(!state.feedbackMode){
+            //         // 내 피드백
+            //         added = action.data.data;
+            //     }else{
+            //         // 요청된 피드백
+            //     }
+            // }else{
+
+            // }
+            
             return{
                ...state,
                isLoadingFeedback:false,
@@ -206,15 +225,22 @@ export default (state = initialState, action) => {
          // 피드백 게시물 READ 
         case FEEDBACK_ITEM_READ_REQUEST:
             return{
-
+                ...state,
+                isLoadingFeedbackItem:true,
+                isLoadedFeedbackItem:false,
             };
         case FEEDBACK_ITEM_READ_SUCCESS:
             return{
-                
+                ...state,
+                isLoadingFeedbackItem:false,
+                isLoadedFeedbackItem:true,
             };
         case FEEDBACK_ITEM_READ_FAILURE:
             return{
-                
+                ...state,
+                isLoadingFeedbackItem:false,
+                isLoadedFeedbackItem:false,
+                LoadedFeedbackItemErrorReason:action.error,
             };
 
         // 피드백 게시물 ADD 
