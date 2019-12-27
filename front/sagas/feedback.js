@@ -225,6 +225,7 @@ function* watchFeedback_Add(){
 
 // Feedback 메인화면 Read
 function feedback_Read_API(data){
+    
     return axios.get(`/feedback/all/${data.lastId}`,{
         withCredentials:true
     });

@@ -72,7 +72,7 @@ const mypage = () => {
                         <Col span={24} style={{textAlign:'center'}}>
                             <Empty
                                 image={<Avatar style={{width: "20vh", height:'20vh', marginTop:15}} 
-                                        src={me.portrait&&`http://localhost:8000/mypage/${me.portrait}`}>
+                                        src={me.portrait&&`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${me.portrait}`}>
                                           {!me.portrait&&<Icon type="user" style={{fontSize: "20vh"}} />}
                                        </Avatar>
                                         }   

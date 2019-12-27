@@ -16,26 +16,27 @@ const { Footer, Content, Sider } = Layout;
 const Main = () => {
 
     const dispatch = useDispatch();
-    const {LoadedFeedbackErrorReason, feedback } = useSelector(state=>state.feedback);
+    const {LoadedFeedbackErrorReason, feedback, hasMoreFeedback } = useSelector(state=>state.feedback);
     const {feedbackMode} = useSelector(state => state.feedbackMode);
 
     // if(LoadedFeedbackErrorReason.config.headers.Cookie===""){
     //     return <Error statusCode={LoadedFeedbackErrorReason.message}/>
     // }
     const handleScroll = useCallback(() => {
-        if(window.scrollY+document.documentElement.clientHeight > document.documentElement.scrollHeight - 300){
-            const lastId = feedback.myFeedback[feedback.myFeedback.length - 1].id;
-            const feedbackModes = feedbackMode;
-            console.log(lastId,"lastId");
-            dispatch({
-                type:FEEDBACK_READ_REQUEST,
-                data:{
-                    lastId, feedbackModes
-                }
-            });
-            
+        
+            if(window.scrollY+document.documentElement.clientHeight > document.documentElement.scrollHeight - 300){
+                if(hasMoreFeedback){
+                    const lastId = feedback.myFeedback[feedback.myFeedback.length - 1].id;
+                    const feedbackModes = feedbackMode;
+                    dispatch({
+                        type:FEEDBACK_READ_REQUEST,
+                        data:{
+                            lastId, feedbackModes
+                        }
+                    });
+            } 
         }
-    },[feedback.myFeedback.length]);
+    },[feedback.myFeedback.length,hasMoreFeedback]);
     
 
     useEffect(()=>{

@@ -96,28 +96,39 @@ export default (state = initialState, action) => {
                 isLoadingFeedback:true,
                 isLoadedFeedback:false,
                 feedbackMode:action.data.feedbackModes,
-                feedback:action.data.lastId === 0 ? {} : state.feedback,
-                hasMoreFeedback: action.lastId?state.hasMoreFeedback:true,
+                lastId:action.data.lastId,
+                // hasMoreFeedback: action.lastId?state.hasMoreFeedback:true,
             };
         case FEEDBACK_READ_SUCCESS:
-            // let added = {};
-            // action.data.lastId === 0이 아니라면 인피니티 스크롤링 쪽
-            // if(action.data.success){
-            //     if(!state.feedbackMode){
-            //         // 내 피드백
-            //         added = action.data.data;
-            //     }else{
-            //         // 요청된 피드백
-            //     }
-            // }else{
+            let added = {};
+            let hasMore = true;
+            if(parseInt(state.lastId)===0){
+                // init feedback_read
+                if(!state.feedbackMode){
+                    // 내 피드백
+                    added = action.data.data;
+                }else{
+                    // 요청된 피드백
+                }
+            }else{
+                // 인피니티 스크롤링 feedback_read
+                if(!state.feedbackMode){
+                    // 내 피드백
+                    const myFeedbackadded = action.data.data.myFeedback;
+                    state.feedback.myFeedback.push(...myFeedbackadded);
+                    added = state.feedback;
+                    hasMore = action.data.data.myFeedback.length===10?true:false;
+                }else{
+                    // 요청된 피드백
+                }
+            }
 
-            // }
-            
             return{
                ...state,
                isLoadingFeedback:false,
                isLoadedFeedback:true,
-               feedback:action.data.success?action.data.data:{},
+               hasMoreFeedback: hasMore,
+               feedback:action.data.success?added:{},
             };
         case FEEDBACK_READ_FAILURE:
             return{
