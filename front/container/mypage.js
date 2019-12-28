@@ -36,7 +36,6 @@ const mypage = () => {
     }
 
     const updateMypage = useCallback((e) => {
-      // 서버 단에서 수정 필요 
       e.preventDefault();
       const formData = new FormData();
       formData.append('nickname',nickname);

@@ -96,7 +96,7 @@ function* watchFeedback_Item_Complete() {
 function feedback_Item_Add_API(data){
     switch(data.name){
         case "TEXT": return axios.post('/board/text/create',data,{withCredentials:true});
-        case "PHOTO": return axios.post('/board/picture/create');
+        case "PHOTO": return axios.post('/board/picture/create',data.formData,{withCredentials:true});
         case "VIDEO": return axios.post('/#');
         case "RECORD": return axios.post('/#');
         default: return console.error("에러발생");

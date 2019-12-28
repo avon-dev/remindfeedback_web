@@ -1,14 +1,15 @@
 import React from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-
 import reducer from '../reducers';
 import rootSaga from '../sagas';
 import AppHeader from '../components/AppHeader';
+import { FEEDBACK_SUB_READ_REQUEST } from '../reducers/feedbackSubject';
 
 const RemindFeedback = ({Component, store, pageProps }) => {
     return(
@@ -29,6 +30,15 @@ RemindFeedback.propTypes = {
 RemindFeedback.getInitialProps = async(context) => {
     const { ctx, Component } = context;
     let pageProps = {};
+    const cookie = ctx.isServer? ctx.req.headers.cookie:'';
+    if(ctx.isServer&&cookie){
+        // 서버사이드 렌더링
+        axios.defaults.headers.Cookie = cookie;
+    }
+    ctx.store.dispatch({
+        type:FEEDBACK_SUB_READ_REQUEST,
+    });
+
     if(Component.getInitialProps){
         pageProps = await Component.getInitialProps(ctx);
     }

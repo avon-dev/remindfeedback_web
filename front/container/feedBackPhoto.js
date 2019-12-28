@@ -20,7 +20,7 @@ const getBase64 = (file) => {
     });
   }
 
-const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
+const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id}) => {
 
     const dispatch = useDispatch();
 
@@ -29,6 +29,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
     const [title, setTitle] = useState('');
     const [number, setNumber] = useState([]);
     const [portrait, setPortrait] = useState();
+    const [file, setFile] = useState([]);
 
     const handlePreview = async(file) => {
         console.log('handlePreview', file);
@@ -41,7 +42,12 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
     };
 
     const uploadButton = (
+        mode===UPDATE_USER_REQUEST?
         <Button disabled={number.length==1?true:false}>
+            <Icon type="upload" /> Upload
+        </Button>
+        :
+        <Button disabled={file.length==3?true:false}>
             <Icon type="upload" /> Upload
         </Button>
     );
@@ -53,16 +59,25 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
     const handlePreviewFile = (file) => getBase64(file);
     
     const handleCheck = (e) => {
-        setNumber('1');
-        setPortrait(e);
+        if(mode===UPDATE_USER_REQUEST){
+            setNumber('1');
+            setPortrait(e);
+        }else{
+            setFile([...file,e]);
+        } 
     }
 
     // const handleUpload = ({file}) => {
     //     setPortrait(file);
     // }
 
-    const handleRemove = () => {
-        setNumber([]);
+    const handleRemove = (e) => {
+        if(mode===UPDATE_USER_REQUEST){
+            setNumber([]);
+        }else{
+            setFile(file.filter((v,i)=>v.name!==e.name));
+        }
+        
     }
 
     const up = <Upload
@@ -104,10 +119,21 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name}) => {
                 },
             });
         }else{
+            if(!title){
+                return alert('제목을 입력해 주세요');
+            }
+            if(!file){
+                return alert('사진을 선택해 주세요');
+            }
+            const formData = new FormData();
+            file.forEach((v,i)=>formData.append(`file${i+1}`,v));
+            // formData.append('board_content',introduction);
+            formData.append('board_title',title);
+            formData.append('feedback_id',feedback_id);
             dispatch({
                 type: FEEDBACK_ITEM_ADD_REQUEST,
                 data:{
-                    title,name
+                    formData,name,
                 }
             });
         };

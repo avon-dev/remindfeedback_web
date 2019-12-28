@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Col, Button, Breadcrumb, Icon, Card, Popover, Pagination, Tooltip  } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Col, Button, Breadcrumb, Icon, Card, Popover, Pagination, Tooltip , Empty } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import AppWrite from '../container/feedBackDetailWrite';
@@ -12,14 +12,21 @@ const {Group} = Button;
 const feedBackDetailList = ({feedback_id}) => {
 
     const dispatch = useDispatch();
-    const {feedbackItem} = useSelector(state=>state.feedback);
+    const {feedbackItem,feedback} = useSelector(state=>state.feedback);
 
     const [name, setName] = useState(false);
+    const [adviser_uid, setAdviser_uid] = useState('');
+    const [createdAt, setCreatedAt] = useState('');
     const [Visible, setVisible] = useState(false);
     const [writeVisible, setWriteVisible] = useState(false);
     const [photoVisible, setPhotoVisible] = useState(false);
     const [videoVisible, setVideoVisible] = useState(false);
     const [recordVisible, setRecordVisible] = useState(false);
+
+    useEffect(()=>{
+        setAdviser_uid(feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).adviser_uid);
+        setCreatedAt((feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).createdAt));
+    },[]);
 
     // Popover 추가하기
     const popUpAdd = () => {
@@ -64,19 +71,29 @@ const feedBackDetailList = ({feedback_id}) => {
         }
     }
 
-    // 피드백 디테일 리스트
-    const subTitle = ['목요일반 발표 수업','목요일반 자바 수업','목요일반 php 수업','목요일반 안드로이드 수업'];
-
-    const ItemCard = feedbackItem.map((v,i)=>
+    const ItemCard = feedbackItem.map((v,i) =>
         <Card 
             key={v.id}
-            title={v.board_title} 
+            title={<strong>{v.board_title}</strong>} 
             extra={<Tooltip title="더 자세한 사항을 보려면 More 버튼을 클릭해주세요!"><a href="#">More</a></Tooltip>} 
             style={{ width: '100%' }}
         >
-            <p style={{color:'#000000'}}><strong>{v.board_content}</strong></p>
+            {v.board_content&&<p style={{color:'#000000'}}>{v.board_content}</p>}
+            {v.board_file1&&<img src={`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v.board_file1}`} width="200"/>}
+            {v.board_file2&&<img src={`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v.board_file2}`} width="200"/>}
+            {v.board_file3&&<img src={`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v.board_file3}`} width="200"/>}
             <p style={{fontSize:10}}>{moment(v.createdAt).format('YYYY-MM-DD HH:mm:ss')}</p>
         </Card>)
+
+     const emptyCard = <Col span={24} style={{marginTop:30}}>
+                            <Empty 
+                            description={
+                                <span>
+                                <strong>게시글이 없습니다.<br/>게시글을 생성해 주세요</strong>
+                                </span>
+                            }
+                            />
+                        </Col>   
 
     return(
         <>  
@@ -120,16 +137,21 @@ const feedBackDetailList = ({feedback_id}) => {
                 <Col offset={1}/>
                 <Col span={22} style={{marginBottom:10}}>
                     <div>
-                        <span style={{fontSize:20, color:'#000000', marginRight:5}}><strong>조언자:</strong></span><span>아무개</span>
+                        <span style={{fontSize:20, color:'#000000', marginRight:5}}><strong>조언자:</strong></span><span>{adviser_uid}</span>
                     </div>
                     <div>
-                        <span style={{fontSize:15, color:'#000000', marginRight:5}}><strong>생성일:</strong></span><span>{CreatedAt}</span>
+                        <span style={{fontSize:15, color:'#000000', marginRight:5}}><strong>생성일:</strong></span><span>{moment(createdAt).format('YYYY-MM-DD HH:mm:ss')}</span>
                     </div>
                 </Col>
                 <Col offset={1}/>
                 <Col offset={1}/>
                 <Col span={22}>
-                    {ItemCard}
+                    {
+                        feedbackItem.length!==0?
+                        ItemCard
+                        :
+                        emptyCard
+                    }
                 </Col>
                 <Col offset={1}/>
                 <Col offset={1}/>

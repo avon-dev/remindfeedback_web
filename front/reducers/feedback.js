@@ -27,6 +27,10 @@ export const initialState = {
     isLoadingFeedbackItem: false, // 피드백아이템 로드 중
     isLoadedFeedbackItem: false, // 피드백아이템 로드완료
     LoadedFeedbackItemErrorReason: '', // 피드백아이템 로드 실패 사유
+
+    isAddingFeedbackItem: false, // 피드백아이템 추가 중
+    isAddedFeedbackItem: false, // 피드백아이템 추가완료
+    AddedFeedbackItemErrorReason: '', // 피드백아이템 추가 실패 사유
 }
 
 export const FEEDBACK_TUTORIAL_REQUEST = 'FEEDBACK_TUTORIAL_REQUEST'; // 피드백 튜토리얼 시도 중
@@ -264,15 +268,23 @@ export default (state = initialState, action) => {
         // 피드백 게시물 ADD 
         case FEEDBACK_ITEM_ADD_REQUEST:
             return{
-
+                ...state,
+                isAddingFeedbackItem:true,
+                isAddedFeedbackItem:false,
             };
         case FEEDBACK_ITEM_ADD_SUCCESS:
             return{
-                
+                ...state,
+                isAddingFeedbackItem:true,
+                isAddedFeedbackItem:false,
+                feedbackItem:action.data.success?[action.data.data, ...state.feedbackItem]:state.feedbackItem,
             };
         case FEEDBACK_ITEM_ADD_FAILURE:
             return{
-                
+                ...state,
+                isAddingFeedbackItem:true,
+                isAddedFeedbackItem:false,
+                AddedFeedbackItemErrorReason:action.error,
             };
 
         // 피드백 게시물 완료 

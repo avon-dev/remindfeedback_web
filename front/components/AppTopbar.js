@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import AppTutorial from '../components/TutorialMain';
 import AppAlert from '../container/alert';
 import { FEEDBACK_TUTORIAL_REQUEST, FEEDBACK_READ_REQUEST } from '../reducers/feedback';
-import { FEEDBACK_SUB_READ_REQUEST } from '../reducers/feedbackSubject';
 import { LOG_OUT_REQUEST } from '../reducers/user';
 import Router from 'next/router';
 
@@ -97,9 +96,6 @@ const AppTopbar = () => {
                 lastId, feedbackModes
             }
         })
-        dispatch({
-            type:FEEDBACK_SUB_READ_REQUEST,
-        });
         Router.push('/main');
     }
 
