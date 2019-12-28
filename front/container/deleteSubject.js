@@ -41,7 +41,7 @@ const deleteSubject = ({update,PopupUpdateSubject,popOverVisible,handleVisible})
                             <Popconfirm
                                 key = {update.category_id}
                                 onConfirm={handleConfirm}
-                                title="정말로 삭제하시겠습니까?"  
+                                title={<div>해당 주제를 삭제할 시, 주제 내 모든 피드백 정보는 default 주제로 이동됩니다.<br/>정말로 삭제하시겠습니까?</div>} 
                                 okText="네"
                                 cancelText="아니오"
                             >

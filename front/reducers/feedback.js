@@ -2,7 +2,7 @@ export const initialState = {
     feedbackMode:false,
 
     feedback:{},
-    feedbackItem:{},
+    feedbackItem:[],
 
     isAdddingFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 중
     isAddedFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 완료
@@ -114,10 +114,15 @@ export default (state = initialState, action) => {
                 // 인피니티 스크롤링 feedback_read
                 if(!state.feedbackMode){
                     // 내 피드백
+                   
                     const myFeedbackadded = action.data.data.myFeedback;
-                    state.feedback.myFeedback.push(...myFeedbackadded);
-                    added = state.feedback;
-                    hasMore = action.data.data.myFeedback.length===10?true:false;
+                    if(myFeedbackadded.length === 0){
+                        added = state.feedback;
+                    }else{
+                        state.feedback.myFeedback.push(...myFeedbackadded);
+                        added = state.feedback;
+                    }
+                    hasMore = myFeedbackadded.length===10?true:false; 
                 }else{
                     // 요청된 피드백
                 }
@@ -246,6 +251,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoadingFeedbackItem:false,
                 isLoadedFeedbackItem:true,
+                feedbackItem:action.data.success?action.data.data:[],
             };
         case FEEDBACK_ITEM_READ_FAILURE:
             return{

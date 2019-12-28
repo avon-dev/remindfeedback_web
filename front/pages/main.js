@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback,useRef } from 'react';
 import axios from 'axios';
 import AppSidebar from '../components/AppSidebar';
 import AppTopbar from '../components/AppTopbar';
@@ -18,29 +18,31 @@ const Main = () => {
     const dispatch = useDispatch();
     const {LoadedFeedbackErrorReason, feedback, hasMoreFeedback } = useSelector(state=>state.feedback);
     const {feedbackMode} = useSelector(state => state.feedbackMode);
-
+    const countRef = useRef([]);
     // if(LoadedFeedbackErrorReason.config.headers.Cookie===""){
     //     return <Error statusCode={LoadedFeedbackErrorReason.message}/>
     // }
     const handleScroll = useCallback(() => {
-        
             if(window.scrollY+document.documentElement.clientHeight > document.documentElement.scrollHeight - 300){
                 if(hasMoreFeedback){
                     const lastId = feedback.myFeedback[feedback.myFeedback.length - 1].id;
                     const feedbackModes = feedbackMode;
-                    dispatch({
-                        type:FEEDBACK_READ_REQUEST,
-                        data:{
-                            lastId, feedbackModes
-                        }
-                    });
+                    if(!countRef.current.includes(lastId)){
+                        dispatch({
+                            type:FEEDBACK_READ_REQUEST,
+                            data:{
+                                lastId, feedbackModes
+                            }
+                        });
+                        countRef.current.push(lastId);
+                    }
             } 
         }
     },[feedback.myFeedback.length,hasMoreFeedback]);
     
 
     useEffect(()=>{
-        window.addEventListener("scroll", handleScroll);
+            window.addEventListener("scroll", handleScroll);
         return () => {
             window.removeEventListener("scroll",handleScroll);
         };

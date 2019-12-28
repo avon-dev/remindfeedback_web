@@ -5,13 +5,7 @@ import FeedBackDetailComments from '../container/feedBackDetailComment';
 
 const {Title, Text} = Typography;
 
-const feedBackDetail = () => {
-
-    // request server 
-    useEffect(()=>{
-
-    },[]);
-
+const feedBackDetail = ({feedback_id}) => {
     return(
         <>
             <Row>
@@ -23,7 +17,9 @@ const feedBackDetail = () => {
             <Row>
                 <Col span={1}/>
                 <Col span={23}>
-                    <FeedBackDetailLists/>
+                    <FeedBackDetailLists
+                        feedback_id={feedback_id}
+                    />
                         <Col span={1} style={{textAlign:'center'}}>
                             <Divider type="vertical" style={{border:'2px solid black', height:'100vh',}} />
                         </Col>

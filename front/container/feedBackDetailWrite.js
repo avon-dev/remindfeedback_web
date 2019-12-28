@@ -1,34 +1,44 @@
 import React,{useState,useCallback} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Layout, Form, Input, Icon, Button, Col, Typography, Row } from 'antd';
-// import CKEditor from '@ckeditor/ckeditor5-react';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { backgroundWhite, backgroundLightBlue} from '../css/Common';
+import {formItemLayout} from '../css/FeedbackDetail';
 import {FEEDBACK_ITEM_ADD_REQUEST} from '../reducers/feedback';
 
-
+const { TextArea } = Input;
 const {Content} = Layout;
 const {Title} = Typography;
 
-const feedBackDetailWrite = ({writeVisible,writeHandleCancel,name}) => {
+const feedBackDetailWrite = ({writeVisible,writeHandleCancel,name,feedback_id}) => {
 
     const dispatch = useDispatch();
     
-    const [contents, setContents] = useState();
+    const [board_content, setContents] = useState();
+    const [board_title, setTitle] = useState();
 
     const _onsubmit = useCallback(() => {
-        console.log(contents);
+        if(!board_title){
+            return alert('제목을 작성해주세요');
+        }
+        if(!board_content){
+            return alert('내용을 작성해주세요');
+        }
         dispatch({
             type:FEEDBACK_ITEM_ADD_REQUEST,
             data:{
-                contents,name  
+                board_content,name,feedback_id,board_title 
             }
         });
-    },[contents]);
+        writeHandleCancel();
+    },[board_content,board_title]);
 
-    const handleChange = (event,editor) => {
-        setContents(editor.getData());
-    }
+    const handleChange = useCallback((e) => {
+        setContents(e.target.value);
+    },[board_content]);
+
+    const handleTitle = useCallback((e) => {
+        setTitle(e.target.value);
+    },[board_title]);
 
     return(
         <>
@@ -52,14 +62,25 @@ const feedBackDetailWrite = ({writeVisible,writeHandleCancel,name}) => {
                 centered={true}
             >
                 <Content style={backgroundWhite}>
-                    <Form>
+                    <Form {...formItemLayout}>
                        <Row>
                             <Col span={24}>
-                                <Form.Item >
-                                    {/* <CKEditor
-                                        editor={ClassicEditor}
+                                <Form.Item label={<strong>제목</strong>} >
+                                    <Input
+                                        required
+                                        placeholder="제목을 입력해주세요"
+                                        prefix={<Icon type="edit" />}
+                                        value={board_title}
+                                        onChange={handleTitle}
+                                    />
+                                </Form.Item>
+                                <Form.Item label={<strong>내용</strong>} >
+                                    <TextArea
+                                        required
+                                        rows={4}
+                                        value={board_content}
                                         onChange={handleChange}
-                                    /> */}
+                                    />
                                 </Form.Item>
                             </Col>
                        </Row> 

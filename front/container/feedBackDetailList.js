@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Col, Button, Breadcrumb, Icon, Card, Popover, Pagination, Tooltip  } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import AppWrite from '../container/feedBackDetailWrite';
 import AppPhoto from '../container/feedBackPhoto';
@@ -7,9 +8,11 @@ import AppVideo from '../container/feedBackDetailVideo';
 import AppRecord from '../container/feedBackDetailRecord';
 
 const {Group} = Button;
-const CreatedAt = moment().format('YYYY-MM-DD HH:mm:ss');
 
-const feedBackDetailList = () => {
+const feedBackDetailList = ({feedback_id}) => {
+
+    const dispatch = useDispatch();
+    const {feedbackItem} = useSelector(state=>state.feedback);
 
     const [name, setName] = useState(false);
     const [Visible, setVisible] = useState(false);
@@ -64,15 +67,15 @@ const feedBackDetailList = () => {
     // 피드백 디테일 리스트
     const subTitle = ['목요일반 발표 수업','목요일반 자바 수업','목요일반 php 수업','목요일반 안드로이드 수업'];
 
-    const ItemCard = subTitle.map(data=>
+    const ItemCard = feedbackItem.map((v,i)=>
         <Card 
-            key={data}
-            title="Test" 
+            key={v.id}
+            title={v.board_title} 
             extra={<Tooltip title="더 자세한 사항을 보려면 More 버튼을 클릭해주세요!"><a href="#">More</a></Tooltip>} 
             style={{ width: '100%' }}
         >
-            <p style={{color:'#000000'}}><strong>{data}</strong></p>
-            <p style={{fontSize:10}}>{CreatedAt}</p>
+            <p style={{color:'#000000'}}><strong>{v.board_content}</strong></p>
+            <p style={{fontSize:10}}>{moment(v.createdAt).format('YYYY-MM-DD HH:mm:ss')}</p>
         </Card>)
 
     return(
@@ -139,28 +142,32 @@ const feedBackDetailList = () => {
               <AppWrite
                  writeVisible={writeVisible}   
                  writeHandleCancel={writeHandleCancel}
-                 name={name}           
+                 name={name}
+                 feedback_id={feedback_id}           
               />                  
             </div>
             <div>
               <AppPhoto
                  photoVisible={photoVisible}   
                  photoHandleCancel={photoHandleCancel}
-                 name={name}            
+                 name={name}
+                 feedback_id={feedback_id}              
               />                  
             </div>
             <div>
               <AppVideo
                  videoVisible={videoVisible}   
                  videoHandleCancel={videoHandleCancel}
-                 name={name}            
+                 name={name}
+                 feedback_id={feedback_id}              
               />                  
             </div>
             <div>
               <AppRecord
                  recordVisible={recordVisible}   
                  recordHandleCancel={recordHandleCancel}
-                 name={name}            
+                 name={name}
+                 feedback_id={feedback_id}              
               />                  
             </div>
         </>

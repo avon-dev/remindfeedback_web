@@ -93,18 +93,26 @@ function* watchFeedback_Item_Complete() {
 
 
 // Feedback 피드백 게시물 Add
-function feedback_Item_Add_API(){
-    // return axios.post('/#');
+function feedback_Item_Add_API(data){
+    switch(data.name){
+        case "TEXT": return axios.post('/board/text/create',data,{withCredentials:true});
+        case "PHOTO": return axios.post('/board/picture/create');
+        case "VIDEO": return axios.post('/#');
+        case "RECORD": return axios.post('/#');
+        default: return console.error("에러발생");
+    }
 };
 
 function* feedback_Item_Add(action){
     try {
         const result = yield call(feedback_Item_Add_API, action.data);
+        console.log(result.data,"feedback_Item_Add");
         yield put({
             type:FEEDBACK_ITEM_ADD_SUCCESS,
             data:result.data,
         });
     } catch (e) {
+        console.error(e);
         yield put({
             type:FEEDBACK_ITEM_ADD_FAILURE,
             error:e,
@@ -118,19 +126,22 @@ function* watchFeedback_Item_Add() {
 
 
 // Feedback 피드백 게시물 Read
-function feedback_Item_Read_API(){
-    // return axios.get('/#');
+function feedback_Item_Read_API(feedbackid){
+    return axios.get(`/board/${parseInt(feedbackid)}/0}`,{
+        withCredentials:true,
+    });
 };
 
 function* feedback_Item_Read(action){
     try {
         const result = yield call(feedback_Item_Read_API, action.data);
+        console.log(result.data,"feedback_Item_Read");
         yield put({
             type:FEEDBACK_ITEM_READ_SUCCESS,
             data:result.data,
         });
     } catch (e) {
-        console.log(e);
+        console.error(e);
         yield put({
             type:FEEDBACK_ITEM_READ_FAILURE,
             error:e,

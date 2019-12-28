@@ -9,7 +9,7 @@ import { layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
 import { Layout } from 'antd';
 const { Footer, Content, Sider } = Layout;
 
-const feedbackdetail = () => {
+const feedbackdetail = ({feedback_id}) => {
     return(
         <>
             <Layout style={layout} >
@@ -19,7 +19,9 @@ const feedbackdetail = () => {
                         <AppSidebar/>
                     </Sider>
                     <Content>
-                        <AppFeedbackDetail/>
+                        <AppFeedbackDetail
+                            feedback_id={feedback_id}
+                        />
                     </Content>
                 </Layout>
                 <Footer style={backgroundLightBlue}>
@@ -38,14 +40,16 @@ feedbackdetail.getInitialProps = async(context) => {
         axios.defaults.headers.Cookie = cookie;
         context.store.dispatch({
             type:FEEDBACK_ITEM_READ_REQUEST,
-            data:context.query,
+            data:parseInt(context.query.id),
         });
+        return {feedback_id: parseInt(context.query)};
     }else{
         console.log(context.query);
         context.store.dispatch({
             type:FEEDBACK_ITEM_READ_REQUEST,
-            data:context.query,
+            data:parseInt(context.query.id),
         });
+        return {feedback_id: parseInt(context.query.id)};
     }
 };
 
