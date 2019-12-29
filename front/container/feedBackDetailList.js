@@ -6,6 +6,7 @@ import AppWrite from '../container/feedBackDetailWrite';
 import AppPhoto from '../container/feedBackPhoto';
 import AppVideo from '../container/feedBackDetailVideo';
 import AppRecord from '../container/feedBackDetailRecord';
+import ImageContents from '../components/ImagesContents';
 
 const {Group} = Button;
 
@@ -28,15 +29,9 @@ const feedBackDetailList = ({feedback_id}) => {
         setAdviser_uid(feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).adviser_uid);
         setCreatedAt((feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).createdAt));
         const r = feedbackItem.map((v,i)=>{return{board_file1:v.board_file1,board_file2:v.board_file2,board_file3:v.board_file3}});
-        setImages(r);
-        console.log("images",r);
+        // setImages(r);
+        // console.log("images",r);
     },[]);
-
-    // useEffect(()=>{
-    //     const add = feedbackItem.map((v,i)=>{return{board_file1:v.board_file1,board_file2:v.board_file2,board_file3:v.board_file3}});
-    //     setImages([add,...images]);
-    //     console.log("images",images);
-    // },[feedbackItem&&feedbackItem]);
 
     // Popover 추가하기
     const popUpAdd = () => {
@@ -89,10 +84,10 @@ const feedBackDetailList = ({feedback_id}) => {
             style={{ width: '100%' }}
         >
             {v.board_content&&<p style={{color:'#000000'}}>{v.board_content}</p>}
-            {v.board_file1&&<img src={`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${images.map((v,i)=>v.board_file+i)}`} width="200"/>}
-            {/* {v.board_file2&&<img src={`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v.board_file2}`} width="200"/>}
-            {v.board_file3&&<img src={`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v.board_file3}`} width="200"/>} */}
-            <p style={{fontSize:10}}>{moment(v.createdAt).format('YYYY-MM-DD HH:mm:ss')}</p>
+            <ImageContents
+                v={v}
+            />
+            <div style={{textAlign:'right', marginTop:15}}><p style={{fontSize:10}}>{moment(v.createdAt).format('YYYY-MM-DD HH:mm:ss')}</p></div>
         </Card>)
 
      const emptyCard = <Col span={24} style={{marginTop:30}}>
