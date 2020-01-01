@@ -15,6 +15,9 @@ import {
     UPDATE_USER_REQUEST,
     UPDATE_USER_SUCCESS,
     UPDATE_USER_FAILURE,
+    DELTE_USER_PHOTO_REQUEST,
+    DELTE_USER_PHOTO_SUCCESS,
+    DELTE_USER_PHOTO_FAILURE,
     LOG_OUT_REQUEST,
     LOG_OUT_SUCCESS,
     LOG_OUT_FAILURE,
@@ -56,6 +59,34 @@ function* loadUser(){
 
 function* watchLoadUser() {
     yield takeLatest(LOAD_USER_REQUEST, loadUser);
+};
+
+// 마이페이지 사진 Delete
+function deletePhotoAPI(){
+        return axios.delete('/mypage/delete/portrait',{
+            withCredentials:true,
+        });
+};
+
+function* deletePhoto(){
+    try {
+        const result = yield call(deletePhotoAPI);
+        console.log(result.data);
+        yield put({
+            type:DELTE_USER_PHOTO_SUCCESS,
+            data:result.data,
+        });
+    } catch (e) {
+        console.error(e);
+        yield put({
+            type:DELTE_USER_PHOTO_FAILURE,
+            error:e,
+        });
+    }
+};
+
+function* watchDeletePhoto() {
+    yield takeLatest(DELTE_USER_PHOTO_REQUEST, deletePhoto);
 };
 
 // 마이페이지 UPDATE
@@ -197,5 +228,6 @@ export default function* userSaga(){
         fork(watchLogOut),
         fork(watchLoadUser),
         fork(watchUpateUser),
+        fork(watchDeletePhoto),
     ]);
 }

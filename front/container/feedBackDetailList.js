@@ -80,8 +80,13 @@ const feedBackDetailList = ({feedback_id}) => {
         <Card 
             key={v.id}
             title={<strong>{v.board_title}</strong>} 
-            extra={<Tooltip title="더 자세한 사항을 보려면 More 버튼을 클릭해주세요!"><a href="#">More</a></Tooltip>} 
+            extra={<div>
+                    <Button id={v.id} type="dashed"><Icon type="edit" style={{ fontSize: '18px', color: '#08c' }} /></Button>  
+                    {/* <Tooltip title="더 자세한 사항을 보려면 More 버튼을 클릭해주세요!"><a href="#">More</a></Tooltip> */}
+                   </div>
+                   } 
             style={{ width: '100%' }}
+            
         >
             {v.board_content&&<p style={{color:'#000000'}}>{v.board_content}</p>}
             <ImageContents

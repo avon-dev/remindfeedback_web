@@ -21,6 +21,10 @@ export const initialState = {
     isUpdatedMyInfo: false, // 마이페이지 업데이트 성공
     UpdatedMyInfoReason: '', // 마이페이지 업데이트 실패 사유
 
+    isDeletingPhoto: false, // 마이페이지 사진 삭제 중
+    isDeletedPhoto: false, // 마이페이지 사진 삭제 성공
+    DeletedPhotoReason: '', // 마이페이지 사진 삭제 실패 사유
+
     me:{
         email: '',
         nickname: '',
@@ -50,6 +54,10 @@ export const LOAD_USER_FAILURE = 'LOAD_USER_FAILURE'; // 사용자 정보 가져
 export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST'; // 사용자 정보 업데이트 중
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS'; // 사용자 정보 업데이트 성공
 export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE'; // 사용자 정보 업데이트 실패
+
+export const DELTE_USER_PHOTO_REQUEST = 'DELTE_USER_PHOTO_REQUEST'; // 사용자 사진 삭제 중
+export const DELTE_USER_PHOTO_SUCCESS = 'DELTE_USER_PHOTO_SUCCESS'; // 사용자 사진 삭제 성공
+export const DELTE_USER_PHOTO_FAILURE = 'DELTE_USER_PHOTO_FAILURE'; // 사용자 사진 삭제 실패
 
 export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST'; // 로그아웃 시도 중
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS'; // 로그아웃 성공
@@ -181,34 +189,60 @@ export default (state = initialState, action ) => {
                 me:null,
             }
 
-            case UPDATE_USER_REQUEST:
-                return{
-                    ...state,
-                    isUpatingMyInfo: true,
-                    isUpatdedMyInfo:false,
-                }
-            case UPDATE_USER_SUCCESS:
-                return{
-                    ...state,
-                    isUpatingMyInfo: false,
-                    isUpatdedMyInfo:true,
-                    me:{
-                        ...state.me,
-                        email:action.data.data.email,
-                        introduction:action.data.data.introduction,
-                        portrait:action.data.data.portrait,
-                        nickname:action.data.data.nickname,
-                    },
-                    message:action.data.success?action.data.message:''
-                }
-            case UPDATE_USER_FAILURE:
-                return{
-                    ...state,
-                    isUpatingMyInfo: false,
-                    isUpatdedMyInfo:false,
-                    UpatdedMyInfoReason:action.error,
-                    me:null,
-                }
+        case UPDATE_USER_REQUEST:
+            return{
+                ...state,
+                isUpatingMyInfo: true,
+                isUpatdedMyInfo:false,
+            }
+        case UPDATE_USER_SUCCESS:
+            return{
+                ...state,
+                isUpatingMyInfo: false,
+                isUpatdedMyInfo:true,
+                me:{
+                    ...state.me,
+                    email:action.data.data.email,
+                    introduction:action.data.data.introduction,
+                    portrait:action.data.data.portrait,
+                    nickname:action.data.data.nickname,
+                },
+                message:action.data.success?action.data.message:''
+            }
+        case UPDATE_USER_FAILURE:
+            return{
+                ...state,
+                isUpatingMyInfo: false,
+                isUpatdedMyInfo:false,
+                UpatdedMyInfoReason:action.error,
+                me:null,
+            }
+
+        case DELTE_USER_PHOTO_REQUEST:
+            return{
+                ...state,
+                isDeletingPhoto: true,
+                isDeletedPhoto:false,
+            }
+        case DELTE_USER_PHOTO_SUCCESS:
+            return{
+                ...state,
+                isDeletingPhoto: false,
+                isDeletedPhoto:true,
+                me:{
+                    ...state.me,
+                    portrait:''
+                },
+                message:action.data.success?action.data.message:''
+            }
+        case DELTE_USER_PHOTO_FAILURE:
+            return{
+                ...state,
+                isDeletingPhoto: false,
+                isDeletedPhoto:false,
+                DeletedPhotoReason:action.error,
+                me:null,
+            }
 
         case LOG_OUT_REQUEST:
             return{

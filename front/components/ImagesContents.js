@@ -43,7 +43,7 @@ return(
             :
         v.board_file1?
             <div>
-                <img src={`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v.board_file1}`} width="50%" onClick={onZoom}/>
+                <img src={`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v.board_file1}`} width="100%" onClick={onZoom}/>
                 {showImagesZoom && <ImagesZoom images={v} onClose={onClose} />}
             </div>
             :

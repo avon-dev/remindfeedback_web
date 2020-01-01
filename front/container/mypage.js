@@ -1,8 +1,8 @@
 import React, {useState,useEffect,useCallback} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Form, Avatar, Empty, Typography, Icon, Button, Timeline, Input } from 'antd';
+import { Row, Col, Form, Avatar, Empty, Typography, Icon, Button, Timeline, Input, Popover, Popconfirm } from 'antd';
 import AppPhoto from '../container/feedBackPhoto';
-import {UPDATE_USER_REQUEST} from '../reducers/user';
+import {UPDATE_USER_REQUEST, DELTE_USER_PHOTO_REQUEST} from '../reducers/user';
 
 
 const {Text} = Typography;
@@ -15,14 +15,31 @@ const mypage = () => {
     const [nickname, setNickname] = useState('');
     const [introduction, setIntro] = useState('');
     const [photoVisible, setPhotoVisible] = useState(false);
+    const [photoMagagement, setPhotoManagement] = useState(false);
     
      // 사진
     const popUpPhoto = () => {
         setPhotoVisible(true);
+        setPhotoManagement(false);
     }
 
     const photoHandleCancel = () => {
         setPhotoVisible(false);
+    }
+
+    const popUpPhotoMagagement = () => {
+      setPhotoManagement(true);
+    }
+
+    const mypagePhotoHandleCancel = () => {
+      setPhotoManagement(false);
+    }
+
+    const handlePhotoDelete = () => {
+      setPhotoManagement(false);
+      dispatch({
+       type:DELTE_USER_PHOTO_REQUEST,
+      });
     }
 
     const handleData = (e) => {
@@ -44,7 +61,10 @@ const mypage = () => {
           type:UPDATE_USER_REQUEST,
           data:formData,
       });
+      setPhotoVisible(false);
     },[nickname,introduction]);
+
+    
 
     useEffect(()=>{
       if(me.nickname){
@@ -59,8 +79,23 @@ const mypage = () => {
       if(message){
         alert(message);
       }
-    },[message&&message]);
+    },[me&&me]);
 
+
+    const managePhoto = <>
+                          <Button style={{background:"green", color:"#FFFFFF"}} onClick={popUpPhoto}>수정하기</Button>
+                          <Popconfirm
+                            title="정말로 삭제하시겠습니까?"
+                            onConfirm={handlePhotoDelete}
+                            okText="네"
+                            cancelText="아니오"
+                          >
+                            <Button style={{background:"red", color:"#FFFFFF"}}>삭제하기</Button>
+                          </Popconfirm>
+                          <div style={{marginTop:5, textAlign:'right'}}>
+                            <a onClick={mypagePhotoHandleCancel}><strong>닫기</strong></a>  
+                          </div>
+                        </>
     return(
         <>
             <Row>
@@ -76,9 +111,25 @@ const mypage = () => {
                                        </Avatar>
                                         }   
                             >
-                               <div>
-                                    <Button style={{background:"#052749", color:"#FFFFFF"}} onClick={popUpPhoto}>{me.portrait?"프로필 사진 수정하기":"프로필 사진 추가하기"}</Button>
-                               </div>
+                               <Col span={24}>
+                                  <Col span={24}>
+                                    {
+                                     me.portrait?
+                                     <Popover 
+                                        placement="bottom" 
+                                        trigger="click" 
+                                        title={<div style={{textAlign:'center'}}><strong>프로필 사진 관리</strong></div>} 
+                                        content={managePhoto}
+                                        visible={photoMagagement}
+                                        onVisibleChange={popUpPhotoMagagement}
+                                      >
+                                       <Button style={{background:"#052749", color:"#FFFFFF"}}>프로필 사진 관리하기</Button>
+                                     </Popover>
+                                     :
+                                     <Button style={{background:"#052749", color:"#FFFFFF"}} onClick={popUpPhoto}>프로필 사진 추가하기</Button>
+                                    }
+                                  </Col>
+                               </Col>
                             </Empty>
                         </Col>
                       </Form.Item>

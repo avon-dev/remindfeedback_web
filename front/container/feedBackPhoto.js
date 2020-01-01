@@ -118,6 +118,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id})
                     order:'portrait'
                 },
             });
+            photoHandleCancel();
         }else{
             if(!title){
                 return alert('제목을 입력해 주세요');
@@ -136,6 +137,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id})
                     formData,name,
                 }
             });
+            photoHandleCancel();
         };
     };
        
