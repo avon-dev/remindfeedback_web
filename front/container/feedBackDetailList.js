@@ -88,10 +88,10 @@ const feedBackDetailList = ({feedback_id}) => {
             style={{ width: '100%' }}
             
         >
-            {v.board_content&&<p style={{color:'#000000'}}>{v.board_content}</p>}
             <ImageContents
                 v={v}
             />
+            <div style={{color:'#000000', marginTop:10}}><p>{v.board_content?v.board_content:"내용이 없습니다."}</p></div>
             <div style={{textAlign:'right', marginTop:15}}><p style={{fontSize:10}}>{moment(v.createdAt).format('YYYY-MM-DD HH:mm:ss')}</p></div>
         </Card>)
 
@@ -162,11 +162,6 @@ const feedBackDetailList = ({feedback_id}) => {
                         :
                         emptyCard
                     }
-                </Col>
-                <Col offset={1}/>
-                <Col offset={1}/>
-                <Col span={22} style={{marginTop:20, marginBottom:20, textAlign:'center'}}>
-                    <Pagination efaultCurrent={1} total={50}/>
                 </Col>
                 <Col offset={1}/>     
             </Col>

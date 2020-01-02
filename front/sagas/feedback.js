@@ -126,8 +126,8 @@ function* watchFeedback_Item_Add() {
 
 
 // Feedback 피드백 게시물 Read
-function feedback_Item_Read_API(feedbackid){
-    return axios.get(`/board/${parseInt(feedbackid)}/0}`,{
+function feedback_Item_Read_API(data){
+    return axios.get(`/board/${parseInt(data.feedbackid)}/${data.lastid}`,{
         withCredentials:true,
     });
 };

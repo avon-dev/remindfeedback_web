@@ -249,13 +249,25 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoadingFeedbackItem:true,
                 isLoadedFeedbackItem:false,
+                lastId:action.data.lastid,
             };
         case FEEDBACK_ITEM_READ_SUCCESS:
+            let addedItem = [];
+            let hasMoreItem = true;
+            if(state.lastId===0){
+                addedItem = action.data.data;
+            }else{
+                const item = action.data.data;
+                addedItem = [...state.feedbackItem,...item];
+                hasMoreItem = action.data.data.length===10?true:false;     
+            }
+
             return{
                 ...state,
                 isLoadingFeedbackItem:false,
                 isLoadedFeedbackItem:true,
-                feedbackItem:action.data.success?action.data.data:[],
+                feedbackItem:action.data.success?addedItem:[],
+                hasMoreItem:hasMoreItem
             };
         case FEEDBACK_ITEM_READ_FAILURE:
             return{

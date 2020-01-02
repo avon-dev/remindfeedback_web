@@ -9,6 +9,7 @@ import {UPDATE_USER_REQUEST} from '../reducers/user';
 
 const {Content} = Layout;
 const {Title} = Typography;
+const {TextArea} = Input;
 
 const getBase64 = (file) => {
     console.log('getBase64');
@@ -27,6 +28,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id})
     const [previewVisible, setpreviewVisible] = useState(false);
     const [previewImage, setpreviewImage] = useState('');
     const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
     const [number, setNumber] = useState([]);
     const [portrait, setPortrait] = useState();
     const [file, setFile] = useState([]);
@@ -97,6 +99,10 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id})
         setTitle(e.target.value);
     }
 
+    const handleContents = (e) => {
+        setContent(e.target.value);
+    }
+
     const _onsubmit = async() => {
         if(mode===FRIENDS_PROFILE_ADD_REQUEST){
             dispatch({
@@ -126,9 +132,12 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id})
             if(!file){
                 return alert('사진을 선택해 주세요');
             }
+            if(!content){
+                return alert('내용을 입력해 주세요');
+            }
             const formData = new FormData();
             file.forEach((v,i)=>formData.append(`file${i+1}`,v));
-            // formData.append('board_content',introduction);
+            formData.append('board_content',content);
             formData.append('board_title',title);
             formData.append('feedback_id',feedback_id);
             dispatch({
@@ -173,6 +182,18 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id})
                                         prefix={<Icon type="edit" />}
                                         value={title}
                                         onChange={handleTitle}
+                                    />
+                                </Form.Item>
+                                }
+                            </Col>
+                            <Col span={24}>
+                                {mode!==UPDATE_USER_REQUEST&&
+                                <Form.Item label={<strong>내용</strong>} >
+                                    <TextArea
+                                        required
+                                        rows={4}
+                                        value={content}
+                                        onChange={handleContents}
                                     />
                                 </Form.Item>
                                 }
