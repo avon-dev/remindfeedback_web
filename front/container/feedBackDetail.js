@@ -23,16 +23,17 @@ const feedBackDetail = ({feedback_id}) => {
                 <Col span={23} style={{textAlign:'center', marginTop:25, marginBottom:25}}>
                     <Title level={3}><strong>{feedbackTitle}</strong></Title>
                 </Col>
+                <Col span={1}/>
             </Row>
             <Row>
                 <Col span={1}/>
-                <Col span={23}>
+                <Col span={22}>
                     <FeedBackDetailLists
                         feedback_id={feedback_id}
                     />
-                        <Col span={1} style={{textAlign:'center'}}>
+                        {/* <Col span={1} style={{textAlign:'center'}}>
                             <Divider type="vertical" style={{border:'2px solid black', height:'100vh',}} />
-                        </Col>
+                        </Col> */}
                    <FeedBackDetailComments/>
                 </Col>
             </Row>

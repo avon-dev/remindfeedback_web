@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Divider, Typography, Button, Icon, Comment, Tooltip, Avatar, Input, Form } from 'antd';
+import { Col, Divider, Typography, Button, Icon, Comment, Tooltip, Avatar, Input, Form, Row } from 'antd';
 import moment from 'moment';
 import {FEEDBACK_ITEM_COMMENT_REQUEST} from '../reducers/feedback';
 import {FEEDBACK_ITEM_COMPLETE_REQUEST} from '../reducers/feedback';
@@ -13,36 +13,11 @@ const feedBackDetailComment = () => {
     const [comment,setComments] = useState('');
 
     // 코멘트 리스트 
-    const feedbacks = ['발표가 너무 구렸다.','발표가 너무 좋았다.','발표를 너무 잘했다.','발표만 보였다.'];
-
-    const actions = [
-        <span key="comment-basic-like">
-        <Tooltip title="Like">
-          <Icon
-            type="like"
-            // theme={action === 'liked' ? 'filled' : 'outlined'}
-            // onClick={this.like}
-          />
-        </Tooltip>
-        <span style={{ paddingLeft: 8, cursor: 'auto' }}></span>
-      </span>,
-      <span key="comment-basic-dislike">
-      <Tooltip title="Dislike">
-        <Icon
-          type="dislike"
-        //   theme={action === 'disliked' ? 'filled' : 'outlined'}
-        //   onClick={this.dislike}
-        />
-      </Tooltip>
-      <span style={{ paddingLeft: 8, cursor: 'auto' }}></span>
-    </span>,
-    // <span key="comment-basic-reply-to">Reply to</span>,
-    ];
+    const feedbacks = ['발표가 너무 구렸다.','발표가 너무 좋았다.','발표가 너무 좋았다.'];
 
     const comments = feedbacks.map(data => <Comment
         // style={{border:"1px solid #000000", padding:10}}
         key={data}
-        actions={actions}
         author={<a>최지석</a>}
         avatar={
         <Avatar
@@ -84,8 +59,7 @@ const feedBackDetailComment = () => {
 
     return(
         <>
-            <Col span={11}>
-                <Col offset={1}/>
+            <Col span={10} style={{position:"fixed", right:0}}>
                 <Col span={22}>
                     {comments}
                 </Col>
@@ -97,7 +71,7 @@ const feedBackDetailComment = () => {
                                     key="comments"
                                     onChange={handleComments}
                                     value={comment}
-                                    rows={4} 
+                                    rows={3} 
                                 />
                             </Tooltip>
                         </Form.Item>
@@ -110,11 +84,6 @@ const feedBackDetailComment = () => {
                         </Form.Item>
                     </Form>
                 </Col>
-                <Col offset={1}/>
-                <Col offset={1}/>
-                <Col span={22}><Divider type="horizontal" style={{border:'2px solid black'}} /></Col>
-                <Col offset={1}/>
-                <Col offset={1}/>
                 <Col span={22} style={{textAlign:'center'}}>
                     <Tooltip title="피드백 완료 후 완료 요청버튼을 클릭 해주세요!">
                         <Button 
@@ -125,6 +94,7 @@ const feedBackDetailComment = () => {
                         </Button>
                     </Tooltip>
                 </Col>
+                
                 <Col offset={1}/>
             </Col> 
         </>

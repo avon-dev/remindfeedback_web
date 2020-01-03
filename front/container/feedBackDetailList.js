@@ -107,7 +107,7 @@ const feedBackDetailList = ({feedback_id}) => {
 
     return(
         <>  
-            <Col span={12} >
+            <Col span={24} style={{width:"50%"}}>
                 <Col offset={1}/>
                 <Col span={22} style={{textAlign:'right', marginBottom:10}}>
                     <Popover
