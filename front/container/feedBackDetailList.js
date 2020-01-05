@@ -76,12 +76,24 @@ const feedBackDetailList = ({feedback_id}) => {
         }
     }
 
+    const handleUpdate = (e) => {
+        const type = feedbackItem.find((v,i) => parseInt(e.target.id)===parseInt(v.id)).board_category;
+        switch(type){
+            case 0: return setWriteVisible(true);
+            case 1: return setPhotoVisible(true);
+            case 2: return setVideoVisible(true);
+            case 3: return setRecordVisible(true);
+            default: return;
+        }
+      
+    }
+
     const ItemCard = feedbackItem.map((v,i) =>
         <Card 
             key={v.id}
             title={<strong>{v.board_title}</strong>} 
             extra={<div>
-                    <Button id={v.id} type="dashed"><Icon type="edit" style={{ fontSize: '18px', color: '#08c' }} /></Button>  
+                    <Button id={v.id} type="dashed" onClick={handleUpdate}><Icon type="edit" style={{ fontSize: '18px', color: '#08c' }} /></Button>  
                     {/* <Tooltip title="더 자세한 사항을 보려면 More 버튼을 클릭해주세요!"><a href="#">More</a></Tooltip> */}
                    </div>
                    } 
