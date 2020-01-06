@@ -13,10 +13,11 @@ const {Group} = Button;
 const feedBackDetailList = ({feedback_id}) => {
 
     const dispatch = useDispatch();
-    const {feedbackItem,feedback} = useSelector(state=>state.feedback);
+    const {feedbackItem,feedback,message} = useSelector(state=>state.feedback);
 
     const [name, setName] = useState(false);
     const [adviser_uid, setAdviser_uid] = useState('');
+    const [feedBackItemId, setFeedBackItemId] = useState();
     const [images, setImages] = useState([]);
     const [createdAt, setCreatedAt] = useState('');
     const [Visible, setVisible] = useState(false);
@@ -32,6 +33,12 @@ const feedBackDetailList = ({feedback_id}) => {
         // setImages(r);
         // console.log("images",r);
     },[]);
+
+    useEffect(()=>{
+        if(message){
+            alert(message);
+        }
+    },[message&&message])
 
     // Popover 추가하기
     const popUpAdd = () => {
@@ -77,12 +84,13 @@ const feedBackDetailList = ({feedback_id}) => {
     }
 
     const handleUpdate = (e) => {
+        setFeedBackItemId(e.target.id);
         const type = feedbackItem.find((v,i) => parseInt(e.target.id)===parseInt(v.id)).board_category;
         switch(type){
-            case 0: return setWriteVisible(true);
-            case 1: return setPhotoVisible(true);
-            case 2: return setVideoVisible(true);
-            case 3: return setRecordVisible(true);
+            case 0: return setName("TEXT_UPDATE"), setWriteVisible(true);
+            case 1: return setName("PHOTO_UPDATE"), setPhotoVisible(true);
+            case 2: return setName("VIDEO_UPDATE"), setVideoVisible(true);
+            case 3: return setName("RECORD_UPDATE"), setRecordVisible(true);
             default: return;
         }
       
@@ -182,7 +190,8 @@ const feedBackDetailList = ({feedback_id}) => {
                  writeVisible={writeVisible}   
                  writeHandleCancel={writeHandleCancel}
                  name={name}
-                 feedback_id={feedback_id}           
+                 feedback_id={feedback_id}
+                 feedBackItemId={feedBackItemId}           
               />                  
             </div>
             <div>
@@ -190,7 +199,8 @@ const feedBackDetailList = ({feedback_id}) => {
                  photoVisible={photoVisible}   
                  photoHandleCancel={photoHandleCancel}
                  name={name}
-                 feedback_id={feedback_id}              
+                 feedback_id={feedback_id}
+                 feedBackItemId={feedBackItemId}              
               />                  
             </div>
             <div>
@@ -198,7 +208,8 @@ const feedBackDetailList = ({feedback_id}) => {
                  videoVisible={videoVisible}   
                  videoHandleCancel={videoHandleCancel}
                  name={name}
-                 feedback_id={feedback_id}              
+                 feedback_id={feedback_id}
+                 feedBackItemId={feedBackItemId}              
               />                  
             </div>
             <div>
@@ -206,7 +217,8 @@ const feedBackDetailList = ({feedback_id}) => {
                  recordVisible={recordVisible}   
                  recordHandleCancel={recordHandleCancel}
                  name={name}
-                 feedback_id={feedback_id}              
+                 feedback_id={feedback_id}
+                 feedBackItemId={feedBackItemId}              
               />                  
             </div>
         </>

@@ -4,7 +4,7 @@ import { Modal, Layout, Form, Input, Icon, Button, Col, Typography, Row, Upload 
 import { backgroundWhite, backgroundLightBlue} from '../css/Common';
 import {formItemLayout} from '../css/FeedbackDetail';
 import {FRIENDS_PROFILE_ADD_REQUEST} from '../reducers/friends';
-import {FEEDBACK_ITEM_ADD_REQUEST} from '../reducers/feedback';
+import {FEEDBACK_ITEM_ADD_REQUEST,FEEDBACK_ITEM_UPDATE_REQUEST} from '../reducers/feedback';
 import {UPDATE_USER_REQUEST} from '../reducers/user';
 
 const {Content} = Layout;
@@ -21,9 +21,10 @@ const getBase64 = (file) => {
     });
   }
 
-const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id}) => {
+const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, feedBackItemId}) => {
 
     const dispatch = useDispatch();
+    const {feedbackItem} = useSelector(state=>state.feedback);
 
     const [previewVisible, setpreviewVisible] = useState(false);
     const [previewImage, setpreviewImage] = useState('');
@@ -32,6 +33,40 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id})
     const [number, setNumber] = useState([]);
     const [portrait, setPortrait] = useState();
     const [file, setFile] = useState([]);
+
+    useEffect(()=>{
+        if(feedBackItemId){
+            const {board_content, board_title,board_file1,board_file2,board_file3 } 
+            = feedbackItem.find((v,i)=> parseInt(feedBackItemId)===parseInt(v.id));
+
+            let updatePhoto = [board_file1,board_file2,board_file3];
+            // 수동으로 multi-form 데이터 바꾸기 필요 
+            updatePhoto = updatePhoto.map((v,i)=>{
+                return(v?{  
+                  uid:i,
+                  name:v.split('/')[1],
+                  state:'done',
+                  url:`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v}`
+                }
+                :
+                {
+                    uid:"null"
+                });
+            });
+            updatePhoto = updatePhoto.filter((v,i)=>v.uid!=="null");
+            setFile(updatePhoto);
+            setContent(board_content);
+            setTitle(board_title);
+        }
+
+        if(name==="PHOTO"){
+            setContent('');
+            setTitle('');
+            setFile([]);
+        }
+
+    },[feedBackItemId&&feedBackItemId,name&&name]);
+
 
     const handlePreview = async(file) => {
         console.log('handlePreview', file);
@@ -65,6 +100,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id})
             setNumber('1');
             setPortrait(e);
         }else{
+            console.log(e);
             setFile([...file,e]);
         } 
     }
@@ -84,8 +120,9 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id})
 
     const up = <Upload
                     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"         
-                    listType="picture" 
+                    listType="text" 
                     onPreview={handlePreview}
+                    fileList={file.length>=1?file:false}
                     // onChange={handleUpload}
                     previewFile={handlePreviewFile}
                     onRemove={handleRemove}
@@ -129,23 +166,44 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id})
             if(!title){
                 return alert('제목을 입력해 주세요');
             }
-            if(!file){
+            if(!file&&name==="PHOTO"){
                 return alert('사진을 선택해 주세요');
             }
             if(!content){
                 return alert('내용을 입력해 주세요');
             }
+            let check = ['','',''];
+            if(name==="PHOTO_UPDATE"){
+                check = check.map((v,i)=>{
+                    return(
+                        file[i]?
+                        true:false
+                        )}
+                    )
+                
+            };
+                     
             const formData = new FormData();
             file.forEach((v,i)=>formData.append(`file${i+1}`,v));
+            check.forEach((v,i)=>formData.append(`updatefile${i+1}`,v));
             formData.append('board_content',content);
             formData.append('board_title',title);
             formData.append('feedback_id',feedback_id);
-            dispatch({
-                type: FEEDBACK_ITEM_ADD_REQUEST,
-                data:{
-                    formData,name,
-                }
-            });
+            if(name==="PHOTO_UPDATE"){
+                dispatch({
+                    type: FEEDBACK_ITEM_UPDATE_REQUEST,
+                    data:{
+                        formData,name,feedBackItemId
+                    }
+                });
+            }else{
+                dispatch({
+                    type: FEEDBACK_ITEM_ADD_REQUEST,
+                    data:{
+                        formData,name,
+                    }
+                });
+            }
             photoHandleCancel();
         };
     };
@@ -164,7 +222,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id})
                             <strong>취소</strong>
                         </Button>,
                         <Button key="submit" type="primary" size='large' onClick={_onsubmit} style={{width:'100%'}}>
-                            <strong>추가</strong>
+                            {name==="PHOTO_UPDATE"?<strong>수정</strong>:<strong>추가</strong>}
                         </Button>
                     </div>
                 ]}

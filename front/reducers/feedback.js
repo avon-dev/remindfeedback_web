@@ -31,6 +31,10 @@ export const initialState = {
     isAddingFeedbackItem: false, // 피드백아이템 추가 중
     isAddedFeedbackItem: false, // 피드백아이템 추가완료
     AddedFeedbackItemErrorReason: '', // 피드백아이템 추가 실패 사유
+
+    isUpdatingFeedbackItem: false, // 피드백아이템 추가 중
+    isUpdatedFeedbackItem: false, // 피드백아이템 추가완료
+    UpdatedFeedbackItemErrorReason: '', // 피드백아이템 추가 실패 사유
 }
 
 export const FEEDBACK_TUTORIAL_REQUEST = 'FEEDBACK_TUTORIAL_REQUEST'; // 피드백 튜토리얼 시도 중
@@ -60,6 +64,10 @@ export const FEEDBACK_ITEM_READ_FAILURE = 'FEEDBACK_ITEM_READ_FAILURE'; // 피�
 export const FEEDBACK_ITEM_ADD_REQUEST = 'FEEDBACK_ITEM_ADD_REQUEST'; // 피드백 게시물 ADD 시도 중
 export const FEEDBACK_ITEM_ADD_SUCCESS = 'FEEDBACK_ITEM_ADD_SUCCESS'; // 피드백 게시물 ADD 성공
 export const FEEDBACK_ITEM_ADD_FAILURE = 'FEEDBACK_ITEM_ADD_FAILURE'; // 피드백 게시물 ADD 실패
+
+export const FEEDBACK_ITEM_UPDATE_REQUEST = 'FEEDBACK_ITEM_UPDATE_REQUEST'; // 피드백 게시물 UPDATE 시도 중
+export const FEEDBACK_ITEM_UPDATE_SUCCESS = 'FEEDBACK_ITEM_UPDATE_SUCCESS'; // 피드백 게시물 UPDATE 성공
+export const FEEDBACK_ITEM_UPDATE_FAILURE = 'FEEDBACK_ITEM_UPDATE_FAILURE'; // 피드백 게시물 UPDATE 실패
 
 export const FEEDBACK_ITEM_COMPLETE_REQUEST = 'FEEDBACK_ITEM_COMPLETE_REQUEST'; // 피드백 게시물 완료 시도 중
 export const FEEDBACK_ITEM_COMPLETE_SUCCESS = 'FEEDBACK_ITEM_COMPLETE_SUCCESS'; // 피드백 게시물 완료 성공
@@ -297,6 +305,36 @@ export default (state = initialState, action) => {
                 isAddingFeedbackItem:true,
                 isAddedFeedbackItem:false,
                 AddedFeedbackItemErrorReason:action.error,
+            };
+            
+        // 피드백 게시물 UPDATE 
+        case FEEDBACK_ITEM_UPDATE_REQUEST:
+            return{
+                ...state,
+                isUpdatingFeedbackItem:true,
+                isUpdatedFeedbackItem:false,
+            };
+        case FEEDBACK_ITEM_UPDATE_SUCCESS:
+            let updated = state.feedbackItem;
+            if(action.data.success){
+                const index = state.feedbackItem.findIndex((v,i)=>parseInt(v.id)===parseInt(action.data.data.id));
+                state.feedbackItem[index] = {...action.data.data};
+                updated = [...state.feedbackItem];
+                message = action.data.message;
+            }
+            return{
+                ...state,
+                isUpdatingFeedbackItem:true,
+                isUpdatedFeedbackItem:false,
+                feedbackItem:updated,
+                message:message,
+            };
+        case FEEDBACK_ITEM_UPDATE_FAILURE:
+            return{
+                ...state,
+                isUpdatingFeedbackItem:true,
+                isUpdatedFeedbackItem:false,
+                UpdatedFeedbackItemErrorReason:action.error,
             };
 
         // 피드백 게시물 완료 

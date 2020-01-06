@@ -1,20 +1,34 @@
-import React,{useState,useCallback} from 'react';
+import React,{useState,useCallback,useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Layout, Form, Input, Icon, Button, Col, Typography, Row } from 'antd';
 import { backgroundWhite, backgroundLightBlue} from '../css/Common';
 import {formItemLayout} from '../css/FeedbackDetail';
-import {FEEDBACK_ITEM_ADD_REQUEST} from '../reducers/feedback';
+import {FEEDBACK_ITEM_ADD_REQUEST, FEEDBACK_ITEM_UPDATE_REQUEST} from '../reducers/feedback';
 
 const { TextArea } = Input;
 const {Content} = Layout;
 const {Title} = Typography;
 
-const feedBackDetailWrite = ({writeVisible,writeHandleCancel,name,feedback_id}) => {
+const feedBackDetailWrite = ({writeVisible,writeHandleCancel,name,feedback_id,feedBackItemId}) => {
 
     const dispatch = useDispatch();
-    
-    const [board_content, setContents] = useState();
-    const [board_title, setTitle] = useState();
+    const {feedbackItem} = useSelector(state=>state.feedback);
+
+    const [board_content, setContents] = useState('');
+    const [board_title, setTitle] = useState('');
+
+    useEffect(()=>{
+        if(feedBackItemId){
+            const {board_content, board_title} = feedbackItem.find((v,i)=> parseInt(feedBackItemId)===parseInt(v.id));
+            setContents(board_content);
+            setTitle(board_title);
+        }
+
+        if(name==="TEXT"){
+            setContents('');
+            setTitle('');
+        }
+    },[feedBackItemId&&feedBackItemId,name&&name]);
 
     const _onsubmit = useCallback(() => {
         if(!board_title){
@@ -23,12 +37,22 @@ const feedBackDetailWrite = ({writeVisible,writeHandleCancel,name,feedback_id}) 
         if(!board_content){
             return alert('내용을 작성해주세요');
         }
-        dispatch({
-            type:FEEDBACK_ITEM_ADD_REQUEST,
-            data:{
-                board_content,name,feedback_id,board_title 
-            }
-        });
+
+        if(name==="TEXT_UPDATE"){
+            dispatch({
+                type:FEEDBACK_ITEM_UPDATE_REQUEST,
+                data:{
+                    board_content,name,feedBackItemId,board_title 
+                }
+            });
+        }else{
+            dispatch({
+                type:FEEDBACK_ITEM_ADD_REQUEST,
+                data:{
+                    board_content,name,feedback_id,board_title 
+                }
+            });
+        }
         writeHandleCancel();
     },[board_content,board_title]);
 
@@ -54,7 +78,7 @@ const feedBackDetailWrite = ({writeVisible,writeHandleCancel,name,feedback_id}) 
                             <strong>취소</strong>
                         </Button>,
                         <Button key="submit" type="primary" size='large' onClick={_onsubmit} style={{width:'100%'}}>
-                            <strong>추가</strong>
+                            {name==="TEXT_UPDATE"?<strong>수정</strong>:<strong>추가</strong>}
                         </Button>
                     </div>
                 ]}

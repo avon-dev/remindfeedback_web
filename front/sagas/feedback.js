@@ -22,6 +22,9 @@ import {
     FEEDBACK_ITEM_ADD_REQUEST,
     FEEDBACK_ITEM_ADD_SUCCESS,
     FEEDBACK_ITEM_ADD_FAILURE,
+    FEEDBACK_ITEM_UPDATE_REQUEST,
+    FEEDBACK_ITEM_UPDATE_SUCCESS,
+    FEEDBACK_ITEM_UPDATE_FAILURE,
     FEEDBACK_ITEM_COMPLETE_REQUEST,
     FEEDBACK_ITEM_COMPLETE_SUCCESS,
     FEEDBACK_ITEM_COMPLETE_FAILURE,
@@ -89,6 +92,39 @@ function* feedback_Item_Complete(){
 
 function* watchFeedback_Item_Complete() {
     yield takeLatest(FEEDBACK_ITEM_COMPLETE_REQUEST, feedback_Item_Complete);
+};
+
+// Feedback 피드백 게시물 Update
+function feedback_Item_Update_API(data){
+    console.log(data);
+    switch(data.name){
+        case "TEXT_UPDATE": return axios.put(`/board/text/update/${data.feedBackItemId}`,data,{withCredentials:true});
+        case "PHOTO_UPDATE": return axios.put(`/board/picture/update/${data.feedBackItemId}`,data.formData,{withCredentials:true});
+        case "VIDEO_UPDATE": return axios.put('/#');
+        case "RECORD_UPDATE": return axios.put('/#');
+        default: return console.error("에러발생");
+    }
+};
+
+function* feedback_Item_Update(action){
+    try {
+        const result = yield call(feedback_Item_Update_API, action.data);
+        console.log(result.data,"feedback_Item_Update");
+        yield put({
+            type:FEEDBACK_ITEM_UPDATE_SUCCESS,
+            data:result.data,
+        });
+    } catch (e) {
+        console.error(e);
+        yield put({
+            type:FEEDBACK_ITEM_UPDATE_FAILURE,
+            error:e,
+        });
+    }
+};
+
+function* watchFeedback_Item_Update() {
+    yield takeLatest(FEEDBACK_ITEM_UPDATE_REQUEST, feedback_Item_Update);
 };
 
 
@@ -302,6 +338,7 @@ export default function* feedbackSaga(){
         fork(watchFeedback_Delete),
         fork(watchFeedback_Item_Read),
         fork(watchFeedback_Item_Add),
+        fork(watchFeedback_Item_Update),
         fork(watchFeedback_Item_Complete),
         fork(watchFeedback_Item_Comment),
     ]);
