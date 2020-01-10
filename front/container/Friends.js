@@ -1,6 +1,6 @@
 import React, {useState, useCallback, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Input, Icon, Button, Card, Avatar, Popover,Popconfirm } from 'antd';
+import { Row, Col, Input, Icon, Button, Card, Avatar, Popover,Popconfirm,Empty } from 'antd';
 import AddFriends from '../container/addFriends';
 import RequestFriends from '../container/requestFriends';
 import ProfileFriends from '../components/ProfileFriends';
@@ -15,6 +15,7 @@ const { Search } = Input;
 const Friends = () => {
  
     const dispatch = useDispatch();
+    const {friends , message} = useSelector(state=>state.friends)
 
     const [addVisible, setAddVisible] = useState(false);
     const [requestVisible, setRequestVisible] = useState(false);
@@ -22,10 +23,11 @@ const Friends = () => {
     const [profileName, setProfileName] = useState('');
     const [id,setId] = useState('');
 
-    // request server 
     useEffect(()=>{
-
-    },[]);
+      if(message){
+        alert(message);
+      }
+    },[message&&message]);
 
     const title = [
       {
@@ -176,15 +178,27 @@ const Friends = () => {
                         </ButtonGroup>
                     </Col>
                     <Col span={24} style={{marginBottom:15}}>
+                    {!friends?
+                          <Col span={24} style={{marginTop:30}}>
+                            <Empty 
+                            description={
+                                <span>
+                                  <strong>친구가 없습니다.<br/>친구를 등록해 주세요</strong>
+                                </span>
+                              }
+                            />
+                          </Col> 
+                          :
                         <Search
                           placeholder="이메일을 검색하세요"
                           enterButton="검색"
                           size="large"
                           onSearch={handleSearch}
                         />
+                    }
                     </Col>
                     <Col span={24}>
-                        {Item}
+                        {friends&&Item}
                     </Col>
                 </Col>
                 <Col span={6}></Col>

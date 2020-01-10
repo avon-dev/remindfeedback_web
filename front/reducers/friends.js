@@ -1,5 +1,13 @@
 export const initialState = {
+    friends:[],
     
+    isLoadingFriends: false, // 친구 데이터 로드 중
+    isLoadedFriends: false, // 친구 데이터 로드 성공
+    LoadedFriendsErrorReason: '', // 친구 데이터 실패 사유
+
+    isAddingFriends: false, // 친구 데이터 추가 중
+    isAddedFriends: false, // 친구 데이터 추가 성공
+    AddedFriendsErrorReason: '', // 친구 데이터 추가 실패 사유
 }
 
 export const FRIENDS_MAIN_READ_REQUEST = 'FRIENDS_MAIN_READ_REQUEST'; // 친구 메인 창 READ 시도 중
@@ -47,15 +55,21 @@ export default (state = initialState, action) => {
         // 친구 메인 창 READ
         case FRIENDS_MAIN_READ_REQUEST:
             return{
-
+                isLoadingFriends: true, 
+                isLoadedFriends: false,
             }
         case FRIENDS_MAIN_READ_SUCCESS:
             return{
-                
+                isLoadingFriends: false, 
+                isLoadedFriends: true,
+                friends:action.data.success?action.data.data:[],
+                message:action.data.success?action.data.message:'',
             }
         case FRIENDS_MAIN_READ_FAILURE:
             return{
-                
+                isLoadingFriends: false, 
+                isLoadedFriends: false,
+                LoadedFriendsErrorReason:action.error
             }
 
         // 친구 메인 창 SEARCH
@@ -117,15 +131,20 @@ export default (state = initialState, action) => {
         //친구 추가 모달 친구 ADD
         case FRIENDS_ADD_ADD_REQUEST:
             return{
-
+                isAddingFriends: true, 
+                isAddedFriends: false,
             }
         case FRIENDS_ADD_ADD_SUCCESS:
             return{
-                
+                isAddingFriends: false, 
+                isAddedFriends: true,
+                friends:action.data.success?[...state.friends, action.data.data]:state.friends
             }
         case FRIENDS_ADD_ADD_FAILURE:
             return{
-                
+                isAddingFriends: false, 
+                isAddedFriends: false,
+                AddedFriendsErrorReason:action.error
             }
 
         // 친구 요청 모달 READ   

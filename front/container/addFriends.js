@@ -72,10 +72,11 @@ const addFriends = ({addVisible,addHandleOk,addHandleCancel}) => {
         dispatch({
             type:FRIENDS_ADD_ADD_REQUEST,
             data:{
-                email,
+                user_uid:1,
+                nickname:email
             }
         });
-    },[email]);
+    },[email&&email]);
 
     const handleSearch = (e) => {
         setEmail(e.target.value);
@@ -88,7 +89,7 @@ const addFriends = ({addVisible,addHandleOk,addHandleCancel}) => {
                 email,
             }
         });
-    },[email]);
+    },[email&&email]);
 
     return(
         <>
@@ -107,7 +108,7 @@ const addFriends = ({addVisible,addHandleOk,addHandleCancel}) => {
                         <Button key="back" onClick={addHandleCancel} style={{display:'none'}}>
                             <strong>취소</strong>
                         </Button>,
-                        <Button key="submit" type="primary" size='large' style={{width:'100%'}}>
+                        <Button key="submit" type="primary" size='large' onClick={_onsubmit} style={{width:'100%'}}>
                             <strong>친구 요청</strong>
                         </Button>
                     </div>
@@ -115,7 +116,7 @@ const addFriends = ({addVisible,addHandleOk,addHandleCancel}) => {
             >
                 <Content>
                     <Row>
-                        <Form {...formItemLayout} onSubmit={_onsubmit} style={{marginTop:15}} >
+                        <Form {...formItemLayout}  style={{marginTop:15}} >
                             <Form.Item label={<strong>이메일</strong>}>
                                 <Col span={24} >
                                     <Search
@@ -124,7 +125,7 @@ const addFriends = ({addVisible,addHandleOk,addHandleCancel}) => {
                                         enterButton="검색"
                                         value={email}
                                         onChange={handleSearch}
-                                        onClick={handleSearchOk}
+                                        onSearch={handleSearchOk}
                                     />
                                 </Col>
                             </Form.Item>

@@ -33,6 +33,15 @@ import {
     FRIENDS_PROFILE_ADD_FAILURE,
 } from '../reducers/friends';
 
+const dev = process.env.NODE_ENV !== "production";
+const prod = process.env.NODE_ENV === "production";
+
+if(prod){
+    axios.defaults.baseURL = "http://54.180.118.35";
+}else{
+    axios.defaults.baseURL = "http://localhost:8000";
+}
+
 // 친구 프로필 Add
 function friends_Pro_Add_API(data){
     // return axios.post('/#');
@@ -138,15 +147,18 @@ function* watchFriends_Req_Read() {
 
 // 친구 추가 모달 Add
 function friends_Add_Add_API(data){
-    // return axios.post('/#');
+    return axios.post('/friend/create',data,{
+        withCredentials:true
+    });
 };
 
 function* friends_Add_Add(action){
     try {
-        yield delay(2000);
-        yield call(friends_Add_Add_API, action.data);
+        const result = yield call(friends_Add_Add_API, action.data);
+        console.log(result);
         yield put({
             type:FRIENDS_ADD_ADD_SUCCESS,
+            data:result.data
         });
     } catch (e) {
         console.error(e);
@@ -194,10 +206,10 @@ function friends_Add_Read_API(){
 
 function* friends_Add_Read(){
     try {
-        yield delay(2000);
-        yield call(friends_Add_Read_API);
+        const result = yield call(friends_Add_Read_API);
         yield put({
             type:FRIENDS_ADD_READ_SUCCESS,
+            data:result.data
         });
     } catch (e) {
         console.error(e);
@@ -267,15 +279,17 @@ function* watchFriends_Search() {
 
 // 친구 메인창 Read
 function friends_Read_API(){
-    // return axios.get('/#');
+    return axios.get('/friend/allfriend',{
+        withCredentials:true
+    });
 };
 
 function* friends_Read(){
     try {
-        yield delay(2000);
-        yield call(friends_Read_API);
+        const result = yield call(friends_Read_API);
         yield put({
             type:FRIENDS_MAIN_READ_SUCCESS,
+            data:result.data
         });
     } catch (e) {
         console.error(e);

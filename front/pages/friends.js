@@ -5,6 +5,8 @@ import AppFriends from '../container/friends';
 import AppFooter from '../components/AppFooter';
 import { layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
 import { Layout } from 'antd';
+import {FRIENDS_MAIN_READ_REQUEST} from '../reducers/friends';
+import axios from 'axios';
 const { Footer, Content, Sider } = Layout;
 
 const friends = () => {
@@ -27,6 +29,31 @@ const friends = () => {
             
         </>
     );
+};
+
+friends.getInitialProps = async(context) => {
+    console.log("서버냐",context.isServer);
+    if(context.isServer){
+        const cookie = context.req.headers.cookie;
+        axios.defaults.headers.Cookie = cookie;
+        const {feedbackMode} = context.store.getState();
+        const feedbackModes = feedbackMode.feedbackMode;
+        const lastId = 0;
+        context.store.dispatch({
+            type:FEEDBACK_READ_REQUEST,
+            data:{
+                lastId, feedbackModes
+            }
+        });
+        context.store.dispatch({
+            type:FRIENDS_MAIN_READ_REQUEST,
+        });
+        
+    }else{
+        context.store.dispatch({
+            type:FRIENDS_MAIN_READ_REQUEST,
+        });
+    }
 };
 
 export default friends;
