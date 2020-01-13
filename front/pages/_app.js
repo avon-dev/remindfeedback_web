@@ -10,7 +10,7 @@ import reducer from '../reducers';
 import rootSaga from '../sagas';
 import AppHeader from '../components/AppHeader';
 import { FEEDBACK_SUB_READ_REQUEST } from '../reducers/feedbackSubject';
-import {FEEDBACK_READ_REQUEST} from '../reducers/feedback';
+
 
 const RemindFeedback = ({Component, store, pageProps }) => {
     return(

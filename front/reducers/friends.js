@@ -135,6 +135,13 @@ export default (state = initialState, action) => {
                 isAddedFriends: false,
             }
         case FRIENDS_ADD_ADD_SUCCESS:
+            const status = action.data.data;
+            if(status==="1"){
+                // 친구를 요청한 상황
+                
+            }
+
+
             return{
                 isAddingFriends: false, 
                 isAddedFriends: true,

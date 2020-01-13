@@ -6,6 +6,7 @@ import AppFooter from '../components/AppFooter';
 import { layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
 import { Layout } from 'antd';
 import {FRIENDS_MAIN_READ_REQUEST} from '../reducers/friends';
+import {FEEDBACK_READ_REQUEST} from '../reducers/feedback';
 import axios from 'axios';
 const { Footer, Content, Sider } = Layout;
 
