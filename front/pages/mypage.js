@@ -40,6 +40,7 @@ mypage.getInitialProps = async(context) => {
         context.store.dispatch({
             type:LOAD_USER_REQUEST,
         });
+        
     }else{
         context.store.dispatch({
             type:LOAD_USER_REQUEST,

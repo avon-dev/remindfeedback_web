@@ -4,9 +4,7 @@ import { Row, Col, Input, Icon, Button, Card, Avatar, Popover,Popconfirm,Empty }
 import AddFriends from '../container/addFriends';
 import RequestFriends from '../container/requestFriends';
 import ProfileFriends from '../components/ProfileFriends';
-import {FRIENDS_MAIN_SEARCH_REQUEST} from '../reducers/friends';
-import {FRIENDS_MAIN_READ_REQUEST} from '../reducers/friends';
-import {FRIENDS_BLOCK_REQUEST} from '../reducers/friends';
+import {FRIENDS_MAIN_SEARCH_REQUEST, FRIENDS_ADD_READ_REQUEST, FRIENDS_BLOCK_REQUEST, FRIENDS_RQ_READ_REQUEST} from '../reducers/friends';
 
 const ButtonGroup = Button.Group;
 const { Meta } = Card;
@@ -15,12 +13,15 @@ const { Search } = Input;
 const Friends = () => {
  
     const dispatch = useDispatch();
-    const {friends , message} = useSelector(state=>state.friends)
+    const {registerdFriends , message, Add_Modal_isLoadingFriends, RQ_Modal_isLoadingFriends} = useSelector(state=>state.friends)
 
     const [addVisible, setAddVisible] = useState(false);
     const [requestVisible, setRequestVisible] = useState(false);
     const [profileVisible, setProfileVisible] = useState(false);
     const [profileName, setProfileName] = useState('');
+    const [profileEmail, setProfileEmail] = useState('');
+    const [profilePortrait, setProfilePortrait] = useState('');
+    const [profileIntro, setProfileIntro] = useState('');
     const [id,setId] = useState('');
 
     useEffect(()=>{
@@ -72,8 +73,11 @@ const Friends = () => {
     }
 
     // 친구 추가
-    const PopupAddFriends = () => {
-      setAddVisible(true);
+    const PopupAddFriends = async() => {
+      await dispatch({
+        type:FRIENDS_ADD_READ_REQUEST,
+      })
+      await setAddVisible(true);
     }
 
     const addHandleOk = () => {
@@ -85,8 +89,11 @@ const Friends = () => {
     }
 
     // 친구 요청
-    const PopupRequestFriends = () => {
-      setRequestVisible(true);
+    const PopupRequestFriends = async() => {
+      await dispatch({
+        type:FRIENDS_RQ_READ_REQUEST
+      })
+      await setRequestVisible(true);
     }
 
     const requestHandleOk = () => {
@@ -98,10 +105,15 @@ const Friends = () => {
     }
 
     // 프로필 보기
-    const PopupProfile = (e) => {
-      console.log(e.target.name);
-      setProfileName(e.target.name);
-      setProfileVisible(true);
+    const PopupProfile = async(e) => {
+      const {id} = e.target;
+    
+      const {email,nickname,portrait,introduction} = await registerdFriends.find((v,i)=>id===v.user_uid);
+      setProfileName(nickname);
+      setProfileEmail(email);
+      setProfilePortrait(portrait);
+      setProfileIntro(introduction);
+      await setProfileVisible(true);
     }
 
     const profileHandleOk = () => {
@@ -122,39 +134,43 @@ const Friends = () => {
       });
     },[]);
 
-    const Item = title.map((item)=> {
+    const Item = registerdFriends&&registerdFriends.map((v,i)=> {
       return(
-        <Card key={item.name} extra={<Popover
-                          key={item.name}
-                          title={item.name}
+        <Card key={v.user_uid} extra={<Popover
+                          key={v.user_uid}
+                          title={v.nickname}
                           placement="rightBottom"
                           overlayStyle={{textAlign:'center'}}
                           content={
                               <>
-                                  <div id={item.name} style={{display:'flex', justifyContent:'space-around' }}>
+                                  <div id={v.user_uid} style={{display:'flex', justifyContent:'space-around' }}>
                                       <Popconfirm
                                           onConfirm={handleConfirm}
                                           title="정말로 차단하시겠습니까?"  
                                           okText="네"
                                           cancelText="아니오"
                                       >
-                                          <Button key="ban" type="danger" name={item.name} onClick={handleBlock} size="small">차단</Button> 
+                                          <Button key="ban" type="danger" name={v.name} onClick={handleBlock} size="small">차단</Button> 
                                       </Popconfirm>
                                   </div>
                               </>
                           }
                           trigger="click"
                       >
-                          <Button type="link" key={item.name} >
-                              <Icon type="more" key={item.name}/>
+                          <Button type="link" key={v.user_uid} >
+                              <Icon type="more" key={v.user_uid}/>
                           </Button>
                     </Popover> }>
           <Meta
             avatar={
-              <Button onClick={PopupProfile} shape="circle-outline" key={item.name} name={item.name} ><Avatar style={{background:item.color}}>U</Avatar></Button>
+            <Button onClick={PopupProfile} shape="circle-outline" key={v.user_uid} id={v.user_uid} name={v.nickname} >
+              <Avatar src={v.portrait&&`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v.portrait}`}>
+                {!v.portrait&&v.nickname.split('')[0]}
+              </Avatar>
+            </Button>
             }
-            title={item.name}
-            description="Description"
+            title={v.nickname}
+            description={<p>{v.introduction}</p>}
           />
         </Card>
       )
@@ -167,18 +183,18 @@ const Friends = () => {
                 <Col span={12} style={{marginTop:20}}>
                     <Col span={24} style={{textAlign:'right', marginBottom:15}}>
                         <ButtonGroup>
-                          <Button type="primary" size="large" onClick={PopupAddFriends} >
+                          <Button type="primary" size="large" onClick={PopupAddFriends} loading={Add_Modal_isLoadingFriends} >
                             <Icon type="plus" style={{marginRight:3}}></Icon>
                             <strong>친구 추가</strong>
                           </Button>
-                          <Button type="primary" size="large" onClick={PopupRequestFriends} >
+                          <Button type="primary" size="large" onClick={PopupRequestFriends} loading={RQ_Modal_isLoadingFriends}>
                             <Icon type="shrink" style={{marginRight:3}}></Icon>
                             <strong>친구 요청</strong>
                           </Button>
                         </ButtonGroup>
                     </Col>
                     <Col span={24} style={{marginBottom:15}}>
-                    {!friends?
+                    {!registerdFriends||registerdFriends.length<1?
                           <Col span={24} style={{marginTop:30}}>
                             <Empty 
                             description={
@@ -198,7 +214,7 @@ const Friends = () => {
                     }
                     </Col>
                     <Col span={24}>
-                        {friends&&Item}
+                        {registerdFriends&&Item}
                     </Col>
                 </Col>
                 <Col span={6}></Col>
@@ -223,6 +239,9 @@ const Friends = () => {
                   profileHandleOk={profileHandleOk}
                   profileHandleCancel={profileHandleCancel}
                   profileName={profileName}
+                  profileIntro={profileIntro}
+                  profileEmail={profileEmail}
+                  profilePortrait={profilePortrait}
                 />
             </div>
         </>

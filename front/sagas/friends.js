@@ -96,15 +96,25 @@ function* watchFriends_Pro_Read() {
 
 // 친구 요청 모달 Add
 function friends_Req_Add_API(data){
-    // return axios.post('/#');
+    if(data.check==='accept'){
+        return axios.post('/friend/create',data,{
+            withCredentials:true
+        });
+    }else{
+        return axios.put('/friend/reject',data,{
+            withCredentials:true
+        });
+    }
+    
 };
 
 function* friends_Req_Add(action){
     try {
-        yield delay(2000);
-        yield call(friends_Req_Add_API, action.data);
+        const result = yield call(friends_Req_Add_API, action.data);
+        console.log(result.data,'친구요청모달 추가');
         yield put({
             type:FRIENDS_RQ_ADD_SUCCESS,
+            data:result.data
         });
     } catch (e) {
         console.error(e);
@@ -121,15 +131,18 @@ function* watchFriends_Req_Add() {
 
 // 친구 요청 모달 Read
 function friends_Req_Read_API(){
-    // return axios.get('/#');
+    return axios.get('/friend/allrequest/receive',{
+        withCredentials:true
+    });
 };
 
 function* friends_Req_Read(){
     try {
-        yield delay(2000);
-        yield call(friends_Req_Read_API);
+        const result = yield call(friends_Req_Read_API);
+        console.log(result.data,"친구요청모달Read");
         yield put({
             type:FRIENDS_RQ_READ_SUCCESS,
+            data:result.data,
         });
     } catch (e) {
         console.error(e);
@@ -155,7 +168,6 @@ function friends_Add_Add_API(data){
 function* friends_Add_Add(action){
     try {
         const result = yield call(friends_Add_Add_API, action.data);
-        console.log(result);
         yield put({
             type:FRIENDS_ADD_ADD_SUCCESS,
             data:result.data
@@ -175,15 +187,18 @@ function* watchFriends_Add_Add() {
 
 // 친구 추가 모달 Search
 function friends_Add_Search_API(data){
-    // return axios.get('/#');
+    return axios.post('/friend/search',data,{
+        withCredentials:true
+    });
 };
 
 function* friends_Add_Search(action){
     try {
-        yield delay(2000);
-        yield call(friends_Add_Search_API, action.data);
+        const result = yield call(friends_Add_Search_API, action.data);
+        console.log(result,"Search");
         yield put({
             type:FRIENDS_ADD_SEARCH_SUCCESS,
+            data: result.data,
         });
     } catch (e) {
         console.error(e);
@@ -201,7 +216,9 @@ function* watchFriends_Add_Search() {
 
 // 친구 추가 모달 Read
 function friends_Add_Read_API(){
-    // return axios.get('/#');
+    return axios.get('/friend/allrequest/send', {
+        withCredentials:true,
+    });
 };
 
 function* friends_Add_Read(){

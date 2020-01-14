@@ -8,7 +8,7 @@ import AppPhoto from '../container/feedBackPhoto';
 const {Text,Title} = Typography;
 const {Content} = Layout;
 
-const ProfileFriends = ({profileVisible,profileHandleCancel,profileName}) => {
+const ProfileFriends = ({profileVisible,profileHandleCancel,profileName,profileIntro,profileEmail,profilePortrait}) => {
     
     
 
@@ -50,8 +50,10 @@ const ProfileFriends = ({profileVisible,profileHandleCancel,profileName}) => {
                     <Row style={layoutProfile}>
                         <Col span={24} style={{textAlign:'center'}}>
                             <Empty
-                                image={<Avatar style={{width: "20vh", height:'20vh', marginTop:15}}>
-                                          <Icon type="user" style={{fontSize: "20vh"}} />
+                                image={<Avatar style={{width: "20vh", height:'20vh', marginTop:15}}
+                                            src={profilePortrait&&`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${profilePortrait}`}
+                                        >
+                                        {!profilePortrait&&<span style={{fontSize:100, textAlign:"center"}}>{profileName.split('')[0]}</span>}
                                        </Avatar>
                                         }   
                             >
@@ -64,10 +66,10 @@ const ProfileFriends = ({profileVisible,profileHandleCancel,profileName}) => {
                             <Text style={{color:"#000000"}}><strong>{profileName}</strong></Text>
                         </Col>
                         <Col span={24} style={{textAlign:'center', marginTop:5}}>
-                            <Text style={{color:"#000000"}}><strong>test@naver.com</strong></Text>
+                            <Text style={{color:"#000000"}}><strong>{profileEmail}</strong></Text>
                         </Col>
                         <Col span={24} style={{textAlign:'center', marginTop:10}}>
-                            <Text style={{color:"#000000"}}>상태메시지입니다.</Text>
+                            <Text style={{color:"#000000"}}>{profileIntro}</Text>
                         </Col>
                     </Row>
                     <Row>

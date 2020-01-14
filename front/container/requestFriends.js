@@ -1,6 +1,6 @@
 import React,{useCallback,useState,useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal, Layout, Form, Input, Icon, Button, Col, Typography, Row, Divider, Table, Pagination  } from 'antd';
+import { Modal, Layout, Form, Input, Icon, Button, Col, Typography, Row, Divider, Table, Pagination, Empty  } from 'antd';
 import {formItemLayout} from '../css/Friends';
 import {FRIENDS_RQ_ADD_REQUEST} from '../reducers/friends';
 
@@ -12,8 +12,7 @@ const {Search} = Input;
 const requestFriends = ({requestVisible,requestHandleOk,requestHandleCancel}) => {
 
     const dispatch = useDispatch();
-
-    const [email,setEmail] =  useState('');
+    const {receivedFriends} = useSelector(state=>state.friends);
 
     const columns = [
         {
@@ -41,47 +40,47 @@ const requestFriends = ({requestVisible,requestHandleOk,requestHandleCancel}) =>
             render: ing => (
                 <>
                     <Group>
-                        <Button type="primary" onClick={_onsubmit}>수락</Button>
-                        <Button type="danger">{ing}</Button>
+                        <Button type="primary" name="accept" id={ing} onClick={_onsubmit}>수락</Button>
+                        <Button type="danger" name="reject" id={ing} onClick={_onsubmit}>거절</Button>
                     </Group>
                 </>
             )
           },
         ]
 
-        const data = [
-            {
-              key: '1',
-              number: '1',
-              name: 'AVON',
-              email: 'test@naver.com',
-              ing:'거절'
-            },
-            {
-              key: '2',
-              number: '2',
-              name: '운동',
-              email: 'test1@naver.com',
-              ing:'거절'
-            },
-            {
-              key: '3',
-              number: '3',
-              name: "Test",
-              email: 'test2@naver.com',
-              ing:'거절'
-            },
-        ];
-
+        const data = receivedFriends&&receivedFriends.map((v,i)=>{
+            return(
+                {
+                    key: v.user_uid,
+                    number: i+1,
+                    name: v.nickname,
+                    email: v.email,
+                    ing:v.user_uid,
+                  }
+            )
+        })
+            
     const _onsubmit = useCallback((e) => {
-        console.log(e)
-        dispatch({
-            type:FRIENDS_RQ_ADD_REQUEST,
-            data:{
-                email,
-            }
-        });
-    },[email]);
+        const check = e.target.name;
+        const user_uid = e.target.id;
+        if(check==='accept'){
+            // 수락
+            dispatch({
+                type:FRIENDS_RQ_ADD_REQUEST,
+                data:{
+                    check,user_uid
+                }
+            })
+        }else{
+            // 거절
+            dispatch({
+                type:FRIENDS_RQ_ADD_REQUEST,
+                data:{
+                    check,user_uid
+                }
+            })
+        }
+    })
 
     return(
         <>
@@ -113,11 +112,22 @@ const requestFriends = ({requestVisible,requestHandleOk,requestHandleCancel}) =>
                                 <Text><strong>나에게 온 친구 요청 목록</strong></Text>
                                 <Divider style={{border:'#000000 solid 1px',marginTop:10}} />     
                             </Col>
-                        <Form {...formItemLayout} style={{marginTop:15}} >
+                            {!receivedFriends||receivedFriends.length<1
+                            ?
+                            <Col span={24} style={{margin:1}}>
+                                <Empty 
+                                description={
+                                    <span>
+                                    <strong>요청을 받은 친구가 없습니다.</strong>
+                                    </span>
+                                }
+                                />
+                            </Col> 
+                            :
                             <Col span={24}>
                                 <Table columns={columns} dataSource={data} pagination={<Pagination style={{textAlign:'center'}} />} />
                             </Col>
-                        </Form>
+                            } 
                     </Row>
                 </Content>
             </Modal>
