@@ -7,7 +7,7 @@ import {FEEDBACK_DELETE_REQUEST, FEEDBACK_UPDATE_REQUEST} from '../reducers/feed
 import UpdateFeedback from '../container/addFeedback';
 const {Meta} = Card;
 
-const setFeedbackContents = ({myFeedback,inProgress}) => {
+const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
 
     const dispatch = useDispatch();
     const { subject } = useSelector(state=> state.feedbackSubject);
@@ -18,6 +18,9 @@ const setFeedbackContents = ({myFeedback,inProgress}) => {
     const [feedback_adviser_uid, setFeedback_adviser_uid] = useState();
     const [feedback_write_date, setFeedback_write_date] = useState();
     const [category_title, setCategory_title] = useState();
+    const [category_id, setCategory_id] = useState();
+    const [code, setCode] = useState(false);
+    const [forall, setForall] = useState(false);
     const [filteredFeedback, setMyfeedback] = useState([]);
     const [visible, setVisible] = useState();
 
@@ -28,12 +31,86 @@ const setFeedbackContents = ({myFeedback,inProgress}) => {
     },[isUpdatedFeedback&&isUpdatedFeedback]);
 
     useEffect(()=>{
+      if(categoryId){
+
+        if(categoryId==='0'){
+          setCategory_id(categoryId)
+          if(forall){
+            setMyfeedback(myFeedback.filter((v,i)=>v.complete===true)); 
+            // setForall(false);
+            return
+          }else{
+            setMyfeedback(myFeedback.filter((v,i)=>v.complete===false));
+            // setForall(true);
+            return
+          }  
+        }
+
+        setCategory_id(categoryId)
+        if(inProgress){
+          //진행완료
+          if(categoryId===category_id){
+            setMyfeedback(filteredFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId)))
+          }else{
+            const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId));
+            const j = r.filter((v,i)=>v.complete===true)
+            setMyfeedback(j)
+          }
+        }else{
+          // 진행중
+          if(categoryId===category_id){
+            setMyfeedback(filteredFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId)))
+          }else{
+            const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId));
+            const j = r.filter((v,i)=>v.complete===false)
+            setMyfeedback(j)
+            setCode(true)
+          }
+        }
+       
+      }
+    },[categoryId&&categoryId]);
+
+    useEffect(()=>{
+
+      if(category_id==='0'){
+        if(inProgress){
+          setMyfeedback(myFeedback.filter((v,i)=>v.complete===true)); 
+          return
+        }else{
+          setMyfeedback(myFeedback.filter((v,i)=>v.complete===false));
+          return
+        }  
+      }
+
        if(inProgress){
-         setMyfeedback(myFeedback.filter((v,i)=>v.complete===true));
+         //진행완료
+         if(code){
+          const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(category_id));
+          const j = r.filter((v,i)=>v.complete===true)
+          setMyfeedback(j)
+         }else{
+          setMyfeedback(myFeedback.filter((v,i)=>v.complete===true));
+         }
+
+         setForall(true)
+         
        }else{
-        setMyfeedback(myFeedback.filter((v,i)=>v.complete===false));
+         //진행중
+         if(code){
+          const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(category_id));
+          const j = r.filter((v,i)=>v.complete===false)
+          setMyfeedback(j)
+         }else{
+          setMyfeedback(myFeedback.filter((v,i)=>v.complete===false));
+         }
+         setForall(false)
        }
     },[inProgress&&inProgress]);
+
+    useEffect(()=>{
+      setMyfeedback(myFeedback.filter((v,i)=>v.complete===false));
+    },[])
 
     const setCategory = (val) => {
         const index = subject.findIndex((v,i) => parseInt(v.category_id)===parseInt(val));

@@ -16,6 +16,8 @@ const setFeedback = ({myFeedback}) => {
     const { feedback } = useSelector(state=> state.feedback);
 
     const [inProgress, setInProgress] = useState(false);
+    const [categoryId, setCategoryId] = useState(0);
+    const [categoryName, setCategoryName] = useState('주제선택');
     
 
     useEffect(()=>{
@@ -29,9 +31,20 @@ const setFeedback = ({myFeedback}) => {
         setInProgress(!inProgress);
     }
 
+    const onClickSubject = (e) => {
+        setCategoryId(e.item.props.id);
+        if(e.item.props.id==='0'){
+            setCategoryName('주제선택');
+        }else{
+            setCategoryName(subject.find((v,i)=>v.category_id===e.item.props.id).category_title);
+        }
+        
+    }
+
     const mainItem = <SetFeedbackContents
                         myFeedback={myFeedback}
-                        inProgress={inProgress}    
+                        inProgress={inProgress}
+                        categoryId={categoryId}    
                     />
 
     const filter =  myFeedback.length>=1?
@@ -50,9 +63,14 @@ const setFeedback = ({myFeedback}) => {
                     <div></div>
          
     const menu = subject.length>=1?
-                    <Menu>  
+                    <Menu>
+                        <Menu.Item key='all' onClick={onClickSubject} id='0'>
+                                <div>
+                                    <strong>주제선택</strong>
+                                </div>
+                        </Menu.Item>  
                         {subject.map((v,i)=>
-                            <Menu.Item key={v.category_id+v.category_title}>
+                            <Menu.Item key={v.category_id+v.category_title}  onClick={onClickSubject} id={v.category_id}>
                                 <div style={{color:v.category_color}}>
                                     <strong>{v.category_title}</strong>
                                 </div>
@@ -63,11 +81,12 @@ const setFeedback = ({myFeedback}) => {
                     <div></div>
 
     const subjects = subject.length>=1?
-                    <Dropdown overlay={menu}>
+                    <Dropdown overlay={menu} >
                         <Button 
+                           
                             style={subjectBtn}
                             size='large'
-                        > <strong>주제선택</strong> <Icon type="down" />
+                        > <strong>{categoryName}</strong> <Icon type="down" />
                         </Button>
                     </Dropdown>    
                     :
