@@ -7,7 +7,7 @@ import {FEEDBACK_DELETE_REQUEST, FEEDBACK_UPDATE_REQUEST} from '../reducers/feed
 import UpdateFeedback from '../container/addFeedback';
 const {Meta} = Card;
 
-const setFeedbackContents = ({myFeedback}) => {
+const setFeedbackContents = ({myFeedback,inProgress}) => {
 
     const dispatch = useDispatch();
     const { subject } = useSelector(state=> state.feedbackSubject);
@@ -18,6 +18,7 @@ const setFeedbackContents = ({myFeedback}) => {
     const [feedback_adviser_uid, setFeedback_adviser_uid] = useState();
     const [feedback_write_date, setFeedback_write_date] = useState();
     const [category_title, setCategory_title] = useState();
+    const [filteredFeedback, setMyfeedback] = useState([]);
     const [visible, setVisible] = useState();
 
     useEffect(()=>{
@@ -26,6 +27,13 @@ const setFeedbackContents = ({myFeedback}) => {
         }
     },[isUpdatedFeedback&&isUpdatedFeedback]);
 
+    useEffect(()=>{
+       if(inProgress){
+         setMyfeedback(myFeedback.filter((v,i)=>v.complete===true));
+       }else{
+        setMyfeedback(myFeedback.filter((v,i)=>v.complete===false));
+       }
+    },[inProgress&&inProgress]);
 
     const setCategory = (val) => {
         const index = subject.findIndex((v,i) => parseInt(v.category_id)===parseInt(val));
@@ -79,8 +87,8 @@ const setFeedbackContents = ({myFeedback}) => {
     return(
         <>
         {
-           myFeedback.length>=1?
-           myFeedback.map((v,i)=> 
+           filteredFeedback.length>=1?
+           filteredFeedback.map((v,i)=> 
               <Card
               // title={<div style={{background:'#DCDCDC', padding:0, margin:0}}>
               // {<strong>{setCategory(v.category)}</strong>}</div>}

@@ -120,6 +120,7 @@ function feedback_Sub_Read_API(){
 
 function* feedback_Sub_Read(){
     try {
+        yield delay(100);
         const result = yield call(feedback_Sub_Read_API);
         yield put({
             type:FEEDBACK_SUB_READ_SUCCESS,

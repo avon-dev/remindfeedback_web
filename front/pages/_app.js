@@ -10,7 +10,7 @@ import reducer from '../reducers';
 import rootSaga from '../sagas';
 import AppHeader from '../components/AppHeader';
 import { FEEDBACK_SUB_READ_REQUEST } from '../reducers/feedbackSubject';
-
+import {FEEDBACK_READ_REQUEST} from '../reducers/feedback';
 
 const RemindFeedback = ({Component, store, pageProps }) => {
     return(
@@ -31,12 +31,21 @@ RemindFeedback.propTypes = {
 RemindFeedback.getInitialProps = async(context) => {
     const { ctx, Component } = context;
     let pageProps = {};
+    const {feedbackMode} = ctx.store.getState();
+    const feedbackModes = feedbackMode.feedbackMode;
+    const lastId = 0;
     const cookie = ctx.isServer? ctx.req.headers.cookie:'';
     if(ctx.isServer&&cookie){
         // 서버사이드 렌더링
         axios.defaults.headers.Cookie = cookie;
     }
     if(cookie!==''){
+        ctx.store.dispatch({
+            type:FEEDBACK_READ_REQUEST,
+            data:{
+                lastId, feedbackModes
+            }
+        });
         ctx.store.dispatch({
             type:FEEDBACK_SUB_READ_REQUEST,
         });

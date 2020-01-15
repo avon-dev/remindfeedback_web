@@ -1,10 +1,16 @@
 import React, {useState, useCallback, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Input, Icon, Button, Card, Avatar, Popover,Popconfirm,Empty } from 'antd';
+import { Row, Col, Input, Icon, Button, Card, Avatar, Popover,Popconfirm,Empty,AutoComplete  } from 'antd';
 import AddFriends from '../container/addFriends';
 import RequestFriends from '../container/requestFriends';
 import ProfileFriends from '../components/ProfileFriends';
-import {FRIENDS_MAIN_SEARCH_REQUEST, FRIENDS_ADD_READ_REQUEST, FRIENDS_BLOCK_REQUEST, FRIENDS_RQ_READ_REQUEST} from '../reducers/friends';
+import {FRIENDS_MAIN_SEARCH_REQUEST, 
+        FRIENDS_ADD_READ_REQUEST, 
+        FRIENDS_BLOCK_REQUEST, 
+        FRIENDS_RQ_READ_REQUEST, 
+        FRIENDS_MAIN_READ_REQUEST,
+        FRIENDS_SEARCH_LOCAL
+      } from '../reducers/friends';
 
 const ButtonGroup = Button.Group;
 const { Meta } = Card;
@@ -13,7 +19,7 @@ const { Search } = Input;
 const Friends = () => {
  
     const dispatch = useDispatch();
-    const {registerdFriends , message, Add_Modal_isLoadingFriends, RQ_Modal_isLoadingFriends} = useSelector(state=>state.friends)
+    const {registerdFriends , message, Add_Modal_isLoadingFriends, RQ_Modal_isLoadingFriends, RQ_Modal_isAddedFriends} = useSelector(state=>state.friends)
 
     const [addVisible, setAddVisible] = useState(false);
     const [requestVisible, setRequestVisible] = useState(false);
@@ -22,7 +28,17 @@ const Friends = () => {
     const [profileEmail, setProfileEmail] = useState('');
     const [profilePortrait, setProfilePortrait] = useState('');
     const [profileIntro, setProfileIntro] = useState('');
+    const [nickNameList, setNicknameList] = useState([]); 
+    const [searchValue, setSearchValue] = useState('');
     const [id,setId] = useState('');
+
+    useEffect(()=>{
+      if(RQ_Modal_isAddedFriends){
+        dispatch({
+          type:FRIENDS_MAIN_READ_REQUEST,
+      });
+      }
+    },[RQ_Modal_isAddedFriends&&RQ_Modal_isAddedFriends]);
 
     useEffect(()=>{
       if(message){
@@ -30,34 +46,12 @@ const Friends = () => {
       }
     },[message&&message]);
 
-    const title = [
-      {
-        name:'최종수',
-        color:'#f56a00'
-      },
-      {
-        name:'권기현',
-        color:'#7265e6'
-      },
-      {
-        name:'구지운',
-        color:'#ffbf00'
-      },
-      {
-        name:'최지석',
-        color:'#00a2ae'
-      },
-      {
-        name:'최유연',
-        color:'#DEB887'
-      },
-      {
-        name:'김상초',
-        color:'#7FFF00'
-      },
-    ];
- 
-    
+    useEffect(()=>{
+      if(registerdFriends){
+        setNicknameList(registerdFriends.map((v,i)=>v.nickname));
+      }
+    },[registerdFriends&&registerdFriends]);
+
     // 친구 차단
     const handleConfirm = useCallback(() => {
       dispatch({
@@ -125,14 +119,23 @@ const Friends = () => {
     }
 
     // 친구 검색
-    const handleSearch = useCallback((value) => {
-      dispatch({
-        type: FRIENDS_MAIN_SEARCH_REQUEST,
-        data:{
-          value,
-        }
-      });
+    const handleSearch = useCallback((v) => {
+      setSearchValue(v);
     },[]);
+
+    const onClickSearch = () => {
+      
+      if(!searchValue){
+        dispatch({
+          type:FRIENDS_MAIN_READ_REQUEST,
+        })
+      }
+
+      dispatch({
+        type:FRIENDS_SEARCH_LOCAL,
+        data:searchValue
+      })
+    }
 
     const Item = registerdFriends&&registerdFriends.map((v,i)=> {
       return(
@@ -205,12 +208,31 @@ const Friends = () => {
                             />
                           </Col> 
                           :
-                        <Search
-                          placeholder="이메일을 검색하세요"
+                        <AutoComplete
+                          placeholder="닉네임을 검색하세요"
                           enterButton="검색"
                           size="large"
+                          dataSource={nickNameList}
+                          style={{width:"100%"}}
                           onSearch={handleSearch}
-                        />
+                          filterOption={(inputValue, option) =>
+                            option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                          }
+                        >
+                        <Input
+                            suffix={
+                              <Button
+                                className="search-btn"
+                                style={{ marginRight: -12 }}
+                                size="large"
+                                type="primary"
+                                onClick={onClickSearch}
+                              >
+                                <Icon type="search" />
+                              </Button>
+                            }
+                        />  
+                        </AutoComplete>  
                     }
                     </Col>
                     <Col span={24}>

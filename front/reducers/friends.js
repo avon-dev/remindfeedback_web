@@ -29,6 +29,8 @@ export const initialState = {
     RQ_Modal_AddedFriendsErrorReason: '', // 친구 요청 모달 데이터 업데이트 실패 사유
 }
 
+export const FRIENDS_SEARCH_LOCAL = 'FRIENDS_SEARCH_LOCAL'; // 친구 검색 로컬
+
 export const FRIENDS_MAIN_READ_REQUEST = 'FRIENDS_MAIN_READ_REQUEST'; // 친구 메인 창 READ 시도 중
 export const FRIENDS_MAIN_READ_SUCCESS = 'FRIENDS_MAIN_READ_SUCCESS'; // 친구 메인 창 READ 성공
 export const FRIENDS_MAIN_READ_FAILURE = 'FRIENDS_MAIN_READ_FAILURE'; // 친구 메인 창 READ 실패
@@ -269,7 +271,21 @@ export default (state = initialState, action) => {
         case FRIENDS_PROFILE_ADD_FAILURE:
             return{
                 ...state,
-            }     
+            } 
+            
+        case FRIENDS_SEARCH_LOCAL:
+            let searchedFriend = state.registerdFriends;
+            let messages = ""
+            if(action.data){
+                const result = state.registerdFriends.filter((v,i)=>v.nickname===action.data)
+                result.length>=1?searchedFriend=result:messages="존재하지 않습니다."; 
+            }
+            
+            return{
+                ...state,
+                registerdFriends:searchedFriend,
+                message:messages
+            }      
         default: 
             return state;
     }

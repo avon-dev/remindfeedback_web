@@ -1,6 +1,6 @@
 export const initialState = {
     feedbackMode:false,
-
+    status:'progress',
     feedback:{},
     feedbackItem:[],
 
@@ -36,6 +36,8 @@ export const initialState = {
     isUpdatedFeedbackItem: false, // 피드백아이템 추가완료
     UpdatedFeedbackItemErrorReason: '', // 피드백아이템 추가 실패 사유
 }
+
+export const FEEDBACK_PROGRESS_OR_COMPLETE = 'FEEDBACK_PROGRESS_OR_COMPLETE'; // 피드백 진행 중 or 진행완료 필터
 
 export const FEEDBACK_TUTORIAL_REQUEST = 'FEEDBACK_TUTORIAL_REQUEST'; // 피드백 튜토리얼 시도 중
 export const FEEDBACK_TUTORIAL_SUCCESS = 'FEEDBACK_TUTORIAL_SUCCESS'; // 피드백 튜토리얼 성공
@@ -79,6 +81,18 @@ export const FEEDBACK_ITEM_COMMENT_FAILURE = 'FEEDBACK_ITEM_COMMENT_FAILURE'; //
 
 export default (state = initialState, action) => {
     switch(action.type){
+        // 피드백 진행 중 or 진행완료 필터        
+        case FEEDBACK_PROGRESS_OR_COMPLETE:
+            
+            if(action.data==='progress'){
+
+            }else{
+                
+            }
+            return{
+                ...state,
+                
+            };
 
         // 피드백 튜토리얼 
         case FEEDBACK_TUTORIAL_REQUEST:
@@ -109,16 +123,17 @@ export default (state = initialState, action) => {
                 isLoadedFeedback:false,
                 feedbackMode:action.data.feedbackModes,
                 lastId:action.data.lastId,
-                // hasMoreFeedback: action.lastId?state.hasMoreFeedback:true,
+                status:action.data.status&&action.data.status
             };
         case FEEDBACK_READ_SUCCESS:
-            let added = {};
+            let added = [];
             let hasMore = true;
             if(parseInt(state.lastId)===0){
                 // init feedback_read
                 if(!state.feedbackMode){
                     // 내 피드백
                     added = action.data.data;
+                    
                 }else{
                     // 요청된 피드백
                 }
@@ -126,8 +141,7 @@ export default (state = initialState, action) => {
                 // 인피니티 스크롤링 feedback_read
                 if(!state.feedbackMode){
                     // 내 피드백
-                   
-                    const myFeedbackadded = action.data.data.myFeedback;
+                    let myFeedbackadded = action.data.data.myFeedback;
                     if(myFeedbackadded.length === 0){
                         added = state.feedback;
                     }else{

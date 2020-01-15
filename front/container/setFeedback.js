@@ -3,14 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Col, Card,Icon, message, Menu, Dropdown, Button, Breadcrumb,Typography } from 'antd';
 import { subjectBtn } from '../css/Main';
 
+import {FEEDBACK_PROGRESS_OR_COMPLETE} from '../reducers/feedback';
 import SetFeedbackContents from './setFeedbackContents';
 
 const {Title} = Typography;
 
 const setFeedback = ({myFeedback}) => {
 
-    
+    const dispatch = useDispatch();
     const { subject } = useSelector(state=> state.feedbackSubject);
+    const { feedbackMode } = useSelector(state=> state.feedbackMode);
     const { feedback } = useSelector(state=> state.feedback);
 
     const [inProgress, setInProgress] = useState(false);
@@ -23,12 +25,13 @@ const setFeedback = ({myFeedback}) => {
     },[feedback.message&&feedback.message]);
 
 
-    const handleFilter = () => {
+    const handleFilter = (e) => {
         setInProgress(!inProgress);
     }
 
     const mainItem = <SetFeedbackContents
-                        myFeedback={myFeedback}    
+                        myFeedback={myFeedback}
+                        inProgress={inProgress}    
                     />
 
     const filter =  myFeedback.length>=1?
@@ -71,19 +74,21 @@ const setFeedback = ({myFeedback}) => {
                     <div></div>
 
     const progress = myFeedback.length>=1?
-            inProgress?
+            !inProgress?
             <div>
                 <Button
                     onClick={handleFilter}
+                    name="progress"
                     type="primary"
                     icon="loading"
                     shape="round"
-                ><strong> 진행중</strong></Button>
+                ><strong > 진행중</strong></Button>
             </div>
             :
             <div>
                 <Button
                     onClick={handleFilter}
+                    name="complete"
                     type="primary"
                     icon="check"
                     shape="round"
@@ -101,7 +106,7 @@ const setFeedback = ({myFeedback}) => {
                 {subjects}
             </Col>
             <Col span={24} style={{marginTop:20, textAlign:'right'}}> 
-               {filter} 
+               {/* {filter}  */}
             </Col>
             {progress} 
             <div>

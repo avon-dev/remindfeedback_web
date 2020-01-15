@@ -122,7 +122,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
                     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"         
                     listType="text" 
                     onPreview={handlePreview}
-                    fileList={file.length>=1?file:false}
+                    // fileList={file.length>=1?file:false}
                     // onChange={handleUpload}
                     previewFile={handlePreviewFile}
                     onRemove={handleRemove}
