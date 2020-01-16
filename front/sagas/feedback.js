@@ -31,7 +31,11 @@ import {
     FEEDBACK_ITEM_COMMENT_REQUEST,
     FEEDBACK_ITEM_COMMENT_SUCCESS,
     FEEDBACK_ITEM_COMMENT_FAILURE,
+    FEEDBACK_ITEM_COMMENT_ADD_REQUEST,
+    FEEDBACK_ITEM_COMMENT_ADD_SUCCESS,
+    FEEDBACK_ITEM_COMMENT_ADD_FAILURE,
 } from '../reducers/feedback';
+import { FEEDBACK_SUB_READ_REQUEST } from '../reducers/feedbackSubject';
 
 import {LOG_IN_SUCCESS} from '../reducers/user';
 
@@ -44,17 +48,50 @@ if(prod){
     axios.defaults.baseURL = "http://localhost:8000";
 }
 
-// Feedback 피드백 게시물 댓글 Read
-function feedback_Item_Comment_API(){
-    // return axios.get('/#');
+
+// Feedback 피드백 게시물 댓글 Add
+function feedback_Item_Add_Comment_API(data){
+    return axios.post('/comment/create',data,{
+        withCredentials:true
+    });
 };
 
-function* feedback_Item_Comment(){
+function* feedback_Item_Add_Comment(action){
     try {
-        yield delay(2000);
-        yield call(feedback_Item_Comment_API);
+        const result = yield call(feedback_Item_Add_Comment_API, action.data);
+        console.log(result.data);
+        yield put({
+            type:FEEDBACK_ITEM_COMMENT_ADD_SUCCESS,
+            data:result.data,
+        });
+    } catch (e) {
+        console.error(e);
+        yield put({
+            type:FEEDBACK_ITEM_COMMENT_ADD_FAILURE,
+            error:e,
+        });
+    }
+};
+
+function* watchFeedback_Item_Add_Comment() {
+    yield takeLatest(FEEDBACK_ITEM_COMMENT_ADD_REQUEST, feedback_Item_Add_Comment);
+};
+
+
+// Feedback 피드백 게시물 댓글 Read
+function feedback_Item_Comment_API(data){
+    return axios.get(`/comment/selectall/${data.board_id?data.board_id:data}`,{
+        withCredentials:true
+    });
+};
+
+function* feedback_Item_Comment(action){
+    try {
+        const result = yield call(feedback_Item_Comment_API, action.data);
+        console.log(result.data);
         yield put({
             type:FEEDBACK_ITEM_COMMENT_SUCCESS,
+            data:result.data,
         });
     } catch (e) {
         console.error(e);
@@ -171,11 +208,17 @@ function feedback_Item_Read_API(data){
 function* feedback_Item_Read(action){
     try {
         const result = yield call(feedback_Item_Read_API, action.data);
-        console.log(result.data,"feedback_Item_Read");
+        console.log(result,"feedback_Item_Read");
         yield put({
             type:FEEDBACK_ITEM_READ_SUCCESS,
             data:result.data,
         });
+        if(yield action.data.lastid===0){
+            yield put({
+                type: FEEDBACK_ITEM_COMMENT_REQUEST,
+                data: result.data.data[0].id,
+            });
+        }
     } catch (e) {
         console.error(e);
         yield put({
@@ -272,7 +315,6 @@ function* watchFeedback_Add(){
 
 // Feedback 메인화면 Read
 function feedback_Read_API(data){
-    
     return axios.get(`/feedback/all/${data.lastId}`,{
         withCredentials:true
     });
@@ -281,7 +323,6 @@ function feedback_Read_API(data){
 function* feedback_Read(action){
     try {
         const result = yield call(feedback_Read_API, action.data);
-        console.log("result",result.data);
         yield put({
             type:FEEDBACK_READ_SUCCESS,
             data:result.data,
@@ -290,6 +331,7 @@ function* feedback_Read(action){
             type:LOG_IN_SUCCESS,
             data:result.data.data.user,
         });
+        
     } catch (e) {
         yield put({
             type:FEEDBACK_READ_FAILURE,
@@ -341,5 +383,6 @@ export default function* feedbackSaga(){
         fork(watchFeedback_Item_Update),
         fork(watchFeedback_Item_Complete),
         fork(watchFeedback_Item_Comment),
+        fork(watchFeedback_Item_Add_Comment),
     ]);
 }

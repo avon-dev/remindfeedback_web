@@ -3,6 +3,7 @@ export const initialState = {
     status:'progress',
     feedback:{},
     feedbackItem:[],
+    feedbackComment:[],
 
     isAdddingFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 중
     isAddedFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 완료
@@ -35,9 +36,15 @@ export const initialState = {
     isUpdatingFeedbackItem: false, // 피드백아이템 추가 중
     isUpdatedFeedbackItem: false, // 피드백아이템 추가완료
     UpdatedFeedbackItemErrorReason: '', // 피드백아이템 추가 실패 사유
-}
 
-export const FEEDBACK_PROGRESS_OR_COMPLETE = 'FEEDBACK_PROGRESS_OR_COMPLETE'; // 피드백 진행 중 or 진행완료 필터
+    isLoadingFeedbackComment: false, // 피드백 댓글 로드 중
+    isLoadedFeedbackComment: false, // 피드백 댓글 로드완료
+    LoadedFeedbackCommentErrorReason: '', // 피드백 댓글 로드 실패 사유
+
+    isAddingFeedbackComment: false, // 피드백 댓글 추가 중
+    isAddedFeedbackComment: false, // 피드백 댓글 추가 완료
+    AddedFeedbackCommentErrorReason: '', // 피드백 댓글 추가 실패 사유
+}
 
 export const FEEDBACK_TUTORIAL_REQUEST = 'FEEDBACK_TUTORIAL_REQUEST'; // 피드백 튜토리얼 시도 중
 export const FEEDBACK_TUTORIAL_SUCCESS = 'FEEDBACK_TUTORIAL_SUCCESS'; // 피드백 튜토리얼 성공
@@ -75,25 +82,17 @@ export const FEEDBACK_ITEM_COMPLETE_REQUEST = 'FEEDBACK_ITEM_COMPLETE_REQUEST'; 
 export const FEEDBACK_ITEM_COMPLETE_SUCCESS = 'FEEDBACK_ITEM_COMPLETE_SUCCESS'; // 피드백 게시물 완료 성공
 export const FEEDBACK_ITEM_COMPLETE_FAILURE = 'FEEDBACK_ITEM_COMPLETE_FAILURE'; // 피드백 게시물 완료 실패
 
-export const FEEDBACK_ITEM_COMMENT_REQUEST = 'FEEDBACK_ITEM_COMMENT_REQUEST'; // 피드백 게시물 댓글 ADD 시도 중
-export const FEEDBACK_ITEM_COMMENT_SUCCESS = 'FEEDBACK_ITEM_COMMENT_SUCCESS'; // 피드백 게시물 댓글 ADD 성공
-export const FEEDBACK_ITEM_COMMENT_FAILURE = 'FEEDBACK_ITEM_COMMENT_FAILURE'; // 피드백 게시물 댓글 ADD 실패
+export const FEEDBACK_ITEM_COMMENT_REQUEST = 'FEEDBACK_ITEM_COMMENT_REQUEST'; // 피드백 게시물 댓글 READ 시도 중
+export const FEEDBACK_ITEM_COMMENT_SUCCESS = 'FEEDBACK_ITEM_COMMENT_SUCCESS'; // 피드백 게시물 댓글 READ 성공
+export const FEEDBACK_ITEM_COMMENT_FAILURE = 'FEEDBACK_ITEM_COMMENT_FAILURE'; // 피드백 게시물 댓글 READ 실패
+
+export const FEEDBACK_ITEM_COMMENT_ADD_REQUEST = 'FEEDBACK_ITEM_COMMENT_ADD_REQUEST'; // 피드백 게시물 댓글 ADD 시도 중
+export const FEEDBACK_ITEM_COMMENT_ADD_SUCCESS = 'FEEDBACK_ITEM_COMMENT_ADD_SUCCESS'; // 피드백 게시물 댓글 ADD 성공
+export const FEEDBACK_ITEM_COMMENT_ADD_FAILURE = 'FEEDBACK_ITEM_COMMENT_ADD_FAILURE'; // 피드백 게시물 댓글 ADD 실패
 
 export default (state = initialState, action) => {
     switch(action.type){
-        // 피드백 진행 중 or 진행완료 필터        
-        case FEEDBACK_PROGRESS_OR_COMPLETE:
-            
-            if(action.data==='progress'){
-
-            }else{
-                
-            }
-            return{
-                ...state,
-                
-            };
-
+             
         // 피드백 튜토리얼 
         case FEEDBACK_TUTORIAL_REQUEST:
             return{
@@ -354,29 +353,59 @@ export default (state = initialState, action) => {
         // 피드백 게시물 완료 
         case FEEDBACK_ITEM_COMPLETE_REQUEST:
             return{
-
+                ...state,
             };
         case FEEDBACK_ITEM_COMPLETE_SUCCESS:
             return{
-                
+                ...state,
             };
         case FEEDBACK_ITEM_COMPLETE_FAILURE:
             return{
-                
+                ...state,
             };
 
-        // 피드백 게시물 댓글 ADD 
+        // 피드백 게시물 댓글 READ 
         case FEEDBACK_ITEM_COMMENT_REQUEST:
             return{
-
+                ...state,
+                isLoadingFeedbackComment:true,
+                isLoadedFeedbackComment:false,
             };
         case FEEDBACK_ITEM_COMMENT_SUCCESS:
             return{
-                
+                ...state,
+                isLoadingFeedbackComment:false,
+                isLoadedFeedbackComment:true,
+                feedbackComment:action.data.success?action.data.data:state.feedbackComment 
             };
         case FEEDBACK_ITEM_COMMENT_FAILURE:
             return{
-                
+                ...state,
+                isLoadingFeedbackComment:false,
+                isLoadedFeedbackComment:false,
+                LoadedFeedbackCommentErrorReason:action.error,
+            };
+
+        // 피드백 게시물 댓글 ADD 
+        case FEEDBACK_ITEM_COMMENT_ADD_REQUEST:
+            return{
+                ...state,
+                isAddingFeedbackComment:false,
+                isAddedFeedbackComment:true,
+            };
+        case FEEDBACK_ITEM_COMMENT_ADD_SUCCESS:
+            return{
+                ...state,
+                isAddingFeedbackComment:true,
+                isAddedFeedbackComment:false,
+                feedbackComment:action.data.success?[...state.feedbackComment,action.data.data]:state.feedbackComment
+            };
+        case FEEDBACK_ITEM_COMMENT_ADD_FAILURE:
+            return{
+                ...state,
+                isAddingFeedbackComment:false,
+                isAddedFeedbackComment:false,
+                AddedFeedbackCommentErrorReason:action.error,
             };
         
         default:

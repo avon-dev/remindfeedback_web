@@ -7,10 +7,11 @@ import AppPhoto from '../container/feedBackPhoto';
 import AppVideo from '../container/feedBackDetailVideo';
 import AppRecord from '../container/feedBackDetailRecord';
 import ImageContents from '../components/ImagesContents';
+import {FEEDBACK_ITEM_COMMENT_REQUEST} from '../reducers/feedback';
 
 const {Group} = Button;
 
-const feedBackDetailList = ({feedback_id}) => {
+const feedBackDetailList = ({feedback_id, handleComment}) => {
 
     const dispatch = useDispatch();
     const {feedbackItem,feedback,message} = useSelector(state=>state.feedback);
@@ -18,6 +19,7 @@ const feedBackDetailList = ({feedback_id}) => {
     const [name, setName] = useState(false);
     const [adviser_uid, setAdviser_uid] = useState('');
     const [feedBackItemId, setFeedBackItemId] = useState();
+    const [board_id, setBoard_id] = useState(0);
     const [images, setImages] = useState([]);
     const [createdAt, setCreatedAt] = useState('');
     const [Visible, setVisible] = useState(false);
@@ -25,6 +27,7 @@ const feedBackDetailList = ({feedback_id}) => {
     const [photoVisible, setPhotoVisible] = useState(false);
     const [videoVisible, setVideoVisible] = useState(false);
     const [recordVisible, setRecordVisible] = useState(false);
+    const [mouseOver, setMouseOver] = useState(false);
 
     useEffect(()=>{
         setAdviser_uid(feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).adviser_uid);
@@ -38,7 +41,13 @@ const feedBackDetailList = ({feedback_id}) => {
         if(message){
             alert(message);
         }
-    },[message&&message])
+    },[message&&message]);
+
+    useEffect(()=>{
+        if(feedbackItem.length>=1){
+            setBoard_id(feedbackItem[0].id);
+        }
+    },[feedbackItem&&feedbackItem]);
 
     // Popover 추가하기
     const popUpAdd = () => {
@@ -93,19 +102,42 @@ const feedBackDetailList = ({feedback_id}) => {
             case 3: return setName("RECORD_UPDATE"), setRecordVisible(true);
             default: return;
         }
-      
+    }
+
+    const _onMouseOver = () => {
+        setMouseOver(true);
+    }
+    const _onMouseLeave = () => {
+        setMouseOver(false);
+    }
+    const handleList = (e) => {
+        dispatch({
+            type: FEEDBACK_ITEM_COMMENT_REQUEST,
+            data: e.target.id,
+        })
+        setBoard_id(e.target.id);
+        handleComment(e.target.id);
     }
 
     const ItemCard = feedbackItem.map((v,i) =>
-        <Card 
+        <Card
+            onMouseOver={_onMouseOver}
+            onMouseLeave={_onMouseLeave} 
             key={v.id}
-            title={<strong>{v.board_title}</strong>} 
+            title={<strong>{v.board_title}</strong>}
             extra={<div>
-                    <Button id={v.id} type="dashed" onClick={handleUpdate}><Icon type="edit" style={{ fontSize: '18px', color: '#08c' }} /></Button>  
+                    <Group>
+                        <Button id={v.id} type="dashed" onClick={handleList}><Icon type="check" style={{ fontSize: '18px', color: '#08c' }} /></Button>
+                        <Button id={v.id} type="dashed" onClick={handleUpdate}><Icon type="edit" style={{ fontSize: '18px', color: '#08c' }} /></Button>
+                    </Group>  
                     {/* <Tooltip title="더 자세한 사항을 보려면 More 버튼을 클릭해주세요!"><a href="#">More</a></Tooltip> */}
                    </div>
                    } 
-            style={{ width: '100%' }}
+            style={{ width: '100%', 
+                    border:parseInt(board_id)===parseInt(v.id)&&'solid blue 3px', 
+                    borderRadius:parseInt(board_id)===parseInt(board_id)&&'25px 25px 25px 25px',
+                    boxShadow:parseInt(board_id)===parseInt(board_id)&& '5px 10px 20px',
+                    }}
             
         >
             <ImageContents

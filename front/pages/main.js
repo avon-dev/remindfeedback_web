@@ -77,12 +77,6 @@ Main.getInitialProps = async(context) => {
         const lastId = 0;
         const cookies = context.req.headers.cookie;
         axios.defaults.headers.Cookie = cookies;
-        context.store.dispatch({
-            type:FEEDBACK_READ_REQUEST,
-            data:{
-                lastId, feedbackModes
-            }
-        });
     }else{
        
     }

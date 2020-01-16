@@ -11,11 +11,15 @@ const feedBackDetail = ({feedback_id}) => {
     const {feedback} = useSelector(state=>state.feedback);
 
     const [feedbackTitle, setFeedbackTitle] = useState('');
+    const [board_id, setBoard_id] = useState(0);
 
     useEffect(()=>{
         setFeedbackTitle(feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).title);
     },[]);
 
+    const handleComment = (e) => {
+        setBoard_id(e);
+    }
     return(
         <>
             <Row>
@@ -30,11 +34,15 @@ const feedBackDetail = ({feedback_id}) => {
                 <Col span={22}>
                     <FeedBackDetailLists
                         feedback_id={feedback_id}
+                        handleComment={handleComment}
                     />
                         {/* <Col span={1} style={{textAlign:'center'}}>
                             <Divider type="vertical" style={{border:'2px solid black', height:'100vh',}} />
                         </Col> */}
-                   <FeedBackDetailComments/>
+                   <FeedBackDetailComments
+                        feedback_id={feedback_id}
+                        board_ids={board_id}
+                   />
                 </Col>
             </Row>
         </>

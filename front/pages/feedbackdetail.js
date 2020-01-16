@@ -1,11 +1,11 @@
-import React,{useCallback,useRef,useEffect} from 'react';
+import React,{useCallback,useRef,useEffect, useState} from 'react';
 import axios from 'axios';
 import AppSidebar from '../components/AppSidebar';
 import AppTopbar from '../components/AppTopbar';
 import AppFeedbackDetail from '../container/feedBackDetail';
 import AppFooter from '../components/AppFooter';
 import { useDispatch, useSelector } from 'react-redux';
-import { FEEDBACK_ITEM_READ_REQUEST, FEEDBACK_READ_REQUEST} from '../reducers/feedback';
+import { FEEDBACK_ITEM_READ_REQUEST, FEEDBACK_READ_REQUEST, FEEDBACK_ITEM_COMMENT_REQUEST} from '../reducers/feedback';
 import { layout, backgroundWhite, backgroundLightBlue, layouts } from '../css/Common';
 import { Layout } from 'antd';
 const { Footer, Content, Sider } = Layout;
@@ -79,12 +79,6 @@ feedbackdetail.getInitialProps = async(context) => {
             data:{
                 feedbackid:parseInt(context.query.id),
                 lastid:lastId
-            }
-        });
-        context.store.dispatch({
-            type:FEEDBACK_READ_REQUEST,
-            data:{
-                lastId, feedbackModes
             }
         });
         return {feedback_id: parseInt(context.query.id)};

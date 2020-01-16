@@ -53,6 +53,8 @@ const feedBackDetailWrite = ({writeVisible,writeHandleCancel,name,feedback_id,fe
                 }
             });
         }
+        setContents('');
+        setTitle('');
         writeHandleCancel();
     },[board_content,board_title]);
 

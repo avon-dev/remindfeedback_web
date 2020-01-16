@@ -2,8 +2,6 @@ import React,{useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Card,Icon, message, Menu, Dropdown, Button, Breadcrumb,Typography } from 'antd';
 import { subjectBtn } from '../css/Main';
-
-import {FEEDBACK_PROGRESS_OR_COMPLETE} from '../reducers/feedback';
 import SetFeedbackContents from './setFeedbackContents';
 
 const {Title} = Typography;
