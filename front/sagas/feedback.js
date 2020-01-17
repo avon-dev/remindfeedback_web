@@ -84,7 +84,7 @@ function* watchFeedback_Item_Add_Comment() {
 
 // Feedback 피드백 게시물 댓글 Update
 function feedback_Item_Update_Comment_API(data){
-    return axios.put('/comment/create',data,{
+    return axios.put(`/comment/update/${data.comment_id}`,data,{
         withCredentials:true
     });
 };

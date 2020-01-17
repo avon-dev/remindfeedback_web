@@ -410,11 +410,15 @@ export default (state = initialState, action) => {
                 isAddedFeedbackComment:true,
             };
         case FEEDBACK_ITEM_COMMENT_ADD_SUCCESS:
+            let addedComment = {};
+            if(action.data.success){
+                addedComment= {...action.data.data.comment, user:action.data.data.user};
+            }
             return{
                 ...state,
                 isAddingFeedbackComment:true,
                 isAddedFeedbackComment:false,
-                feedbackComment:action.data.success?[...state.feedbackComment,action.data.data]:state.feedbackComment
+                feedbackComment:action.data.success?[...state.feedbackComment,addedComment]:state.feedbackComment
             };
         case FEEDBACK_ITEM_COMMENT_ADD_FAILURE:
             return{
@@ -432,11 +436,20 @@ export default (state = initialState, action) => {
                 isUpdatedFeedbackComment:true,
             };
         case FEEDBACK_ITEM_COMMENT_UPDATE_SUCCESS:
+            let updatedComment = state.feedbackComment;
+            let messages = ''
+            if(action.data.success){
+                const index = state.feedbackComment.findIndex((v,i)=>parseInt(v.id)===parseInt(action.data.data.id))
+                state.feedbackComment[index] = {...action.data.data};
+                updatedComment = state.feedbackComment;
+                // messages = action.data.message;
+            }
             return{
                 ...state,
                 isUpdatingFeedbackComment:true,
                 isUpdatedFeedbackComment:false,
-                // feedbackComment:action.data.success?[...state.feedbackComment,action.data.data]:state.feedbackComment
+                feedbackComment:updatedComment,
+                // message:messages
             };
         case FEEDBACK_ITEM_COMMENT_UPDATE_FAILURE:
             return{
@@ -459,14 +472,14 @@ export default (state = initialState, action) => {
             if(action.data.success){
                 const index = state.feedbackComment.findIndex((v,i)=>parseInt(v.id)===parseInt(action.data.data.comment_id));
                 deleteComment = state.feedbackComment.filter((v,i)=>parseInt(i)!==parseInt(index));
-                messagese = action.data.message;
+                // messagese = action.data.message;
             }
             return{
                 ...state,
                 isDeletingFeedbackComment:true,
                 isDeletedFeedbackComment:false,
                 feedbackComment:deleteComment,
-                message:messagese
+                // message:messagese
             };
         case FEEDBACK_ITEM_COMMENT_DELETE_FAILURE:
             return{
