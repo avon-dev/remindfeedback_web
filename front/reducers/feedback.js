@@ -44,6 +44,14 @@ export const initialState = {
     isAddingFeedbackComment: false, // 피드백 댓글 추가 중
     isAddedFeedbackComment: false, // 피드백 댓글 추가 완료
     AddedFeedbackCommentErrorReason: '', // 피드백 댓글 추가 실패 사유
+
+    isUpdatingFeedbackComment:false, // 피드백 댓글 수정 중
+    isUpdatedFeedbackComment:false, // 피드백 댓글 수정 완료
+    UpdatedFeedbackCommentErrorReason:'', // 피드백 댓글 수정 실패 사유
+
+    isDeletingFeedbackComment:false, // 피드백 댓글 삭제 중
+    isDeletedFeedbackComment:false, // 피드백 댓글 삭제 완료
+    DeletedFeedbackCommentErrorReason:'', // 피드백 댓글 삭제 실패 사유
 }
 
 export const FEEDBACK_TUTORIAL_REQUEST = 'FEEDBACK_TUTORIAL_REQUEST'; // 피드백 튜토리얼 시도 중
@@ -89,6 +97,14 @@ export const FEEDBACK_ITEM_COMMENT_FAILURE = 'FEEDBACK_ITEM_COMMENT_FAILURE'; //
 export const FEEDBACK_ITEM_COMMENT_ADD_REQUEST = 'FEEDBACK_ITEM_COMMENT_ADD_REQUEST'; // 피드백 게시물 댓글 ADD 시도 중
 export const FEEDBACK_ITEM_COMMENT_ADD_SUCCESS = 'FEEDBACK_ITEM_COMMENT_ADD_SUCCESS'; // 피드백 게시물 댓글 ADD 성공
 export const FEEDBACK_ITEM_COMMENT_ADD_FAILURE = 'FEEDBACK_ITEM_COMMENT_ADD_FAILURE'; // 피드백 게시물 댓글 ADD 실패
+
+export const FEEDBACK_ITEM_COMMENT_UPDATE_REQUEST = 'FEEDBACK_ITEM_COMMENT_UPDATE_REQUEST'; // 피드백 게시물 댓글 Update 시도 중
+export const FEEDBACK_ITEM_COMMENT_UPDATE_SUCCESS = 'FEEDBACK_ITEM_COMMENT_UPDATE_SUCCESS'; // 피드백 게시물 댓글 Update 성공
+export const FEEDBACK_ITEM_COMMENT_UPDATE_FAILURE = 'FEEDBACK_ITEM_COMMENT_UPDATE_FAILURE'; // 피드백 게시물 댓글 Update 실패
+
+export const FEEDBACK_ITEM_COMMENT_DELETE_REQUEST = 'FEEDBACK_ITEM_COMMENT_DELETE_REQUEST'; // 피드백 게시물 댓글 DELETE 시도 중
+export const FEEDBACK_ITEM_COMMENT_DELETE_SUCCESS = 'FEEDBACK_ITEM_COMMENT_DELETE_SUCCESS'; // 피드백 게시물 댓글 DELETE 성공
+export const FEEDBACK_ITEM_COMMENT_DELETE_FAILURE = 'FEEDBACK_ITEM_COMMENT_DELETE_FAILURE'; // 피드백 게시물 댓글 DELETE 실패
 
 export default (state = initialState, action) => {
     switch(action.type){
@@ -376,7 +392,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoadingFeedbackComment:false,
                 isLoadedFeedbackComment:true,
-                feedbackComment:action.data.success?action.data.data:state.feedbackComment 
+                feedbackComment:action.data.success?action.data.data.filter((v,i)=>!v.deletedAt):state.feedbackComment 
             };
         case FEEDBACK_ITEM_COMMENT_FAILURE:
             return{
@@ -406,6 +422,58 @@ export default (state = initialState, action) => {
                 isAddingFeedbackComment:false,
                 isAddedFeedbackComment:false,
                 AddedFeedbackCommentErrorReason:action.error,
+            };
+
+        // 피드백 게시물 댓글 UPDATE 
+        case FEEDBACK_ITEM_COMMENT_UPDATE_REQUEST:
+            return{
+                ...state,
+                isUpdatingFeedbackComment:false,
+                isUpdatedFeedbackComment:true,
+            };
+        case FEEDBACK_ITEM_COMMENT_UPDATE_SUCCESS:
+            return{
+                ...state,
+                isUpdatingFeedbackComment:true,
+                isUpdatedFeedbackComment:false,
+                // feedbackComment:action.data.success?[...state.feedbackComment,action.data.data]:state.feedbackComment
+            };
+        case FEEDBACK_ITEM_COMMENT_UPDATE_FAILURE:
+            return{
+                ...state,
+                isUpdatingFeedbackComment:false,
+                isUpdatedFeedbackComment:false,
+                UpdatedFeedbackCommentErrorReason:action.error,
+            };
+        
+        // 피드백 게시물 댓글 DELETE 
+        case FEEDBACK_ITEM_COMMENT_DELETE_REQUEST:
+            return{
+                ...state,
+                isDeletingFeedbackComment:false,
+                isDeletedFeedbackComment:true,
+            };
+        case FEEDBACK_ITEM_COMMENT_DELETE_SUCCESS:
+            let deleteComment = state.feedbackComment;
+            let messagese = '';
+            if(action.data.success){
+                const index = state.feedbackComment.findIndex((v,i)=>parseInt(v.id)===parseInt(action.data.data.comment_id));
+                deleteComment = state.feedbackComment.filter((v,i)=>parseInt(i)!==parseInt(index));
+                messagese = action.data.message;
+            }
+            return{
+                ...state,
+                isDeletingFeedbackComment:true,
+                isDeletedFeedbackComment:false,
+                feedbackComment:deleteComment,
+                message:messagese
+            };
+        case FEEDBACK_ITEM_COMMENT_DELETE_FAILURE:
+            return{
+                ...state,
+                isDeletingFeedbackComment:false,
+                isDeletedFeedbackComment:false,
+                DeletedFeedbackCommentErrorReason:action.error,
             };
         
         default:

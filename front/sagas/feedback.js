@@ -34,6 +34,12 @@ import {
     FEEDBACK_ITEM_COMMENT_ADD_REQUEST,
     FEEDBACK_ITEM_COMMENT_ADD_SUCCESS,
     FEEDBACK_ITEM_COMMENT_ADD_FAILURE,
+    FEEDBACK_ITEM_COMMENT_UPDATE_REQUEST,
+    FEEDBACK_ITEM_COMMENT_UPDATE_SUCCESS,
+    FEEDBACK_ITEM_COMMENT_UPDATE_FAILURE,
+    FEEDBACK_ITEM_COMMENT_DELETE_REQUEST,
+    FEEDBACK_ITEM_COMMENT_DELETE_SUCCESS,
+    FEEDBACK_ITEM_COMMENT_DELETE_FAILURE,
 } from '../reducers/feedback';
 import { FEEDBACK_SUB_READ_REQUEST } from '../reducers/feedbackSubject';
 
@@ -48,7 +54,6 @@ if(prod){
     axios.defaults.baseURL = "http://localhost:8000";
 }
 
-
 // Feedback 피드백 게시물 댓글 Add
 function feedback_Item_Add_Comment_API(data){
     return axios.post('/comment/create',data,{
@@ -59,7 +64,7 @@ function feedback_Item_Add_Comment_API(data){
 function* feedback_Item_Add_Comment(action){
     try {
         const result = yield call(feedback_Item_Add_Comment_API, action.data);
-        console.log(result.data);
+        console.log(result.data,"feedback_Item_Add_Comment");
         yield put({
             type:FEEDBACK_ITEM_COMMENT_ADD_SUCCESS,
             data:result.data,
@@ -75,6 +80,62 @@ function* feedback_Item_Add_Comment(action){
 
 function* watchFeedback_Item_Add_Comment() {
     yield takeLatest(FEEDBACK_ITEM_COMMENT_ADD_REQUEST, feedback_Item_Add_Comment);
+};
+
+// Feedback 피드백 게시물 댓글 Update
+function feedback_Item_Update_Comment_API(data){
+    return axios.put('/comment/create',data,{
+        withCredentials:true
+    });
+};
+
+function* feedback_Item_Update_Comment(action){
+    try {
+        const result = yield call(feedback_Item_Update_Comment_API, action.data);
+        console.log(result.data,'feedback_Item_Update_Comment');
+        yield put({
+            type:FEEDBACK_ITEM_COMMENT_UPDATE_SUCCESS,
+            data:result.data,
+        });
+    } catch (e) {
+        console.error(e);
+        yield put({
+            type:FEEDBACK_ITEM_COMMENT_UPDATE_FAILURE,
+            error:e,
+        });
+    }
+};
+
+function* watchFeedback_Item_Update_Comment() {
+    yield takeLatest(FEEDBACK_ITEM_COMMENT_UPDATE_REQUEST, feedback_Item_Update_Comment);
+};
+
+// Feedback 피드백 게시물 댓글 Delete
+function feedback_Item_Delete_Comment_API(data){
+    return axios.delete(`/comment/delete/${data}`,{
+        withCredentials:true
+    });
+};
+
+function* feedback_Item_Delete_Comment(action){
+    try {
+        const result = yield call(feedback_Item_Delete_Comment_API, action.data);
+        console.log(result.data,"feedback_Item_Delete_Comment");
+        yield put({
+            type:FEEDBACK_ITEM_COMMENT_DELETE_SUCCESS,
+            data:result.data,
+        });
+    } catch (e) {
+        console.error(e);
+        yield put({
+            type:FEEDBACK_ITEM_COMMENT_DELETE_FAILURE,
+            error:e,
+        });
+    }
+};
+
+function* watchFeedback_Item_Delete_Comment() {
+    yield takeLatest(FEEDBACK_ITEM_COMMENT_DELETE_REQUEST, feedback_Item_Delete_Comment);
 };
 
 
@@ -384,5 +445,7 @@ export default function* feedbackSaga(){
         fork(watchFeedback_Item_Complete),
         fork(watchFeedback_Item_Comment),
         fork(watchFeedback_Item_Add_Comment),
+        fork(watchFeedback_Item_Update_Comment),
+        fork(watchFeedback_Item_Delete_Comment),
     ]);
 }
