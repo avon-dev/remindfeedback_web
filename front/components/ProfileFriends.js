@@ -57,12 +57,9 @@ const ProfileFriends = ({profileVisible,profileHandleCancel,profileName,profileI
                                        </Avatar>
                                         }   
                             >
-                               <div>
-                                    <Button style={{background:"#052749", color:"#FFFFFF"}} onClick={popUpPhoto}>프로필 사진 추가하기</Button>
-                               </div>
                             </Empty>
                         </Col>
-                        <Col span={24} style={{textAlign:'center', marginTop:10}}>
+                        <Col span={24} style={{textAlign:'center', marginTop:30}}>
                             <Text style={{color:"#000000"}}><strong>{profileName}</strong></Text>
                         </Col>
                         <Col span={24} style={{textAlign:'center', marginTop:5}}>

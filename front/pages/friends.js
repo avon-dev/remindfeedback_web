@@ -1,14 +1,16 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import AppSidebar from '../components/AppSidebar';
 import AppTopbar from '../components/AppTopbar';
 import AppFriends from '../container/friends';
 import AppFooter from '../components/AppFooter';
 import { layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
 import { Layout } from 'antd';
-import {FRIENDS_MAIN_READ_REQUEST} from '../reducers/friends';
+import {FRIENDS_MAIN_READ_REQUEST, } from '../reducers/friends';
 
 import axios from 'axios';
 const { Footer, Content, Sider } = Layout;
+
+
 
 const friends = () => {
     return(

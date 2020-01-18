@@ -37,6 +37,8 @@ const addSubject = ({visible,handleCancel}) => {
         setColor(color.hex);
     };
 
+    const category_colors = ['#E51C23','#FF5722','#FFFF00','#259B24','#18FFFF','#3F51B5','#9C27B0','#FF4081','#000000',];
+
     return(
         <>
             <Modal
@@ -74,6 +76,7 @@ const addSubject = ({visible,handleCancel}) => {
                             <Col span={24}>
                                 <Form.Item label={<strong>색상 설정</strong>}>
                                     <CirclePicker
+                                        colors={category_colors}
                                         color={category_color}
                                         onChangeComplete={handleChangeComplete}
                                         onChange={handleColor}

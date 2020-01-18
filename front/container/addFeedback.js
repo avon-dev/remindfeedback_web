@@ -1,10 +1,11 @@
 import React,{useState,useCallback, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { Modal, Layout, Form, Input, Tooltip , Menu, Icon, Button, Col, Typography, DatePicker, Select  } from 'antd';
+import { Modal, Layout, Form, Input, Tooltip , Menu, Icon, Button, Col, Typography, DatePicker, Select, Comment  } from 'antd';
 import { backgroundWhite, backgroundLightBlue} from '../css/Common';
 import { subjectBtn, feedbackItemLayout, formItemLayout } from '../css/Main';
 import {FEEDBACK_ADD_REQUEST,FEEDBACK_UPDATE_REQUEST} from '../reducers/feedback';
+import {FRIENDS_ADD_SEARCH_REQUEST} from '../reducers/friends';
 
 
 const { Search } = Input;
@@ -14,7 +15,7 @@ const {Title} = Typography;
 const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adviser_uid,feedback_write_date,category_titles,order,feedback_id}) => {
 
     const dispatch = useDispatch();
-    const {isAdddingFeedback,isAddedFeedback,isUpdatingFeedback} = useSelector(state => state.feedback);
+    const {isAdddingFeedback,isAddedFeedback,isUpdatingFeedback,searchedFriends} = useSelector(state => state.feedback);
     const {subject} = useSelector(state => state.feedbackSubject);
     
     const [category,setCategory] = useState(0);
@@ -69,6 +70,20 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
     const handleAdvisor = (e) =>  {
         setAdvisor(e.target.value);
     };
+
+    const handleSearchOk = () => {
+        if(!adviser){
+            return alert('조언자의 이메일을 입력하세요')
+        }
+        const email = adviser;
+        dispatch({
+            type:FRIENDS_ADD_SEARCH_REQUEST,
+            data:{
+                email,
+            }
+        })
+        setAdvisor('');
+    }
 
     useEffect(()=>{
         if(isAddedFeedback){
@@ -129,19 +144,41 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                             </Form.Item>
                             );
     const feedback_advisorInfo = <strong>피드백을 통해 조언을 받고 싶은 조언자를 검색해주세요</strong>;
+
+    const actions = searchedFriends&&[<span><Button key="request_friends" size="small" onClick={_onsubmit}>친구 요청</Button></span>];
+    const author = searchedFriends&&<a>{searchedFriends.nickname}</a>
+    const avatar = searchedFriends&&<Avatar src={searchedFriends.portrait&&`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${searchedFriends.portrait}`}>{!searchedFriends.portrait&&searchedFriends.nickname.split('')[0]}</Avatar>
+    const content = searchedFriends&&<p>{searchedFriends.introduction?searchedFriends.introduction:'자기소개글이 없습니다.'}</p>   
+    
     const feedback_advisor = (<Form.Item label={<><Tooltip title={feedback_advisorInfo}><Icon type="question-circle" /></Tooltip><strong>조언자</strong></>} >
                                 <Col span={24}>
                                     <Search
                                         value={adviser}
                                         onChange={handleAdvisor}
+                                        onSearch={handleSearchOk}
                                         style={{width:'100%'}}
-                                        placeholder="조언자 이름을 입력하세요"
+                                        placeholder="조언자 이메일을 입력하세요"
                                         enterButton="검색"
                                         required
                                     />
-                                </Col>  
+                                </Col>
+                                {
+                               searchedFriends&&
+                                <Col span={24}>
+                                    <Comment
+                                        style={{marginLeft:10}}
+                                        actions={actions}
+                                        author={author}
+                                        avatar={avatar}
+                                        content={content}   
+                                    />
+                                </Col> 
+                                }  
                             </Form.Item>
                             );
+
+    
+
     return(
         <>  
            <Modal

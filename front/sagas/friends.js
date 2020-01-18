@@ -244,15 +244,18 @@ function* watchFriends_Add_Read() {
 
 // 친구 차단
 function friends_Block_API(data){
-    // return axios.delete();
+    return axios.put('/friend/block',data.user_uid,{
+        withCredentials:true
+    });
 };
 
 function* friends_Block(action){
     try {
-        yield delay(2000);
-        yield call(friends_Block_API, action.data);
+        const result = yield call(friends_Block_API, action.data);
+        console.log(result.data,"friends_Block")
         yield put({
             type:FRIENDS_BLOCK_SUCCESS,
+            data:result.data,
         });
     } catch (e) {
         console.error(e);

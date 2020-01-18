@@ -127,7 +127,7 @@ const Subjects = () => {
                                 <Button type="primary" size="large" onClick={PopupAddSubject}><strong>주제 추가</strong></Button>
                             </Row>
                             <Row> 
-                                <Table columns={columns} dataSource={data} />
+                                <Table columns={columns} dataSource={data} pagination={false} />
                             </Row>
                         </Col>
 

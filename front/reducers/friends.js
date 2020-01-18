@@ -27,6 +27,10 @@ export const initialState = {
     RQ_Modal_isAddingFriends: false, // 친구 요청 모달 업데이트 로드 중
     RQ_Modal_isAddedFriends: false, // 친구 요청 모달 업데이트 로드 성공
     RQ_Modal_AddedFriendsErrorReason: '', // 친구 요청 모달 데이터 업데이트 실패 사유
+
+    isBlockingFriends: false, // 친구 차단 중
+    isBlockedFriends: false, // 친구 차단 성공
+    BlockedFriendsErrorReason: '', // 친구 차단 실패 사유
 }
 
 export const FRIENDS_SEARCH_LOCAL = 'FRIENDS_SEARCH_LOCAL'; // 친구 검색 로컬
@@ -71,6 +75,8 @@ export const FRIENDS_PROFILE_ADD_REQUEST = 'FRIENDS_PROFILE_ADD_REQUEST'; // 친
 export const FRIENDS_PROFILE_ADD_SUCCESS = 'FRIENDS_PROFILE_ADD_SUCCESS'; // 친구 프로필 모달 사진 ADD 성공
 export const FRIENDS_PROFILE_ADD_FAILURE = 'FRIENDS_PROFILE_ADD_FAILURE'; // 친구 프로필 모달 사진 ADD 실패
 
+export const FRIENDS_ARRANGE_DATE = 'FRIENDS_ARRANGE_DATE'; // 친구 데이터 정리
+
 export default (state = initialState, action) => {
     switch(action.type){
         // 친구 메인 창 READ
@@ -114,14 +120,21 @@ export default (state = initialState, action) => {
         case FRIENDS_BLOCK_REQUEST:
             return{
                 ...state,
+                isBlockingFriends: true, 
+                isBlockedFriends: false, 
             }
         case FRIENDS_BLOCK_SUCCESS:
             return{
                 ...state,
+                isBlockingFriends: false, 
+                isBlockedFriends: true,
             }
         case FRIENDS_BLOCK_FAILURE:
             return{
                 ...state,
+                isBlockingFriends: false, 
+                isBlockedFriends: false,
+                BlockedFriendsErrorReason:action.error,
             }
         
         // 친구 추가 모달 READ
@@ -159,6 +172,7 @@ export default (state = initialState, action) => {
                 Add_Modal_isSearchingFriends:false,
                 Add_Modal_isSearchedFriends:true,
                 searchedFriends:action.data.success?action.data.data:state.searchedFriends,
+                message:action.data.success?action.data.message:''
             }
         case FRIENDS_ADD_SEARCH_FAILURE:
             return{
@@ -285,7 +299,17 @@ export default (state = initialState, action) => {
                 ...state,
                 registerdFriends:searchedFriend,
                 message:messages
-            }      
+            }
+
+        case FRIENDS_ARRANGE_DATE:
+            return{
+                ...state,
+                message:'',
+                registerdFriends:[],
+                addedFriends:[],
+                receivedFriends:[],
+                searchedFriends:''
+            }       
         default: 
             return state;
     }

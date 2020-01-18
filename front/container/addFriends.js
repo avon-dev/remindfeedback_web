@@ -75,7 +75,6 @@ const addFriends = ({addVisible,addHandleOk,addHandleCancel}) => {
     }
 
     const handleSearchOk = useCallback(() => {
-
         if(email===''){
             return alert('이메일을 입력해주세요');
         }

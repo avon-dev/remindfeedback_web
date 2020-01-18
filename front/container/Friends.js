@@ -9,7 +9,8 @@ import {FRIENDS_MAIN_SEARCH_REQUEST,
         FRIENDS_BLOCK_REQUEST, 
         FRIENDS_RQ_READ_REQUEST, 
         FRIENDS_MAIN_READ_REQUEST,
-        FRIENDS_SEARCH_LOCAL
+        FRIENDS_SEARCH_LOCAL,
+        FRIENDS_ARRANGE_DATE
       } from '../reducers/friends';
 
 const ButtonGroup = Button.Group;
@@ -31,6 +32,7 @@ const Friends = () => {
     const [nickNameList, setNicknameList] = useState([]); 
     const [searchValue, setSearchValue] = useState('');
     const [id,setId] = useState('');
+    const [blockFriend,setBlockFriend] = useState(false);
 
     useEffect(()=>{
       if(RQ_Modal_isAddedFriends){
@@ -52,18 +54,32 @@ const Friends = () => {
       }
     },[registerdFriends&&registerdFriends]);
 
+    useEffect(()=>{
+        return () =>{
+            dispatch({
+                type:FRIENDS_ARRANGE_DATE
+            })
+        };
+    },[]);
+
     // 친구 차단
     const handleConfirm = useCallback(() => {
       dispatch({
         type:FRIENDS_BLOCK_REQUEST,
         data:{
-          id,
+          user_uid:id,
         }
       });
-    },[]);
+      setBlockFriend(false);
+    },[id]);
+
+    const handleBlockCancel = () => {
+        setBlockFriend(false);
+    }
 
     const handleBlock = (e) => {
-      setId(e.target.name); 
+      setId(e.target.name);
+      setBlockFriend(true); 
     }
 
     // 친구 추가
@@ -152,8 +168,10 @@ const Friends = () => {
                                           title="정말로 차단하시겠습니까?"  
                                           okText="네"
                                           cancelText="아니오"
+                                          onCancel={handleBlockCancel}
+                                          visible={blockFriend}
                                       >
-                                          <Button key="ban" type="danger" name={v.name} onClick={handleBlock} size="small">차단</Button> 
+                                          <Button key="ban" type="danger" name={v.user_uid} onClick={handleBlock} size="small">차단</Button> 
                                       </Popconfirm>
                                   </div>
                               </>

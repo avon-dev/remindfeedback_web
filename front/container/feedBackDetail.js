@@ -3,6 +3,7 @@ import { Row, Col, Divider, Typography, Button, Input  } from 'antd';
 import FeedBackDetailLists from '../container/feedBackDetailList';
 import FeedBackDetailComments from '../container/feedBackDetailComment';
 import { useDispatch, useSelector } from 'react-redux';
+import { FEEDBACK_ITEM_ARRANGE_DATE } from '../reducers/feedback'
 const {Title, Text} = Typography;
 
 const feedBackDetail = ({feedback_id}) => {
@@ -15,6 +16,11 @@ const feedBackDetail = ({feedback_id}) => {
 
     useEffect(()=>{
         setFeedbackTitle(feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).title);
+        return () =>{
+            dispatch({
+                type:FEEDBACK_ITEM_ARRANGE_DATE
+            })
+        };
     },[]);
 
     const handleComment = (e) => {

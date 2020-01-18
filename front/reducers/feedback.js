@@ -54,6 +54,8 @@ export const initialState = {
     DeletedFeedbackCommentErrorReason:'', // 피드백 댓글 삭제 실패 사유
 }
 
+
+
 export const FEEDBACK_TUTORIAL_REQUEST = 'FEEDBACK_TUTORIAL_REQUEST'; // 피드백 튜토리얼 시도 중
 export const FEEDBACK_TUTORIAL_SUCCESS = 'FEEDBACK_TUTORIAL_SUCCESS'; // 피드백 튜토리얼 성공
 export const FEEDBACK_TUTORIAL_FAILURE = 'FEEDBACK_TUTORIAL_FAILURE'; // 피드백 튜토리얼 실패
@@ -105,6 +107,8 @@ export const FEEDBACK_ITEM_COMMENT_UPDATE_FAILURE = 'FEEDBACK_ITEM_COMMENT_UPDAT
 export const FEEDBACK_ITEM_COMMENT_DELETE_REQUEST = 'FEEDBACK_ITEM_COMMENT_DELETE_REQUEST'; // 피드백 게시물 댓글 DELETE 시도 중
 export const FEEDBACK_ITEM_COMMENT_DELETE_SUCCESS = 'FEEDBACK_ITEM_COMMENT_DELETE_SUCCESS'; // 피드백 게시물 댓글 DELETE 성공
 export const FEEDBACK_ITEM_COMMENT_DELETE_FAILURE = 'FEEDBACK_ITEM_COMMENT_DELETE_FAILURE'; // 피드백 게시물 댓글 DELETE 실패
+
+export const FEEDBACK_ITEM_ARRANGE_DATE = 'FEEDBACK_ITEM_ARRANGE_DATE'; // 피드백 게시물 데이터 정리
 
 export default (state = initialState, action) => {
     switch(action.type){
@@ -487,6 +491,15 @@ export default (state = initialState, action) => {
                 isDeletingFeedbackComment:false,
                 isDeletedFeedbackComment:false,
                 DeletedFeedbackCommentErrorReason:action.error,
+            };
+
+        case FEEDBACK_ITEM_ARRANGE_DATE:
+            return{
+                ...state,
+                message:'',
+                feedbackItem:[],
+                feedbackComment:[],
+                
             };
         
         default:

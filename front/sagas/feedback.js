@@ -274,7 +274,9 @@ function* feedback_Item_Read(action){
             type:FEEDBACK_ITEM_READ_SUCCESS,
             data:result.data,
         });
-        if(yield action.data.lastid===0){
+        console.log(action.data.lastid,"hahaha")
+        if(yield action.data.lastid===0&&result.data.data.length>=1){
+            console.log('드러옴')
             yield put({
                 type: FEEDBACK_ITEM_COMMENT_REQUEST,
                 data: result.data.data[0].id,
