@@ -6,6 +6,7 @@ import {formItemLayout} from '../css/FeedbackDetail';
 import {FRIENDS_PROFILE_ADD_REQUEST} from '../reducers/friends';
 import {FEEDBACK_ITEM_ADD_REQUEST,FEEDBACK_ITEM_UPDATE_REQUEST} from '../reducers/feedback';
 import {UPDATE_USER_REQUEST} from '../reducers/user';
+import moment from 'moment';
 
 const {Content} = Layout;
 const {Title} = Typography;
@@ -31,7 +32,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [number, setNumber] = useState([]);
-    const [portrait, setPortrait] = useState();
+    const [portrait, setPortrait] = useState([]);
     const [file, setFile] = useState([]);
 
     useEffect(()=>{
@@ -41,6 +42,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
 
             let updatePhoto = [board_file1,board_file2,board_file3];
             // 수동으로 multi-form 데이터 바꾸기 필요 
+            updatePhoto = updatePhoto.filter((v,i)=>v!==null);
             updatePhoto = updatePhoto.map((v,i)=>{
                 return(v?{  
                   uid:i,
@@ -53,7 +55,8 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
                     uid:"null"
                 });
             });
-            updatePhoto = updatePhoto.filter((v,i)=>v.uid!=="null");
+            // updatePhoto = updatePhoto.filter((v,i)=>v.uid!=="null");
+            console.log(updatePhoto,"updatePhoto")
             setFile(updatePhoto);
             setContent(board_content);
             setTitle(board_title);
@@ -80,11 +83,11 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
 
     const uploadButton = (
         mode===UPDATE_USER_REQUEST?
-        <Button disabled={number.length==1?true:false}>
+        <Button disabled={number.length===1?true:false}>
             <Icon type="upload" /> Upload
         </Button>
         :
-        <Button disabled={file.length==3?true:false}>
+        <Button disabled={file.length===3?true:false}>
             <Icon type="upload" /> Upload
         </Button>
     );
@@ -98,7 +101,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
     const handleCheck = (e) => {
         if(mode===UPDATE_USER_REQUEST){
             setNumber('1');
-            setPortrait(e);
+            setPortrait([e]);
         }else{
             console.log(e);
             setFile([...file,e]);
@@ -122,7 +125,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
                     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"         
                     listType="text" 
                     onPreview={handlePreview}
-                    // fileList={file.length>=1?file:false}
+                    fileList={file.length>=1?file:number.length>=1?portrait:false}
                     // onChange={handleUpload}
                     previewFile={handlePreviewFile}
                     onRemove={handleRemove}
@@ -149,11 +152,11 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
                 }
             });
         }else if(mode===UPDATE_USER_REQUEST){
-            if(!portrait){
+            if(portrait.length<1){
                 return alert('사진을 선택해 주세요');
             }
             const formData = new FormData();
-            formData.append('portrait', portrait);
+            formData.append('portrait', portrait[0]);
             dispatch({
                 type: UPDATE_USER_REQUEST,
                 data:{
@@ -172,19 +175,38 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
             if(!content){
                 return alert('내용을 입력해 주세요');
             }
-            let check = ['','',''];
+            let check = [false,false,false];
+            let compare = [];
+            let result; 
             if(name==="PHOTO_UPDATE"){
+            const {board_file1,board_file2,board_file3} = feedbackItem.find((v,i)=>parseInt(v.id)===parseInt(feedBackItemId))
+            compare.push(board_file1,board_file2,board_file3)
                 check = check.map((v,i)=>{
                     return(
-                        file[i]?
-                        true:false
+                        !file[i]?false
+                        :
+                        typeof file[i].uid ==='string'?true: 
+                        file[i].name!==compare[i].split('/')[1]&&
+                        true
                         )}
                     )
-                
+            result = file.map((v,i)=>{
+                let files ;
+                if(typeof v.uid ==="number"){
+                    const blob = new Blob([v.name],{type:'image/jpeg'});
+                    files = new File([blob],v.name,{
+                        lastModified: new Date(),
+                        type:'image/jpeg',
+                    })
+                }else{
+                    files = v
+                }
+                return files
+            });   
             };
-                     
+    
             const formData = new FormData();
-            file.forEach((v,i)=>formData.append(`file${i+1}`,v));
+            result.forEach((v,i)=>formData.append(`file${i+1}`,v));
             check.forEach((v,i)=>formData.append(`updatefile${i+1}`,v));
             formData.append('board_content',content);
             formData.append('board_title',title);
@@ -204,7 +226,11 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
                     }
                 });
             }
+            setContent('');
+            setTitle('');
+            setFile([]);
             photoHandleCancel();
+            
         };
     };
        

@@ -7,7 +7,7 @@ import AppPhoto from '../container/feedBackPhoto';
 import AppVideo from '../container/feedBackDetailVideo';
 import AppRecord from '../container/feedBackDetailRecord';
 import ImageContents from '../components/ImagesContents';
-import {FEEDBACK_ITEM_COMMENT_REQUEST} from '../reducers/feedback';
+import {FEEDBACK_ITEM_COMMENT_REQUEST, FEEDBACK_ITEM_ADD_REQUEST} from '../reducers/feedback';
 
 const {Group} = Button;
 
@@ -232,7 +232,8 @@ const feedBackDetailList = ({feedback_id, handleComment}) => {
                  photoHandleCancel={photoHandleCancel}
                  name={name}
                  feedback_id={feedback_id}
-                 feedBackItemId={feedBackItemId}              
+                 feedBackItemId={feedBackItemId} 
+                 mode={FEEDBACK_ITEM_ADD_REQUEST}             
               />                  
             </div>
             <div>
