@@ -12,6 +12,7 @@ const setFeedback = ({myFeedback}) => {
     const { subject } = useSelector(state=> state.feedbackSubject);
     const { feedbackMode } = useSelector(state=> state.feedbackMode);
     const { feedback } = useSelector(state=> state.feedback);
+    const { message, searchedFriends} = useSelector(state=> state.friends);
 
     const [inProgress, setInProgress] = useState(false);
     const [categoryId, setCategoryId] = useState(0);
@@ -24,6 +25,11 @@ const setFeedback = ({myFeedback}) => {
         }
     },[feedback.message&&feedback.message]);
 
+    useEffect(()=>{
+        if(message){
+            alert(message);
+        }
+    },[message&&message]);
 
     const handleFilter = (e) => {
         setInProgress(!inProgress);

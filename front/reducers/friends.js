@@ -124,10 +124,16 @@ export default (state = initialState, action) => {
                 isBlockedFriends: false, 
             }
         case FRIENDS_BLOCK_SUCCESS:
+            let blockedFriend = state.registerdFriends;
+            if(action.data.success){
+                const index = state.registerdFriends.findIndex((v,i)=>v.user_uid===action.data.data.user_uid);
+               blockedFriend = state.registerdFriends.filter((v,i)=>i!==index);
+            }
             return{
                 ...state,
                 isBlockingFriends: false, 
                 isBlockedFriends: true,
+                registerdFriends:blockedFriend
             }
         case FRIENDS_BLOCK_FAILURE:
             return{
@@ -171,8 +177,8 @@ export default (state = initialState, action) => {
                 ...state,
                 Add_Modal_isSearchingFriends:false,
                 Add_Modal_isSearchedFriends:true,
-                searchedFriends:action.data.success?action.data.data:state.searchedFriends,
-                message:action.data.success?action.data.message:''
+                searchedFriends:action.data.success?action.data.data:'',
+                message:!action.data.success?action.data.message:''
             }
         case FRIENDS_ADD_SEARCH_FAILURE:
             return{

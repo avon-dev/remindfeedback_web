@@ -205,7 +205,7 @@ const feedBackDetailComment = ({board_ids}) => {
     return(
         <>
             <Col span={12} >
-                {feedbackComment
+                {feedbackComment.length>=1
                 ?
                 <Col span={22}>
                     {comments}

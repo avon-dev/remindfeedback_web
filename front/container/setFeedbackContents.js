@@ -36,11 +36,11 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
         if(categoryId==='0'){
           setCategory_id(categoryId)
           if(forall){
-            setMyfeedback(myFeedback.filter((v,i)=>v.complete===true)); 
+            setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)===2)); 
             // setForall(false);
             return
           }else{
-            setMyfeedback(myFeedback.filter((v,i)=>v.complete===false));
+            setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
             // setForall(true);
             return
           }  
@@ -53,7 +53,7 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
             setMyfeedback(filteredFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId)))
           }else{
             const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId));
-            const j = r.filter((v,i)=>v.complete===true)
+            const j = r.filter((v,i)=>parseInt(v.complete)===2)
             setMyfeedback(j)
           }
         }else{
@@ -62,7 +62,7 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
             setMyfeedback(filteredFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId)))
           }else{
             const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId));
-            const j = r.filter((v,i)=>v.complete===false)
+            const j = r.filter((v,i)=>parseInt(v.complete)!==2)
             setMyfeedback(j)
             setCode(true)
           }
@@ -75,10 +75,10 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
 
       if(category_id==='0'){
         if(inProgress){
-          setMyfeedback(myFeedback.filter((v,i)=>v.complete===true)); 
+          setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)===2)); 
           return
         }else{
-          setMyfeedback(myFeedback.filter((v,i)=>v.complete===false));
+          setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
           return
         }  
       }
@@ -87,10 +87,10 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
          //진행완료
          if(code){
           const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(category_id));
-          const j = r.filter((v,i)=>v.complete===true)
+          const j = r.filter((v,i)=>parseInt(v.complete)===2)
           setMyfeedback(j)
          }else{
-          setMyfeedback(myFeedback.filter((v,i)=>v.complete===true));
+          setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)===2));
          }
 
          setForall(true)
@@ -99,17 +99,17 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
          //진행중
          if(code){
           const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(category_id));
-          const j = r.filter((v,i)=>v.complete===false)
+          const j = r.filter((v,i)=>parseInt(v.complete)!==2)
           setMyfeedback(j)
          }else{
-          setMyfeedback(myFeedback.filter((v,i)=>v.complete===false));
+          setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
          }
          setForall(false)
        }
     },[inProgress&&inProgress]);
 
     useEffect(()=>{
-      setMyfeedback(myFeedback.filter((v,i)=>v.complete===false));
+      setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
     },[])
 
     const setCategory = (val) => {

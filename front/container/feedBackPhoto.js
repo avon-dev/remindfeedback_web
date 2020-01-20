@@ -41,8 +41,9 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
             = feedbackItem.find((v,i)=> parseInt(feedBackItemId)===parseInt(v.id));
 
             let updatePhoto = [board_file1,board_file2,board_file3];
+            
             // 수동으로 multi-form 데이터 바꾸기 필요 
-            updatePhoto = updatePhoto.filter((v,i)=>v!==null);
+            updatePhoto = updatePhoto.filter((v,i)=>v!=null);
             updatePhoto = updatePhoto.map((v,i)=>{
                 return(v?{  
                   uid:i,
@@ -206,7 +207,11 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
             };
     
             const formData = new FormData();
-            result.forEach((v,i)=>formData.append(`file${i+1}`,v));
+            if(name==="PHOTO_UPDATE"){
+                result.forEach((v,i)=>formData.append(`file${i+1}`,v));
+            }else{
+                file.forEach((v,i)=>formData.append(`file${i+1}`,v));
+            }
             check.forEach((v,i)=>formData.append(`updatefile${i+1}`,v));
             formData.append('board_content',content);
             formData.append('board_title',title);

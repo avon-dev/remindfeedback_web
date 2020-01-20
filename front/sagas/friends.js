@@ -244,7 +244,7 @@ function* watchFriends_Add_Read() {
 
 // 친구 차단
 function friends_Block_API(data){
-    return axios.put('/friend/block',data.user_uid,{
+    return axios.put('/friend/block',data,{
         withCredentials:true
     });
 };

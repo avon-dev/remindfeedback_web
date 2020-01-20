@@ -33,6 +33,8 @@ const Friends = () => {
     const [searchValue, setSearchValue] = useState('');
     const [id,setId] = useState('');
     const [blockFriend,setBlockFriend] = useState(false);
+    const [blockCheck,setBlockCheck] = useState(false);
+    const [user_uid, setUser_uid] = useState('');
 
     useEffect(()=>{
       if(RQ_Modal_isAddedFriends){
@@ -71,6 +73,7 @@ const Friends = () => {
         }
       });
       setBlockFriend(false);
+      setBlockCheck(false);
     },[id]);
 
     const handleBlockCancel = () => {
@@ -134,6 +137,13 @@ const Friends = () => {
       setProfileVisible(false);
     }
 
+    const handleBlockCheck = (e) => {
+      setBlockCheck(!blockCheck);
+      if(e.target){
+        setUser_uid(e.target.name);
+      }
+    }
+
     // 친구 검색
     const handleSearch = useCallback((v) => {
       setSearchValue(v);
@@ -158,8 +168,10 @@ const Friends = () => {
         <Card key={v.user_uid} extra={<Popover
                           key={v.user_uid}
                           title={v.nickname}
+                          onVisibleChange={handleBlockCheck}
                           placement="rightBottom"
                           overlayStyle={{textAlign:'center'}}
+                          visible={user_uid===v.user_uid&&blockCheck}
                           content={
                               <>
                                   <div id={v.user_uid} style={{display:'flex', justifyContent:'space-around' }}>
@@ -170,15 +182,16 @@ const Friends = () => {
                                           cancelText="아니오"
                                           onCancel={handleBlockCancel}
                                           visible={blockFriend}
-                                      >
-                                          <Button key="ban" type="danger" name={v.user_uid} onClick={handleBlock} size="small">차단</Button> 
+                                      >  
+                                          <Button key="block" type="danger" name={v.user_uid} onClick={handleBlock} size="small">차단</Button>
                                       </Popconfirm>
+                                          
                                   </div>
                               </>
                           }
                           trigger="click"
                       >
-                          <Button type="link" key={v.user_uid} >
+                          <Button type="link" key={v.user_uid} name={v.user_uid} onClick={handleBlockCheck} >
                               <Icon type="more" key={v.user_uid}/>
                           </Button>
                     </Popover> }>
