@@ -4,7 +4,9 @@ import { Row, Col, Input, Icon, Button, Card, Avatar, Popover,Popconfirm,Empty,A
 import AddFriends from '../container/addFriends';
 import RequestFriends from '../container/requestFriends';
 import ProfileFriends from '../components/ProfileFriends';
-import {FRIENDS_MAIN_SEARCH_REQUEST, 
+import BlockedFriends from '../container/blockedFriends';
+import {FRIENDS_MAIN_SEARCH_REQUEST,
+        FRIENDS_BLOCK_READ_REQUEST, 
         FRIENDS_ADD_READ_REQUEST, 
         FRIENDS_BLOCK_REQUEST, 
         FRIENDS_RQ_READ_REQUEST, 
@@ -24,6 +26,7 @@ const Friends = () => {
 
     const [addVisible, setAddVisible] = useState(false);
     const [requestVisible, setRequestVisible] = useState(false);
+    const [blockedVisible, setBlockedVisible] = useState(false);
     const [profileVisible, setProfileVisible] = useState(false);
     const [profileName, setProfileName] = useState('');
     const [profileEmail, setProfileEmail] = useState('');
@@ -64,7 +67,7 @@ const Friends = () => {
         };
     },[]);
 
-    // 친구 차단
+    // 친구 차단 하기
     const handleConfirm = useCallback(() => {
       dispatch({
         type:FRIENDS_BLOCK_REQUEST,
@@ -83,6 +86,22 @@ const Friends = () => {
     const handleBlock = (e) => {
       setId(e.target.name);
       setBlockFriend(true); 
+    }
+
+    // 친구 차단 목록 보기
+    const PopupBlockeFriends = async() => {
+      await dispatch({
+        type:FRIENDS_BLOCK_READ_REQUEST,
+      })
+      await setBlockedVisible(true);
+    }
+
+    const blockedHandleOk = () => {
+      setBlockedVisible(false);
+    }
+
+    const blockedHandleCancel = () => {
+      setBlockedVisible(false);
     }
 
     // 친구 추가
@@ -217,13 +236,17 @@ const Friends = () => {
                 <Col span={12} style={{marginTop:20}}>
                     <Col span={24} style={{textAlign:'right', marginBottom:15}}>
                         <ButtonGroup>
-                          <Button type="primary" size="large" onClick={PopupAddFriends} loading={Add_Modal_isLoadingFriends} >
+                          <Button type="primary" size="defalut" onClick={PopupAddFriends} loading={Add_Modal_isLoadingFriends} >
                             <Icon type="plus" style={{marginRight:3}}></Icon>
-                            <strong>친구 추가</strong>
+                            <strong>추가 목록</strong>
                           </Button>
-                          <Button type="primary" size="large" onClick={PopupRequestFriends} loading={RQ_Modal_isLoadingFriends}>
+                          <Button type="primary" size="defalut" onClick={PopupRequestFriends} loading={RQ_Modal_isLoadingFriends}>
                             <Icon type="shrink" style={{marginRight:3}}></Icon>
-                            <strong>친구 요청</strong>
+                            <strong>요청 목록</strong>
+                          </Button>
+                          <Button type="danger" size="defalut" onClick={PopupBlockeFriends} loading={RQ_Modal_isLoadingFriends}>
+                            <Icon type="close-circle" style={{marginRight:3}}></Icon>
+                            <strong>차단 목록</strong>
                           </Button>
                         </ButtonGroup>
                     </Col>
@@ -284,6 +307,13 @@ const Friends = () => {
                   requestVisible={requestVisible}
                   requestHandleOk={requestHandleOk}
                   requestHandleCancel={requestHandleCancel}
+                />
+            </div>
+            <div>
+              <BlockedFriends
+                  blockedVisible={blockedVisible}
+                  blockedHandleOk={blockedHandleOk}
+                  blockedHandleCancel={blockedHandleCancel}
                 />
             </div>
             <div>

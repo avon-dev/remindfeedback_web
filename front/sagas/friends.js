@@ -10,6 +10,12 @@ import {
     FRIENDS_BLOCK_REQUEST,
     FRIENDS_BLOCK_SUCCESS,
     FRIENDS_BLOCK_FAILURE,
+    FRIENDS_BLOCK_READ_REQUEST,
+    FRIENDS_BLOCK_READ_SUCCESS,
+    FRIENDS_BLOCK_READ_FAILURE,
+    FRIENDS_BLOCK_UPDATE_REQUEST,
+    FRIENDS_BLOCK_UPDATE_SUCCESS,
+    FRIENDS_BLOCK_UPDATE_FAILURE,
     FRIENDS_ADD_READ_REQUEST,
     FRIENDS_ADD_READ_SUCCESS,
     FRIENDS_ADD_READ_FAILURE,
@@ -241,8 +247,36 @@ function* watchFriends_Add_Read() {
     yield takeLatest(FRIENDS_ADD_READ_REQUEST, friends_Add_Read);
 };
 
+// 친구 차단 목록 READ
+function friends_Block_Read_API(){
+    return axios.get('/friend/allblock',{
+        withCredentials:true
+    });
+};
 
-// 친구 차단
+function* friends_Block_Read(){
+    try {
+        const result = yield call(friends_Block_Read_API);
+        console.log(result.data,"friends_Block_Read")
+        yield put({
+            type:FRIENDS_BLOCK_READ_SUCCESS,
+            data:result.data,
+        });
+    } catch (e) {
+        console.error(e);
+        yield put({
+            type:FRIENDS_BLOCK_READ_FAILURE,
+            error:e,
+        });
+    }
+};
+
+function* watchFriends_Block_Read(){
+    yield takeLatest( FRIENDS_BLOCK_READ_REQUEST, friends_Block_Read);
+};
+
+
+// 친구 차단 ADD
 function friends_Block_API(data){
     return axios.put('/friend/block',data,{
         withCredentials:true
@@ -268,6 +302,34 @@ function* friends_Block(action){
 
 function* watchFriends_Block(){
     yield takeLatest( FRIENDS_BLOCK_REQUEST, friends_Block);
+};
+
+// 친구 차단 목록 Update
+function friends_Block_Update_API(data){
+    return axios.put('/friend/unblock',data,{
+        withCredentials:true
+    });
+};
+
+function* friends_Block_Update(action){
+    try {
+        const result = yield call(friends_Block_Update_API, action.data);
+        console.log(result.data,"friends_Block_Update")
+        yield put({
+            type:FRIENDS_BLOCK_UPDATE_SUCCESS,
+            data:result.data,
+        });
+    } catch (e) {
+        console.error(e);
+        yield put({
+            type:FRIENDS_BLOCK_UPDATE_FAILURE,
+            error:e,
+        });
+    }
+};
+
+function* watchFriends_Block_Update(){
+    yield takeLatest( FRIENDS_BLOCK_UPDATE_REQUEST, friends_Block_Update);
 };
 
 
@@ -336,5 +398,7 @@ export default function* friendsSaga(){
         fork(watchFriends_Req_Add),
         fork(watchFriends_Pro_Read),
         fork(watchFriends_Pro_Add),
-    ]);
-}
+        fork(watchFriends_Block_Read),
+        fork(watchFriends_Block_Update),
+    ])
+    }
