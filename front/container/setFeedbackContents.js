@@ -110,7 +110,7 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
 
     useEffect(()=>{
       setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
-    },[])
+    },[myFeedback&&myFeedback])
 
     const setCategory = (val) => {
         const index = subject.findIndex((v,i) => parseInt(v.category_id)===parseInt(val));

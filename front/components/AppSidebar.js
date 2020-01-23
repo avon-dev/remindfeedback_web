@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Menu, Icon,Button, Row, Switch , Col, Tooltip } from 'antd';
 import AddFeedback from '../container/addFeedback';
@@ -20,9 +20,12 @@ const Sidebar = {
 const AppSidebar = () => {
 
   const dispatch = useDispatch();
-  const {subject} = useSelector(state=>state.feedbackSubject); 
+  const {subject,isLoadedSubject} = useSelector(state=>state.feedbackSubject);
+  const {isLoadedFriends} = useSelector(state=>state.friends);
+  const {isLoadedFeedback,isLoadedFeedbackItem} = useSelector(state=>state.feedback);  
   const [visible, setVisible] = useState();
   const [changeTheme, setChangeTheme] = useState(false);
+  const [check, setCheck] = useState(true);
 
   const category = subject?subject.map((v,i)=>
           <Menu.Item  key={v.category_id} style={{color: v.category_color?v.category_color:"#000000"}}>
@@ -30,6 +33,20 @@ const AppSidebar = () => {
             <strong>{v.category_title}</strong>
           </Menu.Item>
     ):<Menu.Item  key="default" title={<strong>Default</strong>} />
+
+  useEffect(()=>{
+      if(isLoadedFeedback){
+        setCheck(true);
+      }
+      
+    },[isLoadedFeedback])
+
+  useEffect(()=>{
+    if(isLoadedFriends||isLoadedSubject){
+      setCheck(false);
+    }
+    
+  },[isLoadedSubject||isLoadedFriends||isLoadedFeedbackItem]);
 
   const showModal = () => {
     setVisible(true);
@@ -64,7 +81,8 @@ const AppSidebar = () => {
         > + 새로운 피드백 작성</Button>
       </Col>
       <Col span={24} style={Sidebar}>
-        <Col span={24} style={{textAlign:'center', marginBottom:15}}>
+        {check&&
+          <Col span={24} style={{textAlign:'center', marginBottom:15}}>
           <Tooltip title="내피드백 OR 요청받은 피드백">
             <Switch
               size="default"
@@ -74,6 +92,7 @@ const AppSidebar = () => {
             />
           </Tooltip>
         </Col>
+        }
         <Col span={24}>
         <Menu
             theme={changeTheme}

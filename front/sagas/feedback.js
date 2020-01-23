@@ -312,6 +312,7 @@ function feedback_Delete_API(feedback_id){
 function* feedback_Delete(action){
     try {
         const result = yield call(feedback_Delete_API, action.feedback_id);
+        console.log(result.data,"feedback_Delete");
         yield put({
             type:FEEDBACK_DELETE_SUCCESS,
             data:result.data,

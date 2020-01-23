@@ -300,7 +300,7 @@ export default (state = initialState, action) => {
         case FEEDBACK_DELETE_SUCCESS:
             let deletedFeedback = state.feedback.myFeedback;
             if(action.data.success){
-                const index = state.feedback.myFeedback.findIndex((v,i)=>parseInt(v.id)===parseInt(action.data.data.id));
+                const index = state.feedback.myFeedback.findIndex((v,i)=>parseInt(v.id)===parseInt(action.data.data));
                 deletedFeedback = state.feedback.myFeedback.filter((v,i)=>i!==index);
             }
             return{
