@@ -12,11 +12,15 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
+    "/friends": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
     "/login": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/main": [
+    "/subject": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]
