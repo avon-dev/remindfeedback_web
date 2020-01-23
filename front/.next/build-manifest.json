@@ -12,10 +12,6 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/friends": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
     "/main": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
