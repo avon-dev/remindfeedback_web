@@ -27,7 +27,7 @@ const feedBackDetailComment = ({board_ids, feedback_id}) => {
     const [changeMode, setChangeMode] = useState(0);
     const [changeWrite, setChangeWrite] = useState(false);
     const [changeDo, setChangeDo] = useState(true);
-    const [categoryValue, setCategoryValue] = useState(0);
+    const [completeValue, setCompleteValue] = useState(0);
     
     useEffect(()=>{
         if(board_ids){
@@ -43,10 +43,10 @@ const feedBackDetailComment = ({board_ids, feedback_id}) => {
 
     useEffect(()=>{
         if(feedback.myFeedback){
-            const value = feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).category;
-            setCategoryValue(value);
+            const value = feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).complete;
+            setCompleteValue(value);
         }
-    },[feedback.myFeedback&&feedback.myFeedback])
+    },[board_ids&&board_ids])
 
 
     const handleCommentUpdate = () => {
@@ -249,11 +249,11 @@ const feedBackDetailComment = ({board_ids, feedback_id}) => {
                     <Tooltip title="피드백 완료 후 완료 요청버튼을 클릭 해주세요!">
                         <div style={{width:'100%'}}>
                             <Button
-                                disabled={categoryValue>=1?true:false} 
+                                disabled={completeValue>=1?true:false} 
                                 style={{width:'100%', background:'#0B4E92', color:'#FFFFFF'}}
                                 size="large"
                                 onClick={handleComplete}
-                            ><strong>{categoryValue===1?'완료 요청 중':categoryValue===2?'완료':"완료 요청"}</strong>
+                            ><strong>{completeValue===1?'완료 요청 중':completeValue===2?'완료':"완료 요청"}</strong>
                             </Button>
                         </div>
                     </Tooltip>

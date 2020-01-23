@@ -4,10 +4,15 @@ export const initialState = {
     feedback:{},
     feedbackItem:[],
     feedbackComment:[],
+    getFeedbackCategory:[],
 
     isAdddingFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 중
     isAddedFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 완료
     AddedFirstSubjectErrorReason: '', // 피드백 튜토리얼 첫번째 주제 저장 실패 사유
+
+    isLoadingGetFeedbackCategory: false, // 요청 피드백 데이터 요청 목록 로드 중
+    isLoadedGetFeedbackCategory: false, // 피드백 데이터 요청 목록 로드 성공
+    LoadedGetFeedbackCategoryErrorReason: '', // 피드백 데이터 요청 목록 실패 사유
 
     isLoadingFeedback: false, // 피드백 데이터 로드 중
     isLoadedFeedback: false, // 피드백 데이터 로드 성공
@@ -63,6 +68,10 @@ export const initialState = {
 export const FEEDBACK_TUTORIAL_REQUEST = 'FEEDBACK_TUTORIAL_REQUEST'; // 피드백 튜토리얼 시도 중
 export const FEEDBACK_TUTORIAL_SUCCESS = 'FEEDBACK_TUTORIAL_SUCCESS'; // 피드백 튜토리얼 성공
 export const FEEDBACK_TUTORIAL_FAILURE = 'FEEDBACK_TUTORIAL_FAILURE'; // 피드백 튜토리얼 실패
+
+export const GETFEEDBACK_CATEGORY_READ_REQUEST = 'GETFEEDBACK_CATEGORY_READ_REQUEST'; // GET 피드백 카테고리 READ 시도 중
+export const GETFEEDBACK_CATEGORY_READ_SUCCESS = 'GETFEEDBACK_CATEGORY_READ_SUCCESS'; // GET 피드백 카테고리 READ 성공
+export const GETFEEDBACK_CATEGORY_READ_FAILURE = 'GETFEEDBACK_CATEGORY_READ_FAILURE'; // GET 피드백 카테고리 READ 실패
 
 export const FEEDBACK_READ_REQUEST = 'FEEDBACK_READ_REQUEST'; // 피드백 READ 시도 중
 export const FEEDBACK_READ_SUCCESS = 'FEEDBACK_READ_SUCCESS'; // 피드백 READ 성공
@@ -137,6 +146,28 @@ export default (state = initialState, action) => {
                isAddedFirstSubject:false,
                AddedFirstSubjectErrorReason:action.error
             };
+
+        // GET 피드백 카테고리 
+        case GETFEEDBACK_CATEGORY_READ_REQUEST:
+            return{
+                ...state,
+                isLoadedGetFeedbackCategory:true,
+                isLoadedGetFeedbackCategory:false,
+            };
+        case GETFEEDBACK_CATEGORY_READ_SUCCESS:
+            return{
+               ...state,
+               isLoadedGetFeedbackCategory:false,
+               isLoadedGetFeedbackCategory:true,
+               getFeedbackCategory:action.data.success?action.data.data:state.getFeedbackCategory
+            };
+        case GETFEEDBACK_CATEGORY_READ_FAILURE:
+            return{
+               ...state,
+               isLoadedGetFeedbackCategory:false,
+               isLoadedGetFeedbackCategory:false,
+               LoadedGetFeedbackCategoryErrorReason:action.error
+            };
         
         // 피드백 READ
         case FEEDBACK_READ_REQUEST:
@@ -159,6 +190,7 @@ export default (state = initialState, action) => {
                     
                 }else{
                     // 요청된 피드백
+                    added = action.data.data;
                 }
             }else{
                 // 인피니티 스크롤링 feedback_read
@@ -174,6 +206,7 @@ export default (state = initialState, action) => {
                     hasMore = myFeedbackadded.length===10?true:false; 
                 }else{
                     // 요청된 피드백
+                    
                 }
             }
 

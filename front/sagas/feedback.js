@@ -4,6 +4,9 @@ import {
     FEEDBACK_TUTORIAL_REQUEST,
     FEEDBACK_TUTORIAL_SUCCESS,
     FEEDBACK_TUTORIAL_FAILURE,
+    GETFEEDBACK_CATEGORY_READ_REQUEST,
+    GETFEEDBACK_CATEGORY_READ_SUCCESS,
+    GETFEEDBACK_CATEGORY_READ_FAILURE,
     FEEDBACK_READ_REQUEST,
     FEEDBACK_READ_SUCCESS,
     FEEDBACK_READ_FAILURE,
@@ -390,6 +393,7 @@ function feedback_Read_API(data){
 function* feedback_Read(action){
     try {
         const result = yield call(feedback_Read_API, action.data);
+        console.log(result,"feedback_Read");
         yield put({
             type:FEEDBACK_READ_SUCCESS,
             data:result.data,
@@ -409,6 +413,35 @@ function* feedback_Read(action){
 
 function* watchFeedback_Read() {
     yield throttle(2000 , FEEDBACK_READ_REQUEST, feedback_Read);
+};
+
+// GetFeedback 카테고리 목록 
+function getfeedback_Category_API(data){
+    return axios.get(`/feedback/your/${data}`,{
+        withCredentials:true
+    });
+};
+
+
+function* getfeedback_Category(action){
+    try {
+        const result = yield call(getfeedback_Category_API, action.data);
+        console.log(result,'getfeedback_Category');
+        yield put({
+            type:GETFEEDBACK_CATEGORY_READ_SUCCESS,
+            data:result.data
+        }) 
+    } catch (e) {
+        console.error(e);
+        yield put({
+            type:GETFEEDBACK_CATEGORY_READ_FAILURE,
+            error:e,
+        });
+    }
+};
+
+function* watchGetFeedback_Category() {
+    yield takeLatest(GETFEEDBACK_CATEGORY_READ_REQUEST, getfeedback_Category);
 };
 
 // Feedback 튜토리얼
@@ -453,5 +486,6 @@ export default function* feedbackSaga(){
         fork(watchFeedback_Item_Add_Comment),
         fork(watchFeedback_Item_Update_Comment),
         fork(watchFeedback_Item_Delete_Comment),
+        fork(watchGetFeedback_Category),
     ]);
 }
