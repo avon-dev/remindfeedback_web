@@ -17,7 +17,9 @@ const main = () => {
             <Row>
                 <Col span={6}/>
                 <Col span={12}>
-                    "dfdfdfd"
+                <SetFeedBack 
+                        myFeedback={feedback.myFeedback}
+                     />
                     {/* {feedbackMode?
                     <GetFeedBack 
                         requestedFeedback={feedback.yourFeedback} 

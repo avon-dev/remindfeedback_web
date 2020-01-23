@@ -215,7 +215,7 @@ export default (state = initialState, action) => {
                isLoadingFeedback:false,
                isLoadedFeedback:true,
                hasMoreFeedback: hasMore,
-               feedback:action.data.success?added:{},
+               feedback:action.data.success?added:state.feedback,
             };
         case FEEDBACK_READ_FAILURE:
             return{
