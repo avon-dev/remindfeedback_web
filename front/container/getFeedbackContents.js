@@ -7,7 +7,7 @@ import {FEEDBACK_DELETE_REQUEST, FEEDBACK_UPDATE_REQUEST} from '../reducers/feed
 import UpdateFeedback from '../container/addFeedback';
 const {Meta} = Card;
 
-const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
+const getFeedbackContents = ({myFeedback,inProgress}) => {
 
     const dispatch = useDispatch();
     const { subject } = useSelector(state=> state.feedbackSubject);
@@ -30,46 +30,46 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
         }
     },[isUpdatedFeedback&&isUpdatedFeedback]);
 
-    useEffect(()=>{
-      if(categoryId){
+    // useEffect(()=>{
+    //   if(categoryId){
 
-        if(categoryId==='0'){
-          setCategory_id(categoryId)
-          if(forall){
-            setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)===2)); 
-            // setForall(false);
-            return
-          }else{
-            setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
-            // setForall(true);
-            return
-          }  
-        }
+    //     if(categoryId==='0'){
+    //       setCategory_id(categoryId)
+    //       if(forall){
+    //         setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)===2)); 
+    //         // setForall(false);
+    //         return
+    //       }else{
+    //         setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
+    //         // setForall(true);
+    //         return
+    //       }  
+    //     }
 
-        setCategory_id(categoryId)
-        if(inProgress){
-          //진행완료
-          if(categoryId===category_id){
-            setMyfeedback(filteredFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId)))
-          }else{
-            const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId));
-            const j = r.filter((v,i)=>parseInt(v.complete)===2)
-            setMyfeedback(j)
-          }
-        }else{
-          // 진행중
-          if(categoryId===category_id){
-            setMyfeedback(filteredFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId)))
-          }else{
-            const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId));
-            const j = r.filter((v,i)=>parseInt(v.complete)!==2)
-            setMyfeedback(j)
-            setCode(true)
-          }
-        }
+    //     setCategory_id(categoryId)
+    //     if(inProgress){
+    //       //진행완료
+    //       if(categoryId===category_id){
+    //         setMyfeedback(filteredFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId)))
+    //       }else{
+    //         const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId));
+    //         const j = r.filter((v,i)=>parseInt(v.complete)===2)
+    //         setMyfeedback(j)
+    //       }
+    //     }else{
+    //       // 진행중
+    //       if(categoryId===category_id){
+    //         setMyfeedback(filteredFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId)))
+    //       }else{
+    //         const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId));
+    //         const j = r.filter((v,i)=>parseInt(v.complete)!==2)
+    //         setMyfeedback(j)
+    //         setCode(true)
+    //       }
+    //     }
        
-      }
-    },[categoryId&&categoryId]);
+    //   }
+    // },[categoryId&&categoryId]);
 
     useEffect(()=>{
 
@@ -110,7 +110,7 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
 
     useEffect(()=>{
       setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
-    },[myFeedback&&myFeedback])
+    },[])
 
     const setCategory = (val) => {
         const index = subject.findIndex((v,i) => parseInt(v.category_id)===parseInt(val));
@@ -209,7 +209,7 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
           />
           </Col> 
         }
-        <div>
+        {/* <div>
         <UpdateFeedback
             order={FEEDBACK_UPDATE_REQUEST}
             feedback_id={feedback_id}
@@ -221,9 +221,9 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
             handleOk={handleOk}
             visible={visible}
         /> 
-        </div>
+        </div> */}
         </>
     )
 }
 
-export default setFeedbackContents;
+export default getFeedbackContents;

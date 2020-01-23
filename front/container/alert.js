@@ -7,7 +7,7 @@ import {formItemLayout} from '../css/Subject';
 const {Title} = Typography;
 const { Meta } = Card;
 
-const checkPassword = ({alertVisible,alerthHandleCancel,alerthHandleOk}) => {
+const alert = ({alertVisible,alerthHandleCancel,alerthHandleOk}) => {
 
 
     const item = <Row style={{width:500}}>
@@ -60,4 +60,4 @@ const checkPassword = ({alertVisible,alerthHandleCancel,alerthHandleOk}) => {
     )
 };
 
-export default checkPassword;
+export default alert;

@@ -4,10 +4,15 @@ export const initialState = {
     feedback:{},
     feedbackItem:[],
     feedbackComment:[],
+    getFeedbackCategory:[],
 
     isAdddingFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 중
     isAddedFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 완료
     AddedFirstSubjectErrorReason: '', // 피드백 튜토리얼 첫번째 주제 저장 실패 사유
+
+    isLoadingGetFeedbackCategory: false, // 요청 피드백 데이터 요청 목록 로드 중
+    isLoadedGetFeedbackCategory: false, // 피드백 데이터 요청 목록 로드 성공
+    LoadedGetFeedbackCategoryErrorReason: '', // 피드백 데이터 요청 목록 실패 사유
 
     isLoadingFeedback: false, // 피드백 데이터 로드 중
     isLoadedFeedback: false, // 피드백 데이터 로드 성공
@@ -52,6 +57,10 @@ export const initialState = {
     isDeletingFeedbackComment:false, // 피드백 댓글 삭제 중
     isDeletedFeedbackComment:false, // 피드백 댓글 삭제 완료
     DeletedFeedbackCommentErrorReason:'', // 피드백 댓글 삭제 실패 사유
+
+    isCompleting_req_Feedback: false, // 피드백 완료 요청 로드 중
+    isCompleted_req_Feedback: false, // 피드백 완료 요청 로드완료
+    Completed_req_FeedbackErrorReason: '', // 피드백 완료 요청 로드 실패 사유
 }
 
 
@@ -59,6 +68,10 @@ export const initialState = {
 export const FEEDBACK_TUTORIAL_REQUEST = 'FEEDBACK_TUTORIAL_REQUEST'; // 피드백 튜토리얼 시도 중
 export const FEEDBACK_TUTORIAL_SUCCESS = 'FEEDBACK_TUTORIAL_SUCCESS'; // 피드백 튜토리얼 성공
 export const FEEDBACK_TUTORIAL_FAILURE = 'FEEDBACK_TUTORIAL_FAILURE'; // 피드백 튜토리얼 실패
+
+export const GETFEEDBACK_CATEGORY_READ_REQUEST = 'GETFEEDBACK_CATEGORY_READ_REQUEST'; // GET 피드백 카테고리 READ 시도 중
+export const GETFEEDBACK_CATEGORY_READ_SUCCESS = 'GETFEEDBACK_CATEGORY_READ_SUCCESS'; // GET 피드백 카테고리 READ 성공
+export const GETFEEDBACK_CATEGORY_READ_FAILURE = 'GETFEEDBACK_CATEGORY_READ_FAILURE'; // GET 피드백 카테고리 READ 실패
 
 export const FEEDBACK_READ_REQUEST = 'FEEDBACK_READ_REQUEST'; // 피드백 READ 시도 중
 export const FEEDBACK_READ_SUCCESS = 'FEEDBACK_READ_SUCCESS'; // 피드백 READ 성공
@@ -88,9 +101,9 @@ export const FEEDBACK_ITEM_UPDATE_REQUEST = 'FEEDBACK_ITEM_UPDATE_REQUEST'; // �
 export const FEEDBACK_ITEM_UPDATE_SUCCESS = 'FEEDBACK_ITEM_UPDATE_SUCCESS'; // 피드백 게시물 UPDATE 성공
 export const FEEDBACK_ITEM_UPDATE_FAILURE = 'FEEDBACK_ITEM_UPDATE_FAILURE'; // 피드백 게시물 UPDATE 실패
 
-export const FEEDBACK_ITEM_COMPLETE_REQUEST = 'FEEDBACK_ITEM_COMPLETE_REQUEST'; // 피드백 게시물 완료 시도 중
-export const FEEDBACK_ITEM_COMPLETE_SUCCESS = 'FEEDBACK_ITEM_COMPLETE_SUCCESS'; // 피드백 게시물 완료 성공
-export const FEEDBACK_ITEM_COMPLETE_FAILURE = 'FEEDBACK_ITEM_COMPLETE_FAILURE'; // 피드백 게시물 완료 실패
+export const FEEDBACK_ITEM_COMPLETE_REQ_REQUEST = 'FEEDBACK_ITEM_COMPLETE_REQUEST'; // 피드백 게시물 완료 시도 중
+export const FEEDBACK_ITEM_COMPLETE_REQ_SUCCESS = 'FEEDBACK_ITEM_COMPLETE_SUCCESS'; // 피드백 게시물 완료 성공
+export const FEEDBACK_ITEM_COMPLETE_REQ_FAILURE = 'FEEDBACK_ITEM_COMPLETE_FAILURE'; // 피드백 게시물 완료 실패
 
 export const FEEDBACK_ITEM_COMMENT_REQUEST = 'FEEDBACK_ITEM_COMMENT_REQUEST'; // 피드백 게시물 댓글 READ 시도 중
 export const FEEDBACK_ITEM_COMMENT_SUCCESS = 'FEEDBACK_ITEM_COMMENT_SUCCESS'; // 피드백 게시물 댓글 READ 성공
@@ -133,6 +146,28 @@ export default (state = initialState, action) => {
                isAddedFirstSubject:false,
                AddedFirstSubjectErrorReason:action.error
             };
+
+        // GET 피드백 카테고리 
+        case GETFEEDBACK_CATEGORY_READ_REQUEST:
+            return{
+                ...state,
+                isLoadedGetFeedbackCategory:true,
+                isLoadedGetFeedbackCategory:false,
+            };
+        case GETFEEDBACK_CATEGORY_READ_SUCCESS:
+            return{
+               ...state,
+               isLoadedGetFeedbackCategory:false,
+               isLoadedGetFeedbackCategory:true,
+               getFeedbackCategory:action.data.success?action.data.data:state.getFeedbackCategory
+            };
+        case GETFEEDBACK_CATEGORY_READ_FAILURE:
+            return{
+               ...state,
+               isLoadedGetFeedbackCategory:false,
+               isLoadedGetFeedbackCategory:false,
+               LoadedGetFeedbackCategoryErrorReason:action.error
+            };
         
         // 피드백 READ
         case FEEDBACK_READ_REQUEST:
@@ -155,6 +190,7 @@ export default (state = initialState, action) => {
                     
                 }else{
                     // 요청된 피드백
+                    // added = action.data.data;
                 }
             }else{
                 // 인피니티 스크롤링 feedback_read
@@ -170,6 +206,7 @@ export default (state = initialState, action) => {
                     hasMore = myFeedbackadded.length===10?true:false; 
                 }else{
                     // 요청된 피드백
+                    
                 }
             }
 
@@ -178,7 +215,7 @@ export default (state = initialState, action) => {
                isLoadingFeedback:false,
                isLoadedFeedback:true,
                hasMoreFeedback: hasMore,
-               feedback:action.data.success?added:{},
+               feedback:action.data.success?added:state.feedback,
             };
         case FEEDBACK_READ_FAILURE:
             return{
@@ -263,7 +300,7 @@ export default (state = initialState, action) => {
         case FEEDBACK_DELETE_SUCCESS:
             let deletedFeedback = state.feedback.myFeedback;
             if(action.data.success){
-                const index = state.feedback.myFeedback.findIndex((v,i)=>parseInt(v.id)===parseInt(action.data.data.id));
+                const index = state.feedback.myFeedback.findIndex((v,i)=>parseInt(v.id)===parseInt(action.data.data));
                 deletedFeedback = state.feedback.myFeedback.filter((v,i)=>i!==index);
             }
             return{
@@ -370,18 +407,33 @@ export default (state = initialState, action) => {
                 UpdatedFeedbackItemErrorReason:action.error,
             };
 
-        // 피드백 게시물 완료 
-        case FEEDBACK_ITEM_COMPLETE_REQUEST:
+        // 피드백 게시물 완료 요청
+        case FEEDBACK_ITEM_COMPLETE_REQ_REQUEST:
             return{
                 ...state,
+                isCompleting_req_Feedback: true, 
+                isCompleted_req_Feedback: false,
             };
-        case FEEDBACK_ITEM_COMPLETE_SUCCESS:
+        case FEEDBACK_ITEM_COMPLETE_REQ_SUCCESS:
+            let updatedFeedbackAfterComplete = state.feedback;
+            if(action.data.success){
+                const index = state.feedback.myFeedback.findIndex((v,i)=>{parseInt(v.id)===parseInt(action.data.data.id)})
+                state.feedback.myFeedback[index] = {...action.data.data};
+                updatedFeedbackAfterComplete = state.feedback;
+            }
             return{
                 ...state,
+                isCompleting_req_Feedback: false, 
+                isCompleted_req_Feedback: true,
+                feedback:updatedFeedbackAfterComplete,
+                
             };
-        case FEEDBACK_ITEM_COMPLETE_FAILURE:
+        case FEEDBACK_ITEM_COMPLETE_REQ_FAILURE:
             return{
                 ...state,
+                isCompleting_req_Feedback: false, 
+                isCompleted_req_Feedback: false, 
+                Completed_req_FeedbackErrorReason: '', 
             };
 
         // 피드백 게시물 댓글 READ 

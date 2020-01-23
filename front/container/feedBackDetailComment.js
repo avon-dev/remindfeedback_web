@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Col, Divider, Typography, Button, Icon, Comment, Tooltip, Avatar, Input, Form, Popconfirm ,Empty} from 'antd';
 import moment from 'moment';
 import {FEEDBACK_ITEM_COMMENT_REQUEST, 
-        FEEDBACK_ITEM_COMPLETE_REQUEST,
+        FEEDBACK_ITEM_COMPLETE_REQ_REQUEST,
         FEEDBACK_ITEM_COMMENT_ADD_REQUEST,
         FEEDBACK_ITEM_COMMENT_DELETE_REQUEST,
         FEEDBACK_ITEM_COMMENT_UPDATE_REQUEST,
@@ -12,14 +12,14 @@ import {FEEDBACK_ITEM_COMMENT_REQUEST,
 const { TextArea } = Input;
 const {Group} = Button;
 
-const feedBackDetailComment = ({board_ids}) => {
+const feedBackDetailComment = ({board_ids, feedback_id}) => {
 
     const dispatch = useDispatch();
 
     const commentReferenece = useRef();
     const commentIdReference = useRef();
     
-    const {feedbackComment, feedbackItem} = useSelector(state => state.feedback);
+    const {feedbackComment, feedbackItem, feedback} = useSelector(state => state.feedback);
     const [comment_content,setComments] = useState('');
     const [updateComment,setUpdateComment] = useState('');
     const [board_id, setBoard_id] = useState(0);
@@ -27,6 +27,7 @@ const feedBackDetailComment = ({board_ids}) => {
     const [changeMode, setChangeMode] = useState(0);
     const [changeWrite, setChangeWrite] = useState(false);
     const [changeDo, setChangeDo] = useState(true);
+    const [completeValue, setCompleteValue] = useState(0);
     
     useEffect(()=>{
         if(board_ids){
@@ -39,6 +40,13 @@ const feedBackDetailComment = ({board_ids}) => {
             setBoard_id(feedbackItem[0].id);
         }
     },[feedbackItem&&feedbackItem]);
+
+    useEffect(()=>{
+        if(feedback.myFeedback){
+            const value = feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).complete;
+            setCompleteValue(value);
+        }
+    },[board_ids&&board_ids])
 
 
     const handleCommentUpdate = () => {
@@ -109,12 +117,12 @@ const feedBackDetailComment = ({board_ids}) => {
 
     const handleComplete = useCallback(() => {
         dispatch({
-            type:FEEDBACK_ITEM_COMPLETE_REQUEST,
+            type:FEEDBACK_ITEM_COMPLETE_REQ_REQUEST,
             data:{
-                
+                feedback_id
             }
         });
-    },[]);
+    },[feedback_id&&feedback_id]);
 
     const comments = feedbackComment&&feedbackComment.map((v,i) => <Comment
         // style={{border:"1px solid #000000", padding:10}}
@@ -239,12 +247,15 @@ const feedBackDetailComment = ({board_ids}) => {
                 </Col>
                 <Col span={22} style={{textAlign:'center'}}>
                     <Tooltip title="피드백 완료 후 완료 요청버튼을 클릭 해주세요!">
-                        <Button 
-                            style={{width:'100%', background:'#0B4E92', color:'#FFFFFF'}}
-                            size="large"
-                            onClick={handleComplete}
-                        ><strong>완료 요청</strong>
-                        </Button>
+                        <div style={{width:'100%'}}>
+                            <Button
+                                disabled={completeValue>=1?true:false} 
+                                style={{width:'100%', background:'#0B4E92', color:'#FFFFFF'}}
+                                size="large"
+                                onClick={handleComplete}
+                            ><strong>{completeValue===1?'완료 요청 중':completeValue===2?'완료':"완료 요청"}</strong>
+                            </Button>
+                        </div>
                     </Tooltip>
                 </Col>
                 

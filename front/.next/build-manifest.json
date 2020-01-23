@@ -15,6 +15,10 @@
     "/main": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
+    ],
+    "/subject": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ]
   }
 }
