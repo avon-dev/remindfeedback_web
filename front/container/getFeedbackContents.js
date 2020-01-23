@@ -7,7 +7,7 @@ import {FEEDBACK_DELETE_REQUEST, FEEDBACK_UPDATE_REQUEST} from '../reducers/feed
 import UpdateFeedback from '../container/addFeedback';
 const {Meta} = Card;
 
-const getFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
+const getFeedbackContents = ({myFeedback,inProgress}) => {
 
     const dispatch = useDispatch();
     const { subject } = useSelector(state=> state.feedbackSubject);
@@ -73,38 +73,38 @@ const getFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
 
     useEffect(()=>{
 
-      // if(category_id==='0'){
-      //   if(inProgress){
-      //     setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)===2)); 
-      //     return
-      //   }else{
-      //     setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
-      //     return
-      //   }  
-      // }
+      if(category_id==='0'){
+        if(inProgress){
+          setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)===2)); 
+          return
+        }else{
+          setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
+          return
+        }  
+      }
 
        if(inProgress){
          //진행완료
-        //  if(code){
-          // const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(category_id));
-          const j = myFeedback.filter((v,i)=>parseInt(v.complete)===2)
+         if(code){
+          const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(category_id));
+          const j = r.filter((v,i)=>parseInt(v.complete)===2)
           setMyfeedback(j)
-        //  }else{
-        //   setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)===2));
-        //  }
+         }else{
+          setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)===2));
+         }
 
-        //  setForall(true)
+         setForall(true)
          
        }else{
          //진행중
-        //  if(code){
-          // const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(category_id));
-          const j = myFeedback.filter((v,i)=>parseInt(v.complete)!==2)
+         if(code){
+          const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(category_id));
+          const j = r.filter((v,i)=>parseInt(v.complete)!==2)
           setMyfeedback(j)
-        //  }else{
-        //   setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
-        //  }
-        //  setForall(false)
+         }else{
+          setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
+         }
+         setForall(false)
        }
     },[inProgress&&inProgress]);
 
@@ -209,8 +209,8 @@ const getFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
           />
           </Col> 
         }
-        <div>
-        {/* <UpdateFeedback
+        {/* <div>
+        <UpdateFeedback
             order={FEEDBACK_UPDATE_REQUEST}
             feedback_id={feedback_id}
             feedback_titles={feedback_title}
@@ -220,8 +220,8 @@ const getFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
             handleCancel={handleCancel}
             handleOk={handleOk}
             visible={visible}
-        />  */}
-        </div>
+        /> 
+        </div> */}
         </>
     )
 }

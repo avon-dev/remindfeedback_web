@@ -8,9 +8,9 @@ const { Meta } = Card;
 const getFeedbackCategory = ({reqFeedbackCategoryVisble,reqFeedbackCategoryHandleCancel}) => {
 
     return(
-        <>
+        <> 
             <Drawer
-                key='alert'
+                key='getFeedbackCategory'
                 title={<strong>피드백 요청 목록</strong>}
                 placement="right"
                 visible={reqFeedbackCategoryVisble}
