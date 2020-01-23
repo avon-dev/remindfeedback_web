@@ -14,39 +14,39 @@ const getFeedback = ({requestedFeedback}) => {
     const [inProgress, setInProgress] = useState(false);
     const [reqFeedbackCategoryVisble, setReqFeedbackCategoryVisible] = useState(false);
 
-    const mainItem = <GetFeedbackContents
-                            myFeedback={requestedFeedback}
-                            inProgress={inProgress}  
-                        />
-
-    // const mainItem = requestedFeedback.length>=1?
-    //                 requestedFeedback.map((data,i)=> <Link key={data} href={`/feedbackdetail?${data}`} ><a><Card
-    //                     key={data}
-    //                     style={{ marginTop: 15, background:'#8A2BE2' }}
-    //                     cover={<div style={{background:'#DCDCDC', fontSize:10, textAlign:'right', fontWeight:"bold", fontStyle:"italic",paddingRight:15,}}>
-    //                             요청받은 피드백</div>}
-    //                     actions={[<div style={{ fontSize:10, textAlign:'right', fontWeight:"bold", fontStyle:"italic"}}>
-    //                     {moment().format('YYYY MMMM Do , h:mm:ss a')}
-    //                     </div>]}        
-    //                     >
-    //                     <Meta
-    //                         avatar={
-    //                             <Avatar icon="user" />
-    //                         }
-    //                         title="제목"
-    //                         description={data}
+    // const mainItem = <GetFeedbackContents
+    //                         myFeedback={requestedFeedback}
+    //                         inProgress={inProgress}  
     //                     />
-    //                 </Card></a></Link>)
-    //                 :
-    //                 <Col span={24} style={{marginTop:30}}>
-    //                 <Empty 
-    //                 description={
-    //                     <span>
-    //                       <strong>피드백이 없습니다.<br/>피드백을 생성해 주세요</strong>
-    //                     </span>
-    //                   }
-    //                 />
-    //                 </Col>
+
+    const mainItem = requestedFeedback.length>=1?
+                    requestedFeedback.map((data,i)=> <Link key={data} href={`/feedbackdetail?${data}`} ><a><Card
+                        key={data}
+                        style={{ marginTop: 15, background:'#8A2BE2' }}
+                        cover={<div style={{background:'#DCDCDC', fontSize:10, textAlign:'right', fontWeight:"bold", fontStyle:"italic",paddingRight:15,}}>
+                                요청받은 피드백</div>}
+                        actions={[<div style={{ fontSize:10, textAlign:'right', fontWeight:"bold", fontStyle:"italic"}}>
+                        {moment().format('YYYY MMMM Do , h:mm:ss a')}
+                        </div>]}        
+                        >
+                        <Meta
+                            avatar={
+                                <Avatar icon="user" />
+                            }
+                            title="제목"
+                            description={data}
+                        />
+                    </Card></a></Link>)
+                    :
+                    <Col span={24} style={{marginTop:30}}>
+                    <Empty 
+                    description={
+                        <span>
+                          <strong>피드백이 없습니다.<br/>피드백을 생성해 주세요</strong>
+                        </span>
+                      }
+                    />
+                    </Col>
     
     const filter =  requestedFeedback.length>=1?
                     <Breadcrumb>
@@ -118,12 +118,12 @@ const getFeedback = ({requestedFeedback}) => {
             </Col>
             {progress}
             <div>
-                {mainItem}  
+                {/* {mainItem}   */}
             </div>
-            <GetFeedbackCategory
+            {/* <GetFeedbackCategory
                 reqFeedbackCategoryVisble={reqFeedbackCategoryVisble}
                 reqFeedbackCategoryHandleCancel={reqFeedbackCategoryHandleCancel}
-            />        
+            />         */}
         </>
     )
 }

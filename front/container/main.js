@@ -17,13 +17,14 @@ const main = () => {
             <Row>
                 <Col span={6}/>
                 <Col span={12}>
-                    {feedbackMode?
+                    "dfdfdfd"
+                    {/* {feedbackMode?
                     <GetFeedBack 
                         requestedFeedback={feedback.yourFeedback} 
                     />
                     :<SetFeedBack 
                         myFeedback={feedback.myFeedback}
-                     />}
+                     />} */}
                 </Col>
                 <Col span={6}/>
             </Row>

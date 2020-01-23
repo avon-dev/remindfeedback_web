@@ -190,7 +190,7 @@ export default (state = initialState, action) => {
                     
                 }else{
                     // 요청된 피드백
-                    added = action.data.data;
+                    // added = action.data.data;
                 }
             }else{
                 // 인피니티 스크롤링 feedback_read

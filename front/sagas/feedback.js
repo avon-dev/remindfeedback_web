@@ -393,7 +393,7 @@ function feedback_Read_API(data){
 function* feedback_Read(action){
     try {
         const result = yield call(feedback_Read_API, action.data);
-        console.log(result,"feedback_Read");
+        console.log(result.data,"feedback_Read");
         yield put({
             type:FEEDBACK_READ_SUCCESS,
             data:result.data,
