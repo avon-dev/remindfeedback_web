@@ -53,7 +53,7 @@ const getFeedback = ({requestedFeedback}) => {
                     <div></div>
 
     const progress = requestedFeedback.length>=1?
-            inProgress?
+            !inProgress?
             <div>
                 <Button
                     onClick={handleFilter}
@@ -80,11 +80,11 @@ const getFeedback = ({requestedFeedback}) => {
         <>          
             <Col span={24} style={{textAlign:'center',marginTop:15, fontStyle:"italic", textShadow:"2px 2px 2px gray", }}>
                 <Title level={2}><strong>요청받은 피드백</strong>
-                <span style={{marginLeft:15}}>
+                {/* <span style={{marginLeft:15}}>
                     <Tooltip title="요청받은 피드백 목록입니다.">
                         <Button type="dashed" size="small" icon="caret-right" onClick={popUpReqFeedbackCategory}></Button>
                     </Tooltip>
-                </span>
+                </span> */}
                 </Title>
             </Col>
             <Col span={24} style={{marginTop:20, textAlign:'right'}}> 

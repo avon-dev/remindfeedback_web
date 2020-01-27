@@ -122,10 +122,18 @@ export const FEEDBACK_ITEM_COMMENT_DELETE_SUCCESS = 'FEEDBACK_ITEM_COMMENT_DELET
 export const FEEDBACK_ITEM_COMMENT_DELETE_FAILURE = 'FEEDBACK_ITEM_COMMENT_DELETE_FAILURE'; // 피드백 게시물 댓글 DELETE 실패
 
 export const FEEDBACK_ITEM_ARRANGE_DATE = 'FEEDBACK_ITEM_ARRANGE_DATE'; // 피드백 게시물 데이터 정리
+export const FEEDBACK_CHANGE_MODE = 'FEEDBACK_CHANGE_MODE'; // 피드백 모드 체인지
 
 export default (state = initialState, action) => {
     switch(action.type){
-             
+
+        // 피드백 모드 체인지
+        case FEEDBACK_CHANGE_MODE:
+            return{
+                ...state,
+                feedbackMode:action.data,
+            };
+
         // 피드백 튜토리얼 
         case FEEDBACK_TUTORIAL_REQUEST:
             return{
@@ -175,7 +183,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoadingFeedback:true,
                 isLoadedFeedback:false,
-                feedbackMode:action.data.feedbackModes,
+                feedbackMode:action.data.feedbackMode,
                 lastId:action.data.lastId,
                 status:action.data.status&&action.data.status
             };
@@ -190,7 +198,7 @@ export default (state = initialState, action) => {
                     
                 }else{
                     // 요청된 피드백
-                    // added = action.data.data;
+                    added = action.data.data;
                 }
             }else{
                 // 인피니티 스크롤링 feedback_read
@@ -206,7 +214,14 @@ export default (state = initialState, action) => {
                     hasMore = myFeedbackadded.length===10?true:false; 
                 }else{
                     // 요청된 피드백
-                    
+                    let yourFeedbackadded = action.data.data.yourFeedback;
+                    if(yourFeedbackadded.length === 0){
+                        added = state.feedback;
+                    }else{
+                        state.feedback.yourFeedback.push(...yourFeedbackadded);
+                        added = state.feedback;
+                    }
+                    hasMore = yourFeedbackadded.length===10?true:false;
                 }
             }
 
@@ -416,10 +431,23 @@ export default (state = initialState, action) => {
             };
         case FEEDBACK_ITEM_COMPLETE_REQ_SUCCESS:
             let updatedFeedbackAfterComplete = state.feedback;
-            if(action.data.success){
-                const index = state.feedback.myFeedback.findIndex((v,i)=>{parseInt(v.id)===parseInt(action.data.data.id)})
-                state.feedback.myFeedback[index] = {...action.data.data};
-                updatedFeedbackAfterComplete = state.feedback;
+            if(state.feedbackMode){
+                // 요청 받은 피드백
+                
+                if(action.data.success){
+                    const index = state.feedback.yourFeedback.findIndex((v,i)=>parseInt(v.id)===parseInt(action.data.data.id))
+                    console.log("요청 받은 피드백", index)
+                    state.feedback.yourFeedback[index] = {...action.data.data};
+                    updatedFeedbackAfterComplete = state.feedback;
+                }
+            }else{
+                // 요청 한 피드백
+                if(action.data.success){
+                    const index = state.feedback.myFeedback.findIndex((v,i)=>parseInt(v.id)===parseInt(action.data.data.id))
+                    console.log("요청한 피드백", index)
+                    state.feedback.myFeedback[index] = {...action.data.data};
+                    updatedFeedbackAfterComplete = state.feedback;
+                }
             }
             return{
                 ...state,

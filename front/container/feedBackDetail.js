@@ -10,12 +10,20 @@ const feedBackDetail = ({feedback_id}) => {
 
     const dispatch = useDispatch();
     const {feedback} = useSelector(state=>state.feedback);
+    const {feedbackMode} = useSelector(state=>state.feedbackMode);
 
     const [feedbackTitle, setFeedbackTitle] = useState('');
     const [board_id, setBoard_id] = useState(0);
 
     useEffect(()=>{
-        setFeedbackTitle(feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).title);
+        if(feedbackMode){
+            // 요청받은 피드백
+            setFeedbackTitle(feedback.yourFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).title);
+        }else{
+            // 요청한 피드백
+            setFeedbackTitle(feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).title);
+        }
+        
         return () =>{
             dispatch({
                 type:FEEDBACK_ITEM_ARRANGE_DATE

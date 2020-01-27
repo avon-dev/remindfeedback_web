@@ -4,6 +4,7 @@ import { Menu, Icon,Button, Row, Switch , Col, Tooltip } from 'antd';
 import AddFeedback from '../container/addFeedback';
 import Link from 'next/link';
 import { FEEDBACK_MODE } from '../reducers/feedbackMode';
+import { FEEDBACK_CHANGE_MODE } from '../reducers/feedback';
 
 const { SubMenu } = Menu;
 
@@ -38,15 +39,13 @@ const AppSidebar = () => {
       if(isLoadedFeedback){
         setCheck(true);
       }
-      
-    },[isLoadedFeedback])
+  },[isLoadedFeedback]);
 
   useEffect(()=>{
-    if(isLoadedFriends||isLoadedSubject){
+    if(isLoadedFriends||isLoadedFeedbackItem){
       setCheck(false);
     }
-    
-  },[isLoadedSubject||isLoadedFriends||isLoadedFeedbackItem]);
+  },[isLoadedFriends||isLoadedFeedbackItem]);
 
   const showModal = () => {
     setVisible(true);
@@ -65,6 +64,10 @@ const AppSidebar = () => {
     await dispatch({
       type:FEEDBACK_MODE,
       data: value
+    })
+    await dispatch({
+      type:FEEDBACK_CHANGE_MODE,
+      data:value
     })
   };
 

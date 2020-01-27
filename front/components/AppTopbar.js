@@ -4,7 +4,8 @@ import { Menu, Icon, Input, Typography, Dropdown, Col, Row, Button, Avatar, Popc
 import { useDispatch, useSelector } from 'react-redux';
 import AppTutorial from '../components/TutorialMain';
 import AppAlert from '../container/alert';
-import { FEEDBACK_TUTORIAL_REQUEST, FEEDBACK_READ_REQUEST } from '../reducers/feedback';
+import { FEEDBACK_TUTORIAL_REQUEST, FEEDBACK_READ_REQUEST, FEEDBACK_CHANGE_MODE } from '../reducers/feedback';
+import { FEEDBACK_MODE } from '../reducers/feedbackMode';
 import { LOG_OUT_REQUEST } from '../reducers/user';
 import Router from 'next/router';
 
@@ -88,13 +89,18 @@ const AppTopbar = () => {
     }
 
     const handleHome = () => {
-        const feedbackModes = feedbackMode;
+        const feedbackMode = false;
         const lastId = 0;
+        
         dispatch({
             type:FEEDBACK_READ_REQUEST,
             data:{
-                lastId, feedbackModes
+                lastId, feedbackMode
             }
+        })
+        dispatch({
+            type:FEEDBACK_MODE,
+            data: feedbackMode
         })
         Router.push('/main');
     }

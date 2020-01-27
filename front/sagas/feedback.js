@@ -172,10 +172,24 @@ function* watchFeedback_Item_Comment() {
 
 
 // Feedback 피드백 게시물 완료 요청
-function feedback_Item_Complete_API(feedback_id){
-    return axios.post('/feedback/complete/request',feedback_id,{
-        withCredentials:true
-    });
+function feedback_Item_Complete_API(data){
+    switch (data.type) {
+        case "request":
+            return axios.post('/feedback/complete/request',data,{
+                withCredentials:true
+            });
+        case "accept":
+            return axios.post('/feedback/complete/accept',data,{
+                withCredentials:true
+            });
+        case "reject":
+            return axios.post('/feedback/complete/reject',data,{
+                withCredentials:true
+            });
+        default:
+            break;
+    }
+    
 };
 
 function* feedback_Item_Complete(action){
