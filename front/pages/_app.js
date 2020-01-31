@@ -3,6 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
+import {Container} from 'next/app';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
@@ -15,10 +16,12 @@ import {FEEDBACK_READ_REQUEST} from '../reducers/feedback';
 const RemindFeedback = ({Component, store, pageProps }) => {
     return(
         <> 
-            <Provider store={store}>
-                <AppHeader/>
-                <Component {...pageProps}/>
-            </Provider>
+            <Container>
+                <Provider store={store}>
+                    <AppHeader/>
+                    <Component {...pageProps}/>
+                </Provider>
+            </Container>
         </>
     )
 }
