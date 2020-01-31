@@ -30,49 +30,7 @@ const getFeedbackContents = ({myFeedback,inProgress}) => {
         }
     },[isUpdatedFeedback&&isUpdatedFeedback]);
 
-    // useEffect(()=>{
-    //   if(categoryId){
-
-    //     if(categoryId==='0'){
-    //       setCategory_id(categoryId)
-    //       if(forall){
-    //         setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)===2)); 
-    //         // setForall(false);
-    //         return
-    //       }else{
-    //         setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
-    //         // setForall(true);
-    //         return
-    //       }  
-    //     }
-
-    //     setCategory_id(categoryId)
-    //     if(inProgress){
-    //       //진행완료
-    //       if(categoryId===category_id){
-    //         setMyfeedback(filteredFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId)))
-    //       }else{
-    //         const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId));
-    //         const j = r.filter((v,i)=>parseInt(v.complete)===2)
-    //         setMyfeedback(j)
-    //       }
-    //     }else{
-    //       // 진행중
-    //       if(categoryId===category_id){
-    //         setMyfeedback(filteredFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId)))
-    //       }else{
-    //         const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(categoryId));
-    //         const j = r.filter((v,i)=>parseInt(v.complete)!==2)
-    //         setMyfeedback(j)
-    //         setCode(true)
-    //       }
-    //     }
-       
-    //   }
-    // },[categoryId&&categoryId]);
-
     useEffect(()=>{
-
       if(category_id==='0'){
         if(inProgress){
           setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)===2)); 
@@ -167,11 +125,8 @@ const getFeedbackContents = ({myFeedback,inProgress}) => {
            filteredFeedback.length>=1?
            filteredFeedback.map((v,i)=> 
               <Card
-              // title={<div style={{background:'#DCDCDC', padding:0, margin:0}}>
-              // {<strong>{setCategory(v.category)}</strong>}</div>}
-              // extra={}
               key={v.id}
-              style={{ marginTop: 15, background:setColor(v.category) }}
+              style={{ marginTop: 15, background:"#8d8d8d" }}
               cover={<div style={{background:'#DCDCDC', fontSize:12,textAlign:'right', fontWeight:"bold", fontStyle:"italic",paddingRight:15}}>
                       {moment(v.createdAt).format('YYYY MMMM Do , h:mm:ss a')}</div>}
               actions={[
@@ -192,10 +147,15 @@ const getFeedbackContents = ({myFeedback,inProgress}) => {
           >
               <Link key={v.id} as={`/feedbackdetail/${v.id}`} href={`/feedbackdetail?id=${v.id}`} ><a><Meta
                   avatar={
-                  <Avatar>{v.adviser_uid.split('')[0]}</Avatar>
+                    <div>
+                    <Avatar src={v.yourfeedback.portrait&&`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v.yourfeedback.portrait}`}>
+                    {!v.yourfeedback.portrait&&v.yourfeedback.nickname.split('')[0]}
+                    </Avatar>
+                    <p style={{color:"#FFFFFF"}}><strong>{v.yourfeedback.nickname}</strong></p>
+                    </div>
                   }
                 title={<><Col span={7} style={{background:"#FFFFFF",textAlign:"center", margin:5, borderRadius:100, color:"red"}}><strong>D-</strong>{dDay(v.createdAt, v.write_date)}</Col><Col span={17}/>
-                        <Col span={24} style={{fontSize:23}}><strong>{v.title}</strong></Col></>}
+                        <Col span={24} style={{fontSize:23, color:"#FFFFFF"}}><strong>{v.title}</strong></Col></>}
               /></a></Link>
           </Card>)
           :
@@ -209,7 +169,7 @@ const getFeedbackContents = ({myFeedback,inProgress}) => {
           />
           </Col> 
         }
-        {/* <div>
+        <div>
         <UpdateFeedback
             order={FEEDBACK_UPDATE_REQUEST}
             feedback_id={feedback_id}
@@ -221,7 +181,7 @@ const getFeedbackContents = ({myFeedback,inProgress}) => {
             handleOk={handleOk}
             visible={visible}
         /> 
-        </div> */}
+        </div>
         </>
     )
 }

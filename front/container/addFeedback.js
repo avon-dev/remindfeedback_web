@@ -45,12 +45,17 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                 }
             })
         }else{
-            dispatch({
-                type: FEEDBACK_ADD_REQUEST,
-                data:{
-                    category,title,write_date,adviser 
-                },
-            });
+            const adviser = searchedFriends.user_uid;
+            if(adviser){
+                dispatch({
+                    type: FEEDBACK_ADD_REQUEST,
+                    data:{
+                        category,title,write_date,adviser 
+                    },
+                });
+            }else{
+                return alert('조언자를 다시 등록해 주시기 바랍니다.');
+            }
         }
         
     },[category,title,write_date,adviser]);

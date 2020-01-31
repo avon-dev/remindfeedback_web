@@ -7,6 +7,7 @@ import AppFooter from '../components/AppFooter';
 import { layouts,layout, backgroundWhite, backgroundLightBlue } from '../css/Common';
 import { Layout } from 'antd';
 import { FEEDBACK_READ_REQUEST } from '../reducers/feedback';
+import { FEEDBACK_SUB_READ_REQUEST } from '../reducers/feedbackSubject';
 import { useDispatch, useSelector } from 'react-redux';
 import Router  from 'next/router';
 import Error from 'next/error';
@@ -71,14 +72,23 @@ const Main = () => {
 
 Main.getInitialProps = async(context) => {
     console.log("서버냐",context.isServer);
+    const {feedbackMode} = context.store.getState();
+    const feedbackModes = feedbackMode.feedbackMode;
+    const lastId = 0;
+    
     if(context.isServer){
-        const {feedbackMode} = context.store.getState();
-        const feedbackModes = feedbackMode.feedbackMode;
-        const lastId = 0;
         const cookies = context.req.headers.cookie;
         axios.defaults.headers.Cookie = cookies;
     }else{
-       
+        context.store.dispatch({
+            type:FEEDBACK_READ_REQUEST,
+            data:{
+                lastId, feedbackModes
+            }
+        })
+        context.store.dispatch({
+            type:FEEDBACK_SUB_READ_REQUEST
+        })
     }
 };
 

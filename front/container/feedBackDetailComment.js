@@ -19,7 +19,9 @@ const feedBackDetailComment = ({board_ids, feedback_id}) => {
     const commentReferenece = useRef();
     const commentIdReference = useRef();
     
-    const {feedbackComment, feedbackItem, feedback} = useSelector(state => state.feedback);
+    const {feedbackComment, feedbackItem, feedback, isCompleted_req_Feedback} = useSelector(state => state.feedback);
+    const {feedbackMode} = useSelector(state=>state.feedbackMode);
+
     const [comment_content,setComments] = useState('');
     const [updateComment,setUpdateComment] = useState('');
     const [board_id, setBoard_id] = useState(0);
@@ -42,11 +44,18 @@ const feedBackDetailComment = ({board_ids, feedback_id}) => {
     },[feedbackItem&&feedbackItem]);
 
     useEffect(()=>{
-        if(feedback.myFeedback){
-            const value = feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).complete;
-            setCompleteValue(value);
+        if(feedbackMode){
+            if(feedback.yourFeedback){
+                const value = feedback.yourFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).complete;
+                setCompleteValue(value);
+            }
+        }else{
+            if(feedback.myFeedback){
+                const value = feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).complete;
+                setCompleteValue(value);
+            }
         }
-    },[board_ids&&board_ids])
+    },[board_ids&&board_ids||isCompleted_req_Feedback&&isCompleted_req_Feedback])
 
 
     const handleCommentUpdate = () => {
@@ -115,14 +124,17 @@ const feedBackDetailComment = ({board_ids, feedback_id}) => {
         commentReferenece.current.focus();
     },[comment_content]);
 
-    const handleComplete = useCallback(() => {
-        dispatch({
-            type:FEEDBACK_ITEM_COMPLETE_REQ_REQUEST,
-            data:{
-                feedback_id
-            }
-        });
-    },[feedback_id&&feedback_id]);
+    const handleComplete = (e) => {
+        const type = e.target.name;
+        if(type){
+            dispatch({
+                type:FEEDBACK_ITEM_COMPLETE_REQ_REQUEST,
+                data:{
+                    feedback_id, type
+                }
+            });
+        }    
+    };
 
     const comments = feedbackComment&&feedbackComment.map((v,i) => <Comment
         // style={{border:"1px solid #000000", padding:10}}
@@ -237,28 +249,62 @@ const feedBackDetailComment = ({board_ids, feedback_id}) => {
                             </Tooltip>
                         </Form.Item>
                         <Form.Item style={{textAlign:'right'}}>
-                            <Tooltip title="피드백에 관한 코멘트를 작성하고 버튼을 클릭해주세요!">
-                                <Button htmlType="submit" type="primary">
-                                    댓글등록
-                                </Button>
-                            </Tooltip>
+                            <Button htmlType="submit" type="primary">
+                                댓글등록
+                            </Button>
                         </Form.Item>
                     </Form>
                 </Col>
+                {feedbackMode
+                ?
                 <Col span={22} style={{textAlign:'center'}}>
-                    <Tooltip title="피드백 완료 후 완료 요청버튼을 클릭 해주세요!">
-                        <div style={{width:'100%'}}>
+                        {
+                          completeValue>=2
+                          ?
+                          <div style={{width:'100%'}}>
+                                <Button
+                                    disabled={true} 
+                                    style={{width:'100%', background:'gray', color:'#FFFFFF'}}
+                                    name="complete"
+                                    size="large"
+                                >완료
+                                </Button>
+                          </div>
+                          :
+                          <Group style={{width:"100%"}}>
                             <Button
-                                disabled={completeValue>=1?true:false} 
-                                style={{width:'100%', background:'#0B4E92', color:'#FFFFFF'}}
+                                disabled={completeValue<1?true:false} 
+                                style={{width:'50%', background:completeValue<1?'gray':'#0B4E92', color:'#FFFFFF'}}
+                                name="accept"
                                 size="large"
                                 onClick={handleComplete}
-                            ><strong>{completeValue===1?'완료 요청 중':completeValue===2?'완료':"완료 요청"}</strong>
+                                >수락
                             </Button>
-                        </div>
-                    </Tooltip>
+                            <Button
+                                disabled={completeValue<1?true:false} 
+                                style={{width:'50%', background:completeValue<1?'gray':'red', color:'#FFFFFF'}}
+                                name="reject"
+                                size="large"
+                                onClick={handleComplete}
+                                >거절
+                            </Button>
+                        </Group>  
+                        }
                 </Col>
-                
+                :
+                <Col span={22} style={{textAlign:'center'}}>
+                    <div style={{width:'100%'}}>
+                        <Button
+                            disabled={completeValue>=1?true:false} 
+                            style={{width:'100%', background:completeValue>=1?'gray':'#0B4E92', color:'#FFFFFF'}}
+                            name="request"
+                            size="large"
+                            onClick={handleComplete}
+                        >{completeValue===1?'완료 요청 중':completeValue===2?'완료':"완료 요청"}
+                        </Button>
+                    </div>
+                </Col>
+                }
                 <Col offset={1}/>
             </Col> 
         </>

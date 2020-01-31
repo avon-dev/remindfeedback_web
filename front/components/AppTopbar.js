@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import AppTutorial from '../components/TutorialMain';
 import AppAlert from '../container/alert';
 import { FEEDBACK_TUTORIAL_REQUEST, FEEDBACK_READ_REQUEST } from '../reducers/feedback';
+import { FEEDBACK_SUB_READ_REQUEST } from '../reducers/feedbackSubject';
+import { FEEDBACK_MODE } from '../reducers/feedbackMode';
 import { LOG_OUT_REQUEST } from '../reducers/user';
 import Router from 'next/router';
 
@@ -26,6 +28,7 @@ const AppTopbar = () => {
 
     const dispatch = useDispatch();
     const { me, isLogout } = useSelector( state => state.user);
+    const { isLoadedSubject } = useSelector( state => state.feedbackSubject);
     const {feedbackMode} = useSelector(state => state.feedbackMode);
     const [visible, setVisible] = useState(false);
     const [alertVisible, setAlertVisible] = useState(false);
@@ -88,15 +91,20 @@ const AppTopbar = () => {
     }
 
     const handleHome = () => {
-        const feedbackModes = feedbackMode;
+        const feedbackModes = false;
         const lastId = 0;
-        dispatch({
-            type:FEEDBACK_READ_REQUEST,
-            data:{
-                lastId, feedbackModes
-            }
-        })
-        Router.push('/main');
+        
+        // dispatch({
+        //     type:FEEDBACK_READ_REQUEST,
+        //     data:{
+        //         lastId, feedbackModes
+        //     }
+        // })
+        // dispatch({
+        //     type:FEEDBACK_MODE,
+        //     data: feedbackModes
+        // })
+        Router.push('/main');        
     }
 
     const items = (
@@ -122,18 +130,18 @@ const AppTopbar = () => {
     return(
         <>
           <Menu mode="horizontal" key="topbar" style={{backgroundColor:'#0B4E92'}}>
-            <Menu.Item key="home">
-                <Icon type="home" style={{fontSize:'23px', color:'#FFFFFF'}} onClick={handleHome} /> 
+            <Menu.Item key="home" onClick={handleHome}>
+                <Icon type="home" style={{fontSize:'23px', color:'#FFFFFF'}} /> 
             </Menu.Item>
-            <Menu.Item key="search" style >
+            {/* <Menu.Item key="search" style >
                 <Search
                     placeholder="input search text"
                     style={{ width: 250 }}
                 /> 
-            </Menu.Item>
-            <Menu.Item key="subject">
+            </Menu.Item> */}
+            <Menu.Item key="subject" style={{textAlign:'center', marginLeft:"40%"}}>
                 <Row type='flex'>
-                    <Col span={2}>
+                    <Col span={22}>
                         <Typography>
                             <Title style={commonStyle}>RemindFeedBack</Title>
                         </Typography>

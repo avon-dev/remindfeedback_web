@@ -143,7 +143,7 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
      const showModal = async(e) => {
         e.preventDefault();
         setFeedback_id(e.target.id);
-        const [{adviser_uid,title,createdAt,category}] = await myFeedback.filter((v,i)=>parseInt(e.target.id)===parseInt(v.id));
+        const [{adviser_uid,title,createdAt,category,myfeedback}] = await myFeedback.filter((v,i)=>parseInt(e.target.id)===parseInt(v.id));
         await setFeedback_adviser_uid(adviser_uid);
         await setFeedback_title(title);
         await setFeedback_write_date(createdAt);
@@ -192,7 +192,12 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
           >
               <Link key={v.id} as={`/feedbackdetail/${v.id}`} href={`/feedbackdetail?id=${v.id}`} ><a><Meta
                   avatar={
-                  <Avatar>{v.adviser_uid.split('')[0]}</Avatar>
+                  <div>
+                  <Avatar src={v.myfeedback.portrait&&`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v.myfeedback.portrait}`}>
+                    {!v.myfeedback.portrait&&v.myfeedback.nickname.split('')[0]}
+                    </Avatar>
+                    <p style={{color:"black"}}><strong>{v.myfeedback.nickname}</strong></p>
+                    </div>
                   }
                 title={<><Col span={7} style={{background:"#FFFFFF",textAlign:"center", margin:5, borderRadius:100, color:"red"}}><strong>D-</strong>{dDay(v.createdAt, v.write_date)}</Col><Col span={17}/>
                         <Col span={24} style={{fontSize:23}}><strong>{v.title}</strong></Col></>}

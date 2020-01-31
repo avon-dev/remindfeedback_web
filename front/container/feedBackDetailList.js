@@ -15,6 +15,7 @@ const feedBackDetailList = ({feedback_id, handleComment}) => {
 
     const dispatch = useDispatch();
     const {feedbackItem,feedback,message} = useSelector(state=>state.feedback);
+    const {feedbackMode} = useSelector(state=>state.feedbackMode);
 
     const [name, setName] = useState(false);
     const [adviser_uid, setAdviser_uid] = useState('');
@@ -30,11 +31,16 @@ const feedBackDetailList = ({feedback_id, handleComment}) => {
     const [mouseOver, setMouseOver] = useState(false);
 
     useEffect(()=>{
-        setAdviser_uid(feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).adviser_uid);
-        setCreatedAt((feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).createdAt));
-        const r = feedbackItem.map((v,i)=>{return{board_file1:v.board_file1,board_file2:v.board_file2,board_file3:v.board_file3}});
-        // setImages(r);
-        // console.log("images",r);
+        if(feedbackMode){
+            setAdviser_uid(feedback.yourFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).yourfeedback.nickname);
+            setCreatedAt((feedback.yourFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).createdAt));
+        }else{
+            setAdviser_uid(feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).myfeedback.nickname);
+            setCreatedAt((feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).createdAt));
+            const r = feedbackItem.map((v,i)=>{return{board_file1:v.board_file1,board_file2:v.board_file2,board_file3:v.board_file3}});
+            // setImages(r);
+            // console.log("images",r);
+        }
     },[]);
 
     useEffect(()=>{
@@ -161,6 +167,7 @@ const feedBackDetailList = ({feedback_id, handleComment}) => {
         <>  
             <Col span={12} style={{width:"50%"}}>
                 <Col offset={1}/>
+                {!feedbackMode&&
                 <Col span={22} style={{textAlign:'right', marginBottom:10}}>
                     <Popover
                         key="addModal"
@@ -171,9 +178,10 @@ const feedBackDetailList = ({feedback_id, handleComment}) => {
                             <Button type="primary" name="VIDEO" onClick={popUpModal} icon="video-camera">동영상</Button>
                             <Button type="primary" name="RECORD" onClick={popUpModal} icon="audio">녹음</Button>
                         </Group>}
-                         trigger="click"
+                        trigger="click"
                     ><Button type="primary" onClick={popUpAdd}><strong>추가하기</strong></Button></Popover>
                 </Col>
+                }
                 <Col offset={1}/>
                 <Col offset={1}/>
                 <Col span={22} style={{textAlign:'right', marginBottom:10}}>
