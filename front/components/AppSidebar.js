@@ -4,8 +4,9 @@ import { Menu, Icon,Button, Row, Switch , Col, Tooltip } from 'antd';
 import AddFeedback from '../container/addFeedback';
 import Link from 'next/link';
 import { FEEDBACK_MODE } from '../reducers/feedbackMode';
-import { FEEDBACK_CHANGE_MODE } from '../reducers/feedback';
-
+import { FEEDBACK_CHANGE_MODE, FEEDBACK_ADD_REQUEST } from '../reducers/feedback';
+import {FEEDBACK_SUB_READ_REQUEST} from '../reducers/feedbackSubject';
+import {FRIENDS_MAIN_READ_REQUEST} from '../reducers/friends';
 const { SubMenu } = Menu;
 
 const newFeedBack ={
@@ -21,19 +22,19 @@ const Sidebar = {
 const AppSidebar = () => {
 
   const dispatch = useDispatch();
-  const {subject,isLoadedSubject} = useSelector(state=>state.feedbackSubject);
+  // const {subject,isLoadedSubject} = useSelector(state=>state.feedbackSubject);
   const {isLoadedFriends} = useSelector(state=>state.friends);
   const {isLoadedFeedback,isLoadedFeedbackItem} = useSelector(state=>state.feedback);  
   const [visible, setVisible] = useState();
   const [changeTheme, setChangeTheme] = useState(false);
   const [check, setCheck] = useState(true);
 
-  const category = subject?subject.map((v,i)=>
-          <Menu.Item  key={v.category_id} style={{color: v.category_color?v.category_color:"#000000"}}>
-            <Icon type="right" />
-            <strong>{v.category_title}</strong>
-          </Menu.Item>
-    ):<Menu.Item  key="default" title={<strong>Default</strong>} />
+  // const category = subject?subject.map((v,i)=>
+  //         <Menu.Item  key={v.category_id} style={{color: v.category_color?v.category_color:"#000000"}}>
+  //           <Icon type="right" />
+  //           <strong>{v.category_title}</strong>
+  //         </Menu.Item>
+  //   ):<Menu.Item  key="default" title={<strong>Default</strong>} />
 
   useEffect(()=>{
       if(isLoadedFeedback){
@@ -48,6 +49,12 @@ const AppSidebar = () => {
   },[isLoadedFriends||isLoadedFeedbackItem]);
 
   const showModal = () => {
+    dispatch({
+      type:FEEDBACK_SUB_READ_REQUEST
+    })
+    dispatch({
+      type:FRIENDS_MAIN_READ_REQUEST
+    })
     setVisible(true);
   }
 
@@ -103,22 +110,13 @@ const AppSidebar = () => {
             defaultSelectedKeys={['1']}
             mode="inline"
         >
-        <SubMenu key="title1"
-          disabled={changeTheme==="dark"?true:false}
-          style={{color: changeTheme==="dark"?"#FFFFFF":"#000000"}}
-          title={
-            <span>
-              <Icon type="ordered-list"/>
-              <strong>주제 관리</strong>
-            </span>
-          }>
-          <Menu.Item  key="sub1" style={{color: changeTheme==="dark"?"#FFFFFF":"#000000"}}>
-            <Icon type="setting"/><strong>주제 설정</strong>
-            <Link href="/subject">
-            <a></a></Link> 
-          </Menu.Item>
-          {category}
-        </SubMenu>
+        <Menu.Item  key="sub1"  
+        disabled={changeTheme==="dark"?true:false} 
+        style={{color: changeTheme==="dark"?"#FFFFFF":"#000000"}}>
+          <Icon type="ordered-list"/><strong>주제 관리</strong>
+          <Link href="/subject">
+            <a></a></Link>
+        </Menu.Item>
         <Menu.Item key="sub2" style={{color: changeTheme==="dark"?"#FFFFFF":"#000000"}}>
           <Icon type="team"/><strong>친구 관리</strong>
           <Link href="/friends">
@@ -132,6 +130,7 @@ const AppSidebar = () => {
           handleCancel={handleCancel}
           handleOk={handleOk}
           visible={visible}
+          order={FEEDBACK_ADD_REQUEST}
         /> 
       </div>
       </> 

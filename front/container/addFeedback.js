@@ -1,7 +1,7 @@
 import React,{useState,useCallback, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { Modal, Layout, Form, Input, Tooltip , Menu, Icon, Button, Col, Typography, DatePicker, Select, Comment, Avatar} from 'antd';
+import { Modal, Layout, Form, Input, Tooltip , Menu, Icon, Button, Col, Typography, DatePicker, Select, Comment, Avatar, AutoComplete} from 'antd';
 import { backgroundWhite, backgroundLightBlue} from '../css/Common';
 import { subjectBtn, feedbackItemLayout, formItemLayout } from '../css/Main';
 import {FEEDBACK_ADD_REQUEST,FEEDBACK_UPDATE_REQUEST} from '../reducers/feedback';
@@ -16,7 +16,8 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
 
     const dispatch = useDispatch();
     const {isAdddingFeedback,isAddedFeedback,isUpdatingFeedback} = useSelector(state => state.feedback);
-    const {searchedFriends}= useSelector(state=>state.friends);
+    const {searchedFriends,registerdFriends}= useSelector(state=>state.friends);
+    
     const {subject} = useSelector(state => state.feedbackSubject);
     
     const [category,setCategory] = useState(0);
@@ -24,7 +25,8 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
     const [write_date,setWrite_date] = useState(moment());
     const [adviser,setAdvisor] = useState('');
     const [check ,setCheck] = useState(false);
-    
+    const [emailList, setEmailList] = useState([]); 
+
     const _onSubmit = useCallback(async (e) => {
         e.preventDefault();
         if(!title){
@@ -44,13 +46,13 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                     category,title,write_date,adviser,feedback_id 
                 }
             })
-        }else{
-            const adviser = searchedFriends.user_uid;
-            if(adviser){
+        }else if(FEEDBACK_ADD_REQUEST===order){
+            let advisers = registerdFriends.find((v,i)=>v.email === adviser).user_uid;
+            if(advisers){
                 dispatch({
                     type: FEEDBACK_ADD_REQUEST,
                     data:{
-                        category,title,write_date,adviser 
+                        category,title,write_date,adviser:advisers 
                     },
                 });
             }else{
@@ -78,6 +80,10 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
         setAdvisor(e.target.value);
     };
 
+    const handleSearch = (v) =>  {
+        setAdvisor(v);
+    };
+
     const registerAdvisor = (e) => {
         setAdvisor(e.target.name);
         setCheck(false);
@@ -99,6 +105,14 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
     }
 
     useEffect(()=>{
+        if(!registerdFriends||registerdFriends.length<1){
+            setEmailList(['조언자가 없습니다.']);
+        }else{
+            setEmailList(registerdFriends.map((v,i)=>v.email));
+        }
+      },[registerdFriends&&registerdFriends]);
+
+    useEffect(()=>{
         if(isAddedFeedback){
             setCategory('');
             setAdvisor('');
@@ -110,14 +124,16 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
 
     useEffect(()=>{
         if(feedback_titles||category_titles||feedback_adviser_uid||feedback_write_date){
-            setTitle(feedback_titles);
-            setCategory(category_titles);
-            setAdvisor(feedback_adviser_uid);
-            setWrite_date(feedback_write_date); 
+            if(order === FEEDBACK_UPDATE_REQUEST){
+                setTitle(feedback_titles);
+                setCategory(category_titles);
+                setAdvisor(feedback_adviser_uid);
+                setWrite_date(feedback_write_date); 
+            }
         }  
     },[feedback_titles,category_titles,feedback_adviser_uid,feedback_write_date]);
 
-    const feedback_category = (<Form.Item label={<strong>주제선택</strong>} >
+    const feedback_category = (subject.length>=1 && <Form.Item label={<strong>주제선택</strong>} >
                                     <Col span={24}>
                                     <Select value={category?category:subject[0].category_title} onChange={handleSubject} style={{width:'100%', textAlign:'left'}} >
                                     {subject.length>=1?
@@ -156,7 +172,7 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                             </Col>   
                             </Form.Item>
                             );
-    const feedback_advisorInfo = <strong>피드백을 통해 조언을 받고 싶은 조언자를 검색해주세요</strong>;
+    const feedback_advisorInfo = order&&<strong>피드백을 통해 조언을 받고 싶은 조언자를 검색해주세요</strong>;
 
     const actions = searchedFriends&&[<span><Button key="request_friends" size="small" name={searchedFriends.email}  onClick={registerAdvisor}>조언자 등록</Button></span>];
     const author = searchedFriends&&<a>{searchedFriends.nickname}</a>
@@ -165,7 +181,7 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
     
     const feedback_advisor = (<Form.Item label={<><Tooltip title={feedback_advisorInfo}><Icon type="question-circle" /></Tooltip><strong>조언자</strong></>} >
                                 <Col span={24}>
-                                    <Search
+                                    {/* <Search
                                         value={adviser}
                                         onChange={handleAdvisor}
                                         onSearch={handleSearchOk}
@@ -173,9 +189,22 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                                         placeholder="조언자 이메일을 입력하세요"
                                         enterButton="검색"
                                         required
-                                    />
+                                    /> */}
+                                    <AutoComplete
+                                        placeholder="조언자 이메일을 입력하세요"
+                                        enterButton="검색"
+                                        size="large"
+                                        dataSource={emailList}
+                                        style={{width:"100%"}}
+                                        onSelect={handleSearch}
+                                        // onSearch={handleSearchOk}
+                                        filterOption={(inputValue, option) =>
+                                            option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                                        }
+                                    ></AutoComplete>
+                                                    
                                 </Col>
-                                {
+                                {/* {
                                     searchedFriends&&check&&
                                     <Col span={24}>
                                         <Comment
@@ -186,7 +215,7 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                                             content={content}   
                                         />
                                     </Col> 
-                                }     
+                                }      */}
                             </Form.Item>
                             );
 

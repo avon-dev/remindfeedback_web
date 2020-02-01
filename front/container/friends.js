@@ -168,6 +168,10 @@ const Friends = () => {
       setSearchValue(v);
     },[]);
 
+    const handleSelect = (v) => {
+      setSearchValue(v);
+    }
+
     const onClickSearch = () => {
       
       if(!searchValue){
@@ -268,6 +272,7 @@ const Friends = () => {
                           size="large"
                           dataSource={nickNameList}
                           style={{width:"100%"}}
+                          onSelect={handleSelect}
                           onSearch={handleSearch}
                           filterOption={(inputValue, option) =>
                             option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1

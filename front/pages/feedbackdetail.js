@@ -83,7 +83,6 @@ feedbackdetail.getInitialProps = async(context) => {
         });
         return {feedback_id: parseInt(context.query.id)};
     }else{
-        console.log(context.query);
         context.store.dispatch({
             type:FEEDBACK_ITEM_READ_REQUEST,
             data:{

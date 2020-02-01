@@ -368,6 +368,7 @@ function friends_Read_API(){
 
 function* friends_Read(){
     try {
+        yield delay(100);
         const result = yield call(friends_Read_API);
         yield put({
             type:FRIENDS_MAIN_READ_SUCCESS,

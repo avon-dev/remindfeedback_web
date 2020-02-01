@@ -289,6 +289,7 @@ function feedback_Item_Read_API(data){
 
 function* feedback_Item_Read(action){
     try {
+        yield delay(100);
         const result = yield call(feedback_Item_Read_API, action.data);
         console.log(result,"feedback_Item_Read");
         yield put({
@@ -381,6 +382,7 @@ function feedback_Add_API(data){
 function* feedback_Add(action){
     try {
         const result = yield call(feedback_Add_API, action.data);
+        console.log(result.data,"feedback_Add");
         yield put({
             type:FEEDBACK_ADD_SUCCESS,
             data:result.data,

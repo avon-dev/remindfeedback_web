@@ -1,6 +1,10 @@
 {
-  "devFiles": [],
+  "devFiles": [
+    "static/development/dll/dll_90e8ea1802b868f0c448.js",
+    "static/development/dll/dll_90e8ea1802b868f0c448.js.map"
+  ],
   "pages": {
+<<<<<<< HEAD
     "/": [
       "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
       "static/chunks/commons.62d70a20152dc5ba9805.js",

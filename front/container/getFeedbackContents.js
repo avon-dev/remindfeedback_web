@@ -130,7 +130,7 @@ const getFeedbackContents = ({myFeedback,inProgress}) => {
               cover={<div style={{background:'#DCDCDC', fontSize:12,textAlign:'right', fontWeight:"bold", fontStyle:"italic",paddingRight:15}}>
                       {moment(v.createdAt).format('YYYY MMMM Do , h:mm:ss a')}</div>}
               actions={[
-                  <Button id={v.id} onClick={showModal} type="dashed"><Icon type="edit" style={{ fontSize: '18px', color: '#08c' }} /></Button>
+                  <Button disabled={v.complete>=1?true:false} id={v.id} onClick={showModal} type="dashed"><Icon type="edit" style={{ fontSize: '18px', color: '#08c' }} /></Button>
                   ,
                   <Popconfirm
                   key={v.id}
@@ -140,7 +140,7 @@ const getFeedbackContents = ({myFeedback,inProgress}) => {
                   cancelText="아니오"
                   loading={isDeletingFeedback}
                   >
-                  <Button id ={v.id} onClick={handleConfirm} type="dashed"><Icon type="delete"style={{ fontSize: '18px', color: '#08c' }} /></Button>
+                  <Button disabled={v.complete>=1?true:false} id ={v.id} onClick={handleConfirm} type="dashed"><Icon type="delete"style={{ fontSize: '18px', color: '#08c' }} /></Button>
                   </Popconfirm>  
               
               ]}
