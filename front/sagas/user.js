@@ -61,7 +61,7 @@ function* watchLoadUser() {
     yield takeLatest(LOAD_USER_REQUEST, loadUser);
 };
 
-// 마이페이지 사진 Delete
+// 마이페이지 사진 Delete -> 없음
 function deletePhotoAPI(){
         return axios.delete('/mypage/delete/portrait',{
             withCredentials:true,
@@ -92,11 +92,11 @@ function* watchDeletePhoto() {
 // 마이페이지 UPDATE
 function updateUserAPI(data){
     if(data.order==="portrait"){
-        return axios.patch('/mypage/update/portrait', data.formData,{
+        return axios.patch('/mypage/portrait', data.formData,{
             withCredentials:true,
         });
     }else{
-        return axios.put('/mypage/update/',data,{
+        return axios.put('/mypage',data,{
             withCredentials:true,
         });
     }
@@ -189,7 +189,7 @@ function* watchLogin(){
 
 // 회원가입
 function signUpAPI(data){
-    return axios.post('/auth/signup', data);                       
+    return axios.post('/auth/register', data);                       
 };
 
 

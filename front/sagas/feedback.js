@@ -374,7 +374,7 @@ function* watchFeedback_Update(){
 
 // Feedback 새 피드백 Add
 function feedback_Add_API(data){
-    return axios.post('/feedback/create',data,{
+    return axios.post('/feedback',data,{
         withCredentials:true
     });
 };
