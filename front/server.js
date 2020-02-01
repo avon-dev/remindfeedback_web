@@ -41,7 +41,7 @@ app.prepare().then(()=>{
         return handle(req,res);
     });
 
-    server.listen(2323,()=>{
+    server.listen(prod?80:2323,()=>{
         console.log('서버 구동');
     });
 });
