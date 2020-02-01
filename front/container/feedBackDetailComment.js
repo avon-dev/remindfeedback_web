@@ -240,6 +240,7 @@ const feedBackDetailComment = ({board_ids, feedback_id}) => {
                         <Form.Item>
                             <Tooltip title="피드백에 관한 코멘트를 작성해주세요!">
                                 <TextArea
+                                    disabled={completeValue>=1?true:false}
                                     ref={commentReferenece} 
                                     key="comments"
                                     onChange={handleComments}
@@ -249,7 +250,7 @@ const feedBackDetailComment = ({board_ids, feedback_id}) => {
                             </Tooltip>
                         </Form.Item>
                         <Form.Item style={{textAlign:'right'}}>
-                            <Button htmlType="submit" type="primary">
+                            <Button htmlType="submit" type="primary" disabled={completeValue>=1?true:false}>
                                 댓글등록
                             </Button>
                         </Form.Item>

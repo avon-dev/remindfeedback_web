@@ -14,7 +14,7 @@ const {Group} = Button;
 const feedBackDetailList = ({feedback_id, handleComment}) => {
 
     const dispatch = useDispatch();
-    const {feedbackItem,feedback,message} = useSelector(state=>state.feedback);
+    const {feedbackItem,feedback,message, isCompleted_req_Feedback} = useSelector(state=>state.feedback);
     const {feedbackMode} = useSelector(state=>state.feedbackMode);
 
     const [name, setName] = useState(false);
@@ -29,6 +29,7 @@ const feedBackDetailList = ({feedback_id, handleComment}) => {
     const [videoVisible, setVideoVisible] = useState(false);
     const [recordVisible, setRecordVisible] = useState(false);
     const [mouseOver, setMouseOver] = useState(false);
+    const [completeValue, setCompleteValue] = useState(0);
 
     useEffect(()=>{
         if(feedbackMode){
@@ -42,6 +43,20 @@ const feedBackDetailList = ({feedback_id, handleComment}) => {
             // console.log("images",r);
         }
     },[]);
+
+    useEffect(()=>{
+        if(feedbackMode){
+            if(feedback.yourFeedback){
+                const value = feedback.yourFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).complete;
+                setCompleteValue(value);
+            }
+        }else{
+            if(feedback.myFeedback){
+                const value = feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).complete;
+                setCompleteValue(value);
+            }
+        }
+    },[handleComment&&handleComment||isCompleted_req_Feedback&&isCompleted_req_Feedback])
 
     useEffect(()=>{
         if(message){
@@ -133,8 +148,8 @@ const feedBackDetailList = ({feedback_id, handleComment}) => {
             title={<strong>{v.board_title}</strong>}
             extra={<div>
                     <Group>
-                        <Button id={v.id} type="dashed" onClick={handleList}><Icon type="check" style={{ fontSize: '18px', color: '#08c' }} /></Button>
-                        <Button id={v.id} type="dashed" onClick={handleUpdate}><Icon type="edit" style={{ fontSize: '18px', color: '#08c' }} /></Button>
+                        <Button disabled={completeValue>=1?true:false} id={v.id} type="dashed" onClick={handleList}><Icon type="check" style={{ fontSize: '18px', color: '#08c' }} /></Button>
+                        <Button disabled={completeValue>=1?true:false} id={v.id} type="dashed" onClick={handleUpdate}><Icon type="edit" style={{ fontSize: '18px', color: '#08c' }} /></Button>
                     </Group>  
                     {/* <Tooltip title="더 자세한 사항을 보려면 More 버튼을 클릭해주세요!"><a href="#">More</a></Tooltip> */}
                    </div>
@@ -175,11 +190,11 @@ const feedBackDetailList = ({feedback_id, handleComment}) => {
                         content={<Group>
                             <Button type="primary" name="TEXT" onClick={popUpModal} icon="file-text">글</Button>
                             <Button type="primary" name="PHOTO" onClick={popUpModal} icon="picture">사진</Button>
-                            <Button type="primary" name="VIDEO" onClick={popUpModal} icon="video-camera">동영상</Button>
-                            <Button type="primary" name="RECORD" onClick={popUpModal} icon="audio">녹음</Button>
+                            {/* <Button type="primary" name="VIDEO" onClick={popUpModal} icon="video-camera">동영상</Button>
+                            <Button type="primary" name="RECORD" onClick={popUpModal} icon="audio">녹음</Button> */}
                         </Group>}
                         trigger="click"
-                    ><Button type="primary" onClick={popUpAdd}><strong>추가하기</strong></Button></Popover>
+                    ><Button disabled={completeValue>=1?true:false} type="primary" onClick={popUpAdd}><strong>추가하기</strong></Button></Popover>
                 </Col>
                 }
                 <Col offset={1}/>
@@ -195,12 +210,12 @@ const feedBackDetailList = ({feedback_id, handleComment}) => {
                         <Breadcrumb.Item href="#">
                             <Icon type="home" /><span>사진</span>
                         </Breadcrumb.Item>
-                        <Breadcrumb.Item href="#">
+                        {/* <Breadcrumb.Item href="#">
                             <Icon type="home" /><span>동영상</span>
                         </Breadcrumb.Item>
                         <Breadcrumb.Item href="#">
                             <Icon type="home" /><span>녹음</span>
-                        </Breadcrumb.Item>
+                        </Breadcrumb.Item> */}
                     </Breadcrumb>
                 </Col>
                 <Col offset={1}/>

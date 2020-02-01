@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Col, Card, Avatar, Icon,Button,Empty, Popconfirm } from 'antd';
 import moment from 'moment';
 import {FEEDBACK_DELETE_REQUEST, FEEDBACK_UPDATE_REQUEST} from '../reducers/feedback';
+import {FRIENDS_MAIN_READ_REQUEST} from '../reducers/friends';
 import UpdateFeedback from '../container/addFeedback';
 const {Meta} = Card;
 
@@ -142,6 +143,9 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
 
      const showModal = async(e) => {
         e.preventDefault();
+        dispatch({
+          type:FRIENDS_MAIN_READ_REQUEST
+        })
         setFeedback_id(e.target.id);
         const [{adviser_uid,title,createdAt,category,myfeedback}] = await myFeedback.filter((v,i)=>parseInt(e.target.id)===parseInt(v.id));
         await setFeedback_adviser_uid(adviser_uid);
@@ -172,10 +176,30 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
               // extra={}
               key={v.id}
               style={{ marginTop: 15, background:setColor(v.category) }}
-              cover={<div style={{background:'#DCDCDC', fontSize:12,textAlign:'right', fontWeight:"bold", fontStyle:"italic",paddingRight:15}}>
-                      {moment(v.createdAt).format('YYYY MMMM Do , h:mm:ss a')}</div>}
+              cover={<div>
+                        <div style={{background:'#DCDCDC', fontSize:12,textAlign:'right', fontWeight:"bold", fontStyle:"italic",paddingRight:15}}>
+                          {moment(v.createdAt).format('YYYY MMMM Do')}
+                        </div>
+                        {v.complete===1&&
+                        <Col span={24} style={{background:'#DCDCDC', fontSize:12,textAlign:'right', fontWeight:"bold", fontStyle:"italic",paddingRight:15}}>
+                          <Col span={18} />
+                          <Col span={6} 
+                              style={
+                              {
+                                color:'red', 
+                                backgroundColor:'white', 
+                                textAlign:'center', 
+                                borderRadius:30,
+                     
+                              }
+                            }>
+                            {v.complete===1&&'요청중'}
+                          </Col>
+                        </Col>
+                        }
+                      </div>}
               actions={[
-                  <Button id={v.id} onClick={showModal} type="dashed"><Icon type="edit" style={{ fontSize: '18px', color: '#08c' }} /></Button>
+                  <Button disabled={v.complete>=1?true:false} id={v.id} onClick={showModal} type="dashed"><Icon type="edit" style={{ fontSize: '18px', color: '#08c' }} /></Button>
                   ,
                   <Popconfirm
                   key={v.id}
@@ -185,7 +209,7 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
                   cancelText="아니오"
                   loading={isDeletingFeedback}
                   >
-                  <Button id ={v.id} onClick={handleConfirm} type="dashed"><Icon type="delete"style={{ fontSize: '18px', color: '#08c' }} /></Button>
+                  <Button disabled={v.complete>=1?true:false} id ={v.id} onClick={handleConfirm} type="dashed"><Icon type="delete"style={{ fontSize: '18px', color: '#08c' }} /></Button>
                   </Popconfirm>  
               
               ]}

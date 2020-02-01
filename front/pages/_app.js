@@ -49,9 +49,9 @@ RemindFeedback.getInitialProps = async(context) => {
                 lastId, feedbackModes
             }
         });
-        ctx.store.dispatch({
-            type:FEEDBACK_SUB_READ_REQUEST,
-        });
+        // ctx.store.dispatch({
+        //     type:FEEDBACK_SUB_READ_REQUEST,
+        // });
     }
     if(Component.getInitialProps){
         pageProps = await Component.getInitialProps(ctx);

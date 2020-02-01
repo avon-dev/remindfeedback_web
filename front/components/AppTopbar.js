@@ -77,7 +77,9 @@ const AppTopbar = () => {
 
     const handleAlert = () => {
         console.log('handleAlert');
-        setAlertVisible(!alertVisible);
+        alert('추후 업데이트 될 예정입니다.')
+        // 추후 업데이트 예정
+        // setAlertVisible(!alertVisible);
     }
 
     const alerthHandleCancel = () => {
@@ -90,20 +92,25 @@ const AppTopbar = () => {
         setAlertVisible(false);
     }
 
+    const handleSetting = () => {
+        console.log('handleSetting');
+        alert('추후 업데이트 될 예정입니다.')
+        // 추후 업데이트 예정
+    }
+
     const handleHome = () => {
         const feedbackModes = false;
         const lastId = 0;
         
-        // dispatch({
-        //     type:FEEDBACK_READ_REQUEST,
-        //     data:{
-        //         lastId, feedbackModes
-        //     }
-        // })
-        // dispatch({
-        //     type:FEEDBACK_MODE,
-        //     data: feedbackModes
-        // })
+        dispatch({
+            type:FEEDBACK_READ_REQUEST,
+            data:{
+                lastId, feedbackModes
+            }
+        })
+        dispatch({
+            type:FEEDBACK_SUB_READ_REQUEST
+        })
         Router.push('/main');        
     }
 
@@ -182,6 +189,7 @@ const AppTopbar = () => {
                             shape="circle"
                             ghost={true}
                             style={{ border:'none' }}
+                            onClick={handleSetting}
                         >
                         <Icon type="setting" style={{fontSize:'23px'}} />
                         </Button> 
