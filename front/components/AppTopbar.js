@@ -28,6 +28,7 @@ const AppTopbar = () => {
 
     const dispatch = useDispatch();
     const { me, isLogout } = useSelector( state => state.user);
+    const { feedback } = useSelector( state => state.feedback);
     const { isLoadedSubject } = useSelector( state => state.feedbackSubject);
     const {feedbackMode} = useSelector(state => state.feedbackMode);
     const [visible, setVisible] = useState(false);

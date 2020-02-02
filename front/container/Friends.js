@@ -72,7 +72,7 @@ const Friends = () => {
       dispatch({
         type:FRIENDS_BLOCK_REQUEST,
         data:{
-          user_uid:id,
+          friend_id:id,
         }
       });
       setBlockFriend(false);

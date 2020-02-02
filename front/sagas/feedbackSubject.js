@@ -28,7 +28,7 @@ if(prod){
 
 // 피드백 주제 Delete
 function feedback_Sub_Delete_API(category_id){
-    return axios.delete(`/category/delete/${category_id}`,{
+    return axios.delete(`/categories/${category_id}`,{
         withCredentials:true,
     });
 };
@@ -56,7 +56,7 @@ function* watchFeedback_Sub_Delete() {
 
 // 피드백 주제 Update
 function feedback_Sub_Update_API(data){
-    return axios.put(`/category/update/${data.category_id}`,data,{
+    return axios.put(`/categories/${data.category_id}`,data,{
         withCredentials:true,
     });
 };
@@ -85,7 +85,7 @@ function* watchFeedback_Sub_Update() {
 
 // 피드백 주제 Add
 function feedback_Sub_Add_API(data){
-    return axios.post('/category/create', data ,{
+    return axios.post('/categories', data ,{
         withCredentials:true,
     });
 };
@@ -113,7 +113,7 @@ function* watchFeedback_Sub_Add(){
 
 // 피드백 주제 메인 Read
 function feedback_Sub_Read_API(){
-    return axios.get('/category/selectall',{
+    return axios.get('/categories',{
         withCredentials:true,
     });
 };

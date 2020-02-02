@@ -31,15 +31,16 @@ const login = () => {
                 email,password
             }
         });
+        dispatch({
+            type:MOVE_TO_SIGNUP
+        });
     },[email,password]);
 
     useEffect(()=>{
         const feedbackModes = feedbackMode;
         const lastId = 0;
         if(isLoggedIn){
-            dispatch({
-                type:MOVE_TO_SIGNUP
-            });
+            
             dispatch({
                 type:FEEDBACK_READ_REQUEST,
                 data:{
@@ -114,9 +115,9 @@ const login = () => {
                                 required
                             />
                        </Form.Item>
-                       <Form.Item>
+                       {/* <Form.Item>
                             <Checkbox><strong>Remember me</strong></Checkbox>
-                       </Form.Item>
+                       </Form.Item> */}
                        <Form.Item style={{textAlign:'center'}}>
                            <Col span={24}>
                                 <Button type="primary" htmlType="submit" size="large" className="login-form-button" style={loginBtn} loading={isLoggingIn}>
@@ -125,7 +126,7 @@ const login = () => {
                            </Col>
                        </Form.Item>
                        <hr/>
-                       <Form.Item style={{textAlign:'center'}}>
+                       {/* <Form.Item style={{textAlign:'center'}}>
                             <Col span={24}>
                                 <Button type="danger" size="large" htmlType="submit" className="login-form-button" style={loginApple} icon="apple">
                                        <strong>Log in with Apple</strong> 
@@ -146,7 +147,7 @@ const login = () => {
                                     <strong>Log in with Facebook</strong> 
                                 </Button>
                             </Col>
-                       </Form.Item>
+                       </Form.Item> */}
                     </Form>
                     <div style={{textAlign:'center'}}>
                         <span>계정이 없으신가요? </span><Button type="ghost" style={{border:"white"}} onClick={handleSignUp} ><strong>시작하기</strong></Button>

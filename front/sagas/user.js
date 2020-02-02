@@ -162,7 +162,8 @@ function loginAPI(data){
 function* login(action){
     try {
         const result = yield call(loginAPI,action.data);
-        !result.data.email
+        console.log(result.data,'login');
+        !result.data.success
         ?
         yield put({
             type:LOG_IN_HASEMAIL,
@@ -197,7 +198,7 @@ function* signUp(action){
     try {
         const result = yield call(signUpAPI, action.data);
         console.log(result);
-        result.data.msg
+        !result.data.success
         ?
         yield put({
             type:SIGN_UP_HASEMAIL,

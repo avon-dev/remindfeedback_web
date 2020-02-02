@@ -72,10 +72,11 @@ export default (state = initialState, action ) => {
                 isSignedUp: false,
                 hasMessage: false,
                 me:{
-                    ...state.me,
                     email: '',
-                    password: '',
                     nickname: '',
+                    introduction:'',
+                    portrait:'',
+                    tutorial:null,
                     msg:'',
                 }
             }  
@@ -99,6 +100,7 @@ export default (state = initialState, action ) => {
                 isLoggingIn: true,
             }
         case LOG_IN_SUCCESS:
+            
             return{
                 ...state,
                 isLoggingIn: false,
@@ -112,6 +114,7 @@ export default (state = initialState, action ) => {
                     nickname:action.data.nickname,
                     tutorial:action.data.tutorial,
                 },
+                message: action.data.success?action.data.message:'',
             }
         case LOG_IN_FAILURE:
             return{
@@ -136,7 +139,7 @@ export default (state = initialState, action ) => {
                     ...state.me,
                     email:'',
                     nickname:'',
-                    msg: action.data.msg,
+                    msg: action.data.message,
                 },
             }    
         case SIGN_UP_SUCCESS:
@@ -147,8 +150,8 @@ export default (state = initialState, action ) => {
                 hasMessage: false,
                 me:{
                     ...state.me,
-                   email:action.data.email,
-                   nickname:action.data.nickname,
+                   email:action.data.data.email,
+                   nickname:action.data.data.nickname,
                    msg:'', 
                 },
             }

@@ -180,6 +180,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
             let compare = [];
             let result; 
             if(name==="PHOTO_UPDATE"){
+            console.log(file,'file');
             const {board_file1,board_file2,board_file3} = feedbackItem.find((v,i)=>parseInt(v.id)===parseInt(feedBackItemId))
             compare.push(board_file1,board_file2,board_file3)
                 check = check.map((v,i)=>{
@@ -212,6 +213,7 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
             }else{
                 file.forEach((v,i)=>formData.append(`file${i+1}`,v));
             }
+            console.log(check,'check');
             check.forEach((v,i)=>formData.append(`updatefile${i+1}`,v));
             formData.append('board_content',content);
             formData.append('board_title',title);
