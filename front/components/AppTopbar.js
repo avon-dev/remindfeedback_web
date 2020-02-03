@@ -180,7 +180,9 @@ const AppTopbar = () => {
                                     shape="circle"
                                     style={{background:'gray', border:'none' }}
                                 >
-                                <Avatar src={me.portrait&&`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${me.portrait}`}>{!me.portrait&&me.nickname.split('')[0]}</Avatar>
+                                <Avatar src={me.portrait&&`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${me.portrait}`}>
+                                    {!me.portrait&&me.nickname.split('')[0]}
+                                    </Avatar>
                                 </Button>
                             </div>
                         </Dropdown>
@@ -199,7 +201,7 @@ const AppTopbar = () => {
             </Menu.Item>
           </Menu>
           
-          <div>
+          {/* <div>
               <AppTutorial
                 handleCancel={handleCancel}
                 handleOk={handleOk}
@@ -207,7 +209,7 @@ const AppTopbar = () => {
                 firstSubject={firstSubject}
                 handleSetFirstSubject={handleSetFirstSubject}
               />
-          </div>
+          </div> */}
           <div>
               
           </div>    

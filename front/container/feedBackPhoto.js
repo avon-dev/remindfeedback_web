@@ -157,12 +157,14 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
                 return alert('사진을 선택해 주세요');
             }
             const formData = new FormData();
+            const updatefile = true;
             formData.append('portrait', portrait[0]);
+            formData.append('updatefile', updatefile);
             dispatch({
                 type: UPDATE_USER_REQUEST,
                 data:{
                     formData,
-                    order:'portrait'
+                    order:'portrait',
                 },
             });
             photoHandleCancel();

@@ -21,6 +21,9 @@ import {
     LOG_OUT_REQUEST,
     LOG_OUT_SUCCESS,
     LOG_OUT_FAILURE,
+    UNREGISTER_REQUEST,
+    UNREGISTER_SUCCESS,
+    UNREGISTER_FAILURE,
 } from '../reducers/user';
 
 const dev = process.env.NODE_ENV !== "production";
@@ -43,7 +46,7 @@ function logUserAPI(){
 function* loadUser(){
     try {
         const result = yield call(logUserAPI);
-        
+        console.log(result.data,'loadUser');
         yield put({
             type:LOAD_USER_SUCCESS,
             data:result.data,
@@ -62,15 +65,15 @@ function* watchLoadUser() {
 };
 
 // 마이페이지 사진 Delete -> 없음
-function deletePhotoAPI(){
-        return axios.delete('/mypage/delete/portrait',{
+function deletePhotoAPI(data){
+        return axios.patch('/mypage/portrait',data,{
             withCredentials:true,
         });
 };
 
-function* deletePhoto(){
+function* deletePhoto(action){
     try {
-        const result = yield call(deletePhotoAPI);
+        const result = yield call(deletePhotoAPI, action.data);
         console.log(result.data);
         yield put({
             type:DELTE_USER_PHOTO_SUCCESS,
@@ -152,6 +155,33 @@ function* watchLogOut() {
 };
 
 
+// 회원탈퇴
+function unregisterAPI(){
+    return axios.get('/auth/unregister',{
+        withCredentials:true
+    });
+};
+
+function* unregister(){
+    try {
+        yield call(unregisterAPI);
+        yield put({
+            type:UNREGISTER_SUCCESS,
+        });
+    } catch (e) {
+        console.error(e);
+        yield put({
+            type:UNREGISTER_FAILURE,
+            error:e,
+        });
+    }
+};
+
+function* watchUnregister() {
+    yield takeLatest(UNREGISTER_REQUEST, unregister);
+};
+
+
 // 로그인
 function loginAPI(data){
     return axios.post('/auth/login', data,{
@@ -230,5 +260,6 @@ export default function* userSaga(){
         fork(watchLoadUser),
         fork(watchUpateUser),
         fork(watchDeletePhoto),
+        fork(watchUnregister),
     ]);
 }

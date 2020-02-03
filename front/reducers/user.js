@@ -13,6 +13,10 @@ export const initialState = {
     isLogout: false, // 로그아웃 여부
     logOutReason: '', // 로그아웃 실패 사유
 
+    UnregisteringOut: false, // 회원탈퇴 시도중
+    isUnregister: false, // 회원탈퇴 여부
+    UnregisterReason: '', // 회원탈퇴 실패 사유
+
     isLoadingMyInfo: false, // 마이페이지 로드 중
     isLoadedMyInfo: false, // 마이페이지 로드 성공
     LoadedMyInfoReason: '', // 마이페이지 로드 실패 사유
@@ -62,6 +66,10 @@ export const DELTE_USER_PHOTO_FAILURE = 'DELTE_USER_PHOTO_FAILURE'; // 사용자
 export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST'; // 로그아웃 시도 중
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS'; // 로그아웃 성공
 export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'; // 로그아웃 실패
+
+export const UNREGISTER_REQUEST = 'UNREGISTER_REQUEST'; // 회원탈퇴 시도 중
+export const UNREGISTER_SUCCESS = 'UNREGISTER_SUCCESS'; // 회원탈퇴 성공
+export const UNREGISTER_FAILURE = 'UNREGISTER_FAILURE'; // 회원탈퇴 실패
 
 export default (state = initialState, action ) => {
     switch(action.type){
@@ -252,6 +260,15 @@ export default (state = initialState, action ) => {
                 ...state,
                 isLoggingOut: true,
                 isLogout:false,
+                isLoggedIn:false,
+                me:{
+                    email: '',
+                    nickname: '',
+                    introduction:'',
+                    portrait:'',
+                    tutorial:null,
+                    msg:'',
+                }
             }
         case LOG_OUT_SUCCESS:
             return{
@@ -264,9 +281,29 @@ export default (state = initialState, action ) => {
             return{
                 ...state,
                 isLoggingOut: false,
-                isLogout:false,
+                isLogout:true,
                 logOutReason:action.error,
-            }                    
+            } 
+        
+         case UNREGISTER_REQUEST:
+            return{
+                ...state,
+                UnregisteringOut: true,
+                isUnregister:false,
+            }
+        case UNREGISTER_SUCCESS:
+            return{
+                ...state,
+                UnregisteringOut:false,
+                isUnregister: true,
+            }
+        case UNREGISTER_FAILURE:
+            return{
+                ...state,
+                UnregisteringOut: false,
+                isUnregister:false,
+                UnregisterReason:action.error,
+            } 
         default:
             return state;    
     }

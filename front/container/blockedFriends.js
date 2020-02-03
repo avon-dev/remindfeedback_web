@@ -60,11 +60,12 @@ const blockedFriends = ({blockedVisible,blockedHandleOk,blockedHandleCancel}) =>
         })
             
     const _onsubmit = useCallback((e) => {
-        const user_uid = e.target.id;
+        const friend_uid = e.target.id;
+        const friend_id = blockedFriends.find((v,i)=>v.user_uid===friend_uid).id;
         dispatch({
             type:FRIENDS_BLOCK_UPDATE_REQUEST,
             data:{
-                 user_uid
+                friend_uid,friend_id,
             }
         })
         blockedHandleCancel();

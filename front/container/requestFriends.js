@@ -62,13 +62,15 @@ const requestFriends = ({requestVisible,requestHandleOk,requestHandleCancel}) =>
             
     const _onsubmit = useCallback((e) => {
         const check = e.target.name;
-        const user_uid = e.target.id;
+        const friend_uid = e.target.id;
+        const friend_id = receivedFriends.find((v,i)=>v.user_uid===friend_uid).id;
+        console.log(friend_uid);
         if(check==='accept'){
             // 수락
             dispatch({
                 type:FRIENDS_RQ_ADD_REQUEST,
                 data:{
-                    check,user_uid
+                    check,user_uid:friend_uid,friend_id
                 }
             })
         }else{
@@ -76,7 +78,7 @@ const requestFriends = ({requestVisible,requestHandleOk,requestHandleCancel}) =>
             dispatch({
                 type:FRIENDS_RQ_ADD_REQUEST,
                 data:{
-                    check,user_uid
+                    check,friend_uid,friend_id
                 }
             })
         }

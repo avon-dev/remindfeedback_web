@@ -69,10 +69,11 @@ const Friends = () => {
 
     // 친구 차단 하기
     const handleConfirm = useCallback(() => {
+      const friend_id = registerdFriends.find((v,i)=>v.user_uid===id).id;
       dispatch({
         type:FRIENDS_BLOCK_REQUEST,
         data:{
-          friend_id:id,
+          friend_uid:id,friend_id,
         }
       });
       setBlockFriend(false);

@@ -103,11 +103,11 @@ function* watchFriends_Pro_Read() {
 // 친구 요청 모달 Add
 function friends_Req_Add_API(data){
     if(data.check==='accept'){
-        return axios.post('/friends/create',data,{
+        return axios.post('/friends',data,{
             withCredentials:true
         });
     }else{
-        return axios.patch(`/friends/rejection${data}`,{
+        return axios.patch(`/friends/rejection/${data.friend_id}`,data,{
             withCredentials:true
         });
     }
@@ -278,7 +278,7 @@ function* watchFriends_Block_Read(){
 
 // 친구 차단 ADD
 function friends_Block_API(data){
-    return axios.patch(`/friends/block/${data}`,{
+    return axios.patch(`/friends/block/${data.friend_id}`,data,{
         withCredentials:true
     });
 };
@@ -306,7 +306,7 @@ function* watchFriends_Block(){
 
 // 친구 차단 목록 Update
 function friends_Block_Update_API(data){
-    return axios.patch(`/friends/unblock/${data}`,{
+    return axios.patch(`/friends/unblock/${data.friend_id}`,data,{
         withCredentials:true
     });
 };

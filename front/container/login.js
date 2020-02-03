@@ -31,16 +31,15 @@ const login = () => {
                 email,password
             }
         });
-        dispatch({
-            type:MOVE_TO_SIGNUP
-        });
+        // dispatch({
+        //     type:MOVE_TO_SIGNUP
+        // });
     },[email,password]);
 
     useEffect(()=>{
         const feedbackModes = feedbackMode;
         const lastId = 0;
         if(isLoggedIn){
-            
             dispatch({
                 type:FEEDBACK_READ_REQUEST,
                 data:{
@@ -98,7 +97,7 @@ const login = () => {
                                 prefix={<Icon type="user" 
                                 style={{ color: 'rgba(0,0,0,.25)' }} />}
                                 placeholder="Email"
-                                value={me.email?me.email:email}
+                                value={email}
                                 onChange={handleEmail}
                                 required
                             />
