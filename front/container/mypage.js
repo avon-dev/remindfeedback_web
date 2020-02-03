@@ -39,6 +39,9 @@ const mypage = () => {
       setPhotoManagement(false);
       dispatch({
        type:DELTE_USER_PHOTO_REQUEST,
+       data:{
+        updatefile:true, 
+       }
       });
     }
 

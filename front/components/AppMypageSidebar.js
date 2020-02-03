@@ -3,6 +3,8 @@ import { Menu, Icon,Button, Row, Modal, Col } from 'antd';
 import CheckPassword from '../container/checkPassword';
 import Link from 'next/link';
 const { SubMenu } = Menu;
+import { useDispatch, useSelector } from 'react-redux';
+import {UNREGISTER_REQUEST, LOG_OUT_REQUEST} from '../reducers/user';
 
 const newFeedBack ={
   fontSize:17,
@@ -15,6 +17,8 @@ const Sidebar = {
 }
 
 const AppMypageSidebar = () => {
+  const dispatch = useDispatch();
+
   const [buttonNumber, setButtonNumber] = useState('1');
   const [visible, setVisible] = useState(false);
 
@@ -34,6 +38,16 @@ const AppMypageSidebar = () => {
     console.log(e.key);
     if(e.key==='2'){
       PopupUpdatePassword();
+    }else if(e.key==='3'){
+      //회원탈퇴
+      confirm('정말로 탈퇴하시겠습니까?')
+      &&
+      dispatch({
+        type:UNREGISTER_REQUEST
+      })
+      dispatch({
+        type:LOG_OUT_REQUEST
+      })
     }
     setButtonNumber(e.key);
   };

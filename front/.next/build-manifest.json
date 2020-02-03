@@ -16,30 +16,9 @@
       "static/chunks/commons.a376ea0b588e0e56c147.js",
       "static/runtime/main-24a4990b84f161890d74.js"
     ],
-    "/feedbackdetail": [
-      "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
-      "static/chunks/commons.a376ea0b588e0e56c147.js",
-      "static/runtime/main-24a4990b84f161890d74.js"
-    ],
-    "/friends": [
-      "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
-      "static/chunks/commons.a376ea0b588e0e56c147.js",
-      "static/runtime/main-24a4990b84f161890d74.js"
-    ],
-    "/imagePath": [
-      "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
-      "static/chunks/commons.a376ea0b588e0e56c147.js",
-      "static/runtime/main-24a4990b84f161890d74.js"
-    ],
-    "/index": [
-      "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
-      "static/chunks/commons.a376ea0b588e0e56c147.js",
-      "static/runtime/main-24a4990b84f161890d74.js"
-    ],
     "/login": [
-      "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
-      "static/chunks/commons.a376ea0b588e0e56c147.js",
-      "static/runtime/main-24a4990b84f161890d74.js"
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ],
     "/main": [
       "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",

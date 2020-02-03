@@ -89,8 +89,8 @@ const signup = () => {
       }, []);
 
      useEffect(() => {
-        if (isSignedUp) {
-          alert('회원가입이 완료되었습니다. 로그인창으로 이동합니다.');
+        if (!hasMessage&&isSignedUp) {
+          alert(me.msg);
           Router.push('/login');
         }
       }, [isSignedUp&&isSignedUp]);
@@ -98,6 +98,11 @@ const signup = () => {
       useEffect(() => {
         if (hasMessage) {
           alert(me.msg);
+          setEmail('');
+          setNickname('');
+          setPassword('');
+          setRe_password('');
+          setTerm(false);
           dispatch({
               type:MOVE_TO_SIGNUP
           });

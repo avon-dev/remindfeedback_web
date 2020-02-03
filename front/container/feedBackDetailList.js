@@ -33,10 +33,10 @@ const feedBackDetailList = ({feedback_id, handleComment}) => {
 
     useEffect(()=>{
         if(feedbackMode){
-            setAdviser_uid(feedback.yourFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).yourfeedback.nickname);
+            setAdviser_uid(feedback.yourFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).owner.nickname);
             setCreatedAt((feedback.yourFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).createdAt));
         }else{
-            setAdviser_uid(feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).myfeedback.nickname);
+            setAdviser_uid(feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).adviser.nickname);
             setCreatedAt((feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).createdAt));
             const r = feedbackItem.map((v,i)=>{return{board_file1:v.board_file1,board_file2:v.board_file2,board_file3:v.board_file3}});
             // setImages(r);

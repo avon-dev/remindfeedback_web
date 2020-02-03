@@ -13,6 +13,10 @@ export const initialState = {
     isLogout: false, // 로그아웃 여부
     logOutReason: '', // 로그아웃 실패 사유
 
+    UnregisteringOut: false, // 회원탈퇴 시도중
+    isUnregister: false, // 회원탈퇴 여부
+    UnregisterReason: '', // 회원탈퇴 실패 사유
+
     isLoadingMyInfo: false, // 마이페이지 로드 중
     isLoadedMyInfo: false, // 마이페이지 로드 성공
     LoadedMyInfoReason: '', // 마이페이지 로드 실패 사유
@@ -63,6 +67,10 @@ export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST'; // 로그아웃 시도 중
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS'; // 로그아웃 성공
 export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'; // 로그아웃 실패
 
+export const UNREGISTER_REQUEST = 'UNREGISTER_REQUEST'; // 회원탈퇴 시도 중
+export const UNREGISTER_SUCCESS = 'UNREGISTER_SUCCESS'; // 회원탈퇴 성공
+export const UNREGISTER_FAILURE = 'UNREGISTER_FAILURE'; // 회원탈퇴 실패
+
 export default (state = initialState, action ) => {
     switch(action.type){
         case MOVE_TO_SIGNUP:
@@ -72,10 +80,11 @@ export default (state = initialState, action ) => {
                 isSignedUp: false,
                 hasMessage: false,
                 me:{
-                    ...state.me,
                     email: '',
-                    password: '',
                     nickname: '',
+                    introduction:'',
+                    portrait:'',
+                    tutorial:null,
                     msg:'',
                 }
             }  
@@ -99,6 +108,7 @@ export default (state = initialState, action ) => {
                 isLoggingIn: true,
             }
         case LOG_IN_SUCCESS:
+            
             return{
                 ...state,
                 isLoggingIn: false,
@@ -112,6 +122,7 @@ export default (state = initialState, action ) => {
                     nickname:action.data.nickname,
                     tutorial:action.data.tutorial,
                 },
+                message: action.data.success?action.data.message:'',
             }
         case LOG_IN_FAILURE:
             return{
@@ -136,7 +147,7 @@ export default (state = initialState, action ) => {
                     ...state.me,
                     email:'',
                     nickname:'',
-                    msg: action.data.msg,
+                    msg: action.data.message,
                 },
             }    
         case SIGN_UP_SUCCESS:
@@ -147,8 +158,8 @@ export default (state = initialState, action ) => {
                 hasMessage: false,
                 me:{
                     ...state.me,
-                   email:action.data.email,
-                   nickname:action.data.nickname,
+                   email:action.data.data.email,
+                   nickname:action.data.data.nickname,
                    msg:'', 
                 },
             }
@@ -249,6 +260,15 @@ export default (state = initialState, action ) => {
                 ...state,
                 isLoggingOut: true,
                 isLogout:false,
+                isLoggedIn:false,
+                me:{
+                    email: '',
+                    nickname: '',
+                    introduction:'',
+                    portrait:'',
+                    tutorial:null,
+                    msg:'',
+                }
             }
         case LOG_OUT_SUCCESS:
             return{
@@ -261,9 +281,29 @@ export default (state = initialState, action ) => {
             return{
                 ...state,
                 isLoggingOut: false,
-                isLogout:false,
+                isLogout:true,
                 logOutReason:action.error,
-            }                    
+            } 
+        
+         case UNREGISTER_REQUEST:
+            return{
+                ...state,
+                UnregisteringOut: true,
+                isUnregister:false,
+            }
+        case UNREGISTER_SUCCESS:
+            return{
+                ...state,
+                UnregisteringOut:false,
+                isUnregister: true,
+            }
+        case UNREGISTER_FAILURE:
+            return{
+                ...state,
+                UnregisteringOut: false,
+                isUnregister:false,
+                UnregisterReason:action.error,
+            } 
         default:
             return state;    
     }

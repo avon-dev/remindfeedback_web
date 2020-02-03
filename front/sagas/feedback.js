@@ -59,7 +59,7 @@ if(prod){
 
 // Feedback 피드백 게시물 댓글 Add
 function feedback_Item_Add_Comment_API(data){
-    return axios.post('/comment/create',data,{
+    return axios.post('/comments/',data,{
         withCredentials:true
     });
 };
@@ -87,7 +87,7 @@ function* watchFeedback_Item_Add_Comment() {
 
 // Feedback 피드백 게시물 댓글 Update
 function feedback_Item_Update_Comment_API(data){
-    return axios.put(`/comment/update/${data.comment_id}`,data,{
+    return axios.put(`/comments/${data.comment_id}`,data,{
         withCredentials:true
     });
 };
@@ -115,7 +115,7 @@ function* watchFeedback_Item_Update_Comment() {
 
 // Feedback 피드백 게시물 댓글 Delete
 function feedback_Item_Delete_Comment_API(data){
-    return axios.delete(`/comment/delete/${data}`,{
+    return axios.delete(`/comments/${data}`,{
         withCredentials:true
     });
 };
@@ -144,7 +144,7 @@ function* watchFeedback_Item_Delete_Comment() {
 
 // Feedback 피드백 게시물 댓글 Read
 function feedback_Item_Comment_API(data){
-    return axios.get(`/comment/selectall/${data.board_id?data.board_id:data}`,{
+    return axios.get(`/comments/all/${data.board_id?data.board_id:data}`,{
         withCredentials:true
     });
 };
@@ -175,15 +175,15 @@ function* watchFeedback_Item_Comment() {
 function feedback_Item_Complete_API(data){
     switch (data.type) {
         case "request":
-            return axios.post('/feedback/complete/request',data,{
+            return axios.patch(`/feedbacks/request/${data.feedback_id}`,{
                 withCredentials:true
             });
         case "accept":
-            return axios.post('/feedback/complete/accept',data,{
+            return axios.patch(`/feedbacks/approval/${data.feedback_id}`,{
                 withCredentials:true
             });
         case "reject":
-            return axios.post('/feedback/complete/reject',data,{
+            return axios.patch(`/feedbacks/rejection/${data.feedback_id}`,{
                 withCredentials:true
             });
         default:
@@ -217,8 +217,8 @@ function* watchFeedback_Item_Complete() {
 function feedback_Item_Update_API(data){
     console.log(data);
     switch(data.name){
-        case "TEXT_UPDATE": return axios.put(`/board/text/update/${data.feedBackItemId}`,data,{withCredentials:true});
-        case "PHOTO_UPDATE": return axios.put(`/board/picture/update/${data.feedBackItemId}`,data.formData,{withCredentials:true});
+        case "TEXT_UPDATE": return axios.put(`/board/cards/text/${data.feedBackItemId}`,data,{withCredentials:true});
+        case "PHOTO_UPDATE": return axios.put(`/board/cards/picture/${data.feedBackItemId}`,data.formData,{withCredentials:true});
         case "VIDEO_UPDATE": return axios.put('/#');
         case "RECORD_UPDATE": return axios.put('/#');
         default: return console.error("에러발생");
@@ -250,8 +250,8 @@ function* watchFeedback_Item_Update() {
 // Feedback 피드백 게시물 Add
 function feedback_Item_Add_API(data){
     switch(data.name){
-        case "TEXT": return axios.post('/board/text/create',data,{withCredentials:true});
-        case "PHOTO": return axios.post('/board/picture/create',data.formData,{withCredentials:true});
+        case "TEXT": return axios.post('/board/cards/text',data,{withCredentials:true});
+        case "PHOTO": return axios.post('/board/cards/picture',data.formData,{withCredentials:true});
         case "VIDEO": return axios.post('/#');
         case "RECORD": return axios.post('/#');
         default: return console.error("에러발생");
@@ -282,7 +282,7 @@ function* watchFeedback_Item_Add() {
 
 // Feedback 피드백 게시물 Read
 function feedback_Item_Read_API(data){
-    return axios.get(`/board/${parseInt(data.feedbackid)}/${data.lastid}`,{
+    return axios.get(`/board/cards/${parseInt(data.feedbackid)}/${data.lastid}`,{
         withCredentials:true,
     });
 };
@@ -319,7 +319,7 @@ function* watchFeedback_Item_Read() {
 
 // Feedback 피드백 Delete
 function feedback_Delete_API(feedback_id){
-    return axios.delete(`/feedback/${feedback_id}`,{
+    return axios.delete(`/feedbacks/${feedback_id}`,{
         withCredentials:true
     });
 };
@@ -348,7 +348,7 @@ function* watchFeedback_Delete(){
 // Feedback 피드백 Update
 function feedback_Update_API(data){
     
-    return axios.put(`/feedback/update/${data.feedback_id}`,data,{
+    return axios.put(`/feedbacks/${data.feedback_id}`,data,{
         withCredentials:true
     });
 };
@@ -374,7 +374,7 @@ function* watchFeedback_Update(){
 
 // Feedback 새 피드백 Add
 function feedback_Add_API(data){
-    return axios.post('/feedback',data,{
+    return axios.post('/feedbacks',data,{
         withCredentials:true
     });
 };
@@ -402,7 +402,7 @@ function* watchFeedback_Add(){
 
 // Feedback 메인화면 Read
 function feedback_Read_API(data){
-    return axios.get(`/feedback/all/${data.lastId}`,{
+    return axios.get(`/feedbacks/${data.lastId}`,{
         withCredentials:true
     });
 };
@@ -434,7 +434,7 @@ function* watchFeedback_Read() {
 
 // GetFeedback 카테고리 목록 
 function getfeedback_Category_API(data){
-    return axios.get(`/feedback/your/${data}`,{
+    return axios.get(`/feedbacks/your/${data}`,{
         withCredentials:true
     });
 };
