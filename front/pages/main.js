@@ -83,7 +83,7 @@ Main.getInitialProps = async(context) => {
             type:FEEDBACK_SUB_READ_REQUEST
         })
     }else{
-        
+       
     }
 };
 

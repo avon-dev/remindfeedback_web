@@ -42,7 +42,7 @@ RemindFeedback.getInitialProps = async(context) => {
         // 서버사이드 렌더링
         axios.defaults.headers.Cookie = cookie;
     }
-    if(cookie!==''){
+   
         ctx.store.dispatch({
             type:FEEDBACK_READ_REQUEST,
             data:{
@@ -52,7 +52,7 @@ RemindFeedback.getInitialProps = async(context) => {
         // ctx.store.dispatch({
         //     type:FEEDBACK_SUB_READ_REQUEST,
         // });
-    }
+    
     if(Component.getInitialProps){
         pageProps = await Component.getInitialProps(ctx);
     }

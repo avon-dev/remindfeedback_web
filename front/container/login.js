@@ -31,9 +31,9 @@ const login = () => {
                 email,password
             }
         });
-        // dispatch({
-        //     type:MOVE_TO_SIGNUP
-        // });
+        dispatch({
+            type:MOVE_TO_SIGNUP
+        });
     },[email,password]);
 
     useEffect(()=>{
