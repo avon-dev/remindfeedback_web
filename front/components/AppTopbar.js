@@ -45,7 +45,9 @@ const AppTopbar = () => {
 
     useEffect(()=>{
         if(isLogout){
-           Router.push('/login'); 
+            // 쿠키 삭제 
+      
+        Router.push('/login'); 
         }
     },[isLogout&&isLogout]);
 
@@ -74,7 +76,6 @@ const AppTopbar = () => {
         dispatch({
             type:LOG_OUT_REQUEST,
         })
-        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     }
 
     const handleAlert = () => {
