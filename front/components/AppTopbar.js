@@ -181,7 +181,7 @@ const AppTopbar = () => {
                                     style={{background:'gray', border:'none' }}
                                 >
                                 <Avatar src={me.portrait&&`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${me.portrait}`}>
-                                    {!me.portrait&&me.nickname.split('')[0]}
+                                    {!me.portrait&&'U'}
                                     </Avatar>
                                 </Button>
                             </div>
