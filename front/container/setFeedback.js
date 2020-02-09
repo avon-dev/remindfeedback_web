@@ -66,7 +66,7 @@ const setFeedback = ({myFeedback}) => {
                     :
                     <div></div>
          
-    const menu = subject.length>=1?
+    const menu = subject&&subject.length>=1?
                     <Menu>
                         <Menu.Item key='all' onClick={onClickSubject} id='0'>
                                 <div>
@@ -84,7 +84,7 @@ const setFeedback = ({myFeedback}) => {
                     :
                     <div></div>
 
-    const subjects = subject.length>=1?
+    const subjects = subject&&subject.length>=1?
                     <Dropdown overlay={menu} >
                         <Button 
                            

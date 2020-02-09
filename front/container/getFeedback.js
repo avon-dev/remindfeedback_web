@@ -52,7 +52,7 @@ const getFeedback = ({requestedFeedback}) => {
                     :
                     <div></div>
 
-    const progress = requestedFeedback.length>=1?
+    const progress = requestedFeedback&&requestedFeedback.length>=1?
             !inProgress?
             <div>
                 <Button
