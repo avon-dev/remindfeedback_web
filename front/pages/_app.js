@@ -16,12 +16,14 @@ import {FEEDBACK_READ_REQUEST} from '../reducers/feedback';
 const RemindFeedback = ({Component, store, pageProps }) => {
     return(
         <> 
+            
             <Container>
                 <Provider store={store}>
                     <AppHeader/>
                     <Component {...pageProps}/>
                 </Provider>
             </Container>
+           
         </>
     )
 }

@@ -83,7 +83,15 @@ Main.getInitialProps = async(context) => {
             type:FEEDBACK_SUB_READ_REQUEST
         })
     }else{
-        
+        // context.store.dispatch({
+        //     type:FEEDBACK_READ_REQUEST,
+        //     data:{
+        //         feedbackModes,lastId
+        //     }
+        // });
+        // context.store.dispatch({
+        //     type:FEEDBACK_SUB_READ_REQUEST
+        // });
     }
 };
 

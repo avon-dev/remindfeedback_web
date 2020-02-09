@@ -45,7 +45,9 @@ const AppTopbar = () => {
 
     useEffect(()=>{
         if(isLogout){
-           Router.push('/login'); 
+            // 쿠키 삭제 
+      
+        Router.push('/login'); 
         }
     },[isLogout&&isLogout]);
 

@@ -137,7 +137,8 @@ function logOutAPI(){
 
 function* logOut(){
     try {
-        yield call(logOutAPI);
+        const result = yield call(logOutAPI);
+        console.log(result.data);
         yield put({
             type:LOG_OUT_SUCCESS,
         });
