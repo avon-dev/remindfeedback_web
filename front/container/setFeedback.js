@@ -43,33 +43,7 @@ const setFeedback = ({myFeedback}) => {
         }
         
     }
-<<<<<<< HEAD
 
-    const mainItem = <SetFeedbackContents
-                        myFeedback={myFeedback}
-                        inProgress={inProgress}
-                        categoryId={categoryId}    
-                    />
-
-
-    const filter = myFeedback&&myFeedback.length>=1?
-                    <Breadcrumb>
-                        <Breadcrumb.Item href="#">
-                            <Icon type="home" /><span>분류1</span>
-                        </Breadcrumb.Item >
-                        <Breadcrumb.Item href="#">
-                            <Icon type="home" /><span>분류2</span>
-                        </Breadcrumb.Item>
-                        <Breadcrumb.Item href="#">
-                            <Icon type="home" /><span>분류3</span>
-                        </Breadcrumb.Item>
-                    </Breadcrumb>                
-                    :
-                    <div></div>
-         
-=======
-  
->>>>>>> 9b5d184ff2186e09528a878d6acdd3e3c5b345bf
     const menu = subject&&subject.length>=1?
                     <Menu>
                         <Menu.Item key='all' onClick={onClickSubject} id='0'>
