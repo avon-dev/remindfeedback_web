@@ -37,7 +37,7 @@ const getFeedback = ({requestedFeedback}) => {
                             inProgress={inProgress}  
                         />
 
-    const filter = requestedFeedback&&requestedFeedback.length>=1?
+    const filter =  requestedFeedback&&requestedFeedback.length>=1?
                     <Breadcrumb>
                         <Breadcrumb.Item href="#">
                             <Icon type="home" /><span>분류1</span>

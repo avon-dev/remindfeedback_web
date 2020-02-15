@@ -39,7 +39,7 @@ const login = () => {
     useEffect(()=>{
         const feedbackModes = feedbackMode;
         const lastId = 0;
-        if(isLoggedIn){
+        if(isLoggedIn&&me){
             dispatch({
                 type:FEEDBACK_READ_REQUEST,
                 data:{

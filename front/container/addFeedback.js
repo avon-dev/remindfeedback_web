@@ -245,7 +245,7 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                 >
                 <Content style={backgroundWhite}>
                     <Form  {...feedbackItemLayout} >
-                        {feedback_category}
+                        {/* {feedback_category} */}
                         {feedback_title}
                         {feedback_date}
                         {feedback_advisor}
