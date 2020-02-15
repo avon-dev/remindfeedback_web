@@ -26,10 +26,10 @@ const AppFooter = () => {
                 <Col span={24} style={{ textAlign:'center', }}>
                     <Breadcrumb style={{fontWeight:"bold",color:'#FFFFFF'}}>
                         <Breadcrumb.Item style={font}>
-                            <span>서울특별시 강남구 테해란로 501 브이플렉스 4층</span>
+                            <span>서울특별시 ...</span>
                         </Breadcrumb.Item >
                         <Breadcrumb.Item style={font}>
-                            <span>대표 우태헌</span>
+                            <span>대표 ...</span>
                         </Breadcrumb.Item>
                         <Breadcrumb.Item style={font} >
                             <span>사업자등록번호 000-00-000000</span>
