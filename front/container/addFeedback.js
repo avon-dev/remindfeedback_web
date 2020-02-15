@@ -16,7 +16,7 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
 
     const dispatch = useDispatch();
     const {isAdddingFeedback,isAddedFeedback,isUpdatingFeedback} = useSelector(state => state.feedback);
-    const {registerdFriends}= useSelector(state=>state.friends);
+    const {searchedFriends,registerdFriends}= useSelector(state=>state.friends);
     
     const {subject} = useSelector(state => state.feedbackSubject);
     
@@ -24,7 +24,7 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
     const [title,setTitle] = useState('');
     const [write_date,setWrite_date] = useState(moment());
     const [adviser,setAdvisor] = useState('');
-    
+    const [check ,setCheck] = useState(false);
     const [emailList, setEmailList] = useState([]); 
 
     const _onSubmit = useCallback(async (e) => {
@@ -75,6 +75,34 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
        }
     };
 
+    const handleAdvisor = (e) =>  {
+        setAdvisor(e.target.value);
+    };
+
+    const handleSearch = (v) =>  {
+        setAdvisor(v);
+    };
+
+    const registerAdvisor = (e) => {
+        setAdvisor(e.target.name);
+        setCheck(false);
+    }
+
+    const handleSearchOk = () => {
+        if(!adviser){
+            return alert('조언자의 이메일을 입력하세요')
+        }
+        const email = adviser;
+        dispatch({
+            type:FRIENDS_ADD_SEARCH_REQUEST,
+            data:{
+                email,
+            }
+        })
+        setAdvisor('');
+        setCheck(true);
+    }
+
     useEffect(()=>{
         if(!registerdFriends||registerdFriends.length<1){
             setEmailList(['조언자가 없습니다.']);
@@ -104,6 +132,7 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
         }  
     },[feedback_titles,category_titles,feedback_adviser_uid,feedback_write_date]);
 
+    
     const feedback_dateInfo = <strong>피드백의 만료 날짜를 선택해 주세요.</strong>;
     const feedback_advisorInfo = order&&<strong>피드백을 통해 조언을 받고 싶은 조언자를 검색해주세요</strong>;
 

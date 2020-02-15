@@ -106,7 +106,7 @@ const setFeedback = ({myFeedback}) => {
             :
             <div></div>} 
             <div>
-            <SetFeedbackContents myFeedback={myFeedback} inProgress={inProgress} categoryId={categoryId}  /> 
+            <SetFeedbackContents myFeedback={myFeedback} inProgress={inProgress} categoryId={categoryId} /> 
             </div>
                    
         </>
