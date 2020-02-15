@@ -43,7 +43,7 @@ const setFeedback = ({myFeedback}) => {
         }
         
     }
-  
+   
     const menu = subject&&subject.length>=1?
                     <Menu>
                         <Menu.Item key='all' onClick={onClickSubject} id='0'>
@@ -106,7 +106,7 @@ const setFeedback = ({myFeedback}) => {
             :
             <div></div>} 
             <div>
-            <SetFeedbackContents myFeedback={myFeedback} inProgress={inProgress} categoryId={categoryId}  /> 
+            <SetFeedbackContents myFeedback={myFeedback} inProgress={inProgress} categoryId={categoryId} /> 
             </div>
                    
         </>

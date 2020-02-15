@@ -133,7 +133,6 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
     },[feedback_titles,category_titles,feedback_adviser_uid,feedback_write_date]);
 
     
-   
     const feedback_dateInfo = <strong>피드백의 만료 날짜를 선택해 주세요.</strong>;
     const feedback_advisorInfo = order&&<strong>피드백을 통해 조언을 받고 싶은 조언자를 검색해주세요</strong>;
 
