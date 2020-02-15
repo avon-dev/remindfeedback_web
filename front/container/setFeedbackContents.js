@@ -172,9 +172,6 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
            filteredFeedback.length>=1?
            filteredFeedback.map((v,i)=> 
               <Card
-              // title={<div style={{background:'#DCDCDC', padding:0, margin:0}}>
-              // {<strong>{setCategory(v.category)}</strong>}</div>}
-              // extra={}
               key={v.id}
               style={{ marginTop: 15, background:setColor(v.category) }}
               cover={<div>

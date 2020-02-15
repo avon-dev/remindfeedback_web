@@ -10,7 +10,6 @@ const setFeedback = ({myFeedback}) => {
 
     const dispatch = useDispatch();
     const { subject } = useSelector(state=> state.feedbackSubject);
-    const { feedbackMode } = useSelector(state=> state.feedbackMode);
     const { feedback } = useSelector(state=> state.feedback);
     const { message, searchedFriends} = useSelector(state=> state.friends);
 
@@ -44,6 +43,7 @@ const setFeedback = ({myFeedback}) => {
         }
         
     }
+<<<<<<< HEAD
 
     const mainItem = <SetFeedbackContents
                         myFeedback={myFeedback}
@@ -67,6 +67,9 @@ const setFeedback = ({myFeedback}) => {
                     :
                     <div></div>
          
+=======
+  
+>>>>>>> 9b5d184ff2186e09528a878d6acdd3e3c5b345bf
     const menu = subject&&subject.length>=1?
                     <Menu>
                         <Menu.Item key='all' onClick={onClickSubject} id='0'>
@@ -85,7 +88,13 @@ const setFeedback = ({myFeedback}) => {
                     :
                     <div></div>
 
-    const subjects = subject&&subject.length>=1?
+    return(
+        <>          
+            <Col span={24} style={{textAlign:'center',marginTop:15, fontStyle:"italic", textShadow:"2px 2px 2px gray", }}>
+                <Title level={2}><strong>내 피드백</strong></Title>
+            </Col>
+            <Col span={24} style={{marginTop:15, textAlign:'center'}}>
+                {subject&&subject.length>=1?
                     <Dropdown overlay={menu} >
                         <Button 
                            
@@ -95,9 +104,11 @@ const setFeedback = ({myFeedback}) => {
                         </Button>
                     </Dropdown>    
                     :
-                    <div></div>
-
-    const progress = myFeedback&&myFeedback.length>=1?
+                    <div></div>}
+            </Col>
+            <Col span={24} style={{marginTop:20, textAlign:'right'}}> 
+            </Col>
+            { myFeedback&&myFeedback.length>=1?
             !inProgress?
             <div>
                 <Button
@@ -119,22 +130,9 @@ const setFeedback = ({myFeedback}) => {
                 ><strong> 진행완료 </strong></Button>
             </div>
             :
-            <div></div>
-
-    return(
-        <>          
-            <Col span={24} style={{textAlign:'center',marginTop:15, fontStyle:"italic", textShadow:"2px 2px 2px gray", }}>
-                <Title level={2}><strong>내 피드백</strong></Title>
-            </Col>
-            <Col span={24} style={{marginTop:15, textAlign:'center'}}>
-                {subjects}
-            </Col>
-            <Col span={24} style={{marginTop:20, textAlign:'right'}}> 
-               {/* {filter}  */}
-            </Col>
-            {progress} 
+            <div></div>} 
             <div>
-                {mainItem}  
+            <SetFeedbackContents myFeedback={myFeedback} inProgress={inProgress} categoryId={categoryId}  /> 
             </div>
                    
         </>
