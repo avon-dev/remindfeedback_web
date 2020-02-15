@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"/_app":"static/FYaJrRY-TqYuV-W96Mzm_/pages/_app.js","/_document":"static/FYaJrRY-TqYuV-W96Mzm_/pages/_document.js","/_error":"static/FYaJrRY-TqYuV-W96Mzm_/pages/_error.js","/feedbackdetail":"static/FYaJrRY-TqYuV-W96Mzm_/pages/feedbackdetail.js","/friends":"static/FYaJrRY-TqYuV-W96Mzm_/pages/friends.js","/imagePath":"static/FYaJrRY-TqYuV-W96Mzm_/pages/imagePath.js","/index":"static/FYaJrRY-TqYuV-W96Mzm_/pages/index.js","/login":"static/FYaJrRY-TqYuV-W96Mzm_/pages/login.js","/main":"static/FYaJrRY-TqYuV-W96Mzm_/pages/main.js","/mypage":"static/FYaJrRY-TqYuV-W96Mzm_/pages/mypage.js","/signup":"static/FYaJrRY-TqYuV-W96Mzm_/pages/signup.js","/subject":"static/FYaJrRY-TqYuV-W96Mzm_/pages/subject.js","/updatepassword":"static/FYaJrRY-TqYuV-W96Mzm_/pages/updatepassword.js","/":"static/FYaJrRY-TqYuV-W96Mzm_/pages/index.js"}
+=======
+{"/_app":"static/development/pages/_app.js","/_document":"static/development/pages/_document.js","/_error":"static/development/pages/_error.js","/feedbackdetail":"static/development/pages/feedbackdetail.js","/main":"static/development/pages/main.js"}
+>>>>>>> d119478f42261657e9d72db9643f6a8b0bc3e20e

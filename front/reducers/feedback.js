@@ -472,12 +472,21 @@ export default (state = initialState, action) => {
                 isLoadedFeedbackComment:false,
             };
         case FEEDBACK_ITEM_COMMENT_SUCCESS:
+            let comment = state.feedbackComment;
+            let count = 0;
+            if(action.data.success){
+                comment = action.data.data?action.data.data.filter((v,i)=>!v.deletedAt):[];
+                count = action.data.count;
+            }
+
             return{
                 ...state,
                 isLoadingFeedbackComment:false,
                 isLoadedFeedbackComment:true,
-                feedbackComment:action.data.success?action.data.data.filter((v,i)=>!v.deletedAt):state.feedbackComment 
+                feedbackComment:comment,
+                count:count
             };
+
         case FEEDBACK_ITEM_COMMENT_FAILURE:
             return{
                 ...state,

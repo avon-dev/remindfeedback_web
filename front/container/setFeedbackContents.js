@@ -13,6 +13,7 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
     const dispatch = useDispatch();
     const { subject } = useSelector(state=> state.feedbackSubject);
     const { isDeletingFeedback,isUpdatedFeedback } = useSelector(state=> state.feedback);
+    const { me } = useSelector(state=> state.user);
 
     const [feedback_id, setFeedback_id] = useState();
     const [feedback_title, setFeedback_title] = useState();
@@ -217,10 +218,10 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
               <Link key={v.id} as={`/feedbackdetail/${v.id}`} href={`/feedbackdetail?id=${v.id}`} ><a><Meta
                   avatar={
                   <div>
-                  <Avatar src={v.adviser.portrait&&`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v.adviser.portrait}`}>
-                    {!v.adviser.portrait&&v.adviser.nickname.split('')[0]}
+                  <Avatar src={v.adviser!==null?v.adviser.portrait&&`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v.adviser.portrait}`:'#'}>
+                    {v.adviser!==null?!v.adviser.portrait&&v.adviser.nickname.split('')[0]:me.nickname.split('')[0]}
                     </Avatar>
-                    <p style={{color:"black"}}><strong>{v.adviser.nickname}</strong></p>
+                    <p style={{color:"black"}}><strong>{v.adviser!==null?v.adviser.nickname:me.nickname}</strong></p>
                     </div>
                   }
                 title={<><Col span={7} style={{background:"#FFFFFF",textAlign:"center", margin:5, borderRadius:100, color:"red"}}><strong>D-</strong>{dDay(v.createdAt, v.write_date)}</Col><Col span={17}/>

@@ -36,10 +36,16 @@
       "static/chunks/commons.613218d9dd10385e6339.js",
       "static/runtime/main-24a4990b84f161890d74.js"
     ],
+<<<<<<< HEAD
     "/login": [
       "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
       "static/chunks/commons.613218d9dd10385e6339.js",
       "static/runtime/main-24a4990b84f161890d74.js"
+=======
+    "/feedbackdetail": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+>>>>>>> d119478f42261657e9d72db9643f6a8b0bc3e20e
     ],
     "/main": [
       "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",

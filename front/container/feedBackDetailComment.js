@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Divider, Typography, Button, Icon, Comment, Tooltip, Avatar, Input, Form, Popconfirm ,Empty} from 'antd';
+import { Col, Divider, Pagination , Button, Icon, Comment, Tooltip, Avatar, Input, Form, Popconfirm ,Empty} from 'antd';
 import moment from 'moment';
 import {FEEDBACK_ITEM_COMMENT_REQUEST, 
         FEEDBACK_ITEM_COMPLETE_REQ_REQUEST,
@@ -19,7 +19,7 @@ const feedBackDetailComment = ({board_ids, feedback_id}) => {
     const commentReferenece = useRef();
     const commentIdReference = useRef();
     
-    const {feedbackComment, feedbackItem, feedback, isCompleted_req_Feedback} = useSelector(state => state.feedback);
+    const {feedbackComment, feedbackItem, feedback, isCompleted_req_Feedback, count, isAddedFeedbackComment, isDeletedFeedbackComment} = useSelector(state => state.feedback);
     const {feedbackMode} = useSelector(state=>state.feedbackMode);
 
     const [comment_content,setComments] = useState('');
@@ -30,7 +30,30 @@ const feedBackDetailComment = ({board_ids, feedback_id}) => {
     const [changeWrite, setChangeWrite] = useState(false);
     const [changeDo, setChangeDo] = useState(true);
     const [completeValue, setCompleteValue] = useState(0);
-    
+    const [page, setPage] = useState(1);
+
+    useEffect(()=>{
+        if(isDeletedFeedbackComment){
+            dispatch({
+                type: FEEDBACK_ITEM_COMMENT_REQUEST,
+                data:{
+                    page, board_id, 
+                }
+            });
+        }
+    },[isDeletedFeedbackComment&&isDeletedFeedbackComment]);
+
+    useEffect(()=>{
+        if(isAddedFeedbackComment){
+            dispatch({
+                type: FEEDBACK_ITEM_COMMENT_REQUEST,
+                data:{
+                    page, board_id, 
+                }
+            });
+        }
+    },[isAddedFeedbackComment&&isAddedFeedbackComment]);
+
     useEffect(()=>{
         if(board_ids){
             setBoard_id(board_ids);
@@ -136,6 +159,16 @@ const feedBackDetailComment = ({board_ids, feedback_id}) => {
         }    
     };
 
+    const handlePage = (page) =>{
+       setPage(page);
+       dispatch({
+            type: FEEDBACK_ITEM_COMMENT_REQUEST,
+            data:{
+                page, board_id, 
+            }
+        });
+    }
+
     const comments = feedbackComment&&feedbackComment.map((v,i) => <Comment
         // style={{border:"1px solid #000000", padding:10}}
         actions ={[
@@ -229,12 +262,16 @@ const feedBackDetailComment = ({board_ids, feedback_id}) => {
                 ?
                 <Col span={22}>
                     {comments}
+                    <Col style={{textAlign:'center', padding:15}}>
+                    <Pagination  total={count} defaultCurrent={1} defaultPageSize={5} onChange={handlePage} />
+                </Col>
                 </Col>
                 :
                 <Col span={22} style={{marginBottom:20}}>
                     {emptyCard}
                 </Col>
                 }
+                
                 <Col span={22} style={{padding:0, margin:0}}>
                     <Form onSubmit={_onSubmit}>
                         <Form.Item>

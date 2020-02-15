@@ -35,9 +35,7 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
         if(!write_date){
             return alert('피드백 날짜를 선택해 주세요');
         }
-        if(!adviser){
-            return alert('피드백 조언자를 입력해 주세요');
-        }
+       
         if(FEEDBACK_UPDATE_REQUEST===order){
             const category =  await subject&&subject.findIndex((v,i)=>v.category_title===category_titles);
             await dispatch({
@@ -47,17 +45,18 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                 }
             })
         }else if(FEEDBACK_ADD_REQUEST===order){
-            let advisers = registerdFriends.find((v,i)=>v.email === adviser).user_uid;
-            if(advisers){
+            let advisers = ''
+            if(adviser){
+                advisers = registerdFriends.find((v,i)=>v.email === adviser).user_uid;
+                if(!advisers){ return alert('조언자를 다시 등록해 주시기 바랍니다.');}
+            }
                 dispatch({
                     type: FEEDBACK_ADD_REQUEST,
                     data:{
                         category,title,write_date,adviser:advisers 
                     },
                 });
-            }else{
-                return alert('조언자를 다시 등록해 주시기 바랍니다.');
-            }
+            
         }
         
     },[category,title,write_date,adviser]);
@@ -133,20 +132,6 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
         }  
     },[feedback_titles,category_titles,feedback_adviser_uid,feedback_write_date]);
 
-    const feedback_category = (subject&&subject.length>=1 && <Form.Item label={<strong>주제선택</strong>} >
-                                    <Col span={24}>
-                                    <Select value={category?category:subject[0].category_title} onChange={handleSubject} style={{width:'100%', textAlign:'left'}} >
-                                    {subject&&subject.length>=1?
-                                        subject.map((v,i)=>
-                                    <Select.Option key={v.category_id} value={v.category_id} style={{color:v.category_color}}><strong>{v.category_title}</strong></Select.Option>
-                                        )
-                                        : 
-                                    <Select.Option value="default"style={{color:"#FFFFFF"}}><strong>Default</strong></Select.Option>    
-                                    } 
-                                    </Select>
-                                    </Col>
-                                </Form.Item>
-                                );
     
     const feedback_title = (<Form.Item label={<strong>제목</strong>} >
                                 <Col span={24}>
@@ -245,7 +230,19 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                 >
                 <Content style={backgroundWhite}>
                     <Form  {...feedbackItemLayout} >
-                        {/* {feedback_category} */}
+                        {subject&&subject.length>=1 && <Form.Item label={<strong>주제선택</strong>} >
+                                    <Col span={24}>
+                                    <Select value={category?category:subject[0].category_title} onChange={handleSubject} style={{width:'100%', textAlign:'left'}} >
+                                    {subject&&subject.length>=1?
+                                        subject.map((v,i)=>
+                                    <Select.Option key={v.category_id} value={v.category_id} style={{color:v.category_color}}><strong>{v.category_title}</strong></Select.Option>
+                                        )
+                                        : 
+                                    <Select.Option value="default"style={{color:"#FFFFFF"}}><strong>Default</strong></Select.Option>    
+                                    } 
+                                    </Select>
+                                    </Col>
+                                </Form.Item>}
                         {feedback_title}
                         {feedback_date}
                         {feedback_advisor}
