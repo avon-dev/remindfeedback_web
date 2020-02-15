@@ -35,9 +35,7 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
         if(!write_date){
             return alert('피드백 날짜를 선택해 주세요');
         }
-        if(!adviser){
-            return alert('피드백 조언자를 입력해 주세요');
-        }
+       
         if(FEEDBACK_UPDATE_REQUEST===order){
             const category =  await subject&&subject.findIndex((v,i)=>v.category_title===category_titles);
             await dispatch({
@@ -47,17 +45,18 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                 }
             })
         }else if(FEEDBACK_ADD_REQUEST===order){
-            let advisers = registerdFriends.find((v,i)=>v.email === adviser).user_uid;
-            if(advisers){
+            let advisers = ''
+            if(adviser){
+                advisers = registerdFriends.find((v,i)=>v.email === adviser).user_uid;
+                if(!advisers){ return alert('조언자를 다시 등록해 주시기 바랍니다.');}
+            }
                 dispatch({
                     type: FEEDBACK_ADD_REQUEST,
                     data:{
                         category,title,write_date,adviser:advisers 
                     },
                 });
-            }else{
-                return alert('조언자를 다시 등록해 주시기 바랍니다.');
-            }
+            
         }
         
     },[category,title,write_date,adviser]);

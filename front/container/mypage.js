@@ -168,7 +168,7 @@ const mypage = () => {
                       </Col>
                     </Form> 
                 </Col>
-                <Col span={9} style={{marginTop:20}}>
+                {/* <Col span={9} style={{marginTop:20}}>
                   <Col span={24} style={{textAlign:'center', marginBottom:20, fontSize:25}}>
                     <Text code ><strong>Timeline</strong></Text>
                   </Col>
@@ -180,7 +180,7 @@ const mypage = () => {
                         <Timeline.Item color="red"><strong>게시물 삭제</strong> 2019-12-01</Timeline.Item>
                     </Timeline> 
                    </Col>                      
-                </Col>
+                </Col> */}
             </Row>
             <div>
               <AppPhoto

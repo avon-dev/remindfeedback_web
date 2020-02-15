@@ -144,7 +144,7 @@ function* watchFeedback_Item_Delete_Comment() {
 
 // Feedback 피드백 게시물 댓글 Read
 function feedback_Item_Comment_API(data){
-    return axios.get(`/comments/all/${data.board_id?data.board_id:data}`,{
+    return axios.get(`/comments/all/page/${data.board_id?data.board_id:data}/${data.page?data.page:1}/${5}`,{
         withCredentials:true
     });
 };
@@ -152,11 +152,13 @@ function feedback_Item_Comment_API(data){
 function* feedback_Item_Comment(action){
     try {
         const result = yield call(feedback_Item_Comment_API, action.data);
-        console.log(result.data);
+       
+        console.log(result.data,'feedback_Item_Comment');
         yield put({
             type:FEEDBACK_ITEM_COMMENT_SUCCESS,
             data:result.data,
         });
+        
     } catch (e) {
         console.error(e);
         yield put({

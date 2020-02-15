@@ -15,6 +15,7 @@ const feedBackDetailList = ({feedback_id, handleComment}) => {
 
     const dispatch = useDispatch();
     const {feedbackItem,feedback,message, isCompleted_req_Feedback} = useSelector(state=>state.feedback);
+    
     const {feedbackMode} = useSelector(state=>state.feedbackMode);
 
     const [name, setName] = useState(false);
@@ -30,6 +31,8 @@ const feedBackDetailList = ({feedback_id, handleComment}) => {
     const [recordVisible, setRecordVisible] = useState(false);
     const [mouseOver, setMouseOver] = useState(false);
     const [completeValue, setCompleteValue] = useState(0);
+    const [feedbackItems, setFeedbackItems] = useState([]);
+  
 
     useEffect(()=>{
         if(feedbackMode){
@@ -67,6 +70,12 @@ const feedBackDetailList = ({feedback_id, handleComment}) => {
     useEffect(()=>{
         if(feedbackItem.length>=1){
             setBoard_id(feedbackItem[0].id);
+        }
+    },[feedbackItem&&feedbackItem]);
+
+    useEffect(()=>{
+        if(feedbackItem.length>=1){
+            setFeedbackItems(feedbackItem);
         }
     },[feedbackItem&&feedbackItem]);
 
@@ -140,7 +149,25 @@ const feedBackDetailList = ({feedback_id, handleComment}) => {
         handleComment(e.target.id);
     }
 
-    const ItemCard = feedbackItem.map((v,i) =>
+    const handleFilter = (name) => {
+        if(feedbackItem.length>=1){
+            if(name==='all'){
+                console.log('all');
+                setFeedbackItems(feedbackItem);
+            }else if(name==='write'){
+                console.log('write');
+                setFeedbackItems(feedbackItem.filter((v,i)=>parseInt(v.board_category)===0));
+            }else if(name==='photo'){
+                console.log('photo');
+                setFeedbackItems(feedbackItem.filter((v,i)=>parseInt(v.board_category)===1));
+            }else{
+                console.log('Noting')
+            }
+        }
+        
+    }
+
+    const ItemCard = feedbackItems.map((v,i) =>
         <Card
             onMouseOver={_onMouseOver}
             onMouseLeave={_onMouseLeave} 
@@ -200,15 +227,15 @@ const feedBackDetailList = ({feedback_id, handleComment}) => {
                 <Col offset={1}/>
                 <Col offset={1}/>
                 <Col span={22} style={{textAlign:'right', marginBottom:10}}>
-                    <Breadcrumb>
-                        <Breadcrumb.Item href="#">
-                            <Icon type="home" /><span>전체</span>
+                    <Breadcrumb >
+                        <Breadcrumb.Item disabled={completeValue>=1?true:false} href='#' onClick={handleFilter.bind(this, 'all')}>
+                            <Icon type="appstore"/><span>전체</span>
                         </Breadcrumb.Item >
-                        <Breadcrumb.Item href="#">
-                            <Icon type="home" /><span>글</span>
+                        <Breadcrumb.Item disabled={completeValue>=1?true:false} href='#' onClick={handleFilter.bind(this, 'write')}>
+                            <Icon type="read" /><span>글</span>
                         </Breadcrumb.Item>
-                        <Breadcrumb.Item href="#">
-                            <Icon type="home" /><span>사진</span>
+                        <Breadcrumb.Item disabled={completeValue>=1?true:false} href='#' onClick={handleFilter.bind(this, 'photo')}>
+                            <Icon type="camera" /><span>사진</span>
                         </Breadcrumb.Item>
                         {/* <Breadcrumb.Item href="#">
                             <Icon type="home" /><span>동영상</span>
