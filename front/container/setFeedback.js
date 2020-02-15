@@ -51,7 +51,7 @@ const setFeedback = ({myFeedback}) => {
                         categoryId={categoryId}    
                     />
 
-    const filter =  myFeedback.length>=1?
+    const filter = myFeedback&&myFeedback.length>=1?
                     <Breadcrumb>
                         <Breadcrumb.Item href="#">
                             <Icon type="home" /><span>분류1</span>
@@ -96,7 +96,7 @@ const setFeedback = ({myFeedback}) => {
                     :
                     <div></div>
 
-    const progress = myFeedback.length>=1?
+    const progress = myFeedback&&myFeedback.length>=1?
             !inProgress?
             <div>
                 <Button
