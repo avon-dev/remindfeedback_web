@@ -51,7 +51,7 @@ const setFeedback = ({myFeedback}) => {
                         categoryId={categoryId}    
                     />
 
-    const filter =  myFeedback.length>=1?
+    const filter =  myFeedback&&myFeedback.length>=1?
                     <Breadcrumb>
                         <Breadcrumb.Item href="#">
                             <Icon type="home" /><span>분류1</span>
@@ -66,7 +66,7 @@ const setFeedback = ({myFeedback}) => {
                     :
                     <div></div>
          
-    const menu = subject.length>=1?
+    const menu = subject&&subject.length>=1?
                     <Menu>
                         <Menu.Item key='all' onClick={onClickSubject} id='0'>
                                 <div>
@@ -84,7 +84,7 @@ const setFeedback = ({myFeedback}) => {
                     :
                     <div></div>
 
-    const subjects = subject.length>=1?
+    const subjects = subject&&subject.length>=1?
                     <Dropdown overlay={menu} >
                         <Button 
                            
@@ -96,7 +96,7 @@ const setFeedback = ({myFeedback}) => {
                     :
                     <div></div>
 
-    const progress = myFeedback.length>=1?
+    const progress = myFeedback&&myFeedback.length>=1?
             !inProgress?
             <div>
                 <Button
