@@ -16,7 +16,7 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
 
     const dispatch = useDispatch();
     const {isAdddingFeedback,isAddedFeedback,isUpdatingFeedback} = useSelector(state => state.feedback);
-    const {searchedFriends,registerdFriends}= useSelector(state=>state.friends);
+    const {registerdFriends}= useSelector(state=>state.friends);
     
     const {subject} = useSelector(state => state.feedbackSubject);
     
@@ -24,7 +24,7 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
     const [title,setTitle] = useState('');
     const [write_date,setWrite_date] = useState(moment());
     const [adviser,setAdvisor] = useState('');
-    const [check ,setCheck] = useState(false);
+    
     const [emailList, setEmailList] = useState([]); 
 
     const _onSubmit = useCallback(async (e) => {
@@ -75,34 +75,6 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
        }
     };
 
-    const handleAdvisor = (e) =>  {
-        setAdvisor(e.target.value);
-    };
-
-    const handleSearch = (v) =>  {
-        setAdvisor(v);
-    };
-
-    const registerAdvisor = (e) => {
-        setAdvisor(e.target.name);
-        setCheck(false);
-    }
-
-    const handleSearchOk = () => {
-        if(!adviser){
-            return alert('조언자의 이메일을 입력하세요')
-        }
-        const email = adviser;
-        dispatch({
-            type:FRIENDS_ADD_SEARCH_REQUEST,
-            data:{
-                email,
-            }
-        })
-        setAdvisor('');
-        setCheck(true);
-    }
-
     useEffect(()=>{
         if(!registerdFriends||registerdFriends.length<1){
             setEmailList(['조언자가 없습니다.']);
@@ -132,79 +104,8 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
         }  
     },[feedback_titles,category_titles,feedback_adviser_uid,feedback_write_date]);
 
-    
-    const feedback_title = (<Form.Item label={<strong>제목</strong>} >
-                                <Col span={24}>
-                                <Input
-                                    onChange={handleTitle}
-                                    value={title}
-                                    suffix={<Icon type='form' style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                    placeholder="피드백 제목"
-                                    required
-                                />
-                                </Col>
-                            </Form.Item>
-                            );
     const feedback_dateInfo = <strong>피드백의 만료 날짜를 선택해 주세요.</strong>;
-    const feedback_date = (<Form.Item label={<><Tooltip title={feedback_dateInfo}><Icon type="question-circle" /></Tooltip><strong>만료날짜</strong></>}>
-                            <Col span={24}  style={{ width: '100%'}}>
-                                <DatePicker
-                                    style={{width:'100%'}}
-                                    onChange={handleData}
-                                    placeholder="날짜 선택"
-                                    value={write_date?moment(write_date):write_date} 
-                                />
-                            </Col>   
-                            </Form.Item>
-                            );
     const feedback_advisorInfo = order&&<strong>피드백을 통해 조언을 받고 싶은 조언자를 검색해주세요</strong>;
-
-    const actions = searchedFriends&&[<span><Button key="request_friends" size="small" name={searchedFriends.email}  onClick={registerAdvisor}>조언자 등록</Button></span>];
-    const author = searchedFriends&&<a>{searchedFriends.nickname}</a>
-    const avatar = searchedFriends&&<Avatar src={searchedFriends.portrait&&`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${searchedFriends.portrait}`}>{!searchedFriends.portrait&&searchedFriends.nickname.split('')[0]}</Avatar>
-    const content = searchedFriends&&<p>{searchedFriends.introduction?searchedFriends.introduction:'자기소개글이 없습니다.'}</p>   
-    
-    const feedback_advisor = (<Form.Item label={<><Tooltip title={feedback_advisorInfo}><Icon type="question-circle" /></Tooltip><strong>조언자</strong></>} >
-                                <Col span={24}>
-                                    {/* <Search
-                                        value={adviser}
-                                        onChange={handleAdvisor}
-                                        onSearch={handleSearchOk}
-                                        style={{width:'100%'}}
-                                        placeholder="조언자 이메일을 입력하세요"
-                                        enterButton="검색"
-                                        required
-                                    /> */}
-                                    <AutoComplete
-                                        placeholder="조언자 이메일을 입력하세요"
-                                        enterButton="검색"
-                                        size="large"
-                                        dataSource={emailList}
-                                        style={{width:"100%"}}
-                                        onSelect={handleSearch}
-                                        // onSearch={handleSearchOk}
-                                        filterOption={(inputValue, option) =>
-                                            option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                                        }
-                                    ></AutoComplete>
-                                                    
-                                </Col>
-                                {/* {
-                                    searchedFriends&&check&&
-                                    <Col span={24}>
-                                        <Comment
-                                            // style={{marginLeft:10}}
-                                            actions={actions}
-                                            author={author}
-                                            avatar={avatar}
-                                            content={content}   
-                                        />
-                                    </Col> 
-                                }      */}
-                            </Form.Item>
-                            );
-
-    
 
     return(
         <>  
@@ -243,9 +144,44 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                                     </Select>
                                     </Col>
                                 </Form.Item>}
-                        {feedback_title}
-                        {feedback_date}
-                        {feedback_advisor}
+                        {<Form.Item label={<strong>제목</strong>} >
+                                <Col span={24}>
+                                <Input
+                                    onChange={handleTitle}
+                                    value={title}
+                                    suffix={<Icon type='form' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    placeholder="피드백 제목"
+                                    required
+                                />
+                                </Col>
+                            </Form.Item>}
+                        {<Form.Item label={<><Tooltip title={feedback_dateInfo}><Icon type="question-circle" /></Tooltip><strong>만료날짜</strong></>}>
+                            <Col span={24}  style={{ width: '100%'}}>
+                                <DatePicker
+                                    style={{width:'100%'}}
+                                    onChange={handleData}
+                                    placeholder="날짜 선택"
+                                    value={write_date?moment(write_date):write_date} 
+                                />
+                            </Col>   
+                            </Form.Item>}
+                        {<Form.Item label={<><Tooltip title={feedback_advisorInfo}><Icon type="question-circle" /></Tooltip><strong>조언자</strong></>} >
+                                <Col span={24}>
+                        
+                                    <AutoComplete
+                                        placeholder="조언자 이메일을 입력하세요"
+                                        enterButton="검색"
+                                        size="large"
+                                        dataSource={emailList}
+                                        style={{width:"100%"}}
+                                        onSelect={handleSearch}
+                                        // onSearch={handleSearchOk}
+                                        filterOption={(inputValue, option) =>
+                                            option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                                        }
+                                    ></AutoComplete>           
+                                </Col>
+                            </Form.Item>}
                     </Form>
                    
                 </Content>

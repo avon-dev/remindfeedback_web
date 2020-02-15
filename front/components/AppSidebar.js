@@ -22,19 +22,11 @@ const Sidebar = {
 const AppSidebar = () => {
 
   const dispatch = useDispatch();
-  // const {subject,isLoadedSubject} = useSelector(state=>state.feedbackSubject);
   const {isLoadedFriends} = useSelector(state=>state.friends);
   const {isLoadedFeedback,isLoadedFeedbackItem} = useSelector(state=>state.feedback);  
   const [visible, setVisible] = useState();
   const [changeTheme, setChangeTheme] = useState(false);
   const [check, setCheck] = useState(true);
-
-  // const category = subject?subject.map((v,i)=>
-  //         <Menu.Item  key={v.category_id} style={{color: v.category_color?v.category_color:"#000000"}}>
-  //           <Icon type="right" />
-  //           <strong>{v.category_title}</strong>
-  //         </Menu.Item>
-  //   ):<Menu.Item  key="default" title={<strong>Default</strong>} />
 
   useEffect(()=>{
       if(isLoadedFeedback){
