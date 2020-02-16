@@ -38,7 +38,7 @@ const Main = () => {
                     }
             } 
         }
-    },[feedback.myFeedback.length,hasMoreFeedback]);
+    },[feedback.myFeedback&&feedback.myFeedback.length,hasMoreFeedback&&hasMoreFeedback]);
     
 
     useEffect(()=>{
@@ -46,13 +46,13 @@ const Main = () => {
         return () => {
             window.removeEventListener("scroll",handleScroll);
         };
-    },[feedback.myFeedback.length]);
+    },[feedback.myFeedback&&feedback.myFeedback.length]);
 
     
 
     return(
         <>
-            <Layout style={feedback.myFeedback.length>=7?layouts:layout} >
+            <Layout style={feedback.myFeedback&&feedback.myFeedback.length>=7?layouts:layout} >
                 <AppTopbar/>
                 <Layout style={backgroundWhite}>
                     <Sider style={backgroundWhite}>

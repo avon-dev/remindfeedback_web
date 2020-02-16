@@ -32,7 +32,7 @@ const getFeedbackContents = ({myFeedback,inProgress}) => {
     },[isUpdatedFeedback&&isUpdatedFeedback]);
 
     useEffect(()=>{
-      if(category_id==='0'){
+      if(category_id==='0'&&myFeedback.length>=1){
         if(inProgress){
           setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)===2)); 
           return
@@ -42,7 +42,7 @@ const getFeedbackContents = ({myFeedback,inProgress}) => {
         }  
       }
 
-       if(inProgress){
+       if(inProgress&&myFeedback.length>=1){
          //진행완료
          if(code){
           const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(category_id));
@@ -65,10 +65,12 @@ const getFeedbackContents = ({myFeedback,inProgress}) => {
          }
          setForall(false)
        }
-    },[inProgress&&inProgress]);
+    },[inProgress&&inProgress,myFeedback&&myFeedback]);
 
     useEffect(()=>{
+      if(myFeedback.length>=1){    
       setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
+      }
     },[])
 
     const setCategory = (val) => {

@@ -33,7 +33,7 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
     },[isUpdatedFeedback&&isUpdatedFeedback]);
 
     useEffect(()=>{
-      if(categoryId){
+      if(categoryId&&myFeeedback.length>=1){
 
         if(categoryId==='0'){
           setCategory_id(categoryId)
@@ -71,9 +71,10 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
         }
        
       }
-    },[categoryId&&categoryId]);
+    },[categoryId&&categoryId,myFeedback&&myFeedback]);
 
     useEffect(()=>{
+     if(category_id&&myFeedback.length>=1){
 
       if(category_id==='0'){
         if(inProgress){
@@ -108,10 +109,15 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
          }
          setForall(false)
        }
-    },[inProgress&&inProgress]);
+      }	     
+    },[inProgress&&inProgress,myFeedback&&myFeedback]);
 
     useEffect(()=>{
-      setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
+      if(myFeedback){	    
+        if(myFeedback.length>=1){
+          setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
+        }
+      }	      
     },[myFeedback&&myFeedback])
 
     const setCategory = (val) => {

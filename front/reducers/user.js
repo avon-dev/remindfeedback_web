@@ -160,7 +160,7 @@ export default (state = initialState, action ) => {
                     ...state.me,
                    email:action.data.data.email,
                    nickname:action.data.data.nickname,
-                   msg:'', 
+                   msg:action.data.message, 
                 },
             }
         case SIGN_UP_FAILURE:
