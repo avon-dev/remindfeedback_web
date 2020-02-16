@@ -12,11 +12,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/feedbackdetail": [
+    "/login": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/main": [
+    "/subject": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]
