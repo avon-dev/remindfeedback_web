@@ -74,8 +74,9 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
     },[categoryId&&categoryId,myFeedback&&myFeedback]);
 
     useEffect(()=>{
+    if(category_id&&myFeedback.length>=1){
 
-      if(category_id==='0'&&myFeedback.length>=1){
+      if(category_id==='0'){
         if(inProgress){
           setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)===2)); 
           return
@@ -85,7 +86,7 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
         }  
       }
 
-       if(inProgress&&myFeedback.length>=1){
+       if(inProgress){
          //진행완료
          if(code){
           const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(category_id));
@@ -108,12 +109,15 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
          }
          setForall(false)
        }
+      }
     },[inProgress&&inProgress,myFeedback&&myFeedback]);
 
     useEffect(()=>{
-      if(myFeedback.length>=1){
-        setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
-      }
+      if(myFeedback){
+        if(myFeedback.length>=1){
+          setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
+        }
+      }    
     },[myFeedback&&myFeedback])
 
     const setCategory = (val) => {

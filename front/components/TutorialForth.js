@@ -6,7 +6,7 @@ import logoImg from '../img/logo1.png';
 
 const {Text} = Typography;
 
-const TutorialForth = () => {
+const TutorialForth = ({fourthTitle}) => {
     
     return(
         <>
@@ -21,7 +21,7 @@ const TutorialForth = () => {
             </Row>
             <Row style={backgroundLightBlue}>
                 <Col span={24} style={{textAlign:'center', padding:20}}>
-                    <Text style={{color:"#FFFFFF"}}><strong>나만의 조언자를 등록하여 <br/> 다양한 의견들을 공유해 보세요</strong></Text> 
+                    <Text style={{color:"#FFFFFF"}}><strong>{fourthTitle}</strong></Text> 
                 </Col>
             </Row>
         </>

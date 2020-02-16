@@ -24,6 +24,9 @@ import {
     UNREGISTER_REQUEST,
     UNREGISTER_SUCCESS,
     UNREGISTER_FAILURE,
+    UPDATE_PASSWORD_REQUEST,
+    UPDATE_PASSWORD_SUCCESS,
+    UPDATE_PASSWORD_FAILURE,
 } from '../reducers/user';
 
 const dev = process.env.NODE_ENV !== "production";
@@ -155,6 +158,44 @@ function* watchLogOut() {
     yield takeLatest(LOG_OUT_REQUEST, logOut);
 };
 
+// 비밀번호 변경
+function updatePasswordAPI(data){
+    console.log(data);
+    if(data.current===1){
+        return axios.post('/auth/password',data ,{
+            withCredentials:true
+        });
+    }else if(data.current===2){
+        return axios.patch('/auth/password', data ,{
+            withCredentials:true
+        });
+    }else{
+        console.error('ERROR')
+    }
+    
+};
+
+function* updatePassword(action){
+    try {
+        const result = yield call(updatePasswordAPI,action.data);
+        console.log(result,'updatePassword');
+        yield put({
+            type:UPDATE_PASSWORD_SUCCESS,
+            data:result.data,
+        });
+    } catch (e) {
+        console.error(e);
+        yield put({
+            type:UPDATE_PASSWORD_FAILURE,
+            error:e,
+        });
+    }
+};
+
+function* watchUpdatePassword() {
+    yield takeLatest(UPDATE_PASSWORD_REQUEST, updatePassword);
+};
+
 
 // 회원탈퇴
 function unregisterAPI(){
@@ -262,5 +303,6 @@ export default function* userSaga(){
         fork(watchUpateUser),
         fork(watchDeletePhoto),
         fork(watchUnregister),
+        fork(watchUpdatePassword),
     ]);
 }

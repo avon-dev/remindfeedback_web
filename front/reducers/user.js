@@ -17,6 +17,10 @@ export const initialState = {
     isUnregister: false, // 회원탈퇴 여부
     UnregisterReason: '', // 회원탈퇴 실패 사유
 
+    isUpdatingPassword: false, // 비밀번호 변경 중
+    isUpdatedPassword: false, // 비밀번호 변경 성공
+    UpdatedPasswordReason: '', // 비밀번호 변경 실패 사유
+
     isLoadingMyInfo: false, // 마이페이지 로드 중
     isLoadedMyInfo: false, // 마이페이지 로드 성공
     LoadedMyInfoReason: '', // 마이페이지 로드 실패 사유
@@ -71,6 +75,10 @@ export const UNREGISTER_REQUEST = 'UNREGISTER_REQUEST'; // 회원탈퇴 시도 �
 export const UNREGISTER_SUCCESS = 'UNREGISTER_SUCCESS'; // 회원탈퇴 성공
 export const UNREGISTER_FAILURE = 'UNREGISTER_FAILURE'; // 회원탈퇴 실패
 
+export const UPDATE_PASSWORD_REQUEST = 'UPDATE_PASSWORD_REQUEST'; // 비밀번호 변경 시도 중
+export const UPDATE_PASSWORD_SUCCESS = 'UPDATE_PASSWORD_SUCCESS'; // 비밀번호 변경 성공
+export const UPDATE_PASSWORD_FAILURE = 'UPDATE_PASSWORD_FAILURE'; // 비밀번호 변경 실패
+
 export default (state = initialState, action ) => {
     switch(action.type){
         case MOVE_TO_SIGNUP:
@@ -86,7 +94,9 @@ export default (state = initialState, action ) => {
                     portrait:'',
                     tutorial:null,
                     msg:'',
-                }
+                },
+                message:'',
+                success:false,
             }  
         case LOG_IN_HASEMAIL:
             return{
@@ -303,6 +313,33 @@ export default (state = initialState, action ) => {
                 UnregisteringOut: false,
                 isUnregister:false,
                 UnregisterReason:action.error,
+            }
+        
+        case UPDATE_PASSWORD_REQUEST:
+            return{
+                ...state,
+                isUpdatingPassword: true,
+                isUpdatedPassword:false,
+            }
+        case UPDATE_PASSWORD_SUCCESS:
+            let message = action.data.message;
+            let success = false;
+            if(action.data.success){
+                success = true;
+            }
+            return{
+                ...state,
+                isUpdatingPassword:false,
+                isUpdatedPassword: true,
+                message:message,
+                success:success,
+            }
+        case UPDATE_PASSWORD_FAILURE:
+            return{
+                ...state,
+                isUpdatingPassword: false,
+                isUpdatedPassword:false,
+                UpdatedPasswordReason:action.error,
             } 
         default:
             return state;    
