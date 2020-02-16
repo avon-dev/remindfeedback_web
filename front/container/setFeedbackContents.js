@@ -33,7 +33,11 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
     },[isUpdatedFeedback&&isUpdatedFeedback]);
 
     useEffect(()=>{
+<<<<<<< HEAD
       if(categoryId&&myFeeedback.length>=1){
+=======
+      if(categoryId&&myFeedback.length>=1){
+>>>>>>> dedfe6c8166d6acdb6e917e045475aeb3497d1c4
 
         if(categoryId==='0'){
           setCategory_id(categoryId)
@@ -74,7 +78,11 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
     },[categoryId&&categoryId,myFeedback&&myFeedback]);
 
     useEffect(()=>{
+<<<<<<< HEAD
      if(category_id&&myFeedback.length>=1){
+=======
+    if(category_id&&myFeedback.length>=1){
+>>>>>>> dedfe6c8166d6acdb6e917e045475aeb3497d1c4
 
       if(category_id==='0'){
         if(inProgress){

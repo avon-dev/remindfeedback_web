@@ -68,7 +68,7 @@ const getFeedbackContents = ({myFeedback,inProgress}) => {
     },[inProgress&&inProgress,myFeedback&&myFeedback]);
 
     useEffect(()=>{
-      if(myFeedback.length>=1){    
+      if(myFeedback.length>=1){
       setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
       }
     },[])

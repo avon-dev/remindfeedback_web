@@ -6,7 +6,7 @@ import logoImg from '../img/logo1.png';
 
 const {Text} = Typography;
 
-const TutorialFirst = () => {
+const TutorialFirst = ({firstTitle}) => {
     return(
         <>
             <Row style={layoutCenter}>
@@ -23,7 +23,7 @@ const TutorialFirst = () => {
             </Row>
             <Row style={backgroundWhite}>
                 <Col span={24} style={{textAlign:'center', padding:20}}>
-                    <Text><strong>Remind Feedback에 오신 여러분들 <br/> 환영합니다.</strong></Text> 
+                    <Text><strong>{firstTitle}</strong></Text> 
                 </Col>
             </Row>
         </>

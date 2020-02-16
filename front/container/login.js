@@ -8,7 +8,9 @@ import logoImg from '../img/logo1.png';
 import {LOG_IN_REQUEST, MOVE_TO_SIGNUP} from '../reducers/user';
 import { FEEDBACK_READ_REQUEST } from '../reducers/feedback';
 import { FEEDBACK_SUB_READ_REQUEST } from '../reducers/feedbackSubject';
+import { UPDATE_PASSWORD_REQUEST } from '../reducers/user';
 import Router from 'next/router';
+import AppTutorial from '../components/TutorialMain';
 
 const {Text} = Typography;
 
@@ -18,8 +20,13 @@ const login = () => {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    
-    const { me,isLoggedIn,isLoggingIn,logInErrorReason,hasMessage } = useSelector(state=>state.user);
+    const [visible, setVisible] = useState(false);
+    const [firstSubject, setFirstSubject] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [current, setCurrent] = useState(0);
+    const [visiblePaner, setVisiblePaner ] = useState(false);
+
+    const { me,isLoggedIn,isLoggingIn,message,hasMessage, success } = useSelector(state=>state.user);
     const { isLoadedFeedback } = useSelector(state=>state.feedback);
     const {feedbackMode} = useSelector(state => state.feedbackMode);
 
@@ -63,6 +70,19 @@ const login = () => {
         }
     },[hasMessage&&hasMessage]);
 
+    useEffect(()=>{
+        if(success){
+            setVisiblePaner(true);
+        }
+        if(message){
+            alert(message);
+        }
+       
+        dispatch({
+            type:MOVE_TO_SIGNUP
+        });
+    },[message&&message]);
+
     const handlePassword = (e) => {
         setPassword(e.target.value);
     }
@@ -78,6 +98,73 @@ const login = () => {
         });
         await Router.push('/signup');
     }
+
+    const handleFindPw = async(e) => {
+        await dispatch({
+            type:MOVE_TO_SIGNUP
+        });
+       setVisible(true);
+    }
+
+    const handleCancel  = () => {
+        if( window.confirm('나가시면 처음부터 시작하셔야 합니다.')){
+            setVisible(false);
+            setFirstSubject('');
+            setCurrent(0)
+          
+        } 
+    }
+
+    const handleSetEmail = (e) => {
+        setFirstSubject(e.target.value);
+    }
+
+    const handleSubmitEamil = (current) => {
+
+        if(!firstSubject){
+            return alert('먼저 해당 내용을 입력해주세요~');
+        }
+
+        if(current===1){
+            // 이메일 보내기 
+            dispatch({
+                type:UPDATE_PASSWORD_REQUEST,
+                data:{
+                    current, email:firstSubject
+                }
+            })
+        }else if(current===2){
+            // 토큰 보내기
+            if(!newPassword){
+                return alert('먼저 해당 내용을 입력해주세요~');
+            }
+             // 변경할 비밀번호 보내기
+            dispatch({
+                type:UPDATE_PASSWORD_REQUEST,
+                data:{
+                    current, token:firstSubject, password:newPassword
+                }
+            })
+        }
+        else{
+            console.error('에러발생');
+        }
+        setFirstSubject('');
+        setNewPassword('');
+
+    }
+
+    const next = () =>  {
+        const currents = current + 1;
+        setCurrent(currents);
+        setVisiblePaner(false);
+    }
+
+    const handleSetNewPassword = (e) => {
+        setNewPassword(e.target.value);
+    }
+
+   
 
     return(
         <>
@@ -148,12 +235,41 @@ const login = () => {
                             </Col>
                        </Form.Item> */}
                     </Form>
-                    <div style={{textAlign:'center'}}>
-                        <span>계정이 없으신가요? </span><Button type="ghost" style={{border:"white"}} onClick={handleSignUp} ><strong>시작하기</strong></Button>
+                    <div >
+                        <span>계정이 없으신가요?</span><Button type="ghost" style={{border:"white"}} onClick={handleSignUp} ><strong>시작하기</strong></Button>
+                    </div> 
+                    <div >
+                        <span>비밀번호를 잊으셨나요?</span><Button type="ghost" style={{border:"white"}} onClick={handleFindPw} ><strong>비밀번호 찾기</strong></Button>
                     </div> 
                 </Col>
                 <Col span={9}></Col>
             </Row>
+            <AppTutorial
+                next={next}
+                current={current}
+                handleCancel={handleCancel}
+                handleOk={handleFindPw}
+                visible={visible}
+                firstSubject={firstSubject}
+                handleSetFirstSubject={handleSetEmail}
+                newPassword={newPassword}
+                handleSetNewPassword={handleSetNewPassword}
+                secondHandleFunction={handleSubmitEamil}
+                secondTitle={'이메일 확인'}
+                thirdTitle={'토큰 확인'} 
+                thirdSubTitle={'토큰 입력하기 & 변경할 비밀번호 입력하기'}
+                fourthTitle={'완료'}
+                fourthSubTitle={'변경할 비밀번호 입력하기'}
+                secondSubTitle={'이메일 입력하기'}
+                secondSubPlaceHolder={'이메일을 입력해주세요'}
+                firstContentTitle={'Remind Feedback 비밀번호 찾기를 시작합니다.'}
+                secondContentTitle={'등록하신 이메일을 입력해주세요.'}
+                thirdContentTitle={'이메일에서 받으신 내용을 입력해주세요'}
+                fourthContentTitle={'비밀번호가 정상적으로 변경되었습니다.'}
+                thirdSubPlaceHolder={'이메일에서 받으신 내용을 입력해주세요'}
+                thirdSub2_PlaceHolder={'변경하실 비밀번호를 입력해주세요'}
+                visiblePaner={visiblePaner}
+              />
         </>
     )
 }
