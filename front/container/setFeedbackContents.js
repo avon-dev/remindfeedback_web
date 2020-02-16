@@ -33,7 +33,7 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
     },[isUpdatedFeedback&&isUpdatedFeedback]);
 
     useEffect(()=>{
-      if(categoryId){
+      if(categoryId&&myFeedback.length>=1){
 
         if(categoryId==='0'){
           setCategory_id(categoryId)
@@ -71,11 +71,11 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
         }
        
       }
-    },[categoryId&&categoryId]);
+    },[categoryId&&categoryId,myFeedback&&myFeedback]);
 
     useEffect(()=>{
 
-      if(category_id==='0'){
+      if(category_id==='0'&&myFeedback.length>=1){
         if(inProgress){
           setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)===2)); 
           return
@@ -85,7 +85,7 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
         }  
       }
 
-       if(inProgress){
+       if(inProgress&&myFeedback.length>=1){
          //진행완료
          if(code){
           const r = myFeedback.filter((v,i)=>parseInt(v.category)===parseInt(category_id));
@@ -108,10 +108,12 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
          }
          setForall(false)
        }
-    },[inProgress&&inProgress]);
+    },[inProgress&&inProgress,myFeedback&&myFeedback]);
 
     useEffect(()=>{
-      setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
+      if(myFeedback.length>=1){
+        setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
+      }
     },[myFeedback&&myFeedback])
 
     const setCategory = (val) => {

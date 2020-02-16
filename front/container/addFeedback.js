@@ -160,10 +160,10 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
                 >
                 <Content style={backgroundWhite}>
                     <Form  {...feedbackItemLayout} >
-                        {subject&& <Form.Item label={<strong>주제선택</strong>} >
+                        {subject&&subject.length>=1&&<Form.Item label={<strong>주제선택</strong>} >
                                     <Col span={24}>
                                     <Select value={category?category:subject[0].category_title} onChange={handleSubject} style={{width:'100%', textAlign:'left'}} >
-                                    {subject?
+                                    {subject?subject.length>=1&&
                                         subject.map((v,i)=>
                                     <Select.Option key={v.category_id} value={v.category_id} style={{color:v.category_color}}><strong>{v.category_title}</strong></Select.Option>
                                         )
