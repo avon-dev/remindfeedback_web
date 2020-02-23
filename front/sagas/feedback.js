@@ -144,7 +144,8 @@ function* watchFeedback_Item_Delete_Comment() {
 
 // Feedback 피드백 게시물 댓글 Read
 function feedback_Item_Comment_API(data){
-    return axios.get(`/comments/all/page/${data.board_id?data.board_id:data}/${data.page?data.page:1}/${5}/${0}`,{
+  
+    return axios.get(`/comments/all/page/${data.board_id?data.board_id:data}/${data.page?data.page:1}/${5}/${data.sort?data.sort:0}`,{
         withCredentials:true
     });
 };

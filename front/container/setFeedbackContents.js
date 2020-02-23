@@ -142,6 +142,8 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
     const dDay = (createdAt, write_date) => {
         const c = moment(createdAt,'YYYY-MM-DD');
         const w = moment(write_date,'YYYY-MM-DD');
+        const today = moment().format('YYYY-MM-DD');
+        const diff = w.diff(c,'days');
         return w.diff(c,'days');
     }
 
@@ -228,7 +230,7 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
                     <p style={{color:"black"}}><strong>{v.adviser!==null?v.adviser.nickname:me.nickname}</strong></p>
                     </div>
                   }
-                title={<><Col span={7} style={{background:"#FFFFFF",textAlign:"center", margin:5, borderRadius:100, color:"red"}}><strong>D-</strong>{dDay(v.createdAt, v.write_date)}</Col><Col span={17}/>
+                title={<><Col span={7} style={{background:"#FFFFFF",textAlign:"center", margin:5, borderRadius:100, color:"red"}}><strong>{moment().isAfter(moment(v.write_date))?'D+':'D-'}</strong>{dDay(v.createdAt, v.write_date)}</Col><Col span={17}/>
                         <Col span={24} style={{fontSize:23}}><strong>{v.title}</strong></Col></>}
               /></a></Link>
           </Card>)

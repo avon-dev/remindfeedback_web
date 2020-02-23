@@ -169,6 +169,18 @@ const feedBackDetailComment = ({board_ids, feedback_id}) => {
         });
     }
 
+    const handleFilter = (sort) => {
+        console.log(sort);
+        
+            dispatch({
+                type:FEEDBACK_ITEM_COMMENT_REQUEST,
+                data:{
+                    page, board_id, sort
+                }
+            });
+          
+    }
+
     const comments = feedbackComment&&feedbackComment.map((v,i) => <Comment
         // style={{border:"1px solid #000000", padding:10}}
         actions ={[
@@ -255,17 +267,32 @@ const feedBackDetailComment = ({board_ids, feedback_id}) => {
         setComments(e.target.value);
     };
 
+
     return(
         <>
             <Col span={12} >
                 {feedbackComment.length>=1
                 ?
+                <>
+                <Col span={22} style={{textAlign:'right'}}>
+                <Button.Group size='small' >
+                    <Button type="dashed" size='small' onClick={handleFilter.bind(this,1)} >
+                        <Icon type="arrow-up" />
+                        최신순
+                    </Button>
+                    <Button type="dashed"  size='small' onClick={handleFilter.bind(this,0)}>
+                        오래된순
+                        <Icon type="arrow-down" />
+                    </Button>
+                </Button.Group>
+                </Col>
                 <Col span={22}>
                     {comments}
                     <Col style={{textAlign:'center', padding:15}}>
-                    <Pagination  total={count} defaultCurrent={1} defaultPageSize={5} onChange={handlePage} />
+                        <Pagination  total={count} defaultCurrent={1} defaultPageSize={5} onChange={handlePage} />
+                    </Col>
                 </Col>
-                </Col>
+                </>
                 :
                 <Col span={22} style={{marginBottom:20}}>
                     {emptyCard}

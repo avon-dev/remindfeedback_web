@@ -32,7 +32,7 @@ const signup = () => {
                                     onChange={(e)=>setEmail(e.target.value)}
                                     suffix={<Icon type='smile'
                                     style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                    placeholder='Email을 기입해주세요'
+                                    placeholder='이메일을 기입해주세요'
                                     required
                                 />
                             </div>
@@ -47,7 +47,7 @@ const signup = () => {
                                     onChange={(e)=>setNickname(e.target.value)}
                                     suffix={<Icon type='user'
                                     style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                    placeholder='Nickname을 기입해주세요'
+                                    placeholder='닉네임을 기입해주세요'
                                     required
                                 />
                             </div>
@@ -62,7 +62,7 @@ const signup = () => {
                                     onChange={(e)=>setPassword(e.target.value)}
                                     suffix={<Icon type='lock'
                                     style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                    placeholder='Password를 기입해주세요'
+                                    placeholder='비밀번호는 최소 1개의 숫자 특수문자를 포함해야 하며 영문 대소문자를 6 ~ 20자리 입력해주세요'
                                     required
                                 />
                             </div>
@@ -77,11 +77,13 @@ const signup = () => {
                                     onChange={(e)=>setRe_password(e.target.value)}
                                     suffix={<Icon type='lock'
                                     style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                    placeholder='Password를 한번 더 기입해주세요'
+                                    placeholder='비밀번호를 한번 더 기입해주세요'
                                     required
                                 />
                             </div>
                         </div>
+
+    
 
       const onChangeTerm = useCallback((e) => {
         setTermError(false);
@@ -107,11 +109,33 @@ const signup = () => {
               type:MOVE_TO_SIGNUP
           });
         }
-      }, [hasMessage&&hasMessage])
+      }, [hasMessage&&hasMessage]);
+
+    const isEmail = (email) => {
+       const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+       return regExp.test(email);
+    }
+
+    const isPassword = (password) => {
+        const regExp =/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/
+        return regExp.test(password);
+     }
          
     const _onSubmit = useCallback((e) => {
         e.preventDefault();
-        
+        if (!isEmail(email)) {
+            alert('이메일 형식에 맞지 않습니다. 다시 입력해 주세요');
+            setEmail('');
+            return;
+        }
+
+        if (!isPassword(password)) {
+            alert('비밀번호는 최소 1개의 숫자 특수문자를 포함해야 하며 영문 대소문자를 6 ~ 20자리 입력해주세요');
+            setPassword('');
+            setRe_password('');
+            return;
+        }
+
         if(password!==re_password){
             alert('비밀번호가 다릅니다.');
             setPassword('');
