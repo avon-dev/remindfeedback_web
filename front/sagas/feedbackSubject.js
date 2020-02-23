@@ -23,7 +23,7 @@ axios.defaults.baseURL = "http://localhost:8000"
 if(prod){
     axios.defaults.baseURL = "http://api.remindfeedback.com/";
 }else{
-    axios.defaults.baseURL = "http://localhost:8000";
+    axios.defaults.baseURL = "http://localhost:3000";
 }
 
 // 피드백 주제 Delete
@@ -120,7 +120,7 @@ function feedback_Sub_Read_API(){
 
 function* feedback_Sub_Read(){
     try {
-        yield delay(100);
+        // yield delay(100);
         const result = yield call(feedback_Sub_Read_API);
         yield put({
             type:FEEDBACK_SUB_READ_SUCCESS,

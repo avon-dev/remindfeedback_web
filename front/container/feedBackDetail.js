@@ -18,10 +18,16 @@ const feedBackDetail = ({feedback_id}) => {
     useEffect(()=>{
         if(feedbackMode){
             // 요청받은 피드백
-            setFeedbackTitle(feedback.yourFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).title);
+            if(feedback.yourFeedback){
+                setFeedbackTitle(feedback.yourFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).title);
+            }
+            
         }else{
             // 요청한 피드백
-            setFeedbackTitle(feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).title);
+            if(feedback.myFeedback){
+                setFeedbackTitle(feedback.myFeedback.find((v,i)=>parseInt(v.id)===parseInt(feedback_id)).title);
+            }
+            
         }
         
         return () =>{

@@ -54,7 +54,7 @@ const prod = process.env.NODE_ENV === "production";
 if(prod){
     axios.defaults.baseURL = "http://api.remindfeedback.com/";
 }else{
-    axios.defaults.baseURL = "http://localhost:8000";
+    axios.defaults.baseURL = "http://localhost:3000";
 }
 
 // Feedback 피드백 게시물 댓글 Add
@@ -144,7 +144,7 @@ function* watchFeedback_Item_Delete_Comment() {
 
 // Feedback 피드백 게시물 댓글 Read
 function feedback_Item_Comment_API(data){
-    return axios.get(`/comments/all/page/${data.board_id?data.board_id:data}/${data.page?data.page:1}/${5}`,{
+    return axios.get(`/comments/all/page/${data.board_id?data.board_id:data}/${data.page?data.page:1}/${5}/${0}`,{
         withCredentials:true
     });
 };
@@ -175,6 +175,7 @@ function* watchFeedback_Item_Comment() {
 
 // Feedback 피드백 게시물 완료 요청
 function feedback_Item_Complete_API(data){
+   
     switch (data.type) {
         case "request":
             return axios.patch(`/feedbacks/request/${data.feedback_id}`,{

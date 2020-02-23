@@ -37,6 +37,7 @@ const TutorialMain = ({
     visiblePaner,
     handleSetNewPassword,
     newPassword,
+    handleStart,
 }) => {
 
 
@@ -73,7 +74,7 @@ const TutorialMain = ({
     }
 
    
-
+    
     return(
         <>
            <Modal 
@@ -152,7 +153,7 @@ const TutorialMain = ({
                      </div>
                      <div style={{textAlign:'center'}}>  
                         {current === steps.length - 1 && (
-                            <Button type="primary" onClick={handleCancel} size='large' style={{width:'100%'}}>
+                            <Button type="primary" onClick={handleStart} size='large' style={{width:'100%'}}>
                                 <strong>시작하기</strong>
                             </Button>
                         )}

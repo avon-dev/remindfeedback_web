@@ -15,17 +15,18 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
     const { isDeletingFeedback,isUpdatedFeedback } = useSelector(state=> state.feedback);
     const { me } = useSelector(state=> state.user);
 
-    const [feedback_id, setFeedback_id] = useState();
-    const [feedback_title, setFeedback_title] = useState();
-    const [feedback_adviser_uid, setFeedback_adviser_uid] = useState();
-    const [feedback_write_date, setFeedback_write_date] = useState();
-    const [category_title, setCategory_title] = useState();
-    const [category_id, setCategory_id] = useState();
+    const [feedback_id, setFeedback_id] = useState(0);
+    const [feedback_title, setFeedback_title] = useState('');
+    const [feedback_adviser_uid, setFeedback_adviser_uid] = useState(0);
+    const [feedback_write_date, setFeedback_write_date] = useState('');
+    const [category_title, setCategory_title] = useState('');
+    const [category_id, setCategory_id] = useState(0);
     const [code, setCode] = useState(false);
     const [forall, setForall] = useState(false);
     const [filteredFeedback, setMyfeedback] = useState([]);
-    const [visible, setVisible] = useState();
+    const [visible, setVisible] = useState(false);
 
+   
     useEffect(()=>{
         if(isUpdatedFeedback){
             setVisible(false);
@@ -34,7 +35,7 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
 
     useEffect(()=>{
       if(categoryId&&myFeedback.length>=1){
-
+      
         if(categoryId==='0'){
           setCategory_id(categoryId)
           if(forall){
@@ -74,8 +75,9 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
     },[categoryId&&categoryId,myFeedback&&myFeedback]);
 
     useEffect(()=>{
-    if(category_id&&myFeedback.length>=1){
-
+  if(myFeedback){
+    if(myFeedback.length>=1){
+     
       if(category_id==='0'){
         if(inProgress){
           setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)===2)); 
@@ -110,6 +112,7 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
          setForall(false)
        }
       }
+    }
     },[inProgress&&inProgress,myFeedback&&myFeedback]);
 
     useEffect(()=>{
@@ -120,14 +123,12 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
       }    
     },[myFeedback&&myFeedback])
 
-    const setCategory = (val) => {
-        const index = subject.findIndex((v,i) => parseInt(v.category_id)===parseInt(val));
-        return subject[index].category_title;
-    };
+   
 
     const setColor = (val) => {
         const index = subject.findIndex((v,i) => parseInt(v.category_id)===parseInt(val));
-        return subject[index].category_color;
+        const color = subject[index].category_color;
+        return color
     };
 
     const handleDelete = () => {
