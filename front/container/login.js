@@ -26,7 +26,7 @@ const login = () => {
     const [current, setCurrent] = useState(0);
     const [visiblePaner, setVisiblePaner ] = useState(false);
 
-    const { me,isLoggedIn,isLoggingIn,message,hasMessage, success } = useSelector(state=>state.user);
+    const { me,isLoggedIn,isLoggingIn,message,hasMessage, success ,isLogout} = useSelector(state=>state.user);
     const { isLoadedFeedback } = useSelector(state=>state.feedback);
     const {feedbackMode} = useSelector(state => state.feedbackMode);
 
@@ -42,6 +42,15 @@ const login = () => {
             type:MOVE_TO_SIGNUP
         });
     },[email,password]);
+
+    useEffect(()=>{
+        if(isLogout){
+            window.location.reload(true);
+            dispatch({
+                type:MOVE_TO_SIGNUP
+            });
+        }
+    },[isLogout&&isLogout])
 
     useEffect(()=>{
         const feedbackModes = feedbackMode;
@@ -106,13 +115,28 @@ const login = () => {
        setVisible(true);
     }
 
+
     const handleCancel  = () => {
+
+        if(current===3){
+            setVisible(false);
+            setFirstSubject('');
+            setCurrent(0)
+            return;
+        }
+
         if( window.confirm('나가시면 처음부터 시작하셔야 합니다.')){
             setVisible(false);
             setFirstSubject('');
             setCurrent(0)
           
         } 
+    }
+
+    const handleStart = () => {
+        setVisible(false);
+        setFirstSubject('');
+        setCurrent(0);
     }
 
     const handleSetEmail = (e) => {
@@ -247,6 +271,7 @@ const login = () => {
             <AppTutorial
                 next={next}
                 current={current}
+                handleStart={handleStart}
                 handleCancel={handleCancel}
                 handleOk={handleFindPw}
                 visible={visible}

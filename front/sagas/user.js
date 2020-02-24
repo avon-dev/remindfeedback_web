@@ -33,9 +33,9 @@ const dev = process.env.NODE_ENV !== "production";
 const prod = process.env.NODE_ENV === "production";
 
 if(prod){
-    axios.defaults.baseURL = "http://api.remindfeedback.com/";
+    axios.defaults.baseURL = "https://api.remindfeedback.com/";
 }else{
-    axios.defaults.baseURL = "http://localhost:8000";
+    axios.defaults.baseURL = "http://localhost:3000";
 }
 
 

@@ -75,13 +75,13 @@ Main.getInitialProps = async(context) => {
     const {feedbackMode} = context.store.getState();
     const feedbackModes = feedbackMode.feedbackMode;
     const lastId = 0;
-    
     if(context.isServer){
         const cookies = context.req.headers.cookie;
         axios.defaults.headers.Cookie = cookies;
         context.store.dispatch({
             type:FEEDBACK_SUB_READ_REQUEST
         })
+        
     }else{
         // context.store.dispatch({
         //     type:FEEDBACK_READ_REQUEST,
