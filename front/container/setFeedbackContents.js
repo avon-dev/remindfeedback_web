@@ -110,12 +110,8 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
          }
          setForall(false)
        }
-<<<<<<< HEAD
-      }	     
-=======
       }
     }
->>>>>>> c624353482423fd89a89ddfaecbb28f686eebade
     },[inProgress&&inProgress,myFeedback&&myFeedback]);
 
     useEffect(()=>{
