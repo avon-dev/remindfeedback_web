@@ -1,59 +1,28 @@
 {
-  "devFiles": [],
+  "devFiles": [
+    "static/development/dll/dll_90e8ea1802b868f0c448.js",
+    "static/development/dll/dll_90e8ea1802b868f0c448.js.map"
+  ],
   "pages": {
     "/": [
-      "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
-      "static/chunks/commons.3af15f0f70b36010d4e4.js",
-      "static/runtime/main-24a4990b84f161890d74.js"
-    ],
-    "/_app": [
-      "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
-      "static/chunks/commons.3af15f0f70b36010d4e4.js",
-      "static/runtime/main-24a4990b84f161890d74.js"
-    ],
-    "/_error": [
-      "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
-      "static/chunks/commons.3af15f0f70b36010d4e4.js",
-      "static/runtime/main-24a4990b84f161890d74.js"
-    ],
-    "/feedbackdetail": [
-      "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
-      "static/chunks/commons.3af15f0f70b36010d4e4.js",
-      "static/runtime/main-24a4990b84f161890d74.js"
-    ],
-    "/friends": [
-      "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
-      "static/chunks/commons.3af15f0f70b36010d4e4.js",
-      "static/runtime/main-24a4990b84f161890d74.js"
-    ],
-    "/imagePath": [
-      "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
-      "static/chunks/commons.3af15f0f70b36010d4e4.js",
-      "static/runtime/main-24a4990b84f161890d74.js"
-    ],
-    "/index": [
-      "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
-      "static/chunks/commons.3af15f0f70b36010d4e4.js",
-      "static/runtime/main-24a4990b84f161890d74.js"
-    ],
-    "/main": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/signup": [
-      "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
-      "static/chunks/commons.3af15f0f70b36010d4e4.js",
-      "static/runtime/main-24a4990b84f161890d74.js"
+    "/_app": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ],
-    "/subject": [
-      "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
-      "static/chunks/commons.3af15f0f70b36010d4e4.js",
-      "static/runtime/main-24a4990b84f161890d74.js"
+    "/_error": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ],
-    "/updatepassword": [
-      "static/runtime/webpack-4b9b63f31a8aa9e61c87.js",
-      "static/chunks/commons.3af15f0f70b36010d4e4.js",
-      "static/runtime/main-24a4990b84f161890d74.js"
+    "/index": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/login": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ]
   }
 }
