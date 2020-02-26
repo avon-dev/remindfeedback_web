@@ -1,4 +1,5 @@
 const express = require('express');
+const GreenLock = require('greenlock-express');
 const next = require('next');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -31,6 +32,7 @@ app.prepare().then(()=>{
         },
     }));
 
+
     server.get('/feedbackdetail/:id',(req,res)=>{
         const actualPage = '/feedbackdetail';
         const queryParams = {id:req.params.id};
@@ -40,6 +42,18 @@ app.prepare().then(()=>{
     server.get('*',(req,res)=>{
         return handle(req,res);
     });
+
+    GreenLock.init({ 
+      packageRoot: __dirname, 
+      configDir: process.env.HTTPS_CONFIGDIR, 
+      maintainerEmail: process.env.DOMAIN_EMAIL, 
+      cluster: false 
+    }).serve(httpsServer); 
+
+
+    function httpsServer(glx) {
+        glx.serveApp(app); 
+    }
 
     server.listen( prod? 80 : 2323,()=>{
         console.log(`${process.env.PORT}포트에서 서버 구동`);

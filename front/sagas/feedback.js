@@ -176,18 +176,17 @@ function* watchFeedback_Item_Comment() {
 
 // Feedback 피드백 게시물 완료 요청
 function feedback_Item_Complete_API(data){
-   
     switch (data.type) {
         case "request":
-            return axios.patch(`/feedbacks/request/${data.feedback_id}`,{
+            return axios.patch(`/feedbacks/request/${data.feedback_id}`,data,{
                 withCredentials:true
             });
         case "accept":
-            return axios.patch(`/feedbacks/approval/${data.feedback_id}`,{
+            return axios.patch(`/feedbacks/approval/${data.feedback_id}`,data,{
                 withCredentials:true
             });
         case "reject":
-            return axios.patch(`/feedbacks/rejection/${data.feedback_id}`,{
+            return axios.patch(`/feedbacks/rejection/${data.feedback_id}`,data,{
                 withCredentials:true
             });
         default:
