@@ -1,11 +1,14 @@
 // node_modules
-node_modules
+/front/node_modules
 
 // next
-.next
+/front/.next
 
 // image
-img
+/front/img
 
-//.env
-.env
+//env
+/front/.env
+
+// history
+.history 
