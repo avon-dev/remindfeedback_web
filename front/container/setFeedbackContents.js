@@ -77,7 +77,6 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
     useEffect(()=>{
   if(myFeedback){
     if(myFeedback.length>=1){
-     
       if(category_id==='0'){
         if(inProgress){
           setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)===2)); 
@@ -116,11 +115,11 @@ const setFeedbackContents = ({myFeedback,inProgress,categoryId}) => {
     },[inProgress&&inProgress,myFeedback&&myFeedback]);
 
     useEffect(()=>{
-      if(myFeedback){
+      if(myFeedback){	    
         if(myFeedback.length>=1){
           setMyfeedback(myFeedback.filter((v,i)=>parseInt(v.complete)!==2));
         }
-      }    
+      }	      
     },[myFeedback&&myFeedback])
 
    

@@ -43,7 +43,7 @@ const setFeedback = ({myFeedback}) => {
         }
         
     }
-   
+
     const menu = subject?
                     <Menu>
                         <Menu.Item key='all' onClick={onClickSubject} id='0'>

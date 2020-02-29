@@ -44,7 +44,22 @@ app.prepare().then(() => {
     return handle(req, res);
   });
 
-  server.listen(prod ? 80 : 2323, () => {
+  require("greenlock-express")
+    .init({
+      packageRoot: __dirname,
+      configDir: process.env.HTTPS_CONFIGDIR,
+      maintainerEmail: process.env.DOMAIN_EMAIL,
+      cluster: false
+    })
+    .serve(httpsServer);
+
+  function httpsServer(glx) {
+    glx.serveApp(server);
+  }
+
+  server.listen(prod ? 2323 : 2323, () => {
     console.log(`${process.env.PORT}포트에서 서버 구동`);
   });
+
+  modules.export = server;
 });

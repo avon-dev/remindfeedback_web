@@ -104,7 +104,7 @@ const addFeedback = ({visible,handleCancel,handleOk,feedback_titles,feedback_adv
     }
 
     useEffect(()=>{
-        if(!registerdFriends||registerdFriends.length<1){
+        if(!registerdFriends){
             setEmailList(['조언자가 없습니다.']);
         }else{
             setEmailList(registerdFriends.map((v,i)=>v.email));
