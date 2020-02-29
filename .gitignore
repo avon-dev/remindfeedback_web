@@ -2,8 +2,8 @@
 node_modules
 
 // https certification
-greenlocknp
-.greenlockrc
+//greenlocknp
+//.greenlockrc
 
 // next
 .next
