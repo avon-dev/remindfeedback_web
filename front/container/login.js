@@ -60,16 +60,16 @@ const login = () => {
     e => {
       e.preventDefault();
 
-      // const passwords = CryptoJS.AES.encrypt(
-      //   password,
-      //   process.env.PASSWORD
-      // ).toString();
+      const passwords = CryptoJS.AES.encrypt(
+        password,
+        process.env.PASSWORD
+      ).toString();
 
       dispatch({
         type: LOG_IN_REQUEST,
         data: {
           email,
-          password
+          password: passwords
         }
       });
       dispatch({
