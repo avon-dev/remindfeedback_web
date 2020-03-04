@@ -265,16 +265,16 @@ const signup = () => {
         return setTermError(true);
       }
 
-      const passwords = CryptoJS.AES.encrypt(
-        password,
-        process.env.PASSWORD
-      ).toString();
+      // const passwords = CryptoJS.AES.encrypt(
+      //   password,
+      //   process.env.PASSWORD
+      // ).toString();
 
       dispatch({
         type: SIGN_UP_REQUEST,
         data: {
           email,
-          password: passwords,
+          password,
           nickname,
           token
         }
