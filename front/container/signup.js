@@ -51,6 +51,22 @@ const signup = () => {
     });
   };
 
+  const onChangeSetToken = e => {
+    setTokenNum(e.target.value);
+  };
+  const onChangeSetEmail = e => {
+    setEmail(e.target.value);
+  };
+  const onChangeSetNickName = e => {
+    setNickname(e.target.value);
+  };
+  const onChangeSetPassword = e => {
+    setPassword(e.target.value);
+  };
+  const onChangeSetRePassword = e => {
+    setRe_password(e.target.value);
+  };
+
   const emailForm = (
     <div style={{ padding: 5 }}>
       <label htmlFor="user-email" style={{ fontWeight: "bold" }}>
@@ -67,7 +83,7 @@ const signup = () => {
             type="text"
             name="email"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={onChangeSetEmail}
             suffix={<Icon type="smile" style={{ color: "rgba(0,0,0,.25)" }} />}
             placeholder="이메일을 기입해주세요"
             required
@@ -106,7 +122,7 @@ const signup = () => {
           type="text"
           name="token"
           value={tokenNum}
-          onChange={e => setTokenNum(e.target.value)}
+          onChange={onChangeSetToken}
           placeholder="이메일에서 받은 내용을 기입해주세요"
           required
         />
@@ -123,7 +139,7 @@ const signup = () => {
           type="text"
           name="nickname"
           value={nickname}
-          onChange={e => setNickname(e.target.value)}
+          onChange={onChangeSetNickName}
           suffix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
           placeholder="닉네임을 기입해주세요"
           required
@@ -141,7 +157,7 @@ const signup = () => {
           type="password"
           name="password"
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={onChangeSetPassword}
           suffix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
           placeholder="비밀번호는 최소 1개의 숫자 특수문자를 포함해야 하며 영문 대소문자를 6 ~ 20자리 입력해주세요"
           required
@@ -159,7 +175,7 @@ const signup = () => {
           type="password"
           name="re_password"
           value={re_password}
-          onChange={e => setRe_password(e.target.value)}
+          onChange={onChangeSetRePassword}
           suffix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
           placeholder="비밀번호를 한번 더 기입해주세요"
           required
@@ -216,6 +232,7 @@ const signup = () => {
   const _onSubmit = useCallback(
     e => {
       e.preventDefault();
+      console.log(tokenNum);
       if (!tokenNum) {
         alert("이메일 인증을 먼저 해주세요");
         setIsTokend(false);
