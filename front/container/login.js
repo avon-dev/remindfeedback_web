@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   Row,
@@ -19,6 +20,7 @@ import {
   loginKakao,
   shadowBorder
 } from "../css/Login";
+
 import Link from "next/link";
 import logoImg from "../img/logo1.png";
 import { LOG_IN_REQUEST, MOVE_TO_SIGNUP } from "../reducers/user";
@@ -27,6 +29,7 @@ import { FEEDBACK_SUB_READ_REQUEST } from "../reducers/feedbackSubject";
 import { UPDATE_PASSWORD_REQUEST } from "../reducers/user";
 import Router from "next/router";
 import AppTutorial from "../components/TutorialMain";
+import CryptoJS from "crypto-js";
 
 const { Text } = Typography;
 
@@ -56,6 +59,12 @@ const login = () => {
   const _onsubmit = useCallback(
     e => {
       e.preventDefault();
+
+      // const passwords = CryptoJS.AES.encrypt(
+      //   password,
+      //   process.env.PASSWORD
+      // ).toString();
+
       dispatch({
         type: LOG_IN_REQUEST,
         data: {
@@ -82,6 +91,7 @@ const login = () => {
   useEffect(() => {
     const feedbackModes = feedbackMode;
     const lastId = 0;
+
     if (isLoggedIn && me) {
       dispatch({
         type: FEEDBACK_READ_REQUEST,
@@ -345,6 +355,7 @@ const login = () => {
         fourthContentTitle={"비밀번호가 정상적으로 변경되었습니다."}
         thirdSubPlaceHolder={"이메일에서 받으신 내용을 입력해주세요"}
         thirdSub2_PlaceHolder={"변경하실 비밀번호를 입력해주세요"}
+        code={false}
         visiblePaner={visiblePaner}
       />
     </>

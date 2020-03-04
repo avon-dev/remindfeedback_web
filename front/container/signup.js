@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   Row,
@@ -18,6 +19,8 @@ import Link from "next/link";
 import { SIGN_UP_REQUEST } from "../reducers/user";
 import { MOVE_TO_SIGNUP } from "../reducers/user";
 import { CHECK_EMAIL_REQUEST } from "../reducers/user";
+import CryptoJS from "crypto-js";
+
 const { Title, Text } = Typography;
 
 const signup = () => {
@@ -244,11 +247,17 @@ const signup = () => {
         alert("약관동의를 클릭해주세요");
         return setTermError(true);
       }
+
+      const passwords = CryptoJS.AES.encrypt(
+        password,
+        process.env.PASSWORD
+      ).toString();
+
       dispatch({
         type: SIGN_UP_REQUEST,
         data: {
           email,
-          password,
+          password: passwords,
           nickname,
           token: tokenNum
         }
