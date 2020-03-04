@@ -29,7 +29,7 @@ import { FEEDBACK_SUB_READ_REQUEST } from "../reducers/feedbackSubject";
 import { UPDATE_PASSWORD_REQUEST } from "../reducers/user";
 import Router from "next/router";
 import AppTutorial from "../components/TutorialMain";
-import CryptoJS from "crypto-js";
+import CryptoJS from "crypto-js/sha256";
 
 const { Text } = Typography;
 
@@ -60,16 +60,13 @@ const login = () => {
     e => {
       e.preventDefault();
 
-      // const passwords = CryptoJS.AES.encrypt(
-      //   password,
-      //   process.env.PASSWORD
-      // ).toString();
+      const passwords = CryptoJS(password).toString();
 
       dispatch({
         type: LOG_IN_REQUEST,
         data: {
           email,
-          password
+          password: passwords
         }
       });
       dispatch({

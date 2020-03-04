@@ -19,7 +19,7 @@ import Link from "next/link";
 import { SIGN_UP_REQUEST } from "../reducers/user";
 import { MOVE_TO_SIGNUP } from "../reducers/user";
 import { CHECK_EMAIL_REQUEST } from "../reducers/user";
-import CryptoJS from "crypto-js";
+import CryptoJS from "crypto-js/sha256";
 
 const { Title, Text } = Typography;
 
@@ -265,16 +265,13 @@ const signup = () => {
         return setTermError(true);
       }
 
-      // const passwords = CryptoJS.AES.encrypt(
-      //   password,
-      //   process.env.PASSWORD
-      // ).toString();
+      const passwords = CryptoJS(password).toString();
 
       dispatch({
         type: SIGN_UP_REQUEST,
         data: {
           email,
-          password,
+          password: passwords,
           nickname,
           token
         }
