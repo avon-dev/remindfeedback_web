@@ -36,7 +36,7 @@ const signup = () => {
   const [term, setTerm] = useState(false);
   const [termError, setTermError] = useState(false);
   const [isTokend, setIsTokend] = useState(false);
-  const [tokenNum, setTokenNum] = useState("");
+  const [token, setToken] = useState("");
 
   const handleAuthEmail = () => {
     if (!email) {
@@ -52,7 +52,7 @@ const signup = () => {
   };
 
   const onChangeSetToken = e => {
-    setTokenNum(e.target.value);
+    setToken(e.target.value);
   };
   const onChangeSetEmail = e => {
     setEmail(e.target.value);
@@ -120,8 +120,8 @@ const signup = () => {
       <div style={{ marginTop: 5 }}>
         <Input
           type="text"
-          name="token"
-          value={tokenNum}
+          name="tokenNum"
+          value={token}
           onChange={onChangeSetToken}
           placeholder="이메일에서 받은 내용을 기입해주세요"
           required
@@ -232,11 +232,11 @@ const signup = () => {
   const _onSubmit = useCallback(
     e => {
       e.preventDefault();
-      console.log(tokenNum);
-      if (!tokenNum) {
+      console.log(token, email);
+      if (!token) {
         alert("이메일 인증을 먼저 해주세요");
-        setIsTokend(false);
-        setTokenNum("");
+
+        setToken("");
         return;
       }
       if (!isEmail(email)) {
@@ -276,11 +276,11 @@ const signup = () => {
           email,
           password: passwords,
           nickname,
-          token: tokenNum
+          token
         }
       });
     },
-    [email, password, nickname, term, re_password]
+    [email, password, nickname, term, re_password, token]
   );
 
   return (
