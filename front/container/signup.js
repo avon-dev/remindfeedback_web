@@ -285,7 +285,7 @@ const signup = () => {
           </div>
           <Form onSubmit={_onSubmit} className="signUp-form">
             {emailForm}
-            {isTokend && TokenInput}
+            {TokenInput}
             {nicknameForm}
             {passwordForm}
             {re_passwordForm}
