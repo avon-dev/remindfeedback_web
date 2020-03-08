@@ -94,6 +94,7 @@ export default (state = initialState, action) => {
         isSigningUp: false,
         isSignedUp: false,
         hasMessage: false,
+        isLoggingIn: false,
         isLogout: false,
         me: {
           email: "",
