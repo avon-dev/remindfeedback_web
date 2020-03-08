@@ -88,26 +88,22 @@ const Main = () => {
 
 Main.getInitialProps = async context => {
   console.log("서버냐", context.isServer);
-  const { feedbackMode } = context.store.getState();
+  const { feedbackMode, feedback } = context.store.getState();
   const feedbackModes = feedbackMode.feedbackMode;
   const lastId = 0;
-  if (context.isServer) {
-    const cookies = context.req.headers.cookie;
-    axios.defaults.headers.Cookie = cookies;
 
+  if (context.isServer) {
+    console.log("들어옴");
     context.store.dispatch({
       type: FEEDBACK_SUB_READ_REQUEST
     });
-  } else {
-    // context.store.dispatch({
-    //     type:FEEDBACK_READ_REQUEST,
-    //     data:{
-    //         feedbackModes,lastId
-    //     }
-    // });
-    // context.store.dispatch({
-    //     type:FEEDBACK_SUB_READ_REQUEST
-    // });
+    context.store.dispatch({
+      type: FEEDBACK_READ_REQUEST,
+      data: {
+        lastId,
+        feedbackModes
+      }
+    });
   }
 };
 

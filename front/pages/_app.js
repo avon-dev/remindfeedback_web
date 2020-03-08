@@ -34,23 +34,15 @@ RemindFeedback.propTypes = {
 RemindFeedback.getInitialProps = async context => {
   const { ctx, Component } = context;
   let pageProps = {};
-  const { feedbackMode, user } = ctx.store.getState();
+  const { feedbackMode } = ctx.store.getState();
   const feedbackModes = feedbackMode.feedbackMode;
   const lastId = 0;
   const cookie = ctx.isServer ? ctx.req.headers.cookie : "";
-
   if (ctx.isServer && cookie) {
     // 서버사이드 렌더링
+    console.log("쿠키를 넣어준다.");
     axios.defaults.headers.Cookie = cookie;
   }
-
-  ctx.store.dispatch({
-    type: FEEDBACK_READ_REQUEST,
-    data: {
-      lastId,
-      feedbackModes
-    }
-  });
 
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);

@@ -42,8 +42,10 @@ const commonStyle = {
 const AppTopbar = () => {
   const dispatch = useDispatch();
   const { me, isLogout } = useSelector(state => state.user);
-  const { switchMode } = useSelector(state => state.feedback);
-  const { isLoadedSubject } = useSelector(state => state.feedbackSubject);
+  const { switchMode, feedback, isLoadedFeedback } = useSelector(
+    state => state.feedback
+  );
+  const { subject } = useSelector(state => state.feedbackSubject);
   const { feedbackMode } = useSelector(state => state.feedbackMode);
   const [visible, setVisible] = useState(false);
   const [alertVisible, setAlertVisible] = useState(false);
@@ -130,9 +132,11 @@ const AppTopbar = () => {
         feedbackModes
       }
     });
+
     dispatch({
       type: FEEDBACK_SUB_READ_REQUEST
     });
+
     dispatch({
       type: MOVE_TO_HOME,
       data: true

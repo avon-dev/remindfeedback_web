@@ -54,6 +54,7 @@ const login = () => {
     isLogout
   } = useSelector(state => state.user);
   const { isLoadedFeedback } = useSelector(state => state.feedback);
+  const { isLoadedSubject } = useSelector(state => state.feedbackSubject);
   const { feedbackMode } = useSelector(state => state.feedbackMode);
 
   const _onsubmit = useCallback(
@@ -100,10 +101,15 @@ const login = () => {
       dispatch({
         type: FEEDBACK_SUB_READ_REQUEST
       });
+    }
+  }, [isLoggedIn && isLoggedIn]);
+
+  useEffect(() => {
+    if (isLoadedFeedback && isLoadedSubject) {
       alert("메인페이지로 이동합니다.");
       Router.push("/main");
     }
-  }, [isLoggedIn && isLoggedIn]);
+  }, [isLoadedFeedback, isLoadedSubject]);
 
   useEffect(() => {
     if (hasMessage) {
