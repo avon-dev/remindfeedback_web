@@ -25,9 +25,14 @@ const { Title, Text } = Typography;
 
 const signup = () => {
   const dispatch = useDispatch();
-  const { isSigningUp, me, isSignedUp, hasMessage, success } = useSelector(
-    state => state.user
-  );
+  const {
+    isSigningUp,
+    me,
+    isSignedUp,
+    hasMessage,
+    success,
+    message
+  } = useSelector(state => state.user);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -190,10 +195,10 @@ const signup = () => {
   }, []);
 
   useEffect(() => {
-    if (success) {
-      setIsTokend(true);
+    if (message) {
+      alert(message);
     }
-  }, [success && success]);
+  }, [message && message]);
 
   useEffect(() => {
     if (!hasMessage && isSignedUp) {

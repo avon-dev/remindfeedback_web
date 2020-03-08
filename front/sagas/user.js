@@ -32,14 +32,14 @@ import {
   CHECK_EMAIL_FAILURE
 } from "../reducers/user";
 
-const dev = process.env.NODE_ENV !== "production";
-const prod = process.env.NODE_ENV === "production";
+// const dev = process.env.NODE_ENV !== "production";
+// const prod = process.env.NODE_ENV === "production";
 
-if (prod) {
-  axios.defaults.baseURL = "https://api.remindfeedback.com/";
-} else {
-  axios.defaults.baseURL = "http://localhost:3000";
-}
+// if (prod) {
+//   axios.defaults.baseURL = "https://api.remindfeedback.com/";
+// } else if (dev) {
+//   axios.defaults.baseURL = "http://localhost:3000";
+// }
 
 // 마이페이지 LOAD
 function logUserAPI() {
@@ -205,7 +205,7 @@ function checkEmailAPI(data) {
 function* checkEmail(action) {
   try {
     const result = yield call(checkEmailAPI, action.data);
-    console.log(result, "checkEmail");
+    console.log(result.data, "checkEmail");
     yield put({
       type: CHECK_EMAIL_SUCCESS,
       data: result.data

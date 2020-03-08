@@ -1,81 +1,80 @@
-import React from 'react';
-import axios from 'axios';
-import PropTypes from 'prop-types';
-import withRedux from 'next-redux-wrapper';
-import withReduxSaga from 'next-redux-saga';
-import {Container} from 'next/app';
-import { applyMiddleware, compose, createStore } from 'redux';
-import { Provider } from 'react-redux';
-import createSagaMiddleware from 'redux-saga';
-import reducer from '../reducers';
-import rootSaga from '../sagas';
-import AppHeader from '../components/AppHeader';
-import { FEEDBACK_SUB_READ_REQUEST } from '../reducers/feedbackSubject';
-import {FEEDBACK_READ_REQUEST} from '../reducers/feedback';
+import React from "react";
+import axios from "axios";
+import PropTypes from "prop-types";
+import withRedux from "next-redux-wrapper";
+import withReduxSaga from "next-redux-saga";
+import { Container } from "next/app";
+import { applyMiddleware, compose, createStore } from "redux";
+import { Provider } from "react-redux";
+import createSagaMiddleware from "redux-saga";
+import reducer from "../reducers";
+import rootSaga from "../sagas";
+import AppHeader from "../components/AppHeader";
+import { FEEDBACK_SUB_READ_REQUEST } from "../reducers/feedbackSubject";
+import { FEEDBACK_READ_REQUEST } from "../reducers/feedback";
 
-const RemindFeedback = ({Component, store, pageProps }) => {
-    return(
-        <> 
-            
-            <Container>
-                <Provider store={store}>
-                    <AppHeader/>
-                    <Component {...pageProps}/>
-                </Provider>
-            </Container>
-           
-        </>
-    )
-}
-
-RemindFeedback.propTypes = {
-    Component: PropTypes.elementType.isRequired,
-    store: PropTypes.object.isRequired,
+const RemindFeedback = ({ Component, store, pageProps }) => {
+  return (
+    <>
+      {/* <Container> */}
+      <Provider store={store}>
+        <AppHeader />
+        <Component {...pageProps} />
+      </Provider>
+      {/* </Container> */}
+    </>
+  );
 };
 
-RemindFeedback.getInitialProps = async(context) => {
-    const { ctx, Component } = context;
-    let pageProps = {};
-    const {feedbackMode, user} = ctx.store.getState();
-    const feedbackModes = feedbackMode.feedbackMode;
-    const lastId = 0;
-    const cookie = ctx.isServer? ctx.req.headers.cookie:'';
-    if(ctx.isServer&&cookie){
-        // 서버사이드 렌더링
-        axios.defaults.headers.Cookie = cookie;
-    }
-    // if(user.isLoggedIn){
-        ctx.store.dispatch({
-            type:FEEDBACK_READ_REQUEST,
-            data:{
-                lastId, feedbackModes
-            }
-        });
-        // ctx.store.dispatch({
-        //     type:FEEDBACK_SUB_READ_REQUEST,
-        // });
-    // }
-    if(Component.getInitialProps){
-        pageProps = await Component.getInitialProps(ctx);
-    }
+RemindFeedback.propTypes = {
+  Component: PropTypes.elementType.isRequired,
+  store: PropTypes.object.isRequired
+};
 
-    return {pageProps} ;
-}
+RemindFeedback.getInitialProps = async context => {
+  const { ctx, Component } = context;
+  let pageProps = {};
+  const { feedbackMode, user } = ctx.store.getState();
+  const feedbackModes = feedbackMode.feedbackMode;
+  const lastId = 0;
+  const cookie = ctx.isServer ? ctx.req.headers.cookie : "";
 
-const configureStore = (initialState,options) => {
-    const sagaMiddleware = createSagaMiddleware();
-    const middlewares = [sagaMiddleware];
-    const enhancer = process.env.NODE_ENV === 'production'
-    ? compose(applyMiddleware(...middlewares))
-    : compose(
-      applyMiddleware(...middlewares),
-      !options.isServer && typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined' ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
-    );
-    const store = createStore(reducer, initialState, enhancer);
-    store.sagaTask = sagaMiddleware.run(rootSaga);
-    return store;
-}
+  if (ctx.isServer && cookie) {
+    // 서버사이드 렌더링
+    axios.defaults.headers.Cookie = cookie;
+  }
+
+  ctx.store.dispatch({
+    type: FEEDBACK_READ_REQUEST,
+    data: {
+      lastId,
+      feedbackModes
+    }
+  });
+
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
+  }
+
+  return { pageProps };
+};
+
+const configureStore = (initialState, options) => {
+  const sagaMiddleware = createSagaMiddleware();
+  const middlewares = [sagaMiddleware];
+  const enhancer =
+    process.env.NODE_ENV === "production"
+      ? compose(applyMiddleware(...middlewares))
+      : compose(
+          applyMiddleware(...middlewares),
+          !options.isServer &&
+            typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== "undefined"
+            ? window.__REDUX_DEVTOOLS_EXTENSION__()
+            : f => f
+        );
+  const store = createStore(reducer, initialState, enhancer);
+  store.sagaTask = sagaMiddleware.run(rootSaga);
+  return store;
+};
 
 export default withRedux(configureStore)(withReduxSaga(RemindFeedback));
-
-

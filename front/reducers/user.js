@@ -357,14 +357,17 @@ export default (state = initialState, action) => {
       };
     case CHECK_EMAIL_SUCCESS:
       let successs = false;
-      if (action.data) {
+      let messages = action.data.message;
+      if (action.data.success) {
         successs = true;
       }
+
       return {
         ...state,
         isCheckingEmail: false,
         isCheckedEmail: true,
-        success: successs
+        success: successs,
+        message: messages
       };
     case CHECK_EMAIL_FAILURE:
       return {

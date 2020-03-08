@@ -3,6 +3,9 @@ node_modules
 
 // next
 .next
+.next/server/
+.next/cache/
+.next/static/
 
 // image
 img

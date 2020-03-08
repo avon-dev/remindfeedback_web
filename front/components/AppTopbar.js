@@ -17,7 +17,8 @@ import AppTutorial from "../components/TutorialMain";
 import AppAlert from "../container/alert";
 import {
   FEEDBACK_TUTORIAL_REQUEST,
-  FEEDBACK_READ_REQUEST
+  FEEDBACK_READ_REQUEST,
+  MOVE_TO_HOME
 } from "../reducers/feedback";
 import { FEEDBACK_SUB_READ_REQUEST } from "../reducers/feedbackSubject";
 import { FEEDBACK_MODE } from "../reducers/feedbackMode";
@@ -41,7 +42,7 @@ const commonStyle = {
 const AppTopbar = () => {
   const dispatch = useDispatch();
   const { me, isLogout } = useSelector(state => state.user);
-  const { feedback } = useSelector(state => state.feedback);
+  const { switchMode } = useSelector(state => state.feedback);
   const { isLoadedSubject } = useSelector(state => state.feedbackSubject);
   const { feedbackMode } = useSelector(state => state.feedbackMode);
   const [visible, setVisible] = useState(false);
@@ -131,6 +132,10 @@ const AppTopbar = () => {
     });
     dispatch({
       type: FEEDBACK_SUB_READ_REQUEST
+    });
+    dispatch({
+      type: MOVE_TO_HOME,
+      data: true
     });
     Router.push("/main");
   };
