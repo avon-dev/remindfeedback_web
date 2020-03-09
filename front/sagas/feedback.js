@@ -56,6 +56,7 @@ import { FEEDBACK_SUB_READ_REQUEST } from "../reducers/feedbackSubject";
 
 import { LOG_IN_SUCCESS } from "../reducers/user";
 
+
 // const dev = process.env.NODE_ENV !== "production";
 // const prod = process.env.NODE_ENV === "production";
 
@@ -160,13 +161,14 @@ function* watchFeedback_Item_Delete_Comment() {
 
 // Feedback 피드백 게시물 댓글 Read
 function feedback_Item_Comment_API(data) {
-  const num = 1;
-  console.log(data.sort, "sort");
+  console.log(data, "feedback_Item_Comment_API");
 
+  const board_id = parseInt(data.board_id);
+  const sort = data.sort;
   return axios.get(
-    `/comments/all/page/${data.board_id ? data.board_id : data}/${
+    `/comments/all/page/${board_id ? board_id: board_id}/${
       data.page ? data.page : 1
-    }/${5}/${data.sort ? data.sort : num}`,
+    }/${5}/${sort===0? sort:1}`,
     {
       withCredentials: true
     }
@@ -175,6 +177,7 @@ function feedback_Item_Comment_API(data) {
 
 function* feedback_Item_Comment(action) {
   try {
+  
     const result = yield call(feedback_Item_Comment_API, action.data);
 
     console.log(result.data, "feedback_Item_Comment");
@@ -328,19 +331,23 @@ function feedback_Item_Read_API(data) {
 
 function* feedback_Item_Read(action) {
   try {
-    yield delay(100);
+   
     const result = yield call(feedback_Item_Read_API, action.data);
     console.log(result, "feedback_Item_Read");
     yield put({
       type: FEEDBACK_ITEM_READ_SUCCESS,
       data: result.data
     });
+  
     console.log(action.data.lastid, "hahaha");
     if (yield action.data.lastid === 0 && result.data.data.length >= 1) {
-      console.log("드러옴");
+      console.log("드러옴",result.data.data[0].id, action.data.sort);
+      // const action = {data:{board_id:result.data.data[0].id, sort:action.data.sort}};
+      // feedback_Item_Comment(action)
+      console.log(action,'action')
       yield put({
         type: FEEDBACK_ITEM_COMMENT_REQUEST,
-        data: result.data.data[0].id
+        data: {board_id:result.data.data[0].id, sort:action.data.sort}
       });
     }
   } catch (e) {

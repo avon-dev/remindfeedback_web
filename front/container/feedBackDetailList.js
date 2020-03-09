@@ -201,12 +201,14 @@ const feedBackDetailList = ({ feedback_id, handleComment }) => {
     setMouseOver(false);
   };
   const handleList = e => {
+    const board_id = e.target.id;
+    const sort = 1;
     dispatch({
       type: FEEDBACK_ITEM_COMMENT_REQUEST,
-      data: e.target.id
+      data: {board_id:board_id, sort:sort}
     });
-    setBoard_id(e.target.id);
-    handleComment(e.target.id);
+    setBoard_id(board_id);
+    handleComment(board_id);
   };
 
   const handleFilter = name => {

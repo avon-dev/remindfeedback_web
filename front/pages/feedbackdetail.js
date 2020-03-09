@@ -78,15 +78,24 @@ const feedbackdetail = ({ feedback_id }) => {
 feedbackdetail.getInitialProps = async context => {
   console.log("서버냐", context.isServer);
   const lastId = 0;
+  const sort = 1;
 
   const { feedbackMode } = context.store.getState();
   const feedbackModes = feedbackMode.feedbackMode;
-
+  
+  context.store.dispatch({
+    type: FEEDBACK_READ_REQUEST,
+    data: {
+      lastId,
+      feedbackModes
+    }
+  });
   context.store.dispatch({
     type: FEEDBACK_ITEM_READ_REQUEST,
     data: {
       feedbackid: parseInt(context.query.id),
-      lastid: lastId
+      lastid: lastId,
+      sort,
     }
   });
   return { feedback_id: parseInt(context.query.id) };

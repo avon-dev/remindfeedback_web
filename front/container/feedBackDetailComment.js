@@ -52,6 +52,7 @@ const feedBackDetailComment = ({ board_ids, feedback_id }) => {
   const [changeDo, setChangeDo] = useState(true);
   const [completeValue, setCompleteValue] = useState(0);
   const [page, setPage] = useState(1);
+  const [sort, setSort] = useState(1);
 
   useEffect(() => {
     if (isDeletedFeedbackComment) {
@@ -71,7 +72,8 @@ const feedBackDetailComment = ({ board_ids, feedback_id }) => {
         type: FEEDBACK_ITEM_COMMENT_REQUEST,
         data: {
           page,
-          board_id
+          board_id,
+          sort,
         }
       });
     }
@@ -173,7 +175,7 @@ const feedBackDetailComment = ({ board_ids, feedback_id }) => {
         type: FEEDBACK_ITEM_COMMENT_ADD_REQUEST,
         data: {
           comment_content,
-          board_id
+          board_id, 
         }
       });
       setComments("");
@@ -201,12 +203,14 @@ const feedBackDetailComment = ({ board_ids, feedback_id }) => {
       type: FEEDBACK_ITEM_COMMENT_REQUEST,
       data: {
         page,
-        board_id
+        board_id, 
+        sort
       }
     });
   };
 
   const handleFilter = sort => {
+    setSort(sort)
     console.log(sort);
     dispatch({
       type: FEEDBACK_ITEM_COMMENT_REQUEST,
