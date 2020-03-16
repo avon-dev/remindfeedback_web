@@ -6,10 +6,6 @@ export const initialState = {
   feedbackComment: [],
   getFeedbackCategory: [],
 
-  isAdddingFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 중
-  isAddedFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 완료
-  AddedFirstSubjectErrorReason: "", // 피드백 튜토리얼 첫번째 주제 저장 실패 사유
-
   isLoadingGetFeedbackCategory: false, // 요청 피드백 데이터 요청 목록 로드 중
   isLoadedGetFeedbackCategory: false, // 피드백 데이터 요청 목록 로드 성공
   LoadedGetFeedbackCategoryErrorReason: "", // 피드백 데이터 요청 목록 실패 사유
@@ -64,10 +60,6 @@ export const initialState = {
 };
 
 export const MOVE_TO_HOME = "MOVE_TO_HOME"; // 홈으로 이동
-
-export const FEEDBACK_TUTORIAL_REQUEST = "FEEDBACK_TUTORIAL_REQUEST"; // 피드백 튜토리얼 시도 중
-export const FEEDBACK_TUTORIAL_SUCCESS = "FEEDBACK_TUTORIAL_SUCCESS"; // 피드백 튜토리얼 성공
-export const FEEDBACK_TUTORIAL_FAILURE = "FEEDBACK_TUTORIAL_FAILURE"; // 피드백 튜토리얼 실패
 
 export const GETFEEDBACK_CATEGORY_READ_REQUEST =
   "GETFEEDBACK_CATEGORY_READ_REQUEST"; // GET 피드백 카테고리 READ 시도 중
@@ -146,27 +138,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         feedbackMode: action.data
-      };
-
-    // 피드백 튜토리얼
-    case FEEDBACK_TUTORIAL_REQUEST:
-      return {
-        ...state,
-        isAdddingFirstSubject: true,
-        isAddedFirstSubject: false
-      };
-    case FEEDBACK_TUTORIAL_SUCCESS:
-      return {
-        ...state,
-        isAdddingFirstSubject: false,
-        isAddedFirstSubject: true
-      };
-    case FEEDBACK_TUTORIAL_FAILURE:
-      return {
-        ...state,
-        isAdddingFirstSubject: false,
-        isAddedFirstSubject: false,
-        AddedFirstSubjectErrorReason: action.error
       };
 
     // GET 피드백 카테고리

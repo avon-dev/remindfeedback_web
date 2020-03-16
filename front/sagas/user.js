@@ -29,7 +29,10 @@ import {
   UPDATE_PASSWORD_FAILURE,
   CHECK_EMAIL_REQUEST,
   CHECK_EMAIL_SUCCESS,
-  CHECK_EMAIL_FAILURE
+  CHECK_EMAIL_FAILURE,
+  FEEDBACK_TUTORIAL_REQUEST,
+  FEEDBACK_TUTORIAL_SUCCESS,
+  FEEDBACK_TUTORIAL_FAILURE,
 } from "../reducers/user";
 
 // const dev = process.env.NODE_ENV !== "production";
@@ -40,6 +43,38 @@ import {
 // } else if (dev) {
 //   axios.defaults.baseURL = "http://localhost:3000";
 // }
+
+// Feedback 튜토리얼
+function feedback_Tutorial_API(data) {
+  return axios.patch('/auth/tutorial',data,{
+      withCredentials:true
+  });
+}
+
+function* feedback_Tutorial(action) {
+  try {
+    const result = yield call(feedback_Tutorial_API, action.data);
+    if(result.data.success){
+      console.log(result.data,"feedback_Tutorial")
+      yield put({
+        type: FEEDBACK_TUTORIAL_SUCCESS,
+        data: result.data
+      });
+    }else{
+      console.error(error,'feedback_Tutorial');
+    }
+   
+  } catch (e) {
+    yield put({
+      type: FEEDBACK_TUTORIAL_FAILURE,
+      error: e
+    });
+  }
+}
+
+function* watchFeedback_Toturial() {
+  yield takeLatest(FEEDBACK_TUTORIAL_REQUEST, feedback_Tutorial);
+}
 
 // 마이페이지 LOAD
 function logUserAPI() {
@@ -315,6 +350,7 @@ function* watchSignUp() {
 
 export default function* userSaga() {
   yield all([
+    fork(watchFeedback_Toturial),
     fork(watchLogin),
     fork(watchSignUp),
     fork(watchLogOut),

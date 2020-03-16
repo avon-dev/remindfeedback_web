@@ -16,13 +16,12 @@ import { useDispatch, useSelector } from "react-redux";
 import AppTutorial from "../components/TutorialMain";
 import AppAlert from "../container/alert";
 import {
-  FEEDBACK_TUTORIAL_REQUEST,
   FEEDBACK_READ_REQUEST,
   MOVE_TO_HOME
 } from "../reducers/feedback";
 import { FEEDBACK_SUB_READ_REQUEST } from "../reducers/feedbackSubject";
 import { FEEDBACK_MODE } from "../reducers/feedbackMode";
-import { LOG_OUT_REQUEST } from "../reducers/user";
+import { LOG_OUT_REQUEST,FEEDBACK_TUTORIAL_REQUEST } from "../reducers/user";
 import Router from "next/router";
 
 const { Title, Paragraph, Text } = Typography;
@@ -54,7 +53,7 @@ const AppTopbar = () => {
   const [visiblePaner, setVisiblePaner] = useState(false);
 
   useEffect(() => {
-    if (me.tutorial) {
+    if (!me.tutorial) {
       setVisible(true);
     }
   }, []);
@@ -68,7 +67,13 @@ const AppTopbar = () => {
   const next = () => {
     const currents = current + 1;
     setCurrent(currents);
-    setVisiblePaner(false);
+    setVisiblePaner(true);
+  };
+
+  const prev = () => {
+    const currents = current - 1;
+    setCurrent(currents);
+    setVisiblePaner(true);
   };
 
   const showModal = () => {
@@ -79,7 +84,7 @@ const AppTopbar = () => {
     e.preventDefault();
     dispatch({
       type: FEEDBACK_TUTORIAL_REQUEST,
-      data: firstSubject
+      data: me.email
     });
     setVisible(false);
   };
@@ -120,6 +125,10 @@ const AppTopbar = () => {
     alert("추후 업데이트 될 예정입니다.");
     // 추후 업데이트 예정
   };
+
+  const secondHandleFunction = (current) => {
+
+  }
 
   const handleHome = () => {
     const feedbackModes = false;
@@ -252,23 +261,27 @@ const AppTopbar = () => {
           handleOk={handleOk}
           visible={visible}
           firstSubject={firstSubject}
+          secondHandleFunction={secondHandleFunction}
           handleSetFirstSubject={handleSetFirstSubject}
-          secondTitle={"이메일 확인"}
-          thirdTitle={"토큰 확인"}
-          thirdSubTitle={"토큰 입력하기 & 변경할 비밀번호 입력하기"}
-          fourthTitle={"완료"}
+          handleStart={handleOk}
+          secondTitle={"주제선정"}
+          thirdTitle={"피드백기능"}
+          thirdSubTitle={""}
+          fourthTitle={"조언자기능"}
           fourthSubTitle={"변경할 비밀번호 입력하기"}
-          secondSubTitle={"이메일 입력하기"}
-          secondSubPlaceHolder={"이메일을 입력해주세요"}
+          secondSubTitle={""}
+          secondSubPlaceHolder={""}
           firstContentTitle={
             "Remind Feedback에 오신 여러분들을 진심으로 환영합니다."
           }
-          secondContentTitle={"등록하신 이메일을 입력해주세요."}
-          thirdContentTitle={"이메일에서 받으신 내용을 입력해주세요"}
-          fourthContentTitle={"비밀번호가 정상적으로 변경되었습니다."}
-          thirdSubPlaceHolder={"이메일에서 받으신 내용을 입력해주세요"}
-          thirdSub2_PlaceHolder={"변경하실 비밀번호를 입력해주세요"}
+          secondContentTitle={"피드백에 알맞은 주제를 선정하여, 쉽고 편하게 피드백을 관리하세요."}
+          thirdContentTitle={"제목,날짜,조언자,주제를 선택하여, 나만의 피드백을 만들어보세요."}
+          fourthContentTitle={"나만의 조언자를 등록하여 다양한 의견들을 공유해 보세요."}
+          thirdSubPlaceHolder={""}
+          thirdSub2_PlaceHolder={""}
           visiblePaner={visiblePaner}
+          code={true}
+          prev={prev}
         />
       </div>
       <div></div>

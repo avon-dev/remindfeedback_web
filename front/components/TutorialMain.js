@@ -44,7 +44,8 @@ const TutorialMain = ({
   handleSetNewPassword,
   newPassword,
   handleStart,
-  code
+  code,
+  prev
 }) => {
   const steps = [
     {
@@ -101,10 +102,7 @@ const TutorialMain = ({
     }
   ];
 
-  const prev = () => {
-    const currents = current - 1;
-    setCurrent(currents);
-  };
+
 
   return (
     <>
@@ -132,7 +130,8 @@ const TutorialMain = ({
               </div>
             )}
             <div style={{ textAlign: "center", marginBottom: 5 }}>
-              {current === 1 && (
+              {current === 1 && !code && (
+                
                 <Collapse
                   bordered={true}
                   size="large"
@@ -168,7 +167,7 @@ const TutorialMain = ({
                   </Panel>
                 </Collapse>
               )}
-              {current === 2 && (
+              {current === 2 && !code && (
                 <Collapse
                   bordered={true}
                   size="large"
@@ -229,7 +228,7 @@ const TutorialMain = ({
               {current === steps.length - 1 && (
                 <Button
                   type="primary"
-                  onClick={handleStart}
+                  onClick={handleCancel}
                   size="large"
                   style={{ width: "100%" }}
                 >

@@ -36,6 +36,10 @@ export const initialState = {
   isDeletedPhoto: false, // 마이페이지 사진 삭제 성공
   DeletedPhotoReason: "", // 마이페이지 사진 삭제 실패 사유
 
+  isAdddingFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 중
+  isAddedFirstSubject: false, // 피드백 튜토리얼 첫번째 주제 저장 완료
+  AddedFirstSubjectErrorReason: "", // 피드백 튜토리얼 첫번째 주제 저장 실패 사유
+
   me: {
     email: "",
     nickname: "",
@@ -86,8 +90,37 @@ export const UPDATE_PASSWORD_REQUEST = "UPDATE_PASSWORD_REQUEST"; // 비밀번�
 export const UPDATE_PASSWORD_SUCCESS = "UPDATE_PASSWORD_SUCCESS"; // 비밀번호 변경 성공
 export const UPDATE_PASSWORD_FAILURE = "UPDATE_PASSWORD_FAILURE"; // 비밀번호 변경 실패
 
+export const FEEDBACK_TUTORIAL_REQUEST = "FEEDBACK_TUTORIAL_REQUEST"; // 피드백 튜토리얼 시도 중
+export const FEEDBACK_TUTORIAL_SUCCESS = "FEEDBACK_TUTORIAL_SUCCESS"; // 피드백 튜토리얼 성공
+export const FEEDBACK_TUTORIAL_FAILURE = "FEEDBACK_TUTORIAL_FAILURE"; // 피드백 튜토리얼 실패
+
 export default (state = initialState, action) => {
   switch (action.type) {
+     // 피드백 튜토리얼
+     case FEEDBACK_TUTORIAL_REQUEST:
+      return {
+        ...state,
+        isAdddingFirstSubject: true,
+        isAddedFirstSubject: false
+      };
+    case FEEDBACK_TUTORIAL_SUCCESS:
+      return {
+        ...state,
+        isAdddingFirstSubject: false,
+        me:{
+          ...state.me,
+          tutorial:true,
+        },
+        isAddedFirstSubject: true,
+      };
+    case FEEDBACK_TUTORIAL_FAILURE:
+      return {
+        ...state,
+        isAdddingFirstSubject: false,
+        isAddedFirstSubject: false,
+        AddedFirstSubjectErrorReason: action.error
+      };
+
     case MOVE_TO_SIGNUP:
       return {
         ...state,

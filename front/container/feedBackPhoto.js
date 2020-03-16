@@ -49,7 +49,8 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
                   uid:i,
                   name:v.split('/')[1],
                   state:'done',
-                  url:`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v}`
+                  url:`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v}`,
+                  update:false
                 }
                 :
                 {
@@ -185,15 +186,18 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
             console.log(file,'file');
             const {board_file1,board_file2,board_file3} = feedbackItem.find((v,i)=>parseInt(v.id)===parseInt(feedBackItemId))
             compare.push(board_file1,board_file2,board_file3)
-                check = check.map((v,i)=>{
-                    return(
-                        !file[i]?false
-                        :
-                        typeof file[i].uid ==='string'?true: 
-                        file[i].name!==compare[i].split('/')[1]&&
-                        true
-                        )}
-                    )
+            check = check.map((v,i)=>{
+                return(file[i]&&file[i].update||file[i]&&file[i].name!==compare[i].split('/')[1]||!file[i]&&true)
+            })
+                // check = check.map((v,i)=>{
+                //     return(
+                //         !file[i]?false
+                //         :
+                //         typeof file[i].uid ==='string'?true: 
+                //         file[i].name!==compare[i].split('/')[1]&&
+                //         true
+                //         )}
+                //     )
             result = file.map((v,i)=>{
                 let files ;
                 if(typeof v.uid ==="number"){
@@ -207,7 +211,9 @@ const feedBackPhoto = ({photoVisible,photoHandleCancel,mode, name, feedback_id, 
                 }
                 return files
             });   
+           
             };
+
     
             const formData = new FormData();
             if(name==="PHOTO_UPDATE"){
