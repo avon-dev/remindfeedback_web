@@ -8,7 +8,6 @@ import {
   throttle
 } from "redux-saga/effects";
 import axios from "axios";
-// import * as AxiosLogger from 'axios-logger';
 import {
 
   GETFEEDBACK_CATEGORY_READ_REQUEST,
@@ -55,8 +54,6 @@ import { FEEDBACK_SUB_READ_REQUEST } from "../reducers/feedbackSubject";
 
 import { LOG_IN_SUCCESS } from "../reducers/user";
 
-// const instance = axios.create();
-// instance.interceptors.request.use(AxiosLogger.requestLogger);
 // const dev = process.env.NODE_ENV !== "production";
 // const prod = process.env.NODE_ENV === "production";
 
@@ -447,9 +444,16 @@ function* watchFeedback_Add() {
 // Feedback 메인화면 Read
 
 function feedback_Read_API(data) {
+  axios.interceptors.request.use((config)=>{
+    console.log(config,'config');
+    return config
+   
+  },)
+
   return axios.get(`/feedbacks/${data.lastId}`, {
     withCredentials: true
   });
+ 
 }
 
 function* feedback_Read(action) {
