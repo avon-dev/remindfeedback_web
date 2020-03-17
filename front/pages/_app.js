@@ -38,9 +38,7 @@ RemindFeedback.getInitialProps = async context => {
   const feedbackModes = feedbackMode.feedbackMode;
   const lastId = 0;
   const cookie = ctx.isServer ? ctx.req.headers.cookie : "";
-  axios.defaults.headers.Cookie = '';
   if (ctx.isServer && cookie) {
- 
     // 서버사이드 렌더링
     console.log("쿠키를 넣어준다.");
     axios.defaults.headers.Cookie = cookie;
