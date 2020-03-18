@@ -40,7 +40,7 @@ RemindFeedback.getInitialProps = async context => {
   const cookie = ctx.isServer ? ctx.req.headers.cookie : "";
   if (ctx.isServer && cookie) {
     // 서버사이드 렌더링
-    console.log("쿠키를 넣어준다.");
+    console.log("쿠키를 넣어준다....");
     axios.defaults.headers.Cookie = cookie;
   }
 
