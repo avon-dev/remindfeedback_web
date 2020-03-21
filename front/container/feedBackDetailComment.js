@@ -73,7 +73,7 @@ const feedBackDetailComment = ({ board_ids, feedback_id }) => {
         data: {
           page,
           board_id,
-          sort,
+          sort
         }
       });
     }
@@ -175,7 +175,7 @@ const feedBackDetailComment = ({ board_ids, feedback_id }) => {
         type: FEEDBACK_ITEM_COMMENT_ADD_REQUEST,
         data: {
           comment_content,
-          board_id, 
+          board_id
         }
       });
       setComments("");
@@ -203,14 +203,14 @@ const feedBackDetailComment = ({ board_ids, feedback_id }) => {
       type: FEEDBACK_ITEM_COMMENT_REQUEST,
       data: {
         page,
-        board_id, 
+        board_id,
         sort
       }
     });
   };
 
   const handleFilter = sort => {
-    setSort(sort)
+    setSort(sort);
     console.log(sort);
     dispatch({
       type: FEEDBACK_ITEM_COMMENT_REQUEST,

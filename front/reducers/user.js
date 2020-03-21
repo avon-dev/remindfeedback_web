@@ -51,6 +51,7 @@ export const initialState = {
 };
 
 export const MOVE_TO_SIGNUP = "MOVE_TO_SIGNUP"; // 회원가입 창 이동
+export const INITALS_STATE = "INITALS_STATE"; // 상태값 초기화
 
 export const LOG_IN_REQUEST = "LOG_IN_REQUEST"; // 로그인 시도 중
 export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS"; // 로그인 성공
@@ -96,8 +97,15 @@ export const FEEDBACK_TUTORIAL_FAILURE = "FEEDBACK_TUTORIAL_FAILURE"; // 피드�
 
 export default (state = initialState, action) => {
   switch (action.type) {
-     // 피드백 튜토리얼
-     case FEEDBACK_TUTORIAL_REQUEST:
+    case INITALS_STATE:
+      return {
+        ...state,
+        [action.data]: false,
+        message: ""
+      };
+
+    // 피드백 튜토리얼
+    case FEEDBACK_TUTORIAL_REQUEST:
       return {
         ...state,
         isAdddingFirstSubject: true,
@@ -107,11 +115,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isAdddingFirstSubject: false,
-        me:{
+        me: {
           ...state.me,
-          tutorial:true,
+          tutorial: true
         },
-        isAddedFirstSubject: true,
+        isAddedFirstSubject: true
       };
     case FEEDBACK_TUTORIAL_FAILURE:
       return {
@@ -127,7 +135,7 @@ export default (state = initialState, action) => {
         isSigningUp: false,
         isSignedUp: false,
         hasMessage: false,
-        isLoggingIn: false,
+        isLoggedIn: false,
         isLogout: false,
         me: {
           email: "",

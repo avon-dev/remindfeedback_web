@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 const MyError = ({ statusCode }) => {
   return (
@@ -10,15 +10,19 @@ const MyError = ({ statusCode }) => {
 };
 
 MyError.propTypes = {
-  statusCode: PropTypes.number,
+  statusCode: PropTypes.number
 };
 
 MyError.defaultProps = {
-  statusCode: 400,
+  statusCode: 400
 };
 
-MyError.getInitialProps = async (context) => {
-  const statusCode = context.res ? context.res.statusCode : context.err ? context.err.statusCode : null;
+MyError.getInitialProps = async context => {
+  const statusCode = context.res
+    ? context.res.statusCode
+    : context.err
+    ? context.err.statusCode
+    : null;
   return { statusCode };
 };
 

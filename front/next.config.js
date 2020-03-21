@@ -19,6 +19,7 @@ module.exports = withBundleAnalyzer(
     },
     distDir: ".next",
     webpack(config, { isServer }) {
+      
       const prod = process.env.NODE_ENV === "production";
 
       const plugins = [

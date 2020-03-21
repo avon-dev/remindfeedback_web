@@ -102,8 +102,6 @@ const TutorialMain = ({
     }
   ];
 
-
-
   return (
     <>
       <Modal
@@ -131,7 +129,6 @@ const TutorialMain = ({
             )}
             <div style={{ textAlign: "center", marginBottom: 5 }}>
               {current === 1 && !code && (
-                
                 <Collapse
                   bordered={true}
                   size="large"

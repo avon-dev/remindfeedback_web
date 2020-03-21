@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   FEEDBACK_ITEM_READ_REQUEST,
   FEEDBACK_READ_REQUEST,
-  FEEDBACK_ITEM_COMMENT_REQUEST
+  FEEDBACK_ITEM_COMMENT_REQUEST,
+  MOVE_TO_HOME
 } from "../reducers/feedback";
 import {
   layout,
@@ -82,7 +83,10 @@ feedbackdetail.getInitialProps = async context => {
 
   const { feedbackMode } = context.store.getState();
   const feedbackModes = feedbackMode.feedbackMode;
-  
+  context.store.dispatch({
+    type: MOVE_TO_HOME,
+    data: false
+  });
   context.store.dispatch({
     type: FEEDBACK_READ_REQUEST,
     data: {
@@ -95,7 +99,7 @@ feedbackdetail.getInitialProps = async context => {
     data: {
       feedbackid: parseInt(context.query.id),
       lastid: lastId,
-      sort,
+      sort
     }
   });
   return { feedback_id: parseInt(context.query.id) };

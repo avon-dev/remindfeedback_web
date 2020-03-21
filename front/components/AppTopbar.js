@@ -15,13 +15,14 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import AppTutorial from "../components/TutorialMain";
 import AppAlert from "../container/alert";
-import {
-  FEEDBACK_READ_REQUEST,
-  MOVE_TO_HOME
-} from "../reducers/feedback";
+import { FEEDBACK_READ_REQUEST, MOVE_TO_HOME } from "../reducers/feedback";
 import { FEEDBACK_SUB_READ_REQUEST } from "../reducers/feedbackSubject";
 import { FEEDBACK_MODE } from "../reducers/feedbackMode";
-import { LOG_OUT_REQUEST,FEEDBACK_TUTORIAL_REQUEST } from "../reducers/user";
+import {
+  LOG_OUT_REQUEST,
+  FEEDBACK_TUTORIAL_REQUEST,
+  INITALS_STATE
+} from "../reducers/user";
 import Router from "next/router";
 
 const { Title, Paragraph, Text } = Typography;
@@ -101,6 +102,14 @@ const AppTopbar = () => {
     dispatch({
       type: LOG_OUT_REQUEST
     });
+    dispatch({
+      type: INITALS_STATE,
+      data: "isLoadedSubject"
+    });
+    dispatch({
+      type: INITALS_STATE,
+      data: "isLoadedFeedback"
+    });
   };
 
   const handleAlert = () => {
@@ -126,9 +135,7 @@ const AppTopbar = () => {
     // 추후 업데이트 예정
   };
 
-  const secondHandleFunction = (current) => {
-
-  }
+  const secondHandleFunction = current => {};
 
   const handleHome = () => {
     const feedbackModes = false;
@@ -233,7 +240,7 @@ const AppTopbar = () => {
                         `https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${me.portrait}`
                       }
                     >
-                      {!me.portrait && "U"}
+                      {!me.portrait && me.nickname.split("")[0]}
                     </Avatar>
                   </Button>
                 </div>
@@ -274,9 +281,15 @@ const AppTopbar = () => {
           firstContentTitle={
             "Remind Feedback에 오신 여러분들을 진심으로 환영합니다."
           }
-          secondContentTitle={"피드백에 알맞은 주제를 선정하여, 쉽고 편하게 피드백을 관리하세요."}
-          thirdContentTitle={"제목,날짜,조언자,주제를 선택하여, 나만의 피드백을 만들어보세요."}
-          fourthContentTitle={"나만의 조언자를 등록하여 다양한 의견들을 공유해 보세요."}
+          secondContentTitle={
+            "피드백에 알맞은 주제를 선정하여, 쉽고 편하게 피드백을 관리하세요."
+          }
+          thirdContentTitle={
+            "제목,날짜,조언자,주제를 선택하여, 나만의 피드백을 만들어보세요."
+          }
+          fourthContentTitle={
+            "나만의 조언자를 등록하여 다양한 의견들을 공유해 보세요."
+          }
           thirdSubPlaceHolder={""}
           thirdSub2_PlaceHolder={""}
           visiblePaner={visiblePaner}

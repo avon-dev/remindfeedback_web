@@ -23,7 +23,11 @@ import {
 
 import Link from "next/link";
 import logoImg from "../img/logo1.png";
-import { LOG_IN_REQUEST, MOVE_TO_SIGNUP } from "../reducers/user";
+import {
+  LOG_IN_REQUEST,
+  MOVE_TO_SIGNUP,
+  INITALS_STATE
+} from "../reducers/user";
 import { FEEDBACK_READ_REQUEST } from "../reducers/feedback";
 import { FEEDBACK_SUB_READ_REQUEST } from "../reducers/feedbackSubject";
 import { UPDATE_PASSWORD_REQUEST } from "../reducers/user";
@@ -70,9 +74,6 @@ const login = () => {
           password: passwords
         }
       });
-      dispatch({
-        type: MOVE_TO_SIGNUP
-      });
     },
     [email, password]
   );
@@ -92,6 +93,11 @@ const login = () => {
 
     if (isLoggedIn && me) {
       dispatch({
+        type: INITALS_STATE,
+        data: "isLoggedIn"
+      });
+
+      dispatch({
         type: FEEDBACK_READ_REQUEST,
         data: {
           feedbackModes,
@@ -106,10 +112,6 @@ const login = () => {
 
   useEffect(() => {
     if (isLoadedFeedback && isLoadedSubject) {
-      alert("메인페이지로 이동합니다.");
-      dispatch({
-        type: MOVE_TO_SIGNUP
-      });
       Router.push("/main");
     }
   }, [isLoadedFeedback, isLoadedSubject]);

@@ -1,5 +1,4 @@
 import React, { useCallback, useState, useEffect } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import {
   Row,
@@ -10,7 +9,7 @@ import {
   Button,
   Checkbox,
   Typography,
-  Alert
+  Alert,
 } from "antd";
 import { layoutCenter } from "../css/Common";
 import { signUpBtn, shadowBorder } from "../css/Signup";
@@ -120,7 +119,7 @@ const signup = () => {
   const TokenInput = (
     <div style={{ padding: 5 }}>
       <label htmlFor="user-nickname" style={{ fontWeight: "bold" }}>
-        토큰번호
+        인증코드
       </label>
       <div style={{ marginTop: 5 }}>
         <Input
@@ -128,7 +127,7 @@ const signup = () => {
           name="tokenNum"
           value={token}
           onChange={onChangeSetToken}
-          placeholder="이메일에서 받은 내용을 기입해주세요"
+          placeholder="인증코드를 입력해주세요"
           required
         />
       </div>
@@ -146,7 +145,7 @@ const signup = () => {
           value={nickname}
           onChange={onChangeSetNickName}
           suffix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-          placeholder="닉네임을 기입해주세요"
+          placeholder="닉네임을 입력해주세요"
           required
         />
       </div>
@@ -164,7 +163,7 @@ const signup = () => {
           value={password}
           onChange={onChangeSetPassword}
           suffix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
-          placeholder="비밀번호는 최소 1개의 숫자 특수문자를 포함해야 하며 영문 대소문자를 6 ~ 20자리 입력해주세요"
+          placeholder="최소 1개의 특수문자 + 영문 대소문자를 6 ~ 20자리 입력"
           required
         />
       </div>
@@ -182,7 +181,7 @@ const signup = () => {
           value={re_password}
           onChange={onChangeSetRePassword}
           suffix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
-          placeholder="비밀번호를 한번 더 기입해주세요"
+          placeholder="비밀번호를 한번 더 입력해주세요"
           required
         />
       </div>
@@ -308,11 +307,27 @@ const signup = () => {
             {nicknameForm}
             {passwordForm}
             {re_passwordForm}
-            <Col span={24} style={{ marginTop: 15 }}>
-              <Checkbox style={{ fontWeight: "bold" }} onChange={onChangeTerm}>
-                서비스 이용약관, 개인정보 수집 및 이용, 중요한 약관에 모두
-                동의합니다.
+            <Col span={24} style={{ marginTop: 15, display:'flex', flexDirection:"row", justifyContent:'' }}>
+              <Checkbox style={{ fontWeight: "bold", flexGrow:1, }} onChange={onChangeTerm}>
+                서비스 이용약관 동의(필수)
               </Checkbox>
+              <Button  type="dashed"
+                  style={{
+                    fontWeight: "bold",
+                    
+                   }}>자세히보기</Button>
+            </Col>
+            <Col span={24} style={{ marginTop: 15, display:'flex', flexDirection:"row", justifyContent:'' }}>
+              <Checkbox style={{ fontWeight: "bold", flexGrow:1 }} onChange={onChangeTerm}>
+                개인 정보 수집 및 이용 동의(필수)
+              </Checkbox>
+              <Button  type="dashed"
+                  style={{
+                    fontWeight: "bold",
+                    
+                   }}
+                   
+                   >자세히보기</Button>
             </Col>
             <Col span={24} style={{ marginTop: 15 }}>
               <Button

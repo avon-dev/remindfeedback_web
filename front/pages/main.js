@@ -11,7 +11,7 @@ import {
   backgroundLightBlue
 } from "../css/Common";
 import { Layout } from "antd";
-import { FEEDBACK_READ_REQUEST } from "../reducers/feedback";
+import { FEEDBACK_READ_REQUEST, MOVE_TO_HOME } from "../reducers/feedback";
 import { FEEDBACK_SUB_READ_REQUEST } from "../reducers/feedbackSubject";
 import { useDispatch, useSelector } from "react-redux";
 import Router from "next/router";
@@ -94,6 +94,10 @@ Main.getInitialProps = async context => {
 
   if (context.isServer) {
     console.log("들어옴");
+    context.store.dispatch({
+      type: MOVE_TO_HOME,
+      data: true
+    });
     context.store.dispatch({
       type: FEEDBACK_SUB_READ_REQUEST
     });

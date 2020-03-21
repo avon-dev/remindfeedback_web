@@ -9,7 +9,6 @@ import {
 } from "redux-saga/effects";
 import axios from "axios";
 import {
-
   GETFEEDBACK_CATEGORY_READ_REQUEST,
   GETFEEDBACK_CATEGORY_READ_SUCCESS,
   GETFEEDBACK_CATEGORY_READ_FAILURE,
@@ -163,9 +162,9 @@ function feedback_Item_Comment_API(data) {
   const board_id = parseInt(data.board_id);
   const sort = data.sort;
   return axios.get(
-    `/comments/all/page/${board_id ? board_id: board_id}/${
+    `/comments/all/page/${board_id ? board_id : board_id}/${
       data.page ? data.page : 1
-    }/${5}/${sort===0? sort:1}`,
+    }/${5}/${sort === 0 ? sort : 1}`,
     {
       withCredentials: true
     }
@@ -174,7 +173,6 @@ function feedback_Item_Comment_API(data) {
 
 function* feedback_Item_Comment(action) {
   try {
-  
     const result = yield call(feedback_Item_Comment_API, action.data);
 
     console.log(result.data, "feedback_Item_Comment");
@@ -328,23 +326,22 @@ function feedback_Item_Read_API(data) {
 
 function* feedback_Item_Read(action) {
   try {
-   
     const result = yield call(feedback_Item_Read_API, action.data);
     console.log(result, "feedback_Item_Read");
     yield put({
       type: FEEDBACK_ITEM_READ_SUCCESS,
       data: result.data
     });
-  
+
     console.log(action.data.lastid, "hahaha");
     if (yield action.data.lastid === 0 && result.data.data.length >= 1) {
-      console.log("드러옴",result.data.data[0].id, action.data.sort);
+      console.log("드러옴", result.data.data[0].id, action.data.sort);
       // const action = {data:{board_id:result.data.data[0].id, sort:action.data.sort}};
       // feedback_Item_Comment(action)
-      console.log(action,'action')
+      console.log(action, "action");
       yield put({
         type: FEEDBACK_ITEM_COMMENT_REQUEST,
-        data: {board_id:result.data.data[0].id, sort:action.data.sort}
+        data: { board_id: result.data.data[0].id, sort: action.data.sort }
       });
     }
   } catch (e) {
@@ -444,16 +441,14 @@ function* watchFeedback_Add() {
 // Feedback 메인화면 Read
 
 function feedback_Read_API(data) {
-  axios.interceptors.request.use((config)=>{
-    console.log(config,'config');
-    return config
-   
-  },)
+  axios.interceptors.request.use(config => {
+    console.log(config, "config");
+    return config;
+  });
 
   return axios.get(`/feedbacks/${data.lastId}`, {
     withCredentials: true
   });
- 
 }
 
 function* feedback_Read(action) {
@@ -508,11 +503,8 @@ function* watchGetFeedback_Category() {
   yield takeLatest(GETFEEDBACK_CATEGORY_READ_REQUEST, getfeedback_Category);
 }
 
-
-
 export default function* feedbackSaga() {
   yield all([
-   
     fork(watchFeedback_Read),
     fork(watchFeedback_Add),
     fork(watchFeedback_Update),

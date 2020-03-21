@@ -1,13 +1,12 @@
-  
-import React from 'react';
-import Helmet from 'react-helmet';
-import PropTypes from 'prop-types';
-import Document, { Main, NextScript } from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
+import React from "react";
+import Helmet from "react-helmet";
+import PropTypes from "prop-types";
+import Document, { Main, NextScript } from "next/document";
+import { ServerStyleSheet } from "styled-components";
 
 class MyDocument extends Document {
   static getInitialProps(context) {
-    const page = context.renderPage((App) => (props) => <App {...props} />);
+    const page = context.renderPage(App => props => <App {...props} />);
     return { ...page, helmet: Helmet.renderStatic() };
   }
 
@@ -24,8 +23,9 @@ class MyDocument extends Document {
         </head>
         <body {...bodyAttrs}>
           <Main />
-          {process.env.NODE_ENV === 'production'
-          && <script src="https://polyfill.io/v3/polyfill.min.js?features=es6,es7,es8,es9,NodeList.prototype.forEach&flags=gated" />}
+          {process.env.NODE_ENV === "production" && (
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6,es7,es8,es9,NodeList.prototype.forEach&flags=gated" />
+          )}
           <NextScript />
         </body>
       </html>
@@ -34,7 +34,7 @@ class MyDocument extends Document {
 }
 
 MyDocument.propTypes = {
-  helmet: PropTypes.object.isRequired,
+  helmet: PropTypes.object.isRequired
 };
 
 export default MyDocument;

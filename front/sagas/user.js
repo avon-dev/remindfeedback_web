@@ -33,7 +33,7 @@ import {
   CHECK_EMAIL_FAILURE,
   FEEDBACK_TUTORIAL_REQUEST,
   FEEDBACK_TUTORIAL_SUCCESS,
-  FEEDBACK_TUTORIAL_FAILURE,
+  FEEDBACK_TUTORIAL_FAILURE
 } from "../reducers/user";
 
 // const dev = process.env.NODE_ENV !== "production";
@@ -47,24 +47,23 @@ import {
 
 // Feedback 튜토리얼
 function feedback_Tutorial_API(data) {
-  return axios.patch('/auth/tutorial',data,{
-      withCredentials:true
+  return axios.patch("/auth/tutorial", data, {
+    withCredentials: true
   });
 }
 
 function* feedback_Tutorial(action) {
   try {
     const result = yield call(feedback_Tutorial_API, action.data);
-    if(result.data.success){
-      console.log(result.data,"feedback_Tutorial")
+    if (result.data.success) {
+      console.log(result.data, "feedback_Tutorial");
       yield put({
         type: FEEDBACK_TUTORIAL_SUCCESS,
         data: result.data
       });
-    }else{
-      console.error(error,'feedback_Tutorial');
+    } else {
+      console.error(error, "feedback_Tutorial");
     }
-   
   } catch (e) {
     yield put({
       type: FEEDBACK_TUTORIAL_FAILURE,
