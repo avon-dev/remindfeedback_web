@@ -9,7 +9,7 @@ import {
   Button,
   Checkbox,
   Typography,
-  Alert,
+  Alert
 } from "antd";
 import { layoutCenter } from "../css/Common";
 import { signUpBtn, shadowBorder } from "../css/Signup";
@@ -19,6 +19,8 @@ import { SIGN_UP_REQUEST } from "../reducers/user";
 import { MOVE_TO_SIGNUP } from "../reducers/user";
 import { CHECK_EMAIL_REQUEST } from "../reducers/user";
 import CryptoJS from "crypto-js/sha256";
+import Term from "../components/Term";
+import { FirstTerm, SecondTerm } from "../constant/Term";
 
 const { Title, Text } = Typography;
 
@@ -37,9 +39,12 @@ const signup = () => {
   const [password, setPassword] = useState("");
   const [re_password, setRe_password] = useState("");
   const [nickname, setNickname] = useState("");
-  const [term, setTerm] = useState(false);
+  const [firstTerm, setFristTerm] = useState(false);
+  const [secondTerm, setSecondTerm] = useState(false);
   const [termError, setTermError] = useState(false);
-  const [isTokend, setIsTokend] = useState(false);
+  const [drawer, setDrawer] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [token, setToken] = useState("");
 
   const handleAuthEmail = () => {
@@ -69,6 +74,32 @@ const signup = () => {
   };
   const onChangeSetRePassword = e => {
     setRe_password(e.target.value);
+  };
+
+  const showDrawer = id => {
+    if (id === 1) {
+      setTitle("서비스 이용약관");
+      setDescription(id);
+    } else {
+      setTitle("개인 정보 수집 및 이용동의");
+      setDescription(id);
+    }
+
+    setDrawer(true);
+  };
+
+  const onClose = stuats => {
+    if (stuats === "firstChecked") {
+      setTermError(false);
+      setFristTerm(true);
+    }
+
+    if (stuats === "secondChecked") {
+      setTermError(false);
+      setSecondTerm(true);
+    }
+
+    setDrawer(false);
   };
 
   const emailForm = (
@@ -188,10 +219,17 @@ const signup = () => {
     </div>
   );
 
-  const onChangeTerm = useCallback(e => {
-    setTermError(false);
-    setTerm(e.target.checked);
-  }, []);
+  const onChangeFirstTerm = () => {
+    if (!firstTerm) {
+      return alert("자세히보기를 클릭해주세요");
+    }
+  };
+
+  const onChangeSecondTerm = () => {
+    if (!secondTerm) {
+      return alert("자세히보기를 클릭해주세요");
+    }
+  };
 
   useEffect(() => {
     if (message) {
@@ -216,7 +254,8 @@ const signup = () => {
       setNickname("");
       setPassword("");
       setRe_password("");
-      setTerm(false);
+      setFristTerm(false);
+      setSecondTerm(false);
       dispatch({
         type: MOVE_TO_SIGNUP
       });
@@ -264,7 +303,7 @@ const signup = () => {
         setRe_password("");
         return;
       }
-      if (!term) {
+      if (!firstTerm || !secondTerm) {
         alert("약관동의를 클릭해주세요");
         return setTermError(true);
       }
@@ -281,7 +320,7 @@ const signup = () => {
         }
       });
     },
-    [email, password, nickname, term, re_password, token]
+    [email, password, nickname, firstTerm, re_password, token, secondTerm]
   );
 
   return (
@@ -307,27 +346,57 @@ const signup = () => {
             {nicknameForm}
             {passwordForm}
             {re_passwordForm}
-            <Col span={24} style={{ marginTop: 15, display:'flex', flexDirection:"row", justifyContent:'' }}>
-              <Checkbox style={{ fontWeight: "bold", flexGrow:1, }} onChange={onChangeTerm}>
+            <Col
+              span={24}
+              style={{
+                marginTop: 15,
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: ""
+              }}
+            >
+              <Checkbox
+                checked={firstTerm}
+                style={{ fontWeight: "bold", flexGrow: 1 }}
+                onChange={onChangeFirstTerm}
+              >
                 서비스 이용약관 동의(필수)
               </Checkbox>
-              <Button  type="dashed"
-                  style={{
-                    fontWeight: "bold",
-                    
-                   }}>자세히보기</Button>
+              <Button
+                type="dashed"
+                onClick={showDrawer.bind(this, 1)}
+                style={{
+                  fontWeight: "bold"
+                }}
+              >
+                자세히보기 <Icon type="right" />
+              </Button>
             </Col>
-            <Col span={24} style={{ marginTop: 15, display:'flex', flexDirection:"row", justifyContent:'' }}>
-              <Checkbox style={{ fontWeight: "bold", flexGrow:1 }} onChange={onChangeTerm}>
+            <Col
+              span={24}
+              style={{
+                marginTop: 15,
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: ""
+              }}
+            >
+              <Checkbox
+                checked={secondTerm}
+                style={{ fontWeight: "bold", flexGrow: 1 }}
+                onChange={onChangeSecondTerm}
+              >
                 개인 정보 수집 및 이용 동의(필수)
               </Checkbox>
-              <Button  type="dashed"
-                  style={{
-                    fontWeight: "bold",
-                    
-                   }}
-                   
-                   >자세히보기</Button>
+              <Button
+                type="dashed"
+                onClick={showDrawer.bind(this, 2)}
+                style={{
+                  fontWeight: "bold"
+                }}
+              >
+                자세히보기 <Icon type="right" />
+              </Button>
             </Col>
             <Col span={24} style={{ marginTop: 15 }}>
               <Button
@@ -351,6 +420,22 @@ const signup = () => {
           </Col>
         </Col>
         <Col span={8}></Col>
+        <Term
+          onClose={onClose}
+          drawer={drawer}
+          title={title}
+          description={
+            description === 1 ? (
+              <FirstTerm
+                handleSeocndTerm={onClose.bind(this, "firstChecked")}
+              />
+            ) : (
+              <SecondTerm
+                handleSeocndTerm={onClose.bind(this, "secondChecked")}
+              />
+            )
+          }
+        />
       </Row>
     </>
   );

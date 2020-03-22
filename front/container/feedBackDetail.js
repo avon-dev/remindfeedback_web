@@ -53,7 +53,7 @@ const feedBackDetail = ({ feedback_id }) => {
           span={23}
           style={{ textAlign: "center", marginTop: 25, marginBottom: 25 }}
         >
-          <Title level={3} style={{color:'gray'}}>
+          <Title level={3} style={{ color: "gray" }}>
             <strong>제목 : {feedbackTitle}</strong>
           </Title>
         </Col>

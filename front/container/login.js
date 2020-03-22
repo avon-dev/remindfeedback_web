@@ -319,7 +319,11 @@ const login = () => {
             <span>계정이 없으신가요?</span>
             <Button
               type="ghost"
-              style={{ border: "white" }}
+              style={{
+                border: "tranparent",
+                borderWidth: 0,
+                backgroundColor: "white"
+              }}
               onClick={handleSignUp}
             >
               <strong>시작하기</strong>
@@ -329,7 +333,11 @@ const login = () => {
             <span>비밀번호를 잊으셨나요?</span>
             <Button
               type="ghost"
-              style={{ border: "white" }}
+              style={{
+                border: "tranparent",
+                borderWidth: 0,
+                backgroundColor: "white"
+              }}
               onClick={handleFindPw}
             >
               <strong>비밀번호 찾기</strong>

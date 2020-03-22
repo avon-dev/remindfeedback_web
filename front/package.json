@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint components container pages sagas reducers --fix",
+    "lint": "eslint components container pages sagas reducers constant --fix",
     "dev": "cross-env NODE_ENV=development PORT=2323 pm2 start server.js",
     "build": "cross-env ANALYZE=true next build",
     "prestart": "npm run build",

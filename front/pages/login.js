@@ -13,9 +13,6 @@ const login = () => {
           <AppLogin />
         </Content>
       </Layout>
-      <Footer style={backgroundLightBlue}>
-        <AppFooter />
-      </Footer>
     </>
   );
 };

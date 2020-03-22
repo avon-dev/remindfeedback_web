@@ -18,7 +18,7 @@ const ImagesContents = ({ v }) => {
     <>
       {v.board_file3 && v.board_file2 && v.board_file1 ? (
         <>
-          <div >
+          <div>
             <img
               src={`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v.board_file1}`}
               width="50%"
@@ -56,11 +56,10 @@ const ImagesContents = ({ v }) => {
           {showImagesZoom && <ImagesZoom images={v} onClose={onClose} />}
         </>
       ) : v.board_file1 ? (
-        <div style={{width:'100%', }}>
+        <div style={{ width: "100%" }}>
           <img
             src={`https://remindfeedback.s3.ap-northeast-2.amazonaws.com/${v.board_file1}`}
             width="100%"
-  
             onClick={onZoom}
           />
           {showImagesZoom && <ImagesZoom images={v} onClose={onClose} />}

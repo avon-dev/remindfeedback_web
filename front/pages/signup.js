@@ -8,14 +8,13 @@ const { Footer, Content, Header } = Layout;
 const signup = () => {
   return (
     <>
-      <Layout style={layout}>
-        <Content style={backgroundWhite}>
+      <Layout style={backgroundWhite}>
+        <Content
+          style={{ ...backgroundWhite, paddingTop: "3%", paddingBottom: "3%" }}
+        >
           <AppSignUp />
         </Content>
       </Layout>
-      <Footer style={backgroundLightBlue}>
-        <AppFooter />
-      </Footer>
     </>
   );
 };

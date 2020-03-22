@@ -176,7 +176,6 @@ const feedBackDetailList = ({ feedback_id, handleComment }) => {
   };
 
   const handleUpdate = e => {
-   
     setFeedBackItemId(e.target.id);
     const type = feedbackItem.find(
       (v, i) => parseInt(e.target.id) === parseInt(v.id)
@@ -384,7 +383,7 @@ const feedBackDetailList = ({ feedback_id, handleComment }) => {
             <span style={{ fontSize: 20, color: "#000000", marginRight: 5 }}>
               <strong>조언자:</strong>
             </span>
-            <span>{adviser_uid?adviser_uid:'본인'}</span>
+            <span>{adviser_uid ? adviser_uid : "본인"}</span>
           </div>
           <div>
             <span style={{ fontSize: 15, color: "#000000", marginRight: 5 }}>
