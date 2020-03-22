@@ -426,9 +426,7 @@ const signup = () => {
           title={title}
           description={
             description === 1 ? (
-              <FirstTerm
-                handleSeocndTerm={onClose.bind(this, "firstChecked")}
-              />
+              <FirstTerm handleFirstTerm={onClose.bind(this, "firstChecked")} />
             ) : (
               <SecondTerm
                 handleSeocndTerm={onClose.bind(this, "secondChecked")}
