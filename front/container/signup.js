@@ -308,7 +308,7 @@ const signup = () => {
         return setTermError(true);
       }
 
-      const passwords = CryptoJS(password).toString()+ CryptoJS(process.env.PASSWORD).toString();
+      const passwords = CryptoJS(password + process.env.PASSWORD).toString();
 
       dispatch({
         type: SIGN_UP_REQUEST,

@@ -16,12 +16,17 @@ const backgroundLightBlue ={
 
 const layoutCenter = {
     height:'100vh', 
-    width:'auto',
+    width:'100%',
     display:'flex',
     flexDirection:'row',
     justifyContent:'center',
     alignItems:'center',
 };
+
+const fontSize = {
+    fontSize:'1.5vw',
+    color: "#000000",
+}
 
 export {
     layout,
@@ -29,4 +34,5 @@ export {
     backgroundWhite,
     layoutCenter,
     backgroundLightBlue,
+    fontSize,
 }

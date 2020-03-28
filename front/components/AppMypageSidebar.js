@@ -117,7 +117,7 @@ const AppMypageSidebar = () => {
         return alert("먼저 해당 내용을 입력해주세요~");
       }
 
-      const newPasswords = CryptoJS(newPassword).toString()+ CryptoJS(process.env.PASSWORD).toString();
+      const newPasswords = CryptoJS(password + process.env.PASSWORD).toString();
       // 변경할 비밀번호 보내기
       dispatch({
         type: UPDATE_PASSWORD_REQUEST,

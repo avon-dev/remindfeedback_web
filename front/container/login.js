@@ -11,14 +11,14 @@ import {
   Checkbox,
   Typography
 } from "antd";
-import { layoutCenter } from "../css/Common";
+import { layoutCenter,fontSize } from "../css/Common";
 import {
   loginBtn,
   loginApple,
   loginFacebook,
   loginGoogle,
   loginKakao,
-  shadowBorder
+  shadowBorder, 
 } from "../css/Login";
 
 import Link from "next/link";
@@ -66,8 +66,8 @@ const login = () => {
     e => {
       e.preventDefault();
 
-      const passwords = CryptoJS(password).toString()+ CryptoJS(process.env.PASSWORD).toString();
-
+      const passwords = CryptoJS(password + process.env.PASSWORD).toString();
+     
       dispatch({
         type: LOG_IN_REQUEST,
         data: {
@@ -206,8 +206,8 @@ const login = () => {
       if (!newPassword) {
         return alert("먼저 해당 내용을 입력해주세요~");
       }
-
-      const newPasswords = CryptoJS(newPassword).toString()+ CryptoJS(process.env.PASSWORD).toString();
+      
+      const newPasswords =  CryptoJS(password + process.env.PASSWORD).toString();
       // 변경할 비밀번호 보내기
       dispatch({
         type: UPDATE_PASSWORD_REQUEST,
@@ -243,12 +243,12 @@ const login = () => {
             <img src={logoImg} width="25%" />
           </Col>
           <Col span={24} style={{ textAlign: "center", marginBottom: 5 }}>
-            <Text style={{ fontSize: 20, color: "#000000" }}>
+            <Text style={fontSize} style={fontSize}>
               <strong>RemindFeedback</strong>
             </Text>
           </Col>
           <Form onSubmit={_onsubmit} className="login-form">
-            <label htmlFor="user-email">
+            <label htmlFor="user-email" style={fontSize}>
               <strong>이메일</strong>
             </label>
             <Form.Item>
@@ -262,7 +262,7 @@ const login = () => {
                 required
               />
             </Form.Item>
-            <label htmlFor="user-password">
+            <label htmlFor="user-password" style={fontSize}>
               <strong>비밀번호</strong>
             </label>
             <Form.Item>
@@ -318,32 +318,33 @@ const login = () => {
                             </Col>
                        </Form.Item> */}
           </Form>
-          <div>
-            <span>계정이 없으신가요?</span>
+          <div >
+            <span style={{fontSize:'1vw'}}>계정이 없으신가요?</span>
             <Button
               type="ghost"
               style={{
                 border: "tranparent",
                 borderWidth: 0,
-                backgroundColor: "white"
+                backgroundColor: "white",
+               
               }}
               onClick={handleSignUp}
             >
-              <strong>시작하기</strong>
+              <strong style={{fontSize:'1vw'}}>시작하기</strong>
             </Button>
           </div>
-          <div>
-            <span>비밀번호를 잊으셨나요?</span>
+          <div >
+            <span style={{fontSize:'1vw'}}>비밀번호를 잊으셨나요?</span>
             <Button
               type="ghost"
               style={{
                 border: "tranparent",
                 borderWidth: 0,
-                backgroundColor: "white"
+                backgroundColor: "white",
               }}
               onClick={handleFindPw}
             >
-              <strong>비밀번호 찾기</strong>
+              <strong style={{fontSize:'1vw'}}>비밀번호 찾기</strong>
             </Button>
           </div>
         </Col>
