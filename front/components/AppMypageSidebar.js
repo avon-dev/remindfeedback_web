@@ -6,6 +6,8 @@ const { SubMenu } = Menu;
 import { useDispatch, useSelector } from "react-redux";
 import { UNREGISTER_REQUEST, LOG_OUT_REQUEST } from "../reducers/user";
 import AppTutorial from "../components/TutorialMain";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const newFeedBack = {
   fontSize: 17,
@@ -115,13 +117,15 @@ const AppMypageSidebar = () => {
       if (!newPassword) {
         return alert("먼저 해당 내용을 입력해주세요~");
       }
+
+      const newPasswords = CryptoJS(newPassword).toString()+ CryptoJS(process.env.REACT_APP_PASSWORD).toString();
       // 변경할 비밀번호 보내기
       dispatch({
         type: UPDATE_PASSWORD_REQUEST,
         data: {
           current,
           token: firstSubject,
-          password: newPassword
+          password: newPasswords
         }
       });
     } else {

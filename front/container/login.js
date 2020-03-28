@@ -34,6 +34,8 @@ import { UPDATE_PASSWORD_REQUEST } from "../reducers/user";
 import Router from "next/router";
 import AppTutorial from "../components/TutorialMain";
 import CryptoJS from "crypto-js/sha256";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const { Text } = Typography;
 
@@ -65,7 +67,7 @@ const login = () => {
     e => {
       e.preventDefault();
 
-      const passwords = CryptoJS(password).toString();
+      const passwords = CryptoJS(password).toString()+ CryptoJS(process.env.REACT_APP_PASSWORD).toString();
 
       dispatch({
         type: LOG_IN_REQUEST,
@@ -205,13 +207,15 @@ const login = () => {
       if (!newPassword) {
         return alert("먼저 해당 내용을 입력해주세요~");
       }
+
+      const newPasswords = CryptoJS(newPassword).toString()+ CryptoJS(process.env.REACT_APP_PASSWORD).toString();
       // 변경할 비밀번호 보내기
       dispatch({
         type: UPDATE_PASSWORD_REQUEST,
         data: {
           current,
           token: firstSubject,
-          password: newPassword
+          password: newPasswords
         }
       });
     } else {

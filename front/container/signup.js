@@ -21,6 +21,8 @@ import { CHECK_EMAIL_REQUEST } from "../reducers/user";
 import CryptoJS from "crypto-js/sha256";
 import Term from "../components/Term";
 import { FirstTerm, SecondTerm } from "../constant/Term";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const { Title, Text } = Typography;
 
@@ -308,7 +310,7 @@ const signup = () => {
         return setTermError(true);
       }
 
-      const passwords = CryptoJS(password).toString();
+      const passwords = CryptoJS(password).toString()+ CryptoJS(process.env.REACT_APP_PASSWORD).toString();
 
       dispatch({
         type: SIGN_UP_REQUEST,
