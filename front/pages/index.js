@@ -10,20 +10,20 @@ const { Text } = Typography;
 const Home = () => {
   const [percent, setPercent] = useState(0);
 
-  useEffect(() => {
-    const progressbar = setInterval(() => {
-      let count = percent + 10;
-      if (percent > 100) {
-        setPercent(100);
-      }
-      setPercent(count);
-    }, 500);
+  // useEffect(() => {
+  //   const progressbar = setInterval(() => {
+  //     let count = percent + 10;
+  //     if (percent > 100) {
+  //       setPercent(100);
+  //     }
+  //     setPercent(count);
+  //   }, 500);
 
-    if (percent === 100) {
-      clearInterval(progressbar);
-      Router.push("/login");
-    }
-  }, [percent]);
+  //   if (percent === 100) {
+  //     clearInterval(progressbar);
+  //     Router.push("/login");
+  //   }
+  // }, [percent]);
 
   return (
     <>

@@ -2,7 +2,7 @@ import React from "react";
 import Helmet from "react-helmet";
 import PropTypes from "prop-types";
 import Document, { Main, NextScript } from "next/document";
-import { ServerStyleSheet } from "styled-components";
+// import GlobalStyle from '../css/Index'
 
 class MyDocument extends Document {
   static getInitialProps(context) {
@@ -20,6 +20,7 @@ class MyDocument extends Document {
         <head>
           {this.props.styleTags}
           {Object.values(helmet).map(el => el.toComponent())}
+           {/* <GlobalStyle/> */}
         </head>
         <body {...bodyAttrs}>
           <Main />

@@ -1,5 +1,19 @@
-const shadowBorder = {border:'1px solid',paddingRight:50, paddingLeft:50, paddingBottom:50, boxShadow:'10px 10px 5px grey', marginTop:30};
-
-export {
-    shadowBorder, 
-};
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
+​
+const globalStyles = createGlobalStyle `
+    ${reset};
+    a{
+        text-decoration:none;
+        color:inherit;
+    }
+    *{
+        box-sizing:boerder-box;
+    }
+    body{
+        font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 14px;
+        background-color:rgba(20,20,20,1);
+    }
+`
+export default globalStyles;

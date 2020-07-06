@@ -200,7 +200,9 @@ const signup = () => {
       </div>
     </div>
   );
-  const re_passwordForm = (
+
+
+ const re_passwordForm = (
     <div style={{ padding: 5 }}>
       <label htmlFor="user-re_password" style={{ fontWeight: "bold" }}>
         비밀번호 재입력
