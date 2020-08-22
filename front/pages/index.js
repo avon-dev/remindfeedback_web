@@ -38,8 +38,8 @@ const Home = () => {
               >
                 <img src={logoImg} width="50%" />
               </Col>
-              <Col span={24} style={{ textAlign: "center",  }}>
-                <Text style={{ fontSize: '2vw', color: "#000000",  }}>
+              <Col span={24} style={{ textAlign: "center" }}>
+                <Text style={{ fontSize: "2vw", color: "#000000" }}>
                   <strong>RemindFeedback</strong>
                 </Text>
               </Col>

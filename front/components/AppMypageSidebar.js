@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { UNREGISTER_REQUEST, LOG_OUT_REQUEST } from "../reducers/user";
 import AppTutorial from "../components/TutorialMain";
 
-
 const newFeedBack = {
   fontSize: 17,
   fontWeight: "bold"

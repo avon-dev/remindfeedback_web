@@ -20,7 +20,7 @@ class MyDocument extends Document {
         <head>
           {this.props.styleTags}
           {Object.values(helmet).map(el => el.toComponent())}
-           {/* <GlobalStyle/> */}
+          {/* <GlobalStyle/> */}
         </head>
         <body {...bodyAttrs}>
           <Main />

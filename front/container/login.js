@@ -11,14 +11,14 @@ import {
   Checkbox,
   Typography
 } from "antd";
-import { layoutCenter,fontSize } from "../css/Common";
+import { layoutCenter, fontSize } from "../css/Common";
 import {
   loginBtn,
   loginApple,
   loginFacebook,
   loginGoogle,
   loginKakao,
-  shadowBorder, 
+  shadowBorder
 } from "../css/Login";
 
 import Link from "next/link";
@@ -34,7 +34,6 @@ import { UPDATE_PASSWORD_REQUEST } from "../reducers/user";
 import Router from "next/router";
 import AppTutorial from "../components/TutorialMain";
 import CryptoJS from "crypto-js/sha256";
-
 
 const { Text } = Typography;
 
@@ -67,7 +66,7 @@ const login = () => {
       e.preventDefault();
 
       const passwords = CryptoJS(password + process.env.PASSWORD).toString();
-     
+
       dispatch({
         type: LOG_IN_REQUEST,
         data: {
@@ -206,8 +205,8 @@ const login = () => {
       if (!newPassword) {
         return alert("먼저 해당 내용을 입력해주세요~");
       }
-      
-      const newPasswords =  CryptoJS(password + process.env.PASSWORD).toString();
+
+      const newPasswords = CryptoJS(password + process.env.PASSWORD).toString();
       // 변경할 비밀번호 보내기
       dispatch({
         type: UPDATE_PASSWORD_REQUEST,
@@ -318,33 +317,32 @@ const login = () => {
                             </Col>
                        </Form.Item> */}
           </Form>
-          <div >
-            <span style={{fontSize:'1vw'}}>계정이 없으신가요?</span>
+          <div>
+            <span style={{ fontSize: "1vw" }}>계정이 없으신가요?</span>
             <Button
               type="ghost"
               style={{
                 border: "tranparent",
                 borderWidth: 0,
-                backgroundColor: "white",
-               
+                backgroundColor: "white"
               }}
               onClick={handleSignUp}
             >
-              <strong style={{fontSize:'1vw'}}>시작하기</strong>
+              <strong style={{ fontSize: "1vw" }}>시작하기</strong>
             </Button>
           </div>
-          <div >
-            <span style={{fontSize:'1vw'}}>비밀번호를 잊으셨나요?</span>
+          <div>
+            <span style={{ fontSize: "1vw" }}>비밀번호를 잊으셨나요?</span>
             <Button
               type="ghost"
               style={{
                 border: "tranparent",
                 borderWidth: 0,
-                backgroundColor: "white",
+                backgroundColor: "white"
               }}
               onClick={handleFindPw}
             >
-              <strong style={{fontSize:'1vw'}}>비밀번호 찾기</strong>
+              <strong style={{ fontSize: "1vw" }}>비밀번호 찾기</strong>
             </Button>
           </div>
         </Col>
